@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Besties Boba & Bites — Livermore, CA</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Fredoka+One&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<script src="https://unpkg.com/@rive-app/canvas@2.17.3/rive.js"></script>
+<style>
+/* ── RESET ───────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+/* ── TOKENS ──────────────────────────────────── */
+:root {
+  --pink:   #E8527A;
+  --pink-d: #C73A61;
+  --yellow: #F5C842;
+  --dark:   #160E12;
+  --text:   #2A1E24;
+  --muted:  #8A7278;
+  --border: #EAD8DF;
+  --cream:  #FEF9F6;
+  --warm:   #F9F0EC;
+}
+
+body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--text); -webkit-font-smoothing: antialiased; }
+h1, h2, h3 { font-family: 'Fredoka One', cursive; }
+a { text-decoration: none; color: inherit; }
+button { font-family: 'Inter', sans-serif; cursor: pointer; }
+
+/* ── HELPERS ─────────────────────────────────── */
+.ph { background: var(--warm); border: 1.5px dashed var(--border); display: flex; align-items: center; justify-content: center; }
+.ph span { font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); }
+.tag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--pink); margin-bottom: 14px; }
+.btn-fill { display: inline-block; background: var(--pink); color: white; border: none; border-radius: 6px; padding: 13px 28px; font-size: 14px; font-weight: 600; transition: background .15s; cursor: pointer; }
+.btn-fill:hover { background: var(--pink-d); }
+.btn-outline { display: inline-block; background: transparent; color: var(--dark); border: 1.5px solid var(--border); border-radius: 6px; padding: 12px 24px; font-size: 14px; font-weight: 600; transition: border-color .15s; cursor: pointer; }
+.btn-outline:hover { border-color: var(--dark); }
+
+/* ── NAV ─────────────────────────────────────── */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0 48px; height: 62px; display: flex; align-items: center; justify-content: space-between; background: rgba(254,249,246,0.95); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); }
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a { font-size: 14px; font-weight: 500; color: var(--muted); transition: color .15s; }
+.nav-links a:hover { color: var(--dark); }
+.nav-cta { background: var(--pink); color: white; border: none; border-radius: 6px; padding: 9px 20px; font-size: 13px; font-weight: 700; transition: background .15s; }
+.nav-cta:hover { background: var(--pink-d); }
+
+/* ── HERO ─────────────────────────────────────── */
+.hero { margin-top: 62px; display: grid; grid-template-columns: 1.1fr 0.9fr; min-height: calc(100vh - 62px); }
+.hero-img { position: relative; overflow: hidden; }
+.hero-img-label { position: absolute; bottom: 24px; left: 24px; background: rgba(22,14,18,.55); backdrop-filter: blur(8px); padding: 8px 14px; border-radius: 6px; font-size: 12px; font-weight: 600; color: rgba(255,255,255,.8); letter-spacing: 0.5px; }
+.hero-content { display: flex; flex-direction: column; justify-content: center; padding: 72px 56px 72px 64px; background: var(--cream); }
+.hero-h1 { font-size: clamp(42px, 4.2vw, 68px); font-weight: 900; line-height: 1.05; letter-spacing: -2px; color: var(--dark); margin-bottom: 20px; }
+.hero-h1 em { font-style: normal; color: var(--pink); }
+.hero-sub { font-size: 16px; line-height: 1.75; color: var(--muted); font-weight: 400; max-width: 360px; margin-bottom: 36px; }
+.hero-btns { display: flex; gap: 12px; margin-bottom: 52px; }
+.hero-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding-top: 36px; border-top: 1px solid var(--border); }
+.stat-val { font-size: 14px; font-weight: 700; color: var(--dark); margin-bottom: 3px; }
+.stat-key { font-size: 11px; color: var(--muted); font-weight: 500; }
+
+/* ── MARQUEE ─────────────────────────────────── */
+.marquee-wrap { overflow: hidden; background: var(--pink); padding: 13px 0; }
+.marquee-track { display: flex; animation: marquee 24s linear infinite; white-space: nowrap; }
+.marquee-item { display: flex; align-items: center; gap: 24px; padding-right: 24px; flex-shrink: 0; font-size: 11px; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(255,255,255,.85); }
+.marquee-sep { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,.5); flex-shrink: 0; }
+@keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* ── THIS WEEK ───────────────────────────────── */
+.this-week { padding: 88px 48px; max-width: 1120px; margin: 0 auto; }
+.this-week-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
+.week-h2 { font-size: clamp(32px, 3.2vw, 48px); font-weight: 900; letter-spacing: -1.5px; color: var(--dark); margin-bottom: 12px; line-height: 1.1; }
+.week-dates { display: inline-block; background: var(--warm); border: 1px solid var(--border); border-radius: 6px; padding: 6px 14px; font-size: 13px; font-weight: 700; color: var(--muted); margin-bottom: 32px; }
+.flavors-grid { display: grid; grid-template-columns: 1fr 1fr; }
+.flavor-item { padding: 13px 0; border-bottom: 1px solid var(--border); font-size: 14px; font-weight: 500; color: var(--text); display: flex; align-items: center; gap: 10px; }
+.flavor-item::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--pink); flex-shrink: 0; }
+.week-note { margin-top: 16px; font-size: 13px; color: var(--muted); font-weight: 500; line-height: 1.6; }
+
+/* ── MENU ─────────────────────────────────────── */
+.menu-section { background: var(--dark); padding: 88px 48px; }
+.menu-inner { max-width: 1120px; margin: 0 auto; }
+.menu-head { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 48px; }
+.menu-h2 { font-size: clamp(32px, 3.2vw, 48px); font-weight: 900; letter-spacing: -1.5px; color: white; }
+.menu-link { font-size: 13px; font-weight: 600; color: var(--pink); border-bottom: 1.5px solid var(--pink); padding-bottom: 2px; transition: opacity .15s; }
+.menu-link:hover { opacity: 0.75; }
+.menu-cards { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+.menu-card { border-radius: 12px; overflow: hidden; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); transition: border-color .2s; }
+.menu-card:hover { border-color: rgba(255,255,255,.18); }
+.menu-card-body { padding: 24px 22px; }
+.menu-card-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--pink); margin-bottom: 8px; }
+.menu-card-title { font-size: 20px; font-weight: 800; color: white; letter-spacing: -0.3px; margin-bottom: 10px; }
+.menu-card-desc { font-size: 13px; color: rgba(255,255,255,.4); line-height: 1.65; }
+
+/* ── TUESDAY ─────────────────────────────────── */
+.tuesday { background: var(--yellow); padding: 72px 48px; }
+.tuesday-inner { max-width: 1120px; margin: 0 auto; display: flex; align-items: center; gap: 56px; flex-wrap: wrap; }
+.tue-price { font-size: clamp(80px, 9vw, 128px); font-weight: 900; color: var(--dark); line-height: 1; letter-spacing: -4px; flex-shrink: 0; font-family: 'Fredoka One', cursive; }
+.tue-line { width: 1px; height: 90px; background: rgba(22,14,18,.15); flex-shrink: 0; }
+.tue-label { font-size: 11px; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(22,14,18,.45); margin-bottom: 10px; }
+.tue-headline { font-size: clamp(22px, 2.8vw, 36px); font-weight: 900; color: var(--dark); letter-spacing: -0.8px; line-height: 1.2; margin-bottom: 10px; font-family: 'Fredoka One', cursive; }
+.tue-sub { font-size: 14px; color: rgba(22,14,18,.5); font-weight: 500; }
+
+/* ── VISIT ───────────────────────────────────── */
+.visit { background: var(--warm); border-top: 1px solid var(--border); padding: 88px 48px; }
+.visit-inner { max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; align-items: start; }
+.visit-h2 { font-size: clamp(28px, 2.8vw, 42px); font-weight: 900; letter-spacing: -1.2px; color: var(--dark); margin-bottom: 40px; }
+.visit-rows { display: flex; flex-direction: column; gap: 28px; }
+.vr-key { font-size: 11px; font-weight: 700; letter-spacing: 1.8px; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+.vr-val { font-size: 15px; font-weight: 600; color: var(--dark); line-height: 1.55; }
+.vr-val a { transition: color .15s; }
+.vr-val a:hover { color: var(--pink); }
+.visit-btns { display: flex; gap: 12px; margin-top: 36px; flex-wrap: wrap; }
+
+/* ── FOOTER ───────────────────────────────────── */
+footer { background: var(--dark); padding: 56px 48px 32px; }
+.footer-inner { max-width: 1120px; margin: 0 auto; }
+.footer-top { display: flex; justify-content: space-between; gap: 48px; flex-wrap: wrap; padding-bottom: 44px; margin-bottom: 32px; border-bottom: 1px solid rgba(255,255,255,.07); }
+.f-logo { font-size: 15px; font-weight: 800; color: white; margin-bottom: 8px; }
+.f-logo span { color: var(--pink); }
+.f-sub { font-size: 13px; color: rgba(255,255,255,.28); line-height: 1.6; max-width: 200px; }
+.f-col-head { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,.22); margin-bottom: 16px; }
+.f-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.f-col ul a { font-size: 13px; font-weight: 500; color: rgba(255,255,255,.38); transition: color .15s; }
+.f-col ul a:hover { color: white; }
+.footer-bot { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+.f-copy { font-size: 12px; color: rgba(255,255,255,.18); }
+.f-ig { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,.28); transition: color .15s; }
+.f-ig:hover { color: var(--pink); }
+
+/* ════════════════════════════════════════════════
+   WIDGET — DESKTOP
+   ════════════════════════════════════════════════ */
+@keyframes _peep-bob  { 0%,100%{transform:translateY(0)} 50%{transform:translateY(0px)} }
+@keyframes _spring-up-desk {
+  0%{transform:translateY(250px)} 52%{transform:translateY(-22px)}
+  68%{transform:translateY(10px)} 82%{transform:translateY(-8px)}
+  91%{transform:translateY(3px)}  100%{transform:translateY(0)}
+}
+@keyframes _chat-in  { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+@keyframes _msg-in   { from{opacity:0;transform:translateY(6px)}  to{opacity:1;transform:translateY(0)} }
+@keyframes _dot-pulse{ 0%,80%,100%{opacity:.2;transform:scale(1)} 40%{opacity:1;transform:scale(1.2)} }
+
+/* Widget container */
+#bb-widget { position:fixed; bottom:0; right:24px; z-index:9999; width:340px; }
+
+/* Cat positioning */
+#bb-cat-wrap { transform:translateY(150px); transform-origin:bottom center; }
+.bb-s-peep   #bb-cat-wrap { animation:_peep-bob 2.6s ease-in-out infinite; transform:translateY(150px); }
+.bb-s-spring #bb-cat-wrap { animation:_spring-up-desk 0.85s cubic-bezier(0.22,1,0.36,1) forwards; }
+.bb-s-idle   #bb-cat-wrap { transform:translateY(0); }
+.bb-s-sleep  #bb-cat-wrap { transform:translateY(0); }
+
+#bb-cat-stage { position:relative; width:340px; margin-left:auto; cursor:pointer; overflow:visible; }
+#bb-rive { display:block; width:340px; height:340px; cursor:pointer; background:transparent !important; }
+
+/* Chat window */
+#bb-chat {
+  position:absolute; bottom:300px; right:0; width:340px;
+  background:#FEFCF8; border-radius:20px;
+  border:1.5px solid #EAD8DF;
+  box-shadow:0 8px 40px rgba(26,16,20,.13);
+  display:flex; flex-direction:column; overflow:hidden;
+  font-family:'Inter',system-ui,sans-serif;
+  max-height:0; opacity:0; pointer-events:none;
+  transition:max-height .4s ease, opacity .3s ease;
+}
+#bb-chat.open { max-height:380px; opacity:1; pointer-events:all; animation:_chat-in .3s ease; }
+
+/* Chat header */
+#bb-header { background:linear-gradient(135deg,#E8527A,#C73A61); padding:14px 18px; display:flex; align-items:center; justify-content:space-between; flex-shrink:0; }
+.bb-name   { font-size:15px; font-weight:700; color:white; }
+.bb-status { font-size:11px; color:rgba(255,255,255,.72); font-weight:600; margin-top:2px; }
+#bb-close  { background:rgba(255,255,255,.2); border:none; border-radius:50%; width:28px; height:28px; color:white; font-size:18px; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+#bb-close:hover { background:rgba(255,255,255,.35); }
+
+/* Messages */
+#bb-msgs { height:160px; overflow-y:auto; padding:14px; display:flex; flex-direction:column; gap:10px; background:#FEFCF8; flex-shrink:0; }
+.bb-row { display:flex; }
+.bb-row.usr { justify-content:flex-end; }
+.bb-bubble { max-width:82%; padding:10px 14px; font-size:13px; font-weight:500; line-height:1.55; animation:_msg-in .22s ease; }
+.bb-bubble.bot { background:white; border:1.5px solid #EAD8DF; border-radius:16px 16px 16px 4px; color:#1C1412; }
+.bb-bubble.usr { background:linear-gradient(135deg,#E8527A,#C73A61); border-radius:16px 16px 4px 16px; color:white; }
+.bb-dots { display:flex; gap:4px; align-items:center; padding:10px 16px; background:white; border:1.5px solid #EAD8DF; border-radius:16px 16px 16px 4px; }
+.bb-dots span { width:6px; height:6px; border-radius:50%; background:#e8a0ae; }
+.bb-dots span:nth-child(1){animation:_dot-pulse 1.2s ease-in-out 0.0s infinite}
+.bb-dots span:nth-child(2){animation:_dot-pulse 1.2s ease-in-out 0.2s infinite}
+.bb-dots span:nth-child(3){animation:_dot-pulse 1.2s ease-in-out 0.4s infinite}
+
+/* Chips */
+#bb-chips { padding:8px 14px 4px; display:flex; gap:6px; flex-wrap:wrap; background:white; flex-shrink:0; }
+.bb-chip { background:#F9EEF1; border:1.5px solid #EAD8DF; border-radius:999px; padding:5px 13px; font-size:11px; font-weight:600; cursor:pointer; color:#E8527A; font-family:inherit; transition:background .15s; }
+.bb-chip:hover { background:#f2d5dc; }
+
+/* Input */
+#bb-input-row { padding:10px 14px 14px; display:flex; gap:8px; background:white; flex-shrink:0; }
+#bb-input { flex:1; border:1.5px solid #EAD8DF; border-radius:999px; padding:9px 16px; font-family:inherit; font-size:13px; background:#FEFCF8; color:#1C1412; outline:none; transition:border-color .2s, box-shadow .2s; }
+#bb-input:focus { border-color:#E8527A; box-shadow:0 0 0 3px rgba(232,82,122,.14); }
+#bb-send { background:#E8527A; border:none; border-radius:999px; padding:9px 18px; color:white; font-size:14px; font-weight:600; cursor:pointer; font-family:inherit; transition:background .18s; }
+#bb-send:hover    { background:#C73A61; }
+#bb-send:disabled { background:#e8a0ae; cursor:not-allowed; }
+
+/* ════════════════════════════════════════════════
+   MOBILE — single clean block
+   ════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+  /* Nav */
+  nav { padding: 0 16px; height: 56px; }
+  .nav-logo img { height: 34px !important; }
+  .nav-links { display: none; }
+  .nav-cta { padding: 8px 14px; font-size: 12px; }
+
+  /* Hero */
+  .hero { grid-template-columns: 1fr; margin-top: 56px; min-height: auto; }
+  .hero-content { padding: 40px 20px; }
+  .hero-h1 { letter-spacing: -1px; }
+  .hero-sub { max-width: 100%; }
+  .hero-btns { flex-wrap: wrap; }
+  .hero-stats { grid-template-columns: 1fr 1fr; gap: 14px; }
+
+  /* This week */
+  .this-week { padding: 56px 20px; }
+  .this-week-inner { grid-template-columns: 1fr; gap: 32px; }
+  .week-right { order: -1; }
+  .week-img .ph { height: 240px !important; }
+
+  /* Menu */
+  .menu-section { padding: 56px 20px; }
+  .menu-head { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .menu-cards { grid-template-columns: 1fr; gap: 16px; }
+  .menu-card-img .ph { height: 180px !important; }
+
+  /* Tuesday */
+  .tuesday { padding: 40px 20px; }
+  .tuesday-inner { gap: 20px; }
+  .tue-line { display: none; }
+
+  /* About */
+  section[style*="grid-template-columns:1fr 1fr"],
+  section[style*="grid-template-columns: 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+    padding: 56px 20px !important;
+    gap: 32px !important;
+  }
+
+  /* Catering */
+  #catering > div {
+    grid-template-columns: 1fr !important;
+    padding: 56px 20px !important;
+    gap: 32px !important;
+  }
+
+  /* Visit */
+  .visit { padding: 56px 20px; }
+  .visit-inner { grid-template-columns: 1fr; gap: 36px; }
+  .visit-btns { flex-direction: column; }
+  .visit-btns button { width: 100%; }
+  iframe { height: 260px !important; }
+
+  /* Footer */
+  footer { padding: 40px 20px 24px; }
+  .footer-top { flex-direction: column; gap: 28px; }
+  .footer-bot { flex-direction: column; align-items: flex-start; }
+
+  /* ── Widget mobile ── */
+  #bb-widget {
+    position: fixed;
+    bottom: 0; right: 0; left: 0;
+    width: 100%;
+    z-index: 9999;
+  }
+
+  #bb-cat-stage {
+    position: fixed;
+    bottom: 0;
+    right: 16px;
+    width: 160px !important;
+    cursor: pointer;
+    overflow: visible;
+  }
+
+  #bb-rive {
+    width: 160px !important;
+    height: 160px !important;
+    background: transparent !important;
+  }
+
+  /* Peeping: show top ~50px of cat */
+  #bb-cat-wrap                { transform: translateY(200px); }
+  .bb-s-peep #bb-cat-wrap     { transform: translateY(200px); animation: _peep-bob-m 2.6s ease-in-out infinite; }
+  .bb-s-spring #bb-cat-wrap   { animation: _spring-up-m 0.85s cubic-bezier(0.22,1,0.36,1) forwards; }
+  .bb-s-idle #bb-cat-wrap     { transform: translateY(0); }
+  .bb-s-sleep #bb-cat-wrap    { transform: translateY(0); }
+
+  @keyframes _peep-bob-m  { 0%,100%{transform:translateY(0px)} 50%{transform:translateY(0px)} }
+  @keyframes _spring-up-m {
+  0%{transform:translateY(500px)} 52%{transform:translateY(-14px)}
+  68%{transform:translateY(6px)}  82%{transform:translateY(-5px)}
+  91%{transform:translateY(2px)}  100%{transform:translateY(0)}
+}
+
+  /* Chat window — full width, slides up from bottom */
+  #bb-chat {
+    position: fixed !important;
+    bottom: 150px !important;
+    left: 65px !important;
+    right: 0 !important;
+    width: 80% !important;
+    max-height: 0;
+    border-radius: 20px 20px 20px 20px !important;
+    box-shadow: 0 -4px 24px rgba(26,16,20,.15) !important;
+  }
+  #bb-chat.open {
+    max-height: 50vh !important;
+  }
+
+  /* Smaller text inside chat */
+  .bb-bubble { font-size: 12px !important; padding: 8px 12px !important; }
+  .bb-name   { font-size: 14px !important; }
+  .bb-status { font-size: 10px !important; }
+  .bb-chip   { font-size: 10px !important; padding: 4px 10px !important; }
+  #bb-input  { font-size: 12px !important; padding: 8px 12px !important; }
+  #bb-send   { font-size: 12px !important; padding: 8px 12px !important; }
+  #bb-msgs   { height: 80px !important; }
+  #bb-input-row { padding: 8px 14px 20px !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <img src="mochilogo.jpg" style="height:44px;width:auto;display:block;"/>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#this-week">This Week</a></li>
+    <li><a href="#catering">Catering</a></li>
+    <li><a href="#visit">Visit</a></li>
+  </ul>
+  <a href="https://bestiesboba.square.site/" target="_blank">
+    <button class="nav-cta">Order Online</button>
+  </a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <span class="tag">Boba Tea & Mochi Donuts</span>
+    <h1 class="hero-h1">Welcome!</h1>
+    <p class="hero-sub">Handcrafted drinks, fresh mochi donuts, and a spot that always feels like home. Come as you are.</p>
+    <div class="hero-btns">
+      <a href="https://bestiesboba.square.site/" target="_blank"><button class="btn-fill">Order Online</button></a>
+      <a href="#menu"><button class="btn-outline">See the Menu</button></a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-val">4520 Las Positas Rd</div>
+        <div class="stat-key">Livermore, California</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-val">Open Daily</div>
+        <div class="stat-key">Delivery available</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-val">@BestiesBoba</div>
+        <div class="stat-key">Follow for weekly flavors</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-val">$1 Mochi Tuesdays</div>
+        <div class="stat-key">With every drink purchase</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <div class="marquee-item">Boba Tea <span class="marquee-sep"></span></div>
+    <div class="marquee-item">Mochi Donuts <span class="marquee-sep"></span></div>
+    <div class="marquee-item">Livermore CA <span class="marquee-sep"></span></div>
+    <div class="marquee-item">New Flavors Weekly <span class="marquee-sep"></span></div>
+    <div class="marquee-item">Catering & Events <span class="marquee-sep"></span></div>
+    <div class="marquee-item">Boba Bar Available <span class="marquee-sep"></span></div>
+    <div class="marquee-item">$1 Mochi Tuesdays <span class="marquee-sep"></span></div>
+    <div class="marquee-item">Order Online <span class="marquee-sep"></span></div>
+    <div class="marquee-item">Boba Tea <span class="marquee-sep"></span></div>
+    <div class="marquee-item">Mochi Donuts <span class="marquee-sep"></span></div>
+    <div class="marquee-item">Livermore CA <span class="marquee-sep"></span></div>
+    <div class="marquee-item">New Flavors Weekly <span class="marquee-sep"></span></div>
+    <div class="marquee-item">Catering & Events <span class="marquee-sep"></span></div>
+    <div class="marquee-item">Boba Bar Available <span class="marquee-sep"></span></div>
+    <div class="marquee-item">$1 Mochi Tuesdays <span class="marquee-sep"></span></div>
+    <div class="marquee-item">Order Online <span class="marquee-sep"></span></div>
+  </div>
+</div>
+
+<!-- THIS WEEK -->
+<section id="this-week">
+  <div class="this-week">
+    <div class="this-week-inner">
+      <div class="week-left">
+        <span class="tag">Mochi Donuts</span>
+        <h2 class="week-h2">This week's flavors</h2>
+        <div class="week-dates">May 18 &ndash; May 24</div>
+        <div class="flavors-grid">
+          <div class="flavor-item">Cookies & Cream</div>
+          <div class="flavor-item">Fruity Pebbles</div>
+          <div class="flavor-item">Chocolate Sprinkles</div>
+          <div class="flavor-item">Strawberry Shortcake</div>
+          <div class="flavor-item">Birthday Cake</div>
+          <div class="flavor-item">Ube</div>
+          <div class="flavor-item">Sunny Citrus</div>
+          <div class="flavor-item">Churro</div>
+          <div class="flavor-item">Funnel Cake w/ Choc. Dip</div>
+        </div>
+        <div style="margin-top:32px;">
+          <a href="https://bestiesboba.square.site/" target="_blank">
+            <button class="btn-fill">Order Ahead</button>
+          </a>
+        </div>
+      </div>
+      <div class="week-right">
+        <div class="week-img">
+          <div class="ph" style="height:420px;border-radius:12px;"><span>Mochi donuts photo</span></div>
+        </div>
+        <p class="week-note">Flavors rotate every week. Follow us on Instagram for the latest drops.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section id="menu">
+  <div class="menu-section">
+    <div class="menu-inner">
+      <div class="menu-head">
+        <h2 class="menu-h2">Our Menu</h2>
+        <a href="https://bestiesboba.square.site/" target="_blank" class="menu-link">Order ahead for pickup &rarr;</a>
+      </div>
+      <div class="menu-cards">
+        <div class="menu-card">
+          <div class="menu-card-img"><div class="ph" style="height:220px;background:rgba(255,255,255,.06);border:none;border-radius:0;"><span>Drinks photo</span></div></div>
+          <div class="menu-card-body">
+            <div class="menu-card-label">Drinks</div>
+            <div class="menu-card-title">Bubble Tea & Coffee</div>
+            <div class="menu-card-desc">Handcrafted milk teas, fruit teas, matcha, Thai tea, coffee drinks, and seasonal specials made fresh to order.</div>
+          </div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-card-img"><div class="ph" style="height:220px;background:rgba(255,255,255,.06);border:none;border-radius:0;"><span>Mochi photo</span></div></div>
+          <div class="menu-card-body">
+            <div class="menu-card-label">Mochi Donuts</div>
+            <div class="menu-card-title">Fresh & Rotating</div>
+            <div class="menu-card-desc">Light, bouncy, and perfectly sweet. New flavors every week — there's always something to try for the first time.</div>
+          </div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-card-img"><div class="ph" style="height:220px;background:rgba(255,255,255,.06);border:none;border-radius:0;"><span>Snacks photo</span></div></div>
+          <div class="menu-card-body">
+            <div class="menu-card-label">Snacks</div>
+            <div class="menu-card-title">Taiwanese Bites</div>
+            <div class="menu-card-desc">Popcorn chicken, waffle fries, and sweet potato tots. Get a box to share with the table, or don't.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TUESDAY -->
+<div class="tuesday">
+  <div class="tuesday-inner">
+    <div class="tue-price">$1</div>
+    <div class="tue-line"></div>
+    <div class="tue-copy">
+      <div class="tue-label">Every Tuesday</div>
+      <div class="tue-headline">Mochi Donut<br/>with Every Drink</div>
+      <div class="tue-sub">Any flavor available that week &mdash; one per order</div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section style="padding:88px 48px;max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
+  <img src="interior.png" style="width:100%;height:520px;object-fit:cover;border-radius:16px;display:block;"/>
+  <div>
+    <span class="tag">About Us</span>
+    <h2 style="font-size:clamp(28px,2.8vw,42px);font-weight:900;letter-spacing:-1.2px;color:var(--dark);margin-bottom:20px;">Every sip tastes better with friends</h2>
+    <p style="font-size:16px;line-height:1.8;color:var(--muted);margin-bottom:16px;">At Besties Boba & Bites, we believe every sip tastes better with friends. Born from the idea that boba brings people together, we're your local hangout for fun drinks, sweet treats, yummy snacks, and good vibes.</p>
+    <p style="font-size:16px;line-height:1.8;color:var(--muted);margin-bottom:32px;">Whether you're catching up with your bestie, treating yourself to something tasty, or discovering your new favorite flavor — we've got you covered.</p>
+    <div style="padding:20px 24px;border-left:3px solid var(--pink);background:var(--warm);border-radius:0 8px 8px 0;">
+      <p style="font-size:15px;font-weight:500;font-style:italic;color:var(--dark);line-height:1.6;margin-bottom:10px;">"Come for the boba, stay for the laughter — because everything's better with Besties."</p>
+      <span style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--pink);">Your Friends from Besties Boba & Bites</span>
+    </div>
+  </div>
+</section>
+
+<!-- CATERING -->
+<div id="catering" style="background:var(--warm);border-top:1px solid var(--border);padding:88px 48px;">
+  <div style="max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;">
+    <div>
+      <span class="tag">Events & Occasions</span>
+      <h2 style="font-size:clamp(28px,2.8vw,44px);font-weight:900;letter-spacing:-1.2px;color:var(--dark);margin-bottom:18px;line-height:1.1;">Got an event?<br/>We've got you.</h2>
+      <p style="font-size:16px;line-height:1.75;color:var(--muted);margin-bottom:32px;">From pre-sealed drink cups to a full boba bar setup — we handle weddings, corporate events, birthdays, and everything in between. Delivery available.</p>
+      <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:36px;">
+        <div style="display:flex;gap:12px;align-items:flex-start;"><div style="width:5px;height:5px;border-radius:50%;background:var(--pink);flex-shrink:0;margin-top:8px;"></div><span style="font-size:14px;font-weight:500;color:var(--text);">Catering — individual cups from $5, pouches from $50</span></div>
+        <div style="display:flex;gap:12px;align-items:flex-start;"><div style="width:5px;height:5px;border-radius:50%;background:var(--pink);flex-shrink:0;margin-top:8px;"></div><span style="font-size:14px;font-weight:500;color:var(--text);">Boba Bar — self-serve from $500, full-service from $700</span></div>
+        <div style="display:flex;gap:12px;align-items:flex-start;"><div style="width:5px;height:5px;border-radius:50%;background:var(--pink);flex-shrink:0;margin-top:8px;"></div><span style="font-size:14px;font-weight:500;color:var(--text);">Mochi donuts by the dozen, assorted or custom</span></div>
+        <div style="display:flex;gap:12px;align-items:flex-start;"><div style="width:5px;height:5px;border-radius:50%;background:var(--pink);flex-shrink:0;margin-top:8px;"></div><span style="font-size:14px;font-weight:500;color:var(--text);">Delivery available — pricing depends on location</span></div>
+      </div>
+      <button class="btn-fill">Get a Quote</button>
+    </div>
+    <a href="catering.png" target="_blank">
+      <img src="catering.png" style="width:100%;height:400px;object-fit:contain;border-radius:12px;display:block;background:white;cursor:zoom-in;"/>
+    </a>
+  </div>
+</div>
+
+<!-- VISIT -->
+<section id="visit" class="visit">
+  <div class="visit-inner">
+    <div>
+      <h2 class="visit-h2">Come find us</h2>
+      <div class="visit-rows">
+        <div><div class="vr-key">Location</div><div class="vr-val">4520 Las Positas Rd<br/>Livermore, CA 94551</div></div>
+        <div><div class="vr-key">Phone</div><div class="vr-val"><a href="tel:9258007822">(925) 800-7822</a></div></div>
+        <div><div class="vr-key">Email</div><div class="vr-val"><a href="mailto:BestiesLivermore@gmail.com">BestiesLivermore@gmail.com</a></div></div>
+        <div><div class="vr-key">Instagram</div><div class="vr-val"><a href="https://instagram.com/BestiesBoba" target="_blank">@BestiesBoba</a></div></div>
+      </div>
+      <div class="visit-btns">
+        <button class="btn-fill">Get Directions</button>
+        <button class="btn-outline">Follow on Instagram</button>
+      </div>
+    </div>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3156.8598345095097!2d-121.74609702369838!3d37.699490716492456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fe764b818d893%3A0x52f8e086c223857a!2sBesties%20Boba%20%26%20Bites!5e0!3m2!1sen!2sus!4v1779171279527!5m2!1sen!2sus"
+      style="width:100%;height:380px;border-radius:12px;border:none;display:block;" allowfullscreen="" loading="lazy"></iframe>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="f-logo">Besties <span>Boba</span> & Bites</div>
+        <div class="f-sub">Boba Tea, Coffee & Mochi Donuts &mdash; Livermore, CA</div>
+      </div>
+      <div class="f-col">
+        <div class="f-col-head">Menu</div>
+        <ul><li><a href="#menu">Drinks</a></li><li><a href="#this-week">Mochi Donuts</a></li><li><a href="#menu">Snacks</a></li><li><a href="https://bestiesboba.square.site/" target="_blank">Order Online</a></li></ul>
+      </div>
+      <div class="f-col">
+        <div class="f-col-head">Visit</div>
+        <ul><li><a href="#this-week">This Week's Flavors</a></li><li><a href="#catering">Catering</a></li><li><a href="#visit">Find Us</a></li><li><a href="https://instagram.com/BestiesBoba" target="_blank">Instagram</a></li></ul>
+      </div>
+      <div class="f-col">
+        <div class="f-col-head">Contact</div>
+        <ul><li><a href="tel:9258007822">(925) 800-7822</a></li><li><a href="mailto:BestiesLivermore@gmail.com">Email Us</a></li><li><a>4520 Las Positas Rd</a></li><li><a>Livermore, CA 94551</a></li></ul>
+      </div>
+    </div>
+    <div class="footer-bot">
+      <span class="f-copy">&copy; 2025 Besties Boba & Bites. All rights reserved.</span>
+      <a href="https://instagram.com/BestiesBoba" target="_blank" class="f-ig">@BestiesBoba</a>
+    </div>
+  </div>
+</footer>
+
+<!-- WIDGET HTML -->
+<div id="bb-widget">
+  <div id="bb-chat">
+    <div id="bb-header">
+      <div>
+        <div class="bb-name">Besties Boba & Bites</div>
+        <div class="bb-status" id="bb-status">Ask us anything!</div>
+      </div>
+      <button id="bb-close" onclick="bbClose()">&#215;</button>
+    </div>
+    <div id="bb-msgs">
+      <div class="bb-row">
+        <div class="bb-bubble bot">Hey! Welcome to Besties Boba & Bites. My name is Mochi. Ask about our menu, specials, or catering!</div>
+      </div>
+    </div>
+    <div id="bb-chips">
+      <button class="bb-chip" onclick="bbChip(this)">Menu?</button>
+      <button class="bb-chip" onclick="bbChip(this)">Catering?</button>
+      <button class="bb-chip" onclick="bbChip(this)">Tuesday deal?</button>
+    </div>
+    <div id="bb-input-row">
+      <input id="bb-input" type="text" placeholder="Type a message..."/>
+      <button id="bb-send" onclick="bbSend()">Send</button>
+    </div>
+  </div>
+  <div id="bb-cat-stage" class="bb-s-peep">
+    <div id="bb-cat-wrap">
+      <canvas id="bb-rive" width="340" height="340"></canvas>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var WEBHOOK = 'https://corsproxy.io/?' + encodeURIComponent('https://robertq.app.n8n.cloud/webhook/f5301221-eea4-4cc9-b231-b56c4d57e4a0');
+  var RIVE_FILE = 'bestie-cat.riv';
+  var RIVE_SM   = 'CatStateMachine';
+  var IN_OPEN   = 'isOpen';
+  var IN_SLEEP  = 'isSleeping';
+
+  var S = { PEEP:'peep', SPRING:'spring', IDLE:'idle', SLEEP:'sleep' };
+  var state = S.PEEP, sleepTimer = null, busy = false;
+  var stage    = document.getElementById('bb-cat-stage');
+  var chat     = document.getElementById('bb-chat');
+  var statusEl = document.getElementById('bb-status');
+  var msgs     = document.getElementById('bb-msgs');
+  var input    = document.getElementById('bb-input');
+  var sendBtn  = document.getElementById('bb-send');
+
+  var statusText = { peep:'Click me!', spring:"We're online!", idle:"We're online!", sleep:'Tap to wake me up!' };
+
+  var ri = null, rIn = {};
+
+  function initRive() {
+    ri = new rive.Rive({
+      src: RIVE_FILE,
+      canvas: document.getElementById('bb-rive'),
+      autoplay: true,
+      stateMachines: RIVE_SM,
+      onLoad: function() {
+        var inputs = ri.stateMachineInputs(RIVE_SM);
+        rIn.open  = inputs.find(function(i){ return i.name===IN_OPEN; });
+        rIn.sleep = inputs.find(function(i){ return i.name===IN_SLEEP; });
+        syncRive();
+      }
+    });
+    var canvas = document.getElementById('bb-rive');
+    canvas.addEventListener('click',      bbCatClick);
+    canvas.addEventListener('touchstart', function(e){ e.preventDefault(); bbCatClick(); }, { passive: false });
+  }
+
+  function syncRive() {
+    if (!ri || !rIn.open) return;
+    rIn.open.value  = (state===S.SPRING||state===S.IDLE||state===S.SLEEP);
+    rIn.sleep.value = (state===S.SLEEP);
+  }
+
+  function setState(next) {
+    state = next;
+    stage.className = 'bb-s-' + next;
+    statusEl.textContent = statusText[next] || '';
+    var open = (next===S.SPRING||next===S.IDLE||next===S.SLEEP);
+    open ? chat.classList.add('open') : chat.classList.remove('open');
+    syncRive();
+  }
+
+  function springUp() {
+    setState(S.SPRING);
+    document.getElementById('bb-cat-wrap').addEventListener('animationend', function() {
+      if (state===S.SPRING) setState(S.IDLE);
+    }, { once:true });
+    resetSleep();
+  }
+
+  function resetSleep() {
+    clearTimeout(sleepTimer);
+    sleepTimer = setTimeout(function() {
+      if (state===S.IDLE) setState(S.SLEEP);
+    }, 5000);
+  }
+
+  function bbCatClick() {
+    if (state===S.PEEP||state===S.SLEEP) {
+      springUp();
+      setTimeout(function(){ input.focus(); }, 900);
+    }
+  }
+
+  window.bbClose = function() { clearTimeout(sleepTimer); setState(S.PEEP); };
+  window.bbChip  = function(btn) { bbSend(btn.textContent); };
+
+  input.addEventListener('input', function() {
+    if (state===S.SLEEP) { clearTimeout(sleepTimer); setState(S.IDLE); }
+    resetSleep();
+  });
+  input.addEventListener('keydown', function(e) {
+    if (e.key==='Enter'&&!e.shiftKey) { e.preventDefault(); bbSend(); }
+  });
+
+  function addMsg(role, text) {
+    var row = document.createElement('div');
+    row.className = 'bb-row' + (role==='user'?' usr':'');
+    var b = document.createElement('div');
+    b.className = 'bb-bubble ' + (role==='user'?'usr':'bot');
+    b.textContent = text;
+    row.appendChild(b); msgs.appendChild(row);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  function showDots() {
+    var row = document.createElement('div');
+    row.id='bb-dots'; row.className='bb-row';
+    row.innerHTML='<div class="bb-dots"><span></span><span></span><span></span></div>';
+    msgs.appendChild(row); msgs.scrollTop=msgs.scrollHeight;
+  }
+  function hideDots() { var d=document.getElementById('bb-dots'); if(d) d.remove(); }
+
+  window.bbSend = async function(text) {
+    var msg = (text||input.value).trim();
+    if (!msg||busy) return;
+    input.value=''; busy=true; sendBtn.disabled=true;
+    clearTimeout(sleepTimer);
+    addMsg('user', msg); showDots();
+    try {
+      var res  = await fetch(WEBHOOK, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({message:msg}) });
+      var text = await res.text();
+      var reply;
+      try {
+        var data = JSON.parse(text);
+        reply = data.output||data.message||data.reply||data.text||text;
+      } catch(e) {
+        reply = text;
+      }
+      hideDots(); addMsg('bot', reply);
+    } catch(e) {
+      hideDots(); addMsg('bot','Oops — try again in a sec!');
+    }
+    busy=false; sendBtn.disabled=false; resetSleep();
+  };
+
+  window.onload = function() {
+    setState(S.PEEP);
+    if (typeof rive !== 'undefined') initRive();
+  };
+})();
+</script>
+</body>
+</html>
