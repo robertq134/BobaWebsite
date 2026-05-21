@@ -711,15 +711,11 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
     input.value=''; busy=true; sendBtn.disabled=true;
     clearTimeout(sleepTimer);
     addMsg('user', msg); showDots();
-    try {
-      var res  = await fetch(WEBHOOK, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({message:msg}) });
-      var data = JSON.parse(text);
+    var data = JSON.parse(text);
 var firstKey = Object.keys(data)[0];
 reply = data.output || data.message || 
         (data[firstKey] && data[firstKey].output) || 
         firstKey || text;
-    busy=false; sendBtn.disabled=false; resetSleep();
-  };
 
   window.onload = function() {
     setState(S.PEEP);
