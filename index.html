@@ -600,9 +600,10 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
   </div>
 </div>
 
+
 <script>
 (function() {
-  var WEBHOOK = 'https://robertq.app.n8n.cloud/webhook/f5301221-eea4-4cc9-b231-b56c4d57e4a0';
+  var WEBHOOK  = 'https://robertq.app.n8n.cloud/webhook/f5301221-eea4-4cc9-b231-b56c4d57e4a0';
   var RIVE_FILE = 'bestie-cat.riv';
   var RIVE_SM   = 'CatStateMachine';
   var IN_OPEN   = 'isOpen';
@@ -635,7 +636,7 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
       }
     });
     var canvas = document.getElementById('bb-rive');
-    canvas.addEventListener('click',      bbCatClick);
+    canvas.addEventListener('click', bbCatClick);
     canvas.addEventListener('touchstart', function(e){ e.preventDefault(); bbCatClick(); }, { passive: false });
   }
 
@@ -711,16 +712,37 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
     input.value=''; busy=true; sendBtn.disabled=true;
     clearTimeout(sleepTimer);
     addMsg('user', msg); showDots();
-    var data = JSON.parse(text);
-var firstKey = Object.keys(data)[0];
-reply = data.output || data.message || 
-        (data[firstKey] && data[firstKey].output) || 
-        firstKey || text;
+    try {
+      var res = await fetch(WEBHOOK, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: msg })
+      });
+      var rawText = await res.text();
+      var reply;
+      try {
+        var data = JSON.parse(rawText);
+        var firstKey = Object.keys(data)[0];
+        reply = data.output || data.message || data.reply || data.text ||
+                (data[firstKey] && data[firstKey].output) ||
+                firstKey || rawText;
+      } catch(e) {
+        reply = rawText;
+      }
+      hideDots(); addMsg('bot', reply);
+    } catch(e) {
+      hideDots(); addMsg('bot', 'Oops — try again in a sec!');
+    }
+    busy=false; sendBtn.disabled=false; resetSleep();
+  };
 
   window.onload = function() {
     setState(S.PEEP);
     if (typeof rive !== 'undefined') initRive();
+  };
+
 })();
 </script>
+
 </body>
 </html>
