@@ -693,7 +693,7 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
     row.className = 'bb-row' + (role==='user'?' usr':'');
     var b = document.createElement('div');
     b.className = 'bb-bubble ' + (role==='user'?'usr':'bot');
-    b.textContent = text;
+    b.textContent = text.replace(/\*\*(.*?)\*\*/g, '$1').replace(/\*(.*?)\*/g, '$1');
     row.appendChild(b); msgs.appendChild(row);
     msgs.scrollTop = msgs.scrollHeight;
   }
