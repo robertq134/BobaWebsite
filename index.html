@@ -713,18 +713,11 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
     addMsg('user', msg); showDots();
     try {
       var res  = await fetch(WEBHOOK, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({message:msg}) });
-      var text = await res.text();
-      var reply;
-      try {
-        var data = JSON.parse(text);
-        reply = data.output||data.message||data.reply||data.text||text;
-      } catch(e) {
-        reply = text;
-      }
-      hideDots(); addMsg('bot', reply);
-    } catch(e) {
-      hideDots(); addMsg('bot','Oops — try again in a sec!');
-    }
+      var data = JSON.parse(text);
+var firstKey = Object.keys(data)[0];
+reply = data.output || data.message || 
+        (data[firstKey] && data[firstKey].output) || 
+        firstKey || text;
     busy=false; sendBtn.disabled=false; resetSleep();
   };
 
