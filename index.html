@@ -130,7 +130,7 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
 /* ════════════════════════════════════════════════
    WIDGET — DESKTOP
    ════════════════════════════════════════════════ */
-@keyframes _peep-bob  { 0%,100%{transform:translateY(0)} 50%{transform:translateY(0px)} }
+@keyframes _peep-bob  { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-9px)} }
 @keyframes _spring-up-desk {
   0%{transform:translateY(250px)} 52%{transform:translateY(-22px)}
   68%{transform:translateY(10px)} 82%{transform:translateY(-8px)}
@@ -144,8 +144,8 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
 #bb-widget { position:fixed; bottom:0; right:24px; z-index:9999; width:340px; }
 
 /* Cat positioning */
-#bb-cat-wrap { transform:translateY(150px); transform-origin:bottom center; }
-.bb-s-peep   #bb-cat-wrap { animation:_peep-bob 2.6s ease-in-out infinite; transform:translateY(150px); }
+#bb-cat-wrap { transform:translateY(250px); transform-origin:bottom center; }
+.bb-s-peep   #bb-cat-wrap { animation:_peep-bob 2.6s ease-in-out infinite; transform:translateY(250px); }
 .bb-s-spring #bb-cat-wrap { animation:_spring-up-desk 0.85s cubic-bezier(0.22,1,0.36,1) forwards; }
 .bb-s-idle   #bb-cat-wrap { transform:translateY(0); }
 .bb-s-sleep  #bb-cat-wrap { transform:translateY(0); }
@@ -185,6 +185,12 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
 .bb-status { font-size:11px; color:rgba(255,255,255,.75); font-weight:600; margin-top:2px; }
 #bb-close  { background:rgba(255,255,255,.2); border:none; border-radius:50%; width:28px; height:28px; color:white; font-size:18px; cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
 #bb-close:hover { background:rgba(255,255,255,.35); }
+
+/* Messages */
+#bb-msgs { height:160px; overflow-y:auto; padding:14px; display:flex; flex-direction:column; gap:10px; background:#FEFCF8; flex-shrink:0; }
+.bb-row { display:flex; align-items:flex-end; gap:7px; }
+.bb-row.usr { justify-content:flex-end; }
+/* Bot avatar next to message */
 .bb-avatar {
   width:26px; height:26px; border-radius:50%;
   background: linear-gradient(135deg,#F9EEF1,#F2D5DC);
@@ -192,11 +198,6 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
   display:flex; align-items:center; justify-content:center;
   font-size:13px; flex-shrink:0; margin-bottom:2px;
 }
-
-/* Messages */
-#bb-msgs { height:160px; overflow-y:auto; padding:14px; display:flex; flex-direction:column; gap:10px; background:#FEFCF8; flex-shrink:0; }
-.bb-row { display:flex; }
-.bb-row.usr { justify-content:flex-end; }
 .bb-bubble { max-width:82%; padding:10px 14px; font-size:13px; font-weight:500; line-height:1.55; animation:_msg-in .22s ease; }
 .bb-bubble.bot { background:white; border:1.5px solid #EAD8DF; border-radius:16px 16px 16px 4px; color:#1C1412; }
 .bb-bubble.usr { background:linear-gradient(135deg,#E8527A,#C73A61); border-radius:16px 16px 4px 16px; color:white; }
@@ -306,28 +307,28 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
   }
 
   /* Peeping: show top ~50px of cat */
-  #bb-cat-wrap                { transform: translateY(200px); }
-  .bb-s-peep #bb-cat-wrap     { transform: translateY(200px); animation: _peep-bob-m 2.6s ease-in-out infinite; }
+  #bb-cat-wrap                { transform: translateY(110px); }
+  .bb-s-peep #bb-cat-wrap     { transform: translateY(110px); animation: _peep-bob-m 2.6s ease-in-out infinite; }
   .bb-s-spring #bb-cat-wrap   { animation: _spring-up-m 0.85s cubic-bezier(0.22,1,0.36,1) forwards; }
   .bb-s-idle #bb-cat-wrap     { transform: translateY(0); }
   .bb-s-sleep #bb-cat-wrap    { transform: translateY(0); }
 
-  @keyframes _peep-bob-m  { 0%,100%{transform:translateY(0px)} 50%{transform:translateY(0px)} }
+  @keyframes _peep-bob-m  { 0%,100%{transform:translateY(110px)} 50%{transform:translateY(102px)} }
   @keyframes _spring-up-m {
-  0%{transform:translateY(500px)} 52%{transform:translateY(-14px)}
-  68%{transform:translateY(6px)}  82%{transform:translateY(-5px)}
-  91%{transform:translateY(2px)}  100%{transform:translateY(0)}
-}
+    0%{transform:translateY(110px)} 52%{transform:translateY(-14px)}
+    68%{transform:translateY(6px)}  82%{transform:translateY(-5px)}
+    91%{transform:translateY(2px)}  100%{transform:translateY(0)}
+  }
 
   /* Chat window — full width, slides up from bottom */
   #bb-chat {
     position: fixed !important;
-    bottom: 150px !important;
-    left: 65px !important;
+    bottom: 0 !important;
+    left: 0 !important;
     right: 0 !important;
-    width: 80% !important;
+    width: 100% !important;
     max-height: 0;
-    border-radius: 20px 20px 20px 20px !important;
+    border-radius: 20px 20px 0 0 !important;
     box-shadow: 0 -4px 24px rgba(26,16,20,.15) !important;
   }
   #bb-chat.open {
@@ -444,9 +445,7 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
       </div>
       <div class="week-right">
         <div class="week-img">
-          <div class="ph" style="height:420px;border-radius:12px;">
-            <img src="mochidonuts.jpg" style="width:100%;height:300px;object-fit:cover;border-radius:32px;display:block;">
-          </div>
+          <div class="ph" style="height:420px;border-radius:12px;"><span>Mochi donuts photo</span></div>
         </div>
         <p class="week-note">Flavors rotate every week. Follow us on Instagram for the latest drops.</p>
       </div>
@@ -594,20 +593,21 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
 <div id="bb-widget">
   <div id="bb-chat">
     <div id="bb-header">
-  <div class="bb-header-left">
-    <div class="bb-header-avatar">🐱</div>
-    <div>
-      <div class="bb-name">Besties Boba & Bites</div>
-      <div class="bb-status" id="bb-status">Ask us anything!</div>
+      <div class="bb-header-left">
+        <div class="bb-header-avatar">🐱</div>
+        <div>
+          <div class="bb-name">Besties Boba & Bites</div>
+          <div class="bb-status" id="bb-status">Ask us anything!</div>
+        </div>
+      </div>
+      <button id="bb-close" onclick="bbClose()">&#215;</button>
     </div>
-  </div>
-  <button id="bb-close" onclick="bbClose()">&#215;</button>
-</div>
     <div id="bb-msgs">
       <div class="bb-row">
         <div class="bb-avatar">🐱</div>
-  <div class="bb-bubble bot">Hey! Welcome to Besties Boba & Bites. My name is Mochi. Ask about our menu, specials, or catering!</div>
-</div>
+        <div class="bb-bubble bot">Hey! Welcome to Besties Boba & Bites. My name is Mochi. Ask about our menu, specials, or catering!</div>
+      </div>
+    </div>
     <div id="bb-chips">
       <button class="bb-chip" onclick="bbChip(this)">Menu?</button>
       <button class="bb-chip" onclick="bbChip(this)">Catering?</button>
@@ -625,10 +625,9 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
   </div>
 </div>
 
-
 <script>
 (function() {
-  var WEBHOOK  = 'https://robertq.app.n8n.cloud/webhook/f5301221-eea4-4cc9-b231-b56c4d57e4a0';
+  var WEBHOOK   = 'YOUR_N8N_WEBHOOK_URL';
   var RIVE_FILE = 'bestie-cat.riv';
   var RIVE_SM   = 'CatStateMachine';
   var IN_OPEN   = 'isOpen';
@@ -661,7 +660,7 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
       }
     });
     var canvas = document.getElementById('bb-rive');
-    canvas.addEventListener('click', bbCatClick);
+    canvas.addEventListener('click',      bbCatClick);
     canvas.addEventListener('touchstart', function(e){ e.preventDefault(); bbCatClick(); }, { passive: false });
   }
 
@@ -703,13 +702,8 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
   }
 
   window.bbClose = function() { clearTimeout(sleepTimer); setState(S.PEEP); };
-  window.bbChip = function(btn) {
-  if (state === S.SLEEP) {
-    clearTimeout(sleepTimer);
-    setState(S.IDLE);
-  }
-  bbSend(btn.textContent);
-};
+  window.bbChip  = function(btn) { bbSend(btn.textContent); };
+
   input.addEventListener('input', function() {
     if (state===S.SLEEP) { clearTimeout(sleepTimer); setState(S.IDLE); }
     resetSleep();
@@ -719,20 +713,20 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
   });
 
   function addMsg(role, text) {
-  var row = document.createElement('div');
-  row.className = 'bb-row' + (role==='user'?' usr':'');
-  if (role !== 'user') {
-    var av = document.createElement('div');
-    av.className = 'bb-avatar';
-    av.textContent = '🐱';
-    row.appendChild(av);
+    var row = document.createElement('div');
+    row.className = 'bb-row' + (role==='user'?' usr':'');
+    if (role !== 'user') {
+      var av = document.createElement('div');
+      av.className = 'bb-avatar';
+      av.textContent = '🐱';
+      row.appendChild(av);
+    }
+    var b = document.createElement('div');
+    b.className = 'bb-bubble ' + (role==='user'?'usr':'bot');
+    b.textContent = text;
+    row.appendChild(b); msgs.appendChild(row);
+    msgs.scrollTop = msgs.scrollHeight;
   }
-  var b = document.createElement('div');
-  b.className = 'bb-bubble ' + (role==='user'?'usr':'bot');
-  b.textContent = text;
-  row.appendChild(b); msgs.appendChild(row);
-  msgs.scrollTop = msgs.scrollHeight;
-}
 
   function showDots() {
     var row = document.createElement('div');
@@ -749,25 +743,12 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
     clearTimeout(sleepTimer);
     addMsg('user', msg); showDots();
     try {
-      var res = await fetch(WEBHOOK, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: msg })
-      });
-      var rawText = await res.text();
-      var reply;
-      try {
-        var data = JSON.parse(rawText);
-        var firstKey = Object.keys(data)[0];
-        reply = data.output || data.message || data.reply || data.text ||
-                (data[firstKey] && data[firstKey].output) ||
-                firstKey || rawText;
-      } catch(e) {
-        reply = rawText;
-      }
+      var res  = await fetch(WEBHOOK, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({message:msg}) });
+      var data = await res.json();
+      var reply = data.output||data.message||data.reply||data.text||'Thanks for reaching out!';
       hideDots(); addMsg('bot', reply);
     } catch(e) {
-      hideDots(); addMsg('bot', 'Oops — try again in a sec!');
+      hideDots(); addMsg('bot','Oops — try again in a sec!');
     }
     busy=false; sendBtn.disabled=false; resetSleep();
   };
@@ -776,9 +757,7 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
     setState(S.PEEP);
     if (typeof rive !== 'undefined') initRive();
   };
-
 })();
 </script>
-
 </body>
 </html>
