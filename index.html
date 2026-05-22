@@ -678,8 +678,13 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
   }
 
   window.bbClose = function() { clearTimeout(sleepTimer); setState(S.PEEP); };
-  window.bbChip  = function(btn) { bbSend(btn.textContent); };
-
+  window.bbChip = function(btn) {
+  if (state === S.SLEEP) {
+    clearTimeout(sleepTimer);
+    setState(S.IDLE);
+  }
+  bbSend(btn.textContent);
+};
   input.addEventListener('input', function() {
     if (state===S.SLEEP) { clearTimeout(sleepTimer); setState(S.IDLE); }
     resetSleep();
