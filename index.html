@@ -777,20 +777,21 @@ try {
   };
 
   window.onload = function() {
-    setState(S.PEEP);
-    if (typeof rive !== 'undefined') initRive();
+  setState(S.PEEP);
+  if (typeof rive !== 'undefined') initRive();
 
-    // Scroll fade-in
-    var fadeEls = document.querySelectorAll('.fade-in-scroll');
-    var observer = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.15 });
-    fadeEls.forEach(function(el) { observer.observe(el); });
-  };
+  var fadeEls = document.querySelectorAll('.fade-in-scroll');
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      } else {
+        entry.target.classList.remove('visible');
+      }
+    });
+  }, { threshold: 0.15 });
+  fadeEls.forEach(function(el) { observer.observe(el); });
+};
   var fadeEls = document.querySelectorAll('.fade-in-scroll');
 var observer = new IntersectionObserver(function(entries) {
   entries.forEach(function(entry) {
