@@ -758,8 +758,17 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
     addMsg('user', msg); showDots();
     try {
       var res  = await fetch(WEBHOOK, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({message:msg}) });
-      var data = await res.json();
-      var reply = data.output||data.message||data.reply||data.text||'Thanks for reaching out!';
+      var rawText = await res.text();
+var reply;
+try {
+  var data = JSON.parse(rawText);
+  var firstKey = Object.keys(data)[0];
+  reply = data.output || data.message || data.reply || data.text ||
+          (data[firstKey] && data[firstKey].output) ||
+          firstKey || rawText;
+} catch(e) {
+  reply = rawText;
+}
       hideDots(); addMsg('bot', reply);
     } catch(e) {
       hideDots(); addMsg('bot','Oops — try again in a sec!');
@@ -770,6 +779,17 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
   window.onload = function() {
     setState(S.PEEP);
     if (typeof rive !== 'undefined') initRive();
+
+    // Scroll fade-in
+    var fadeEls = document.querySelectorAll('.fade-in-scroll');
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15 });
+    fadeEls.forEach(function(el) { observer.observe(el); });
   };
   var fadeEls = document.querySelectorAll('.fade-in-scroll');
 var observer = new IntersectionObserver(function(entries) {
