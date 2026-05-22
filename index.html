@@ -7,6 +7,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Fredoka+One&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <script src="https://unpkg.com/@rive-app/canvas@2.17.3/rive.js"></script>
 <style>
+
+  .fade-in-scroll {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.fade-in-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+  
 /* ── RESET ───────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
@@ -345,6 +356,15 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
   #bb-msgs   { height: 80px !important; }
   #bb-input-row { padding: 8px 14px 20px !important; }
 }
+  var fadeEls = document.querySelectorAll('.fade-in-scroll');
+var observer = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.15 });
+fadeEls.forEach(function(el) { observer.observe(el); });
 </style>
 </head>
 <body>
@@ -445,7 +465,9 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
       </div>
       <div class="week-right">
         <div class="week-img">
-          <div class="ph" style="height:420px;border-radius:12px;"><span>Mochi donuts photo</span></div>
+          <div class="week-img fade-in-scroll">
+              <img src="mochidonuts.jpg" style="width:100%;height:350px;object-fit:cover;border-radius:32px;display:block;"/>
+          </div>
         </div>
         <p class="week-note">Flavors rotate every week. Follow us on Instagram for the latest drops.</p>
       </div>
