@@ -670,7 +670,15 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
     });
     var canvas = document.getElementById('bb-rive');
     canvas.addEventListener('click',      bbCatClick);
-    canvas.addEventListener('touchstart', function(e){ e.preventDefault(); bbCatClick(); }, { passive: false });
+    canvas.addEventListener('touchstart', function(e){
+      touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+    canvas.addEventListener('touchend', function(e){
+      var touchEndY = e.changedTouches[0].clientY;
+      if (Math.abs(touchEndY - touchStartY) < 10) {
+    bbCatClick();
+  }
+  });
   }
 
   function syncRive() {
