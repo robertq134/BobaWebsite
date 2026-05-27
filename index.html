@@ -86,8 +86,21 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0 48px;
 .flavor-item { padding: 13px 0; border-bottom: 1px solid var(--border); font-size: 14px; font-weight: 500; color: var(--text); display: flex; align-items: center; gap: 10px; }
 .flavor-item::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--pink); flex-shrink: 0; transition: border-color .30s; }
 .week-note { margin-top: 16px; font-size: 13px; color: var(--muted); font-weight: 500; line-height: 1.6; }
-.flavor-item:hover {border-color: var(--pink-d); }
+.flavor-btn {
+  background: none;
+  border: none;
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  cursor: pointer;
+  padding: 0;
+  text-align: left;
+  transition: color .15s;
+}
   
+.flavor-btn:hover { color: var(--pink); }
+.flavor-btn.active { color: var(--pink); font-weight: 700; }
 
 /* ── MENU ─────────────────────────────────────── */
 .menu-section { background: var(--dark); padding: 88px 48px; }
@@ -447,17 +460,29 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
         <div class="week-dates">May 25 &ndash; May 31</div>
         <div class="flavors-grid">
           <div class="flavor-item">
-            <button>Tropical Punch</button>
+            <button class="flavor-btn" data-img="CHANGE IMAGE">Tropical Punch</button>
           </div>
           <div class="flavor-item">
-            <button>Lavender Yuzu</button>
+            <button class="flavor-btn" data-img="CHANGE IMAGE">Lavender Yuzu</button>
           </div>
-          <div class="flavor-item"><button>Cookie Butter</button></div>
-          <div class="flavor-item"><button>Crème Brulee</button></div>
-          <div class="flavor-item"><button>Strawberry Pockey</button></div>
-          <div class="flavor-item"><button>Chocolate Cherry Drizzle</button></div>
-          <div class="flavor-item"><button>Chocolate Sprinkles</button></div>
-          <div class="flavor-item"><button>OG Glazed</button></div>
+          <div class="flavor-item">
+            <button class="flavor-btn" data-img="CHANGE IMAGE">Cookie Butter</button>
+          </div>
+          <div class="flavor-item">
+            <button class="flavor-btn" data-img="CHANGE IMAGE">Creme Brulee</button>
+          </div>
+          <div class="flavor-item">
+            <button class="flavor-btn" data-img="CHANGE IMAGE">Strawberry Pockey</button>
+          </div>
+          <div class="flavor-item">
+            <button class="flavor-btn" data-img="CHANGE IMAGE">Chocolate Cherry Drizzle</button>
+          </div>
+          <div class="flavor-item">
+            <button class="flavor-btn" data-img="CHANGE IMAGE">Chocolate Sprinkles</button>
+          </div>
+          <div class="flavor-item">
+            <button class="flavor-btn" data-img="CHANGE IMAGE">OG Glazed</button>
+          </div>
         </div>
         <div style="margin-top:32px;">
           <a href="https://bestiesboba.square.site/" target="_blank">
@@ -467,7 +492,7 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
       </div>
       <div class="week-right">
   <div class="week-img fade-in-scroll">
-    <img src="epicdonut.png" style="width:100%;height:350px;object-fit:cover;border-radius:32px;display:block;"/>
+    <img id="donut-img" src="epicdonut.png" style="width:100%;height:350px;object-fit:cover;border-radius:32px;display:block;"/>
   </div>
         <p class="week-note">Flavors rotate every week. Follow us on Instagram for the latest drops.</p>
       </div>
@@ -824,6 +849,21 @@ var observer = new IntersectionObserver(function(entries) {
 }, { threshold: 0.15 });
 fadeEls.forEach(function(el) { observer.observe(el); });
 })();
+
+  document.querySelectorAll('.flavor-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.flavor-btn').forEach(function(b) {
+      b.classList.remove('active');
+    });
+    btn.classList.add('active');
+    var img = document.getElementById('donut-img');
+    img.style.opacity = '0';
+    setTimeout(function() {
+      img.src = btn.getAttribute('data-img');
+      img.style.opacity = '1';
+    }, 200);
+  });
+});
 </script>
 </body>
 </html>
