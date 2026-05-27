@@ -84,9 +84,9 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0 48px;
 .week-dates { display: inline-block; background: var(--warm); border: 1px solid var(--border); border-radius: 6px; padding: 6px 14px; font-size: 13px; font-weight: 700; color: var(--muted); margin-bottom: 32px; }
 .flavors-grid { display: grid; grid-template-columns: 1fr 1fr; }
 .flavor-item { padding: 13px 0; border-bottom: 1px solid var(--border); font-size: 14px; font-weight: 500; color: var(--text); display: flex; align-items: center; gap: 10px; }
-.flavor-item::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--pink); flex-shrink: 0; }
+.flavor-item::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--pink); flex-shrink: 0; transition: border-color .15s; }
 .week-note { margin-top: 16px; font-size: 13px; color: var(--muted); font-weight: 500; line-height: 1.6; }
-.flavor-item:hover {background: var(--pink-d); }
+.flavor-item:hover {border-color: var(--pink-d); }
   
 
 /* ── MENU ─────────────────────────────────────── */
