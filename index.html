@@ -87,7 +87,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0 48px;
 .flavor-item { padding: 13px 0; border-bottom: 1px solid var(--border); font-size: 14px; font-weight: 500; color: var(--text); display: flex; align-items: center; gap: 10px; }
 .flavor-item::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--pink); flex-shrink: 0; transition: border-color .30s; }
 .week-note { margin-top: 16px; font-size: 13px; color: var(--muted); font-weight: 500; line-height: 1.6; }
-#donut-img { transition: opacity 0.3s ease; } 
+#donut-img { transition: opacity 0.08s ease; } 
 .flavor-btn {
   background: none;
   border: none;
@@ -463,28 +463,28 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
         <div class="week-dates">May 25 &ndash; May 31</div>
         <div class="flavors-grid">
           <div class="flavor-item">
-            <button class="flavor-btn" data-img="TP.png">Tropical Punch</button>
+            <button class="flavor-btn" data-img="tropical.png">Tropical Punch</button>
           </div>
           <div class="flavor-item">
-            <button class="flavor-btn" data-img="LY.png">Lavender Yuzu</button>
+            <button class="flavor-btn" data-img="lavender.png">Lavender Yuzu</button>
           </div>
           <div class="flavor-item">
-            <button class="flavor-btn" data-img="CookieB.png">Cookie Butter</button>
+            <button class="flavor-btn" data-img="cookiebutt.png">Cookie Butter</button>
           </div>
           <div class="flavor-item">
-            <button class="flavor-btn" data-img="CB.png">Creme Brulee</button>
+            <button class="flavor-btn" data-img="creme.png">Creme Brulee</button>
           </div>
           <div class="flavor-item">
-            <button class="flavor-btn" data-img="SP.png">Strawberry Pockey</button>
+            <button class="flavor-btn" data-img="strawberrypockey.png">Strawberry Pockey</button>
           </div>
           <div class="flavor-item">
-            <button class="flavor-btn" data-img="CCD.png">Chocolate Cherry Drizzle</button>
+            <button class="flavor-btn" data-img="chocolatecherry.png">Chocolate Cherry Drizzle</button>
           </div>
           <div class="flavor-item">
-            <button class="flavor-btn" data-img="CHANGE IMAGE">Chocolate Sprinkles</button>
+            <button class="flavor-btn" data-img="chocolatesprinkles.png">Chocolate Sprinkles</button>
           </div>
           <div class="flavor-item">
-            <button class="flavor-btn" data-img="CHANGE IMAGE">OG Glazed</button>
+            <button class="flavor-btn" data-img="orange.png">Orange Mochi Donut</button>
           </div>
         </div>
         <div style="margin-top:32px;">
@@ -864,7 +864,7 @@ fadeEls.forEach(function(el) { observer.observe(el); });
     setTimeout(function() {
       img.src = btn.getAttribute('data-img');
       img.style.opacity = '1';
-    }, 200);
+    }, 80);
   });
 });
 </script>
