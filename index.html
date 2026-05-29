@@ -58,7 +58,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0 48px;
 .nav-cta:hover { background: var(--pink-d); }
 
 /* ── HERO ─────────────────────────────────────── */
-.hero { margin-top: 62px; display: grid; grid-template-columns: 1fr 1fr; min-height: calc(100vh - 62px); }
+.hero { margin-top: 62px; display: grid; grid-template-columns: 1fr 1fr; min-height: calc(70vh - 62px); }
 .hero-img { position: relative; overflow: hidden; }
 .hero-img-label { position: absolute; bottom: 24px; left: 24px; background: rgba(22,14,18,.55); backdrop-filter: blur(8px); padding: 8px 14px; border-radius: 6px; font-size: 12px; font-weight: 600; color: rgba(255,255,255,.8); letter-spacing: 0.5px; }
 .hero-content { display: flex; flex-direction: column; justify-content: center; padding: 72px 72px 72px 72px; background: var(--cream); }
@@ -76,6 +76,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0 48px;
 .marquee-item { display: flex; align-items: center; gap: 24px; padding-right: 24px; flex-shrink: 0; font-size: 11px; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(255,255,255,.85); }
 .marquee-sep { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,.5); flex-shrink: 0; }
 @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+@keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
 
 /* ── THIS WEEK ───────────────────────────────── */
 .this-week { padding: 88px 48px; max-width: 1120px; margin: 0 auto; }
@@ -97,7 +98,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0 48px;
   cursor: pointer;
   padding: 0;
   text-align: left;
-  transition: color .15s;
+  transition: color .05s;
 }
   
 .flavor-btn:hover { color: var(--pink); }
@@ -384,8 +385,8 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
     <img src="mochilogoV2.png" style="height:44px;width:auto;display:block;"/>
   </div>
   <ul class="nav-links">
-    <li><a href="#menu">Menu</a></li>
     <li><a href="#this-week">This Week</a></li>
+    <li><a href="#menu">Menu</a></li>
     <li><a href="#about">About Us</a></li>
     <li><a href="#catering">Catering</a></li>
     <li><a href="#visit">Visit</a></li>
@@ -396,7 +397,7 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
 </nav>
 
 <!-- HERO -->
-<section class="hero" style="position:relative; min-height:calc(100vh - 62px); margin-top:62px; overflow:hidden;">
+<section class="hero" style="position:relative; min-height:calc(70vh - 62px); margin-top:62px; overflow:hidden;">
 
   <!-- Three videos side by side as background -->
   <div style="position:absolute; inset:0; display:grid; grid-template-columns:1fr 1fr 1fr; gap:0;">
@@ -426,6 +427,7 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
         <button class="btn-outline" style="color:white; border-color:rgba(255,255,255,0.4);">This Week's Flavors</button>
       </a>
     </div>
+    <div style="position:absolute; bottom:32px; left:50%; transform:translateX(-50%); color:rgba(255,255,255,0.5); font-size:24px; animation:bounce 2s infinite;">↓</div>
   </div>
 
 </section>
