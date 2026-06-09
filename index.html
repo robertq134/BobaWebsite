@@ -812,13 +812,12 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
     try {
       var res  = await fetch(WEBHOOK, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({message:msg}) });
       var rawText = await res.text();
+      console.log(rawText)
 var reply;
 try {
   var data = JSON.parse(rawText);
   var firstKey = Object.keys(data)[0];
-  reply = data.output || data.message || data.reply || data.text ||
-          (data[firstKey] && data[firstKey].output) ||
-          firstKey || rawText;
+  reply = rawText;
 } catch(e) {
   reply = rawText;
 }
