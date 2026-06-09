@@ -706,7 +706,7 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
         sessionId = crypto.randomUUID();
         sessionStorage.setItem('bb_session_id', sessionId);
     }
-  body: JSON.stringify({message: msg, session_id: sessionId})
+
   function initRive() {
     ri = new rive.Rive({
       src: RIVE_FILE,
@@ -815,9 +815,8 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
     clearTimeout(sleepTimer);
     addMsg('user', msg); showDots();
     try {
-      var res  = await fetch(WEBHOOK, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({message:msg}) });
+      var res  = await fetch(WEBHOOK, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({message: msg, session_id: sessionId}) });
       var rawText = await res.text();
-      console.log(rawText)
 var reply;
 try {
   var data = JSON.parse(rawText);
