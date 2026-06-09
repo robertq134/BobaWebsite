@@ -701,7 +701,12 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
   var statusText = { peep:'Click me!', spring:"We're online!", idle:"We're online!", sleep:'Tap to wake me up! /ᐠ - ˕-マ｡˚' };
 
   var ri = null, rIn = {};
-
+  var sessionId = sessionStorage.getItem('bb_session_id');
+    if (!sessionId) {
+        sessionId = crypto.randomUUID();
+        sessionStorage.setItem('bb_session_id', sessionId);
+    }
+  body: JSON.stringify({message: msg, session_id: sessionId})
   function initRive() {
     ri = new rive.Rive({
       src: RIVE_FILE,
