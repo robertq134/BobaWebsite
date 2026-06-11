@@ -818,7 +818,7 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
       var res  = await fetch(WEBHOOK, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({message: msg, session_id: sessionId}) });
       var rawText = await res.text();
       console.log(rawText);
-var reply;
+var reply = data.reply;
 try {
   var data = JSON.parse(rawText);
   var firstKey = Object.keys(data)[0];
