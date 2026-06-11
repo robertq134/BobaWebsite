@@ -816,6 +816,7 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
     addMsg('user', msg); showDots();
     try {
       var res  = await fetch(WEBHOOK, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({message: msg, session_id: sessionId}) });
+      console.log(rawText);
       var rawText = await res.text();
 var reply;
 try {
