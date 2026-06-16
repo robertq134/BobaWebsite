@@ -108,7 +108,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0 48px;
   cursor: pointer;
   padding: 0;
   text-align: left;
-  transition: color .05s;
+  transition: color 1s;
 }
   
 .flavor-btn:hover { color: var(--pink); }
@@ -770,7 +770,7 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
     clearTimeout(sleepTimer);
     sleepTimer = setTimeout(function() {
       if (state===S.IDLE) setState(S.SLEEP);
-    }, 2000);
+    }, 1000);
   }
 
   function bbCatClick() {
