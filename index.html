@@ -770,7 +770,7 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
     clearTimeout(sleepTimer);
     sleepTimer = setTimeout(function() {
       if (state===S.IDLE) setState(S.SLEEP);
-    }, 1000);
+    }, 2000);
   }
 
   function bbCatClick() {
@@ -879,9 +879,11 @@ fadeEls.forEach(function(el) { observer.observe(el); });
     var img = document.getElementById('donut-img');
     img.style.opacity = '0';
     setTimeout(function() {
-      img.src = btn.getAttribute('data-img');
-      img.style.opacity = '1';
-    }, 1000);
+    img.src = btn.getAttribute('data-img');
+    setTimeout(function() {
+        img.style.opacity = '1';
+    }, 50);
+}, 1000);
   });
 });
 </script>
