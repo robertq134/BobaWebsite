@@ -16,8 +16,8 @@
 }
 .fade-in-scroll-two{
     opacity: 0;
-    transform: translateY(2px);
-    transition: opacity 0.25s ease, transform 0.25s ease;
+    transform: translateY(1px);
+    transition: opacity 0.10s ease, transform 0.10s ease;
 }
 .fade-in-scroll-two.visible {
   opacity: 1;
@@ -108,7 +108,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0 48px;
   cursor: pointer;
   padding: 0;
   text-align: left;
-  transition: color 1s;
+  transition: color 0.5s;
 }
   
 .flavor-btn:hover { color: var(--pink); }
@@ -883,7 +883,7 @@ fadeEls.forEach(function(el) { observer.observe(el); });
 img.onload = function() {
     img.style.opacity = '1';
 };
-}, 1000);
+}, 500);
   });
 });
 </script>
