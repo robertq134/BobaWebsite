@@ -189,6 +189,13 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
 .bb-s-sleep  #bb-cat-wrap { transform:translateY(0); }
 
 #bb-cat-stage { position:relative; width:340px; margin-left:auto; cursor:pointer; overflow:visible; }
+#bb-meow-bubble {
+  position: absolute;
+  top: 40px;
+  left: 200px;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
 #bb-rive { display:block; width:340px; height:340px; cursor:pointer; background:transparent !important; }
 
 /* Chat window */
@@ -684,6 +691,7 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
     </div>
   </div>
   <div id="bb-cat-stage" class="bb-s-peep">
+    <div id="bb-meow-bubble">Meow!</div>
     <div id="bb-cat-wrap">
       <canvas id="bb-rive" width="340" height="340"></canvas>
     </div>
@@ -716,6 +724,8 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
         sessionId = crypto.randomUUID();
         sessionStorage.setItem('bb_session_id', sessionId);
     }
+  var elementID = document.querySelector('#bb-meow-bubble');
+  var intervalID = null;
 
   function initRive() {
     ri = new rive.Rive({
@@ -751,6 +761,19 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
 
   function setState(next) {
     state = next;
+    if (state === S.PEEP) {
+    if (!intervalID) {
+        intervalID = setInterval(function() {
+            if (elementID.style.opacity === "0") elementID.style.opacity = "1";
+            else elementID.style.opacity = "0";
+        }, 1000);
+    }
+  }
+  else {
+    clearInterval(intervalID);
+    intervalID = null;
+    elementID.style.opacity = "0";
+  }
     stage.className = 'bb-s-' + next;
     statusEl.textContent = statusText[next] || '';
     var open = (next===S.SPRING||next===S.IDLE||next===S.SLEEP);
