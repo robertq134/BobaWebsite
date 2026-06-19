@@ -417,26 +417,19 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
 <!-- HERO -->
 <section class="hero" style="position:relative; min-height:calc(70vh - 62px); margin-top:62px; overflow:hidden;">
 
-  <!-- Three videos side by side as background -->
-  <div class= "fade-in-scroll-two" style="position:absolute; inset:0; display:grid; grid-template-columns:1fr 1fr 1fr; gap:0;">
-    <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;">
-      <source src="boba1NEW.mp4" type="video/mp4">
-    </video>
-    <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;">
-      <source src="boba2NEW.mp4" type="video/mp4">
-    </video>
-    <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;">
-      <source src="boba4NEW.mp4" type="video/mp4">
-    </video>
-  </div>
+  <video autoplay muted loop playsinline style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
+    <source src="newhero.mp4" type="video/mp4">
+  </video>
 
-  <!-- Dark overlay -->
   <div style="position:absolute; inset:0; background:rgba(0,0,0,0.52);"></div>
 
-  <!-- Text content on top -->
   <div style="position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:calc(100vh - 62px); text-align:center; padding:48px 24px;">
+
+    <!-- TEMP: replace this entire block with logo + drink illustration when ready -->
     <span class="tag" style="color:#E8527A;">Boba Tea & Mochi Donuts</span>
     <h1 style="font-family:'Manrope',cursive; font-size:clamp(36px,5vw,64px); color:white; margin:0 0 16px; line-height:1.1;">Livermore's favorite boba place.</h1>
+    <!-- END TEMP BLOCK -->
+
     <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center;">
       <a href="https://bestiesboba.square.site/" target="_blank">
         <button class="btn-fill">Order Online</button>
@@ -447,8 +440,15 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
     </div>
     <div style="position:absolute; bottom:32px; left:50%; transform:translateX(-50%); color:rgba(255,255,255,0.5); font-size:24px; animation:bounce 2s infinite;">↓</div>
   </div>
-
 </section>
+  <svg width="100%" height="80" viewBox="0 0 1440 80" preserveAspectRatio="none" style="display:block;">
+  <path d="M0,40 C200,10 400,70 700,40 C1000,10 1200,70 1440,40 L1440,80 L0,80 Z" fill="#FEF9F6"/>
+  <circle cx="1180" cy="36" r="7" fill="#2A1E24"/>
+  <circle cx="1200" cy="50" r="6" fill="#2A1E24"/>
+  <circle cx="1215" cy="30" r="5" fill="#2A1E24"/>
+  <circle cx="1235" cy="46" r="6" fill="#2A1E24"/>
+  <circle cx="1255" cy="34" r="4" fill="#2A1E24"/>
+</svg>
 <!-- MARQUEE -->
 <div class="marquee-wrap">
   <div class="marquee-track">
