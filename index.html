@@ -5,7 +5,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Besties Boba & Bites — Livermore, CA</title>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Baloo+2:wght@500;600;700;800&display=swap" rel="stylesheet"/>
 <script src="https://unpkg.com/@rive-app/canvas@2.17.3/rive.js"></script>
 <style>
 
@@ -27,7 +27,7 @@
   opacity: 1;
   transform: translateY(0);
 }
-  
+
 /* ── RESET ───────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
@@ -46,7 +46,7 @@ html { scroll-behavior: smooth; }
 }
 
 body { font-family: 'Manrope', sans-serif; background: var(--cream); color: var(--text); -webkit-font-smoothing: antialiased; }
-h1, h2, h3 { font-family: 'Manrope', cursive; }
+h1, h2, h3 { font-family: 'Baloo 2', sans-serif; }
 a { text-decoration: none; color: inherit; }
 button { font-family: 'Manrope', sans-serif; cursor: pointer; }
 
@@ -60,7 +60,11 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; }
 .btn-outline:hover { border-color: var(--dark); }
 
 /* ── NAV ─────────────────────────────────────── */
-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0 48px; height: 62px; display: flex; align-items: center; justify-content: space-between; background: rgba(254,249,246,0.95); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); }
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0 48px; height: 62px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; background: transparent; border-bottom: 1px solid transparent; transition: background .25s ease, border-color .25s ease, box-shadow .25s ease; }
+.nav-logo { justify-self: start; }
+.nav-links { justify-self: center; }
+nav.scrolled { background: rgba(249,240,236,0.97); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); box-shadow: 0 2px 16px rgba(22,14,18,.06); }
+.nav-logo img { transition: filter .25s ease; }
 .nav-links { display: flex; gap: 36px; list-style: none; }
 .nav-links a { font-size: 14px; font-weight: 500; color: var(--muted); transition: color .15s; }
 .nav-links a:hover { color: var(--dark); }
@@ -68,36 +72,24 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0 48px;
 .nav-cta:hover { background: var(--pink-d); }
 
 /* ── HERO ─────────────────────────────────────── */
-.hero { margin-top: 62px; display: grid; grid-template-columns: 1fr 1fr; height: calc(88vh - 62px); }
-.hero-img { position: relative; overflow: hidden; }
-.hero-img-label { position: absolute; bottom: 24px; left: 24px; background: rgba(22,14,18,.55); backdrop-filter: blur(8px); padding: 8px 14px; border-radius: 6px; font-size: 12px; font-weight: 600; color: rgba(255,255,255,.8); letter-spacing: 0.5px; }
-.hero-content { display: flex; flex-direction: column; justify-content: center; padding: 72px 72px 72px 72px; background: var(--cream); }
-.hero-h1 { font-size: clamp(42px, 4.2vw, 68px); font-weight: 500; line-height: 1.05; letter-spacing: -2px; color: var(--dark); margin-bottom: 20px; }
-.hero-h1 em { font-style: normal; color: var(--pink); }
-.hero-sub { font-size: 16px; line-height: 1.75; color: var(--muted); font-weight: 400; max-width: 360px; margin-bottom: 36px; }
-.hero-btns { display: flex; gap: 12px; margin-bottom: 52px; }
-.hero-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding-top: 36px; border-top: 1px solid var(--border); }
-.stat-val { font-size: 14px; font-weight: 700; color: var(--dark); margin-bottom: 3px; }
-.stat-key { font-size: 11px; color: var(--muted); font-weight: 500; }
-
-/* ── MARQUEE ─────────────────────────────────── */
-.marquee-wrap { overflow: hidden; background: var(--pink); padding: 13px 0; }
-.marquee-track { display: flex; animation: marquee 24s linear infinite; white-space: nowrap; }
-.marquee-item { display: flex; align-items: center; gap: 24px; padding-right: 24px; flex-shrink: 0; font-size: 11px; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(255,255,255,.85); }
-.marquee-sep { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,.5); flex-shrink: 0; }
-@keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
-@keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
+.hero { position: relative; min-height: 100vh; overflow: hidden; }
+.hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.hero-inner { position: relative; z-index: 2; display: flex; align-items: center; justify-content: space-between; min-height: 100vh; text-align: left; padding: 96px 80px 48px; }
+.hero-content { max-width: 600px; }
+.hero-h1 { font-family: 'Baloo 2', sans-serif; font-size: clamp(36px, 5vw, 64px); color: var(--dark); margin: 0 0 16px; line-height: 1.1; }
+.hero-sub { font-size: 16px; line-height: 1.75; color: var(--muted); margin-bottom: 32px; max-width: 420px; }
+.hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
 
 /* ── THIS WEEK ───────────────────────────────── */
 .this-week { padding: 88px 48px; max-width: 1120px; margin: 0 auto; }
 .this-week-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
-.week-h2 { font-size: clamp(32px, 3.2vw, 48px); font-weight: 300; letter-spacing: -1.5px; color: var(--dark); margin-bottom: 12px; line-height: 1.1; }
+.week-h2 { font-size: clamp(32px, 3.2vw, 48px); font-weight: 600; letter-spacing: -0.5px; color: var(--dark); margin-bottom: 12px; line-height: 1.1; }
 .week-dates { display: inline-block; background: var(--warm); border: 1px solid var(--border); border-radius: 6px; padding: 6px 14px; font-size: 13px; font-weight: 700; color: var(--muted); margin-bottom: 32px; }
 .flavors-grid { display: grid; grid-template-columns: 1fr 1fr; }
 .flavor-item { padding: 13px 0; border-bottom: 1px solid var(--border); font-size: 14px; font-weight: 500; color: var(--text); display: flex; align-items: center; gap: 10px; }
 .flavor-item::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--pink); flex-shrink: 0; transition: border-color .30s; }
 .week-note { margin-top: 16px; font-size: 13px; color: var(--muted); font-weight: 500; line-height: 1.6; }
-#donut-img { transition: opacity 0.5s ease; border-radius: 24px; } 
+.week-img-frame { width: 80%; height: 400px; object-fit: cover; border-radius: 64px; display: block; transition: opacity 0.5s ease; }
 .flavor-btn {
   background: none;
   border: none;
@@ -110,7 +102,6 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0 48px;
   text-align: left;
   transition: color 0.5s;
 }
-  
 .flavor-btn:hover { color: var(--pink); }
 .flavor-btn.active { color: var(--pink); font-weight: 700; }
 
@@ -118,12 +109,13 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0 48px;
 .menu-section { background: var(--dark); padding: 88px 48px; }
 .menu-inner { max-width: 1120px; margin: 0 auto; }
 .menu-head { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 48px; }
-.menu-h2 { font-size: clamp(32px, 3.2vw, 48px); font-weight: 900; letter-spacing: -1.5px; color: white; }
+.menu-h2 { font-size: clamp(32px, 3.2vw, 48px); font-weight: 800; letter-spacing: -0.5px; color: white; }
 .menu-link { font-size: 13px; font-weight: 600; color: var(--pink); border-bottom: 1.5px solid var(--pink); padding-bottom: 2px; transition: opacity .15s; }
 .menu-link:hover { opacity: 0.75; }
 .menu-cards { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
 .menu-card { border-radius: 12px; overflow: hidden; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); transition: border-color .2s; }
 .menu-card:hover { border-color: rgba(255,255,255,.18); }
+.menu-card-img { width: 100%; height: 350px; object-fit: cover; display: block; }
 .menu-card-body { padding: 24px 22px; }
 .menu-card-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--pink); margin-bottom: 8px; }
 .menu-card-title { font-size: 20px; font-weight: 800; color: white; letter-spacing: -0.3px; margin-bottom: 10px; }
@@ -132,22 +124,39 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0 48px;
 /* ── TUESDAY ─────────────────────────────────── */
 .tuesday { background: var(--yellow); padding: 72px 48px; }
 .tuesday-inner { max-width: 1120px; margin: 0 auto; display: flex; align-items: center; gap: 56px; flex-wrap: wrap; }
-.tue-price { font-size: clamp(80px, 9vw, 128px); font-weight: 500; color: var(--dark); line-height: 1; letter-spacing: -4px; flex-shrink: 0; font-family: 'Manrope', cursive; }
+.tue-price { font-size: clamp(80px, 9vw, 128px); font-weight: 700; color: var(--dark); line-height: 1; letter-spacing: -1px; flex-shrink: 0; font-family: 'Baloo 2', sans-serif; }
 .tue-line { width: 1px; height: 90px; background: rgba(22,14,18,.15); flex-shrink: 0; }
 .tue-label { font-size: 11px; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(22,14,18,.45); margin-bottom: 10px; }
-.tue-headline { font-size: clamp(22px, 2.8vw, 36px); font-weight: 600; color: var(--dark); letter-spacing: -0.8px; line-height: 1.2; margin-bottom: 10px; font-family: 'Manrope', cursive; }
+.tue-headline { font-size: clamp(22px, 2.8vw, 36px); font-weight: 700; color: var(--dark); letter-spacing: -0.3px; line-height: 1.2; margin-bottom: 10px; font-family: 'Baloo 2', sans-serif; }
 .tue-sub { font-size: 14px; color: rgba(22,14,18,.5); font-weight: 400; }
+
+/* ── ABOUT ───────────────────────────────────── */
+.about-section { padding: 88px 48px; max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.about-img { width: 100%; height: 520px; object-fit: cover; border-radius: 16px; display: block; }
+.about-h2 { font-size: clamp(28px, 2.8vw, 42px); font-weight: 600; letter-spacing: -0.3px; color: var(--dark); margin-bottom: 20px; }
+.about-p { font-size: 16px; line-height: 1.8; color: var(--muted); margin-bottom: 16px; }
+.about-quote { padding: 20px 24px; border-left: 3px solid var(--pink); background: var(--warm); border-radius: 0 8px 8px 0; }
+.about-quote p { font-size: 15px; font-weight: 500; font-style: italic; color: var(--dark); line-height: 1.6; margin-bottom: 10px; }
+.about-quote span { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--pink); }
+
+/* ── CATERING ────────────────────────────────── */
+.catering-section { background: var(--warm); border-top: 1px solid var(--border); padding: 88px 48px; }
+.catering-inner { max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.catering-h2 { font-size: clamp(28px, 2.8vw, 44px); font-weight: 600; letter-spacing: -0.3px; color: var(--dark); margin-bottom: 18px; line-height: 1.1; }
+.catering-p { font-size: 16px; line-height: 1.75; color: var(--muted); margin-bottom: 32px; }
+.catering-img { width: 100%; height: 400px; object-fit: contain; border-radius: 12px; display: block; background: white; cursor: zoom-in; }
 
 /* ── VISIT ───────────────────────────────────── */
 .visit { background: var(--warm); border-top: 1px solid var(--border); padding: 88px 48px; }
 .visit-inner { max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; align-items: start; }
-.visit-h2 { font-size: clamp(28px, 2.8vw, 42px); font-weight: 900; letter-spacing: -1.2px; color: var(--dark); margin-bottom: 40px; }
+.visit-h2 { font-size: clamp(28px, 2.8vw, 42px); font-weight: 800; letter-spacing: -0.3px; color: var(--dark); margin-bottom: 40px; }
 .visit-rows { display: flex; flex-direction: column; gap: 28px; }
 .vr-key { font-size: 11px; font-weight: 700; letter-spacing: 1.8px; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
 .vr-val { font-size: 15px; font-weight: 600; color: var(--dark); line-height: 1.55; }
 .vr-val a { transition: color .15s; }
 .vr-val a:hover { color: var(--pink); }
 .visit-btns { display: flex; gap: 12px; margin-top: 36px; flex-wrap: wrap; }
+.visit-map { width: 100%; height: 380px; border-radius: 12px; border: none; display: block; }
 
 /* ── FOOTER ───────────────────────────────────── */
 footer { background: var(--dark); padding: 56px 48px 32px; }
@@ -278,24 +287,17 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
   .nav-cta { padding: 8px 14px; font-size: 12px; }
 
   /* Hero */
-  .hero { grid-template-columns: 1fr; margin-top: 56px; min-height: auto; }
-  .hero-content { padding: 40px 20px; }
-  .hero-h1 { letter-spacing: -1px; }
-  .hero-sub { max-width: 100%; }
-  .hero-btns { flex-wrap: wrap; }
-  .hero-stats { grid-template-columns: 1fr 1fr; gap: 14px; }
+  .hero-inner { padding: 80px 20px 24px; flex-direction: column; align-items: flex-start; justify-content: center; }
 
   /* This week */
   .this-week { padding: 56px 20px; }
   .this-week-inner { grid-template-columns: 1fr; gap: 32px; }
   .week-right { order: -1; }
-  .week-img .ph { height: 240px !important; }
 
   /* Menu */
   .menu-section { padding: 56px 20px; }
   .menu-head { flex-direction: column; align-items: flex-start; gap: 12px; }
   .menu-cards { grid-template-columns: 1fr; gap: 16px; }
-  .menu-card-img .ph { height: 180px !important; }
 
   /* Tuesday */
   .tuesday { padding: 40px 20px; }
@@ -303,26 +305,18 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
   .tue-line { display: none; }
 
   /* About */
-  section[style*="grid-template-columns:1fr 1fr"],
-  section[style*="grid-template-columns: 1fr 1fr"] {
-    grid-template-columns: 1fr !important;
-    padding: 56px 20px !important;
-    gap: 32px !important;
-  }
+  .about-section { grid-template-columns: 1fr; padding: 56px 20px; gap: 32px; }
 
   /* Catering */
-  #catering > div {
-    grid-template-columns: 1fr !important;
-    padding: 56px 20px !important;
-    gap: 32px !important;
-  }
+  .catering-section { padding: 56px 20px; }
+  .catering-inner { grid-template-columns: 1fr; gap: 32px; }
 
   /* Visit */
   .visit { padding: 56px 20px; }
   .visit-inner { grid-template-columns: 1fr; gap: 36px; }
   .visit-btns { flex-direction: column; }
   .visit-btns button { width: 100%; }
-  iframe { height: 260px !important; }
+  .visit-map { height: 260px !important; }
 
   /* Footer */
   footer { padding: 40px 20px 24px; }
@@ -367,16 +361,15 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
   }
 
   /* Chat window — full width, slides up from bottom */
- #bb-chat {
-  position: fixed !important;
-  bottom: 180px !important;
-  right: 8px !important;
-  left: 8px !important;
-  width: auto !important;
-  max-height: 45vh !important;
-  border-radius: 20px !important;
-  box-shadow: 0 8px 32px rgba(26,16,20,.18) !important;
-}
+  #bb-chat {
+    position: fixed !important;
+    bottom: 180px !important;
+    right: 8px !important;
+    left: 8px !important;
+    width: auto !important;
+    max-height: 45vh !important;
+    border-radius: 20px !important;
+    box-shadow: 0 8px 32px rgba(26,16,20,.18) !important;
   }
   #bb-chat.open {
     max-height: 50vh !important;
@@ -392,7 +385,7 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
   #bb-msgs   { height: 250px !important; }
   #bb-input-row { padding: 8px 14px 20px !important; }
 }
- 
+
 </style>
 </head>
 <body>
@@ -409,33 +402,27 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
     <li><a href="#catering">Catering</a></li>
     <li><a href="#visit">Visit</a></li>
   </ul>
-  <a href="https://bestiesboba.square.site/" target="_blank">
-    <button class="nav-cta">Order Online</button>
-  </a>
 </nav>
 
 <!-- HERO -->
-<section class="hero" style="position:relative; min-height:calc(100vh - 62px); margin-top:62px; overflow:hidden;">
-  <video autoplay muted loop playsinline style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
-    <source src="newhero.mp4" type="video/mp4">
-  </video>
-  <div style="position:absolute; inset:0; background:rgba(0,0,0,0.52);"></div>
-  <div style="position:relative; z-index:2; display:flex; align-items:center; justify-content:space-between; min-height:calc(100vh - 62px); text-align:left; padding:48px 80px;">
-    <div style="max-width:600px;">
-      <span class="tag" style="color:#E8527A;">Boba Tea & Mochi Donuts</span>
-      <h1 style="font-family:'Manrope',cursive; font-size:clamp(36px,5vw,64px); color:white; margin:0 0 16px; line-height:1.1;">Livermore's favorite boba place.</h1>
-      <div style="display:flex; gap:12px; flex-wrap:wrap;">
+<section class="hero">
+  <img class="hero-video" src="bobahero.png" alt="Brown sugar boba with a brulee top at Besties Boba & Bites"/>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <span class="tag">Boba Tea & Mochi Donuts</span>
+      <h1 class="hero-h1">Livermore's favorite boba place.</h1>
+      <p class="hero-sub">Handcrafted milk teas, fresh mochi donuts, and Taiwanese bites — made fresh, every day, right here in Livermore.</p>
+      <div class="hero-btns">
         <a href="https://bestiesboba.square.site/" target="_blank">
           <button class="btn-fill">Order Online</button>
         </a>
         <a href="#this-week">
-          <button class="btn-outline" style="color:white; border-color:rgba(255,255,255,0.4);">This Week's Flavors</button>
+          <button class="btn-outline">This Week's Flavors</button>
         </a>
       </div>
     </div>
   </div>
 </section>
-
 
 <svg width="100%" height="120" viewBox="0 0 1440 120" preserveAspectRatio="none" style="display:block; margin-top:-100px; position:relative; z-index:3;">
   <path d="M0,100 C300,90 600,40 900,20 C1100,10 1300,0 1440,0 L1440,120 L0,120 Z" fill="#FEF9F6"/>
@@ -450,30 +437,14 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
         <h2 class="week-h2">This week's flavors</h2>
         <div class="week-dates">May 25 &ndash; May 31</div>
         <div class="flavors-grid">
-          <div class="flavor-item">
-            <button class="flavor-btn" data-img="tropical.png">Tropical Punch</button>
-          </div>
-          <div class="flavor-item">
-            <button class="flavor-btn" data-img="lavender.png">Lavender Yuzu</button>
-          </div>
-          <div class="flavor-item">
-            <button class="flavor-btn" data-img="cookiebutt.png">Cookie Butter</button>
-          </div>
-          <div class="flavor-item">
-            <button class="flavor-btn" data-img="creme.png">Creme Brulee</button>
-          </div>
-          <div class="flavor-item">
-            <button class="flavor-btn" data-img="strawberrypockey.png">Strawberry Pockey</button>
-          </div>
-          <div class="flavor-item">
-            <button class="flavor-btn" data-img="chocolatecherry.png">Chocolate Cherry Drizzle</button>
-          </div>
-          <div class="flavor-item">
-            <button class="flavor-btn" data-img="chocolatesprinkles.png">Chocolate Sprinkles</button>
-          </div>
-          <div class="flavor-item">
-            <button class="flavor-btn" data-img="orange.png">Orange Mochi Donut</button>
-          </div>
+          <div class="flavor-item"><button class="flavor-btn" data-img="tropical.png">Tropical Punch</button></div>
+          <div class="flavor-item"><button class="flavor-btn" data-img="lavender.png">Lavender Yuzu</button></div>
+          <div class="flavor-item"><button class="flavor-btn" data-img="cookiebutt.png">Cookie Butter</button></div>
+          <div class="flavor-item"><button class="flavor-btn" data-img="creme.png">Creme Brulee</button></div>
+          <div class="flavor-item"><button class="flavor-btn" data-img="strawberrypockey.png">Strawberry Pockey</button></div>
+          <div class="flavor-item"><button class="flavor-btn" data-img="chocolatecherry.png">Chocolate Cherry Drizzle</button></div>
+          <div class="flavor-item"><button class="flavor-btn" data-img="chocolatesprinkles.png">Chocolate Sprinkles</button></div>
+          <div class="flavor-item"><button class="flavor-btn" data-img="orange.png">Orange Mochi Donut</button></div>
         </div>
         <div style="margin-top:32px;">
           <a href="https://bestiesboba.square.site/" target="_blank">
@@ -482,15 +453,14 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
         </div>
       </div>
       <div class="week-right">
-  <div class="week-img fade-in-scroll">
-    <img id="donut-img" src="tropical.png" style="width:80%;height:400px;object-fit:cover;border-radius:64px;display:block;"/>
-  </div>
+        <div class="week-img fade-in-scroll">
+          <img id="donut-img" class="week-img-frame" src="tropical.png"/>
+        </div>
         <p class="week-note">Flavors rotate every week. Follow us on Instagram for the latest drops.</p>
       </div>
     </div>
   </div>
 </section>
-
 
 <section id="menu">
   <div class="menu-section">
@@ -501,9 +471,7 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
       </div>
       <div class="menu-cards">
         <div class="menu-card">
-          <div class="menu-card-img fade-in-scroll">
-            <img src="macha.jpg" style="width:100%;height:350px;object-fit:cover;border-radius:0;display:block;"/>
-          </div>
+          <div class="fade-in-scroll"><img class="menu-card-img" src="macha.jpg"/></div>
           <div class="menu-card-body">
             <div class="menu-card-label">Drinks</div>
             <div class="menu-card-title">Bubble Tea & Coffee</div>
@@ -511,9 +479,7 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
           </div>
         </div>
         <div class="menu-card">
-          <div class="menu-card-img fade-in-scroll">
-            <img src="mochidonutsV2.jpg" style="width:100%;height:350px;object-fit:cover;border-radius:0;display:block;"/>
-          </div>
+          <div class="fade-in-scroll"><img class="menu-card-img" src="mochidonutsV2.jpg"/></div>
           <div class="menu-card-body">
             <div class="menu-card-label">Mochi Donuts</div>
             <div class="menu-card-title">Fresh & Rotating</div>
@@ -521,9 +487,7 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
           </div>
         </div>
         <div class="menu-card">
-          <div class="menu-card-img fade-in-scroll">
-            <img src="popcornV2.png" style="width:100%;height:350px;object-fit:cover;border-radius:0;display:block;"/>
-          </div>
+          <div class="fade-in-scroll"><img class="menu-card-img" src="popcornV2.png"/></div>
           <div class="menu-card-body">
             <div class="menu-card-label">Snacks</div>
             <div class="menu-card-title">Taiwanese Bites</div>
@@ -534,7 +498,6 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
     </div>
   </div>
 </section>
-
 
 <div class="tuesday">
   <div class="tuesday-inner">
@@ -548,37 +511,31 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
   </div>
 </div>
 
-
-<section id ="about" style="padding:88px 48px;max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
-  <div class="week-img fade-in-scroll">
-    <img src="interior.png" style="width:100%;height:520px;object-fit:cover;border-radius:16px;display:block;"/>
-  </div>
+<section id="about" class="about-section">
+  <div class="fade-in-scroll"><img class="about-img" src="interior.png"/></div>
   <div>
-    <h2 style="font-size:clamp(28px,2.8vw,42px);font-weight:500;letter-spacing:-1.2px;color:var(--dark);margin-bottom:20px;">About Us</h2>
-    <p style="font-size:16px;line-height:1.8;color:var(--muted);margin-bottom:16px;">At Besties Boba & Bites, we believe every sip tastes better with friends! Born from the idea that boba brings people together, we’re your local hangout for fun drinks, sweet treats, yummy snacks, and good vibes. Whether you’re catching up with your bestie, treating yourself to something tasty, or discovering your new favorite flavor, we’ve got you covered. </p>
-    <div style="padding:20px 24px;border-left:3px solid var(--pink);background:var(--warm);border-radius:0 8px 8px 0;">
-      <p style="font-size:15px;font-weight:500;font-style:italic;color:var(--dark);line-height:1.6;margin-bottom:10px;">"Come for the boba, stay for the laughter — because everything's better with Besties."</p>
-      <span style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--pink);">Besties Boba & Bites :3</span>
+    <h2 class="about-h2">About Us</h2>
+    <p class="about-p">At Besties Boba & Bites, we believe every sip tastes better with friends! Born from the idea that boba brings people together, we're your local hangout for fun drinks, sweet treats, yummy snacks, and good vibes. Whether you're catching up with your bestie, treating yourself to something tasty, or discovering your new favorite flavor, we've got you covered.</p>
+    <div class="about-quote">
+      <p>"Come for the boba, stay for the laughter — because everything's better with Besties."</p>
+      <span>Besties Boba & Bites :3</span>
     </div>
   </div>
 </section>
 
-
-<div id="catering" style="background:var(--warm);border-top:1px solid var(--border);padding:88px 48px;">
-  <div style="max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;">
+<div id="catering" class="catering-section">
+  <div class="catering-inner">
     <div>
-      <h2 style="font-size:clamp(28px,2.8vw,44px);font-weight:300;letter-spacing:-1.2px;color:var(--dark);margin-bottom:18px;line-height:1.1;">Catering?<br/>We've got you.</h2>
-      <p style="font-size:16px;line-height:1.75;color:var(--muted);margin-bottom:32px;">Check out the epic catering by clicking the picture!</p>
-      
+      <h2 class="catering-h2">Catering?<br/>We've got you.</h2>
+      <p class="catering-p">Check out the epic catering by clicking the picture!</p>
     </div>
-    <div class="week-img fade-in-scroll">
-    <a href="catering.png" target="_blank">
-      <img src="catering.png" style="width:100%;height:400px;object-fit:contain;border-radius:12px;display:block;background:white;cursor:zoom-in;"/>
-    </a>
+    <div class="fade-in-scroll">
+      <a href="catering.png" target="_blank">
+        <img class="catering-img" src="catering.png"/>
+      </a>
     </div>
   </div>
 </div>
-
 
 <section id="visit" class="visit">
   <div class="visit-inner">
@@ -591,19 +548,18 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
         <div><div class="vr-key">Instagram</div><div class="vr-val"><a href="https://instagram.com/BestiesBoba" target="_blank">@BestiesBoba</a></div></div>
       </div>
       <div class="visit-btns">
-      <a href="https://maps.app.goo.gl/xfkBfg51nW4FmRsM7" target="_blank">
-        <button class="btn-fill">Get Directions</button>
-      </a>
+        <a href="https://maps.app.goo.gl/xfkBfg51nW4FmRsM7" target="_blank">
+          <button class="btn-fill">Get Directions</button>
+        </a>
         <a href="https://www.instagram.com/bestiesboba" target="_blank">
           <button class="btn-outline">Follow on Instagram</button>
         </a>
       </div>
     </div>
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3156.8598345095097!2d-121.74609702369838!3d37.699490716492456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fe764b818d893%3A0x52f8e086c223857a!2sBesties%20Boba%20%26%20Bites!5e0!3m2!1sen!2sus!4v1779171279527!5m2!1sen!2sus"
-      style="width:100%;height:380px;border-radius:12px;border:none;display:block;" allowfullscreen="" loading="lazy"></iframe>
+    <iframe class="visit-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3156.8598345095097!2d-121.74609702369838!3d37.699490716492456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fe764b818d893%3A0x52f8e086c223857a!2sBesties%20Boba%20%26%20Bites!5e0!3m2!1sen!2sus!4v1779171279527!5m2!1sen!2sus"
+      allowfullscreen="" loading="lazy"></iframe>
   </div>
 </section>
-
 
 <footer>
   <div class="footer-inner">
@@ -626,12 +582,11 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
       </div>
     </div>
     <div class="footer-bot">
-      <span class="f-copy">&copy; 2025 Besties Boba & Bites. All rights reserved.</span>
+      <span class="f-copy">&copy; 2026 Besties Boba & Bites. All rights reserved.</span>
       <a href="https://instagram.com/BestiesBoba" target="_blank" class="f-ig">@BestiesBoba</a>
     </div>
   </div>
 </footer>
-
 
 <div id="bb-widget">
   <div id="bb-chat">
@@ -686,17 +641,18 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
   var msgs     = document.getElementById('bb-msgs');
   var input    = document.getElementById('bb-input');
   var sendBtn  = document.getElementById('bb-send');
+  var meowBubble = document.getElementById('bb-meow-bubble');
 
   var statusText = { peep:'Click me!', spring:"We're online!", idle:"We're online!", sleep:'Tap to wake me up! /ᐠ - ˕-マ｡˚' };
 
   var ri = null, rIn = {};
+  var meowIntervalId = null;
+
   var sessionId = sessionStorage.getItem('bb_session_id');
-    if (!sessionId) {
-        sessionId = crypto.randomUUID();
-        sessionStorage.setItem('bb_session_id', sessionId);
-    }
-  var elementID = document.querySelector('#bb-meow-bubble');
-  var intervalID = null;
+  if (!sessionId) {
+    sessionId = crypto.randomUUID();
+    sessionStorage.setItem('bb_session_id', sessionId);
+  }
 
   function initRive() {
     ri = new rive.Rive({
@@ -712,16 +668,14 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
       }
     });
     var canvas = document.getElementById('bb-rive');
-    canvas.addEventListener('click',      bbCatClick);
+    canvas.addEventListener('click', bbCatClick);
     canvas.addEventListener('touchstart', function(e){
       touchStartY = e.touches[0].clientY;
     }, { passive: true });
     canvas.addEventListener('touchend', function(e){
       var touchEndY = e.changedTouches[0].clientY;
-      if (Math.abs(touchEndY - touchStartY) < 10) {
-    bbCatClick();
-  }
-  });
+      if (Math.abs(touchEndY - touchStartY) < 10) bbCatClick();
+    });
   }
 
   function syncRive() {
@@ -732,19 +686,19 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
 
   function setState(next) {
     state = next;
+
     if (state === S.PEEP) {
-    if (!intervalID) {
-        intervalID = setInterval(function() {
-            if (elementID.style.opacity === "0") elementID.style.opacity = "1";
-            else elementID.style.opacity = "0";
+      if (!meowIntervalId) {
+        meowIntervalId = setInterval(function() {
+          meowBubble.style.opacity = (meowBubble.style.opacity === "0") ? "1" : "0";
         }, 1000);
+      }
+    } else {
+      clearInterval(meowIntervalId);
+      meowIntervalId = null;
+      meowBubble.style.opacity = "0";
     }
-  }
-  else {
-    clearInterval(intervalID);
-    intervalID = null;
-    elementID.style.opacity = "0";
-  }
+
     stage.className = 'bb-s-' + next;
     statusEl.textContent = statusText[next] || '';
     var open = (next===S.SPRING||next===S.IDLE||next===S.SLEEP);
@@ -820,16 +774,8 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
     addMsg('user', msg); showDots();
     try {
       var res  = await fetch(WEBHOOK, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({message: msg, session_id: sessionId}) });
-      var rawText = await res.text();
-      console.log(rawText);
-var reply;
-try {
-  var data = JSON.parse(rawText);
-  var firstKey = Object.keys(data)[0];
-  reply = data.reply;
-} catch(e) {
-  reply = data.reply;
-}
+      var data = await res.json();
+      var reply = data.reply || "Hmm, I didn't catch that — try again?";
       hideDots(); addMsg('bot', reply);
     } catch(e) {
       hideDots(); addMsg('bot','Oops — try again in a sec!');
@@ -837,49 +783,48 @@ try {
     busy=false; sendBtn.disabled=false; resetSleep();
   };
 
-  window.onload = function() {
-  setState(S.PEEP);
-  if (typeof rive !== 'undefined') initRive();
+  function setupFadeIn() {
+    var fadeEls = document.querySelectorAll('.fade-in-scroll, .fade-in-scroll-two');
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        entry.target.classList.toggle('visible', entry.isIntersecting);
+      });
+    }, { threshold: 0.15 });
+    fadeEls.forEach(function(el) { observer.observe(el); });
+  }
 
-  var fadeEls = document.querySelectorAll('.fade-in-scroll, .fade-in-scroll-two');
-  var observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      } else {
-        entry.target.classList.remove('visible');
-      }
+  function setupFlavorSwap() {
+    document.querySelectorAll('.flavor-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.flavor-btn').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        var img = document.getElementById('donut-img');
+        img.style.opacity = '0';
+        setTimeout(function() {
+          img.src = btn.getAttribute('data-img');
+          img.onload = function() { img.style.opacity = '1'; };
+        }, 500);
+      });
     });
-  }, { threshold: 0.15 });
-  fadeEls.forEach(function(el) { observer.observe(el); });
-};
-  var fadeEls = document.querySelectorAll('.fade-in-scroll');
-var observer = new IntersectionObserver(function(entries) {
-  entries.forEach(function(entry) {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
-  });
-}, { threshold: 0.15 });
-fadeEls.forEach(function(el) { observer.observe(el); });
+  }
+
+  window.onload = function() {
+    setState(S.PEEP);
+    if (typeof rive !== 'undefined') initRive();
+    setupFadeIn();
+    setupFlavorSwap();
+  };
 })();
 
-  document.querySelectorAll('.flavor-btn').forEach(function(btn) {
-  btn.addEventListener('click', function() {
-    document.querySelectorAll('.flavor-btn').forEach(function(b) {
-      b.classList.remove('active');
-    });
-    btn.classList.add('active');
-    var img = document.getElementById('donut-img');
-    img.style.opacity = '0';
-    setTimeout(function() {
-    img.src = btn.getAttribute('data-img');
-img.onload = function() {
-    img.style.opacity = '1';
-};
-}, 500);
-  });
-});
+// Nav starts transparent (blended into the hero) and solidifies once the user scrolls down
+(function() {
+  var navEl = document.querySelector('nav');
+  function onScroll() {
+    navEl.classList.toggle('scrolled', window.scrollY > 40);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
 </script>
 </body>
 </html>
