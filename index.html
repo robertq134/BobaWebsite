@@ -5,7 +5,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Besties Boba & Bites — Livermore, CA</title>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Baloo+2:wght@500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Baloo+2:wght@500;600;700;800&family=Caveat:wght@400;700;800&display=swap" rel="stylesheet"/>
 <script src="https://unpkg.com/@rive-app/canvas@2.17.3/rive.js"></script>
 <style>
 
@@ -76,12 +76,12 @@ nav.scrolled { background: rgba(249,240,236,0.97); backdrop-filter: blur(14px); 
 .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .hero-inner { position: relative; z-index: 2; display: flex; align-items: center; justify-content: space-between; min-height: 100vh; text-align: left; padding: 96px 80px 48px; }
 .hero-content { max-width: 600px; }
-.hero-h1 { font-family: 'Baloo 2', sans-serif; font-size: clamp(36px, 5vw, 64px); color: var(--dark); margin: 0 0 16px; line-height: 1.1; }
+.hero-h1 { font-family: 'Caveat', sans-serif; font-size: clamp(36px, 5vw, 64px); color: var(--dark); margin: 0 0 16px; line-height: 1.1; }
 .hero-sub { font-size: 16px; line-height: 1.75; color: var(--muted); margin-bottom: 32px; max-width: 420px; }
 .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
 
 /* ── THIS WEEK ───────────────────────────────── */
-.this-week { padding: 140px 40px 160px; max-width: 1320px; margin: 0 auto; }
+.this-week { position: relative; padding: 140px 40px 160px; max-width: 1320px; margin: 0 auto; }
 .this-week-inner { display: grid; grid-template-columns: 0.8fr 1.3fr; gap: 200px; align-items: center; }
 .week-right {
   display: flex;
@@ -148,6 +148,12 @@ nav.scrolled { background: rgba(249,240,236,0.97); backdrop-filter: blur(14px); 
 }
 .flavor-btn:hover { color: var(--pink); }
 .flavor-btn.active { color: var(--pink); font-weight: 700; }
+.cat-1 {position: absolute; z-index: 1; top: 100px; left: 100px; transform: rotate(15deg) scale(0.5)}
+.cat-2 { position: absolute; z-index: 1; top: 50px; left: 150px; transform: rotate(-15deg) scale(0.5)}
+.cat-3 { position: absolute; z-index: 1; top: 330px; left: 150px; transform: rotate(-15deg)  scale(0.5)}
+.boba-1 {position: absolute; z-index: 1; top: 200px; left: 100px; transform: rotate(15deg) scale(0.5)}
+.boba-2 {position: absolute; z-index: 1; top: 400px; left: 100px; transform: rotate(15deg) scale(0.5)}
+
 
 /* ── MENU ─────────────────────────────────────── */
 .menu-section { background: var(--dark); padding: 88px 48px; }
