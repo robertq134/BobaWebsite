@@ -81,21 +81,55 @@ nav.scrolled { background: rgba(249,240,236,0.97); backdrop-filter: blur(14px); 
 .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
 
 /* ── THIS WEEK ───────────────────────────────── */
-.this-week { padding: 88px 48px; max-width: 1120px; margin: 0 auto; }
-.this-week-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
+.this-week { padding: 140px 40px 160px; max-width: 1320px; margin: 0 auto; }
+.this-week-inner { display: grid; grid-template-columns: 0.8fr 1.3fr; gap: 56px; align-items: start; }
 .week-h2 { font-size: clamp(32px, 3.2vw, 48px); font-weight: 600; letter-spacing: -0.5px; color: var(--dark); margin-bottom: 12px; line-height: 1.1; }
-.week-dates { display: inline-block; background: var(--warm); border: 1px solid var(--border); border-radius: 6px; padding: 6px 14px; font-size: 13px; font-weight: 700; color: var(--muted); margin-bottom: 32px; }
-.flavors-grid { display: grid; grid-template-columns: 1fr 1fr; }
-.flavor-item { padding: 13px 0; border-bottom: 1px solid var(--border); font-size: 14px; font-weight: 500; color: var(--text); display: flex; align-items: center; gap: 10px; }
+.week-dates { display: inline-block; background: var(--warm); border: 1px solid var(--border); border-radius: 6px; padding: 7px 16px; font-size: 14px; font-weight: 700; color: var(--muted); margin-bottom: 32px; }
+.flavors-grid { display: grid; grid-template-columns: 1fr 1fr; column-gap: 40px; }
+.flavor-item { padding: 16px 0; border-bottom: 1px solid var(--border); font-size: 17px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 10px; }
 .flavor-item::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--pink); flex-shrink: 0; transition: border-color .30s; }
-.week-note { margin-top: 16px; font-size: 13px; color: var(--muted); font-weight: 500; line-height: 1.6; }
-.week-img-frame { width: 80%; height: 400px; object-fit: cover; border-radius: 64px; display: block; transition: opacity 0.5s ease; }
+.week-note { margin-top: 20px; font-size: 14px; color: var(--muted); font-weight: 500; line-height: 1.6; }
+
+/* ── FLAVOR CAROUSEL (3D coverflow) ───────────── */
+.flavor-carousel {
+  --card-size: 290px;
+  --card-spacing: 165px;
+  position: relative;
+  height: 540px;
+  perspective: 1400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.carousel-track { position: relative; width: 100%; height: 100%; }
+.carousel-item {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--card-size);
+  height: var(--card-size);
+  margin-top: calc(var(--card-size) / -2);
+  margin-left: calc(var(--card-size) / -2);
+  background: #FFFFFF;
+  border-radius: 28px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 16px 32px rgba(199,58,97,.12);
+  transition: transform .65s cubic-bezier(.22,1,.36,1), opacity .5s ease, box-shadow .45s ease;
+}
+.carousel-item img { width: 100%; height: 100%; object-fit: contain; display: block; padding: 20px; pointer-events: none; }
+.carousel-item.is-active {
+  box-shadow: 0 0 0 3px rgba(232,82,122,.55), 0 0 50px 8px rgba(232,82,122,.35), 0 25px 50px rgba(199,58,97,.22);
+  cursor: default;
+}
+
 .flavor-btn {
   background: none;
   border: none;
   font-family: 'Manrope', sans-serif;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 17px;
+  font-weight: 600;
   color: var(--text);
   cursor: pointer;
   padding: 0;
@@ -293,6 +327,7 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
   .this-week { padding: 56px 20px; }
   .this-week-inner { grid-template-columns: 1fr; gap: 32px; }
   .week-right { order: -1; }
+  .flavor-carousel { --card-size: 150px; --card-spacing: 76px; height: 280px; }
 
   /* Menu */
   .menu-section { padding: 56px 20px; }
@@ -406,7 +441,7 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
 
 <!-- HERO -->
 <section class="hero">
-  <img class="hero-video" src="bobahero.png" alt="Brown sugar boba with a brulee top at Besties Boba & Bites"/>
+  <img class="hero-video" src="hero-boba.png" alt="Brown sugar boba with a brulee top at Besties Boba & Bites"/>
   <div class="hero-inner">
     <div class="hero-content">
       <span class="tag">Boba Tea & Mochi Donuts</span>
@@ -453,8 +488,17 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
         </div>
       </div>
       <div class="week-right">
-        <div class="week-img fade-in-scroll">
-          <img id="donut-img" class="week-img-frame" src="tropical.png"/>
+        <div class="flavor-carousel" id="flavor-carousel">
+          <div class="carousel-track" id="carousel-track">
+            <div class="carousel-item"><img src="tropical.png" alt="Tropical Punch mochi donut"/></div>
+            <div class="carousel-item"><img src="lavender.png" alt="Lavender Yuzu mochi donut"/></div>
+            <div class="carousel-item"><img src="cookiebutt.png" alt="Cookie Butter mochi donut"/></div>
+            <div class="carousel-item"><img src="creme.png" alt="Creme Brulee mochi donut"/></div>
+            <div class="carousel-item"><img src="strawberrypockey.png" alt="Strawberry Pockey mochi donut"/></div>
+            <div class="carousel-item"><img src="chocolatecherry.png" alt="Chocolate Cherry Drizzle mochi donut"/></div>
+            <div class="carousel-item"><img src="chocolatesprinkles.png" alt="Chocolate Sprinkles mochi donut"/></div>
+            <div class="carousel-item"><img src="orange.png" alt="Orange Mochi Donut"/></div>
+          </div>
         </div>
         <p class="week-note">Flavors rotate every week. Follow us on Instagram for the latest drops.</p>
       </div>
@@ -793,26 +837,70 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
     fadeEls.forEach(function(el) { observer.observe(el); });
   }
 
-  function setupFlavorSwap() {
+  function setupFlavorCarousel() {
+    var carouselEl = document.getElementById('flavor-carousel');
+    if (!carouselEl) return;
+    var items = Array.prototype.slice.call(document.querySelectorAll('#carousel-track .carousel-item'));
+    var n = items.length;
+    var activeIndex = 0;
+
+    function getVar(name, fallback) {
+      var v = parseFloat(getComputedStyle(carouselEl).getPropertyValue(name));
+      return isNaN(v) ? fallback : v;
+    }
+
+    function layout() {
+      var spacing = getVar('--card-spacing', 130);
+      items.forEach(function(item, i) {
+        var d = i - activeIndex;
+        if (d > n / 2) d -= n;
+        if (d < -n / 2) d += n;
+        var absD = Math.abs(d);
+        var visible = absD <= 3;
+        var translateX = d * spacing;
+        var rotateY = d * -28;
+        var scale = Math.max(1 - absD * 0.16, 0.4);
+        var opacity = visible ? Math.max(1 - absD * 0.28, 0) : 0;
+        item.style.transform = 'translateX(' + translateX + 'px) rotateY(' + rotateY + 'deg) scale(' + scale + ')';
+        item.style.opacity = opacity;
+        item.style.zIndex = 100 - absD;
+        item.style.pointerEvents = visible ? 'auto' : 'none';
+        item.classList.toggle('is-active', d === 0);
+      });
+    }
+
+    function setActive(index) {
+      activeIndex = ((index % n) + n) % n;
+      layout();
+      var targetSrc = items[activeIndex].querySelector('img').getAttribute('src');
+      document.querySelectorAll('.flavor-btn').forEach(function(b) {
+        b.classList.toggle('active', b.getAttribute('data-img') === targetSrc);
+      });
+    }
+
+    items.forEach(function(item, i) {
+      item.addEventListener('click', function() { setActive(i); });
+    });
+
     document.querySelectorAll('.flavor-btn').forEach(function(btn) {
       btn.addEventListener('click', function() {
-        document.querySelectorAll('.flavor-btn').forEach(function(b) { b.classList.remove('active'); });
-        btn.classList.add('active');
-        var img = document.getElementById('donut-img');
-        img.style.opacity = '0';
-        setTimeout(function() {
-          img.src = btn.getAttribute('data-img');
-          img.onload = function() { img.style.opacity = '1'; };
-        }, 500);
+        var targetSrc = btn.getAttribute('data-img');
+        var idx = items.findIndex(function(it) {
+          return it.querySelector('img').getAttribute('src') === targetSrc;
+        });
+        if (idx !== -1) setActive(idx);
       });
     });
+
+    window.addEventListener('resize', layout);
+    setActive(0);
   }
 
   window.onload = function() {
     setState(S.PEEP);
     if (typeof rive !== 'undefined') initRive();
     setupFadeIn();
-    setupFlavorSwap();
+    setupFlavorCarousel();
   };
 })();
 
