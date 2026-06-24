@@ -29,7 +29,8 @@
   /* horizontal centering is applied via JS (see setupHeroFlowerParallax), combined with the scroll-drift transform,
      since setting .style.transform directly would otherwise wipe out a transform set here in CSS */
 }
-.hero-flower { display: block; width: 100%; scale: 5 }
+.hero-flower { display: block; width: 100%; scale: 8; rotate: 270deg}
+.hero-flower-two { display: block; width: 100%; scale: 8 }
 
 .fade-in-scroll {
   opacity: 0;
