@@ -18,19 +18,19 @@
   pointer-events: none;
 }
 .hero-flower-corner {
-  top: 110px;
-  right: 60px;
+  top: 50px;
+  right: 10px;
   width: 130px;
 }
 .hero-flower-bottom {
   bottom: 40px;
-  left: 50%;
+  left: 10%;
   width: 110px;
   /* horizontal centering is applied via JS (see setupHeroFlowerParallax), combined with the scroll-drift transform,
      since setting .style.transform directly would otherwise wipe out a transform set here in CSS */
 }
-.hero-flower { display: block; width: 100%; }
-
+.hero-flower { display: block; width: 100%; scale: 7; rotate: -125deg}
+.hero-flower-two { display: block; width: 100%; scale: 7 }
 .fade-in-scroll {
   opacity: 0;
   transform: translateY(24px);
