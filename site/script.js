@@ -1,4 +1,3 @@
-
 (function() {
   var WEBHOOK = 'https://web-production-10533.up.railway.app/messages/';
   var RIVE_FILE = 'bestie-cat.riv';
@@ -192,6 +191,32 @@
     updateActive();
   }
 
+  function setupHeroFlowerParallax() {
+    // Each entry: element id, how fast it drifts relative to scroll (bigger = more movement)
+    var flowers = [
+      { id: 'hero-flower-corner', speed: 0.15 },
+      { id: 'hero-flower-bottom', speed: 0.25 }
+    ];
+
+    var targets = flowers.map(function(f) {
+      var el = document.getElementById(f.id);
+      if (!el) return null;
+      return { el: el, speed: f.speed, base: el.getAttribute('data-base-transform') || '' };
+    }).filter(Boolean);
+
+    if (!targets.length) return;
+
+    function onScroll() {
+      var scrollY = window.scrollY;
+      targets.forEach(function(t) {
+        var offset = scrollY * t.speed;
+        t.el.style.transform = (t.base ? t.base + ' ' : '') + 'translateY(' + offset + 'px)';
+      });
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+
   function setupFlavorCarousel() {
     var carouselEl = document.getElementById('flavor-carousel');
     if (!carouselEl) return;
@@ -257,6 +282,7 @@
     setupFadeIn();
     setupFlavorCarousel();
     setupNavScrollSpy();
+    setupHeroFlowerParallax();
   };
 })();
 
