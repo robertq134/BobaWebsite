@@ -1,5 +1,3 @@
-
-
 @keyframes fadeInOnLoad {
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -10,6 +8,28 @@
   opacity: 0;
   animation: fadeInOnLoad 1s ease forwards;
 }
+
+/* Decorative hero flower: wrapper handles scroll-parallax drift (via JS),
+   the image inside handles the load fade-in (via .fade-in-load above).
+   Keeping these on separate elements avoids the two transforms fighting each other. */
+.hero-flower-wrap {
+  position: absolute;
+  z-index: 3;
+  pointer-events: none;
+}
+.hero-flower-corner {
+  top: 110px;
+  right: 60px;
+  width: 130px;
+}
+.hero-flower-bottom {
+  bottom: 40px;
+  left: 50%;
+  width: 110px;
+  /* horizontal centering is applied via JS (see setupHeroFlowerParallax), combined with the scroll-drift transform,
+     since setting .style.transform directly would otherwise wipe out a transform set here in CSS */
+}
+.hero-flower { display: block; width: 100%; }
 
 .fade-in-scroll {
   opacity: 0;
@@ -341,6 +361,8 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
 
   /* Hero */
   .hero-inner { padding: 80px 20px 24px; flex-direction: column; align-items: flex-start; justify-content: center; }
+  .hero-flower-corner { width: 80px; top: 70px; right: 20px; }
+  .hero-flower-bottom { width: 70px; bottom: 24px; }
 
   /* This week */
   .this-week { padding: 56px 20px; }
@@ -440,4 +462,3 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
   #bb-msgs   { height: 250px !important; }
   #bb-input-row { padding: 8px 14px 20px !important; }
 }
-
