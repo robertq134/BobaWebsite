@@ -209,7 +209,7 @@ nav.scrolled { background: rgba(249,240,236,0.97); backdrop-filter: blur(14px); 
   max-width: 1120px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 28px;
 }
 .drink-card { text-align: center; }
@@ -388,10 +388,6 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
 /* ════════════════════════════════════════════════
    MOBILE — single clean block
    ════════════════════════════════════════════════ */
-@media (max-width: 1024px) {
-  .drink-grid { grid-template-columns: repeat(3, 1fr); }
-}
-
 @media (max-width: 768px) {
 
   /* Nav */
