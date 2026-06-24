@@ -18,19 +18,18 @@
   pointer-events: none;
 }
 .hero-flower-corner {
-  top: 50px;
-  right: 10px;
+  top: 110px;
+  right: 60px;
   width: 130px;
 }
 .hero-flower-bottom {
   bottom: 40px;
-  left: 10%;
+  left: 50%;
   width: 110px;
   /* horizontal centering is applied via JS (see setupHeroFlowerParallax), combined with the scroll-drift transform,
      since setting .style.transform directly would otherwise wipe out a transform set here in CSS */
 }
-.hero-flower { display: block; width: 100%; scale: 7; rotate: -125deg}
-.hero-flower-two { display: block; width: 100%; scale: 7 }
+.hero-flower { display: block; width: 100%; }
 
 .fade-in-scroll {
   opacity: 0;
@@ -195,6 +194,38 @@ nav.scrolled { background: rgba(249,240,236,0.97); backdrop-filter: blur(14px); 
 .menu-card-title { font-size: 20px; font-weight: 800; color: white; letter-spacing: -0.3px; margin-bottom: 10px; }
 .menu-card-desc { font-size: 13px; color: rgba(255,255,255,.4); line-height: 1.65; }
 
+/* ── MENU PAGE: GRID SECTIONS ─────────────────── */
+.menu-grid-section { padding: 88px 48px; }
+.menu-grid-section.is-white { background: #FFFFFF; }
+.menu-grid-section.is-warm  { background: var(--warm); border-top: 1px solid var(--border); }
+.menu-grid-head { max-width: 1120px; margin: 0 auto 40px; }
+.menu-grid-h2 { font-size: clamp(28px, 2.8vw, 42px); font-weight: 600; letter-spacing: -0.3px; color: var(--dark); }
+.drink-grid {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 28px;
+}
+.drink-card { text-align: center; }
+.drink-img-frame {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--warm);
+  margin-bottom: 12px;
+}
+.drink-img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .3s ease; }
+.drink-card:hover .drink-img { transform: scale(1.05); }
+.drink-name { font-size: 14px; font-weight: 600; color: var(--text); }
+
+/* Nav variant for pages whose hero is the dark video (vs. the homepage's light photo hero) —
+   keeps nav text readable while unscrolled, without changing the default light-hero styling everywhere else */
+nav.nav-on-dark:not(.scrolled) .nav-links a { color: rgba(255,255,255,.85); }
+nav.nav-on-dark:not(.scrolled) .nav-links a:hover { color: white; }
+nav.nav-on-dark:not(.scrolled) .nav-logo img { filter: drop-shadow(0 1px 4px rgba(0,0,0,.45)); }
+
 /* ── TUESDAY ─────────────────────────────────── */
 .tuesday { background: var(--yellow); padding: 72px 48px; }
 .tuesday-inner { max-width: 1120px; margin: 0 auto; display: flex; align-items: center; gap: 56px; flex-wrap: wrap; }
@@ -352,6 +383,10 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
 /* ════════════════════════════════════════════════
    MOBILE — single clean block
    ════════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .drink-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
 @media (max-width: 768px) {
 
   /* Nav */
@@ -376,6 +411,8 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
   .menu-section { padding: 56px 20px; }
   .menu-head { flex-direction: column; align-items: flex-start; gap: 12px; }
   .menu-cards { grid-template-columns: 1fr; gap: 16px; }
+  .menu-grid-section { padding: 56px 20px; }
+  .drink-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
 
   /* Tuesday */
   .tuesday { padding: 40px 20px; }
