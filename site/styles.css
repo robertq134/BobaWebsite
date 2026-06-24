@@ -2,44 +2,71 @@
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+
 /* For decorative elements that should fade in once, on page load, rather than on scroll.
+
    Usage: <img class="fade-in-load" style="animation-delay:.3s" src="flower.png"> */
+
 .fade-in-load {
+
   opacity: 0;
+
   animation: fadeInOnLoad 1s ease forwards;
+
 }
 
 /* Decorative hero flower: wrapper handles scroll-parallax drift (via JS),
+
    the image inside handles the load fade-in (via .fade-in-load above).
+
    Keeping these on separate elements avoids the two transforms fighting each other. */
+
 .hero-flower-wrap {
+
   position: absolute;
+
   z-index: 3;
+
   pointer-events: none;
+
 }
+
 .hero-flower-corner {
+
   top: 50px;
+
   right: 10px;
+
   width: 130px;
+
 }
+
 .hero-flower-bottom {
+
   bottom: 40px;
+
   left: 10%;
+
   width: 110px;
+
   /* horizontal centering is applied via JS (see setupHeroFlowerParallax), combined with the scroll-drift transform,
+
      since setting .style.transform directly would otherwise wipe out a transform set here in CSS */
+
 }
+
 .hero-flower { display: block; width: 100%; scale: 7; rotate: -125deg}
+
 .hero-flower-two { display: block; width: 100%; scale: 7 }
+
 .fade-in-scroll {
+
   opacity: 0;
+
   transform: translateY(24px);
+
   transition: opacity 0.7s ease, transform 0.7s ease;
-}
-.fade-in-scroll-two{
-    opacity: 0;
-    transform: translateY(1px);
-    transition: opacity 0.10s ease, transform 0.10s ease;
+
 }
 .fade-in-scroll-two.visible {
   opacity: 1;
@@ -96,6 +123,9 @@ nav.scrolled { background: rgba(249,240,236,0.97); backdrop-filter: blur(14px); 
 
 /* ── HERO ─────────────────────────────────────── */
 .hero { position: relative; min-height: 100vh; overflow: hidden; }
+.hero.hero-compact { min-height: 420px; }
+.hero.hero-compact .hero-inner { justify-content: center; text-align: center; padding: 140px 40px 40px; }
+.hero.hero-compact .hero-content { max-width: 700px; margin: 0 auto; }
 .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .hero-inner { position: relative; z-index: 2; display: flex; align-items: center; justify-content: space-between; min-height: 100vh; text-align: left; padding: 150px 80px 48px; }
 .hero-content { max-width: 600px; }
@@ -397,6 +427,8 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
 
   /* Hero */
   .hero-inner { padding: 80px 20px 24px; flex-direction: column; align-items: flex-start; justify-content: center; }
+  .hero.hero-compact { min-height: 320px; }
+  .hero.hero-compact .hero-inner { padding: 100px 20px 24px; }
   .hero-flower-corner { width: 80px; top: 70px; right: 20px; }
   .hero-flower-bottom { width: 70px; bottom: 24px; }
 
