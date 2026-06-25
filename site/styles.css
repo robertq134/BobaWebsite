@@ -236,17 +236,18 @@ nav.nav-on-dark:not(.scrolled) .nav-logo img { filter: drop-shadow(0 1px 4px rgb
 .hero-catering .hero-sub { color: rgba(255,255,255,.85); max-width: 480px; margin: 0 auto; }
 
 .catering-desc {
-  max-width: 680px;
+  max-width: 760px;
   margin: 0 auto;
   padding: 64px 40px 24px;
   text-align: center;
-  font-size: 16px;
+  font-size: 22px;
   line-height: 1.8;
   color: var(--muted);
 }
 
-.catering-section-head { text-align: center; max-width: 1120px; margin: 0 auto 40px; }
-.catering-section-head .menu-grid-h2 { margin-top: 4px; }
+.catering-section-head { text-align: center; max-width: 1120px; margin: 0 auto 56px; }
+.catering-section-title { font-family: 'Fraunces', serif; font-weight: 700; font-size: clamp(48px, 6vw, 84px); color: var(--dark); line-height: 1.05; }
+.catering-section-subtitle { font-size: 22px; font-weight: 600; color: var(--muted); margin-top: 10px; letter-spacing: 0.3px; }
 
 .catering-photo-banner {
   max-width: 1120px;
@@ -263,41 +264,43 @@ nav.nav-on-dark:not(.scrolled) .nav-logo img { filter: drop-shadow(0 1px 4px rgb
   grid-template-columns: 1fr 1fr;
   gap: 56px;
 }
-.catering-col-head { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
-.catering-col-head img { width: 56px; height: 56px; object-fit: cover; border-radius: 12px; flex-shrink: 0; }
-.catering-col-head h3 { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 600; color: var(--dark); }
+.catering-col-head { display: flex; align-items: center; gap: 20px; margin-bottom: 28px; }
+.catering-col-head img { width: 84px; height: 84px; object-fit: cover; border-radius: 16px; flex-shrink: 0; }
+.catering-col-head h3 { font-family: 'Fraunces', serif; font-size: 36px; font-weight: 600; color: var(--dark); }
 
-.catering-item { margin-bottom: 22px; }
-.catering-item-name { font-size: 15px; font-weight: 700; color: var(--text); }
-.catering-item-price { font-size: 13px; font-weight: 700; color: var(--pink); margin-left: 6px; }
-.catering-item-detail { font-size: 13px; color: var(--muted); line-height: 1.6; margin-top: 2px; }
-.catering-item ul { margin: 6px 0 0 18px; padding: 0; font-size: 13px; color: var(--muted); line-height: 1.7; }
+.catering-item { margin-bottom: 32px; }
+.catering-item-name { font-size: 23px; font-weight: 700; color: var(--text); }
+.catering-item-price { font-size: 19px; font-weight: 700; color: var(--pink); margin-left: 8px; }
+.catering-item-detail { font-size: 17px; color: var(--muted); line-height: 1.6; margin-top: 4px; }
+.catering-item ul { margin: 10px 0 0 20px; padding: 0; font-size: 17px; color: var(--muted); line-height: 1.8; }
 
-.catering-note { font-size: 13px; color: var(--muted); line-height: 1.7; margin-top: 16px; }
+.catering-note { font-size: 17px; color: var(--muted); line-height: 1.8; margin-top: 20px; }
 
 .delivery-banner {
   max-width: 1120px;
   margin: 56px auto 0;
   background: var(--yellow);
   border-radius: 16px;
-  padding: 18px 32px;
+  padding: 26px 32px;
   text-align: center;
   font-family: 'Fraunces', serif;
   font-weight: 600;
-  font-size: 17px;
+  font-size: 26px;
   color: var(--dark);
 }
 
 .catering-contact-cta {
   text-align: center;
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 24px 40px 0;
-  font-size: 16px;
-  line-height: 1.8;
-  color: var(--muted);
+  max-width: 760px;
+  margin: 80px auto 0;
+  padding: 64px 48px;
+  background: var(--warm);
+  border-radius: 28px;
 }
-.catering-contact-cta a { color: var(--pink); font-weight: 700; }
+.catering-cta-title { font-family: 'Fraunces', serif; font-weight: 700; font-size: clamp(32px, 4vw, 48px); color: var(--dark); margin-bottom: 18px; }
+.catering-cta-desc { font-size: 18px; line-height: 1.8; color: var(--muted); margin-bottom: 8px; }
+.catering-cta-phone { font-size: 24px; line-height: 1.7; color: var(--text); font-weight: 600; }
+.catering-cta-phone a { color: var(--pink); font-weight: 800; font-size: 30px; }
 
 /* ── TUESDAY ─────────────────────────────────── */
 .tuesday { background: var(--yellow); padding: 72px 48px; }
@@ -481,6 +484,10 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
   .menu-grid-section { padding: 56px 20px; }
   .drink-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
   .catering-grid { grid-template-columns: 1fr; gap: 40px; }
+  .catering-col-head h3 { font-size: 26px; }
+  .catering-col-head img { width: 60px; height: 60px; }
+  .catering-item-name { font-size: 18px; }
+  .catering-contact-cta { padding: 40px 24px; margin-top: 48px; }
   .catering-photo-banner img { height: 200px; }
 
   /* Tuesday */
