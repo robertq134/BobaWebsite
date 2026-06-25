@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="icon" type="image/png" href="android-chrome-192x192.png">
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Catering — Besties Boba & Bites</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..800&family=Work+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<script src="https://unpkg.com/@rive-app/canvas@2.17.3/rive.js"></script>
+<link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+
+<!-- NAV: nav-on-dark since this page's hero is a solid pink gradient, not a light photo -->
+<nav class="nav-on-dark">
+  <div class="nav-logo">
+    <img src="mochilogoV2.png" style="height:44px;width:auto;display:block;"/>
+  </div>
+  <ul class="nav-links">
+    <li><a href="bobamain.html#this-week">This Week</a></li>
+    <li><a href="menu.html">Menu</a></li>
+    <li><a href="about.html">About Us</a></li>
+    <li><a href="catering.html" class="active">Catering</a></li>
+    <li><a href="bobamain.html#visit">Visit</a></li>
+  </ul>
+</nav>
+
+<!-- SMALL HERO -->
+<section class="hero hero-compact hero-catering">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <h1 class="hero-h1">Catering for you!</h1>
+      <p class="hero-sub">Drinks, mochi donuts, and snacks for any size event — see packages below, or call us directly at the bottom of the page.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Wave divider, mirrored: high on the left, decreasing toward the right -->
+<svg width="100%" height="120" viewBox="0 0 1440 120" preserveAspectRatio="none" style="display:block; margin-top:-100px; position:relative; z-index:3;">
+  <path d="M1440,100 C1140,90 840,40 540,20 C340,10 140,0 0,0 L0,120 L1440,120 Z" fill="#FEF9F6"/>
+</svg>
+
+<!-- DESCRIPTION (placeholder — Robert is writing the real copy) -->
+<div class="catering-desc">
+  <!-- TODO: replace with real description copy -->
+  [Catering intro description goes here]
+</div>
+
+<!-- ════════════ CATERING MENU ════════════ -->
+<section class="menu-grid-section is-white" style="padding-top:24px;">
+  <div class="catering-section-head">
+    <span class="tag">Catering Menu</span>
+    <h2 class="menu-grid-h2">Drinks & Mochi Donuts</h2>
+  </div>
+
+  <div class="catering-grid">
+    <!-- DRINKS -->
+    <div>
+      <div class="catering-col-head">
+        <img src="macha.jpg" alt=""/>
+        <h3>Drinks</h3>
+      </div>
+
+      <div class="catering-item">
+        <span class="catering-item-name">Pre-Sealed Individual Cups</span>
+        <span class="catering-item-price">From $5 & up</span>
+        <div class="catering-item-detail">20 cups minimum</div>
+      </div>
+
+      <div class="catering-item">
+        <span class="catering-item-name">1 Gallon Drink Pouch</span>
+        <span class="catering-item-price">From $50 & up</span>
+        <div class="catering-item-detail">10–14 servings</div>
+      </div>
+
+      <div class="catering-item">
+        <span class="catering-item-name">Toppings</span>
+        <span class="catering-item-price">$25 each container per topping</span>
+        <div class="catering-item-detail">2.7 quart container, 35–45 servings</div>
+      </div>
+
+      <p class="catering-note">Boba Bar & Full Service available! Straws, cups, lids, and napkins are available upon request. Drink pricing depends on drink selection — please contact us for your custom quote.</p>
+    </div>
+
+    <!-- MOCHI DONUTS -->
+    <div>
+      <div class="catering-col-head">
+        <img src="mochidonutsV2.jpg" alt=""/>
+        <h3>Mochi Donuts</h3>
+      </div>
+
+      <p class="catering-note" style="margin-top:0;">Must order a minimum of 3 dozen for catering pricing!</p>
+
+      <div class="catering-item">
+        <span class="catering-item-name">Assorted Weekly Flavors</span>
+        <span class="catering-item-price">$33 per dozen</span>
+      </div>
+
+      <div class="catering-item">
+        <span class="catering-item-name">Custom Mochi Donuts</span>
+        <span class="catering-item-price">$36 per dozen</span>
+        <div class="catering-item-detail">Includes 1 base + 1 topping. Additional toppings $5 each (per dozen).</div>
+      </div>
+
+      <div class="catering-item">
+        <span class="catering-item-name">Base Options</span>
+        <ul>
+          <li>Strawberry, White Chocolate, Taro, Milk Chocolate</li>
+          <li>Churro* / Sugar* (*no topping option)</li>
+        </ul>
+      </div>
+
+      <div class="catering-item">
+        <span class="catering-item-name">Topping Options</span>
+        <ul>
+          <li>Rainbow Sprinkles</li>
+          <li>Chocolate Sprinkles</li>
+          <li>Oreo Crumbs</li>
+          <li>Graham Cracker Crumbs</li>
+          <li>Fruity Pebbles</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EQUIPMENT + SNACKS -->
+<section class="menu-grid-section is-warm">
+  <div class="catering-grid">
+    <!-- EQUIPMENT -->
+    <div>
+      <div class="catering-col-head">
+        <h3>Equipment</h3>
+      </div>
+      <p class="catering-note" style="margin-top:0;">Boba Bar equipment rental: tables, table covers, drink dispensers, topping & ice bowls, floral decorations, coolers, and more are available.</p>
+      <p class="catering-note">Deposit required (refundable).</p>
+    </div>
+
+    <!-- SNACKS -->
+    <div>
+      <div class="catering-col-head">
+        <img src="popcornV2.png" alt=""/>
+        <h3>Snacks</h3>
+      </div>
+      <p class="catering-note" style="margin-top:0;">All snacks are served in a half-size foil pan. Serving suggestions below.</p>
+
+      <div class="catering-item">
+        <span class="catering-item-name">Popcorn Chicken</span>
+        <span class="catering-item-price">$75.92</span>
+        <div class="catering-item-detail">8 servings — 80oz.</div>
+      </div>
+
+      <div class="catering-item">
+        <span class="catering-item-name">Waffle Fries</span>
+        <span class="catering-item-price">$49.32</span>
+        <div class="catering-item-detail">8 servings — 64oz.</div>
+      </div>
+
+      <div class="catering-item">
+        <span class="catering-item-name">Sweet Potato Tots</span>
+        <span class="catering-item-price">$67.82</span>
+        <div class="catering-item-detail">11 servings — 64oz.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="delivery-banner">We deliver! Pricing depends on location.</div>
+</section>
+
+<!-- ════════════ BOBA BAR ════════════ -->
+<section class="menu-grid-section is-white">
+  <div class="catering-section-head">
+    <span class="tag">Boba Bar</span>
+    <h2 class="menu-grid-h2">Self-Serve & Full Service</h2>
+  </div>
+
+  <div class="catering-photo-banner">
+    <img src="interior.png" alt="Besties Boba & Bites interior"/>
+  </div>
+
+  <div class="catering-grid">
+    <!-- SELF-SERVE -->
+    <div>
+      <div class="catering-col-head"><h3>Self-Serve</h3></div>
+
+      <div class="catering-item">
+        <span class="catering-item-name">Basic Self-Serve Package</span>
+        <span class="catering-item-price">$500</span>
+        <div class="catering-item-detail">Up to 50 guests</div>
+        <ul>
+          <li>2 drink bases, 1 topping</li>
+          <li>Rental equipment included</li>
+          <li>Extra drink base +$50 each</li>
+          <li>Extra topping +$25 each</li>
+        </ul>
+      </div>
+
+      <div class="catering-item">
+        <span class="catering-item-name">Standard Self-Serve Package</span>
+        <span class="catering-item-price">$675</span>
+        <div class="catering-item-detail">Up to 75 guests</div>
+        <ul>
+          <li>2 drink bases, 2 toppings</li>
+          <li>Rental equipment included</li>
+          <li>Extra drink base +$60 each</li>
+          <li>Extra topping +$25 each</li>
+        </ul>
+      </div>
+
+      <div class="catering-item">
+        <span class="catering-item-name">Premium Self-Serve Package</span>
+        <span class="catering-item-price">$850</span>
+        <div class="catering-item-detail">Up to 100 guests</div>
+        <ul>
+          <li>3 drink bases, 2 toppings</li>
+          <li>Rental equipment included</li>
+          <li>Extra drink base +$70 each</li>
+          <li>Extra topping +$25 each</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- FULL SERVICE -->
+    <div>
+      <div class="catering-col-head"><h3>Full Service</h3></div>
+
+      <div class="catering-item">
+        <span class="catering-item-name">Basic Full-Serving Package</span>
+        <span class="catering-item-price">$700</span>
+        <div class="catering-item-detail">Up to 50 guests</div>
+        <ul>
+          <li>2 drink bases, 1 topping</li>
+          <li>2 hours of service</li>
+          <li>Extra drink base +$50 each</li>
+          <li>Extra topping +$25 each</li>
+          <li>Extra service charge +$75 every additional 30 min.</li>
+        </ul>
+      </div>
+
+      <div class="catering-item">
+        <span class="catering-item-name">Standard Full-Serving Package</span>
+        <span class="catering-item-price">$945</span>
+        <div class="catering-item-detail">Up to 75 guests</div>
+        <ul>
+          <li>2 drink bases, 2 toppings</li>
+          <li>2 hours of service</li>
+          <li>Extra drink base +$60 each</li>
+          <li>Extra topping +$25 each</li>
+          <li>Extra service charge +$75 every additional 30 min.</li>
+        </ul>
+      </div>
+
+      <div class="catering-item">
+        <span class="catering-item-name">Premium Full-Serving Package</span>
+        <span class="catering-item-price">$1,250</span>
+        <div class="catering-item-detail">Up to 100 guests</div>
+        <ul>
+          <li>3 drink bases, 3 toppings</li>
+          <li>2 hours of service</li>
+          <li>Extra drink base +$70 each</li>
+          <li>Extra topping +$25 each</li>
+          <li>Extra service charge +$75 every additional 30 min.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <p class="catering-note" style="text-align:center; margin-top:32px;">We'd love to connect! Contact us for more information.</p>
+</section>
+
+<!-- BOBA BAR EQUIPMENT -->
+<section class="menu-grid-section is-warm">
+  <div class="catering-section-head">
+    <span class="tag">Boba Bar</span>
+    <h2 class="menu-grid-h2">Equipment</h2>
+  </div>
+  <div class="catering-desc" style="padding-top:0;">
+    All Boba Bar equipment is included with packages — contact us for more details!
+    <br/><br/>
+    <strong>+$100 deposit</strong>, refundable when items are returned undamaged after the event.
+    <br/>
+    <strong>+$10 late fee per day</strong> applies if items are not returned within 48 hours after the event.
+  </div>
+</section>
+
+<!-- CLOSING CONTACT CTA -->
+<div class="catering-contact-cta">
+  For catering requests or further questions, please call us at <a href="tel:9258007822">(925) 800-7822</a>!
+</div>
+
+<footer style="margin-top:56px;">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="f-logo">Besties <span>Boba</span> & Bites</div>
+        <div class="f-sub">Boba Tea, Coffee & Mochi Donuts &mdash; Livermore, CA</div>
+      </div>
+      <div class="f-col">
+        <div class="f-col-head">Menu</div>
+        <ul><li><a href="menu.html">Drinks</a></li><li><a href="bobamain.html#this-week">Mochi Donuts</a></li><li><a href="menu.html">Snacks</a></li><li><a href="https://bestiesboba.square.site/" target="_blank">Order Online</a></li></ul>
+      </div>
+      <div class="f-col">
+        <div class="f-col-head">Visit</div>
+        <ul><li><a href="bobamain.html#this-week">This Week's Flavors</a></li><li><a href="catering.html">Catering</a></li><li><a href="bobamain.html#visit">Find Us</a></li><li><a href="https://instagram.com/BestiesBoba" target="_blank">Instagram</a></li></ul>
+      </div>
+      <div class="f-col">
+        <div class="f-col-head">Contact</div>
+        <ul><li><a href="tel:9258007822">(925) 800-7822</a></li><li><a href="mailto:BestiesLivermore@gmail.com">Email Us</a></li><li><a>4520 Las Positas Rd</a></li><li><a>Livermore, CA 94551</a></li></ul>
+      </div>
+    </div>
+    <div class="footer-bot">
+      <span class="f-copy">&copy; 2026 Besties Boba & Bites. All rights reserved.</span>
+      <a href="https://instagram.com/BestiesBoba" target="_blank" class="f-ig">@BestiesBoba</a>
+    </div>
+  </div>
+</footer>
+
+<div id="bb-widget">
+  <div id="bb-chat">
+    <div id="bb-header">
+      <div class="bb-header-left">
+        <div class="bb-header-avatar">🐱</div>
+        <div>
+          <div class="bb-name">Besties Boba & Bites</div>
+          <div class="bb-status" id="bb-status">Ask us anything!</div>
+        </div>
+      </div>
+      <button id="bb-close" onclick="bbClose()">&#215;</button>
+    </div>
+    <div id="bb-msgs">
+      <div class="bb-row">
+        <div class="bb-avatar">🐱</div>
+        <div class="bb-bubble bot">Hey! Welcome to Besties Boba & Bites. My name is Mochi. Ask about our menu, specials, or catering!</div>
+      </div>
+    </div>
+    <div id="bb-chips">
+      <button class="bb-chip" onclick="bbChip(this)">Menu?</button>
+      <button class="bb-chip" onclick="bbChip(this)">Catering?</button>
+      <button class="bb-chip" onclick="bbChip(this)">Tuesday deal?</button>
+    </div>
+    <div id="bb-input-row">
+      <input id="bb-input" type="text" placeholder="Type a message..."/>
+      <button id="bb-send" onclick="bbSend()">Send</button>
+    </div>
+  </div>
+  <div id="bb-cat-stage" class="bb-s-peep">
+    <div id="bb-meow-bubble">Meow!</div>
+    <div id="bb-cat-wrap">
+      <canvas id="bb-rive" width="340" height="340"></canvas>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
