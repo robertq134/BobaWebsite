@@ -40,12 +40,12 @@
         syncRive();
       }
     });
-    var canvas = document.getElementById('bb-rive');
-    canvas.addEventListener('click', bbCatClick);
-    canvas.addEventListener('touchstart', function(e){
+    var hitzone = document.getElementById('bb-cat-hitzone');
+    hitzone.addEventListener('click', bbCatClick);
+    hitzone.addEventListener('touchstart', function(e){
       touchStartY = e.touches[0].clientY;
     }, { passive: true });
-    canvas.addEventListener('touchend', function(e){
+    hitzone.addEventListener('touchend', function(e){
       var touchEndY = e.changedTouches[0].clientY;
       if (Math.abs(touchEndY - touchStartY) < 10) bbCatClick();
     });
@@ -215,6 +215,7 @@
     }
 
     window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
   }
 
   function setupFlavorCarousel() {
@@ -294,4 +295,21 @@
   }
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
+})();
+
+// Mobile nav toggle: opens/closes the dropdown, closes automatically once a link is tapped
+(function() {
+  var toggleBtn = document.getElementById('nav-toggle');
+  var navLinks = document.querySelector('.nav-links');
+  if (!toggleBtn || !navLinks) return;
+
+  toggleBtn.addEventListener('click', function() {
+    navLinks.classList.toggle('mobile-open');
+  });
+
+  navLinks.querySelectorAll('a').forEach(function(link) {
+    link.addEventListener('click', function() {
+      navLinks.classList.remove('mobile-open');
+    });
+  });
 })();
