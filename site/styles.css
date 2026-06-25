@@ -231,6 +231,74 @@ nav.nav-on-dark:not(.scrolled) .nav-links a { color: rgba(255,255,255,.85); }
 nav.nav-on-dark:not(.scrolled) .nav-links a:hover { color: white; }
 nav.nav-on-dark:not(.scrolled) .nav-logo img { filter: drop-shadow(0 1px 4px rgba(0,0,0,.45)); }
 
+/* ── CATERING PAGE ─────────────────────────────── */
+.hero-catering { background: linear-gradient(135deg, var(--pink) 0%, var(--pink-d) 100%); }
+.hero-catering .hero-sub { color: rgba(255,255,255,.85); max-width: 480px; margin: 0 auto; }
+
+.catering-desc {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 64px 40px 24px;
+  text-align: center;
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--muted);
+}
+
+.catering-section-head { text-align: center; max-width: 1120px; margin: 0 auto 40px; }
+.catering-section-head .menu-grid-h2 { margin-top: 4px; }
+
+.catering-photo-banner {
+  max-width: 1120px;
+  margin: 0 auto 40px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+.catering-photo-banner img { width: 100%; height: 280px; object-fit: cover; display: block; }
+
+.catering-grid {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+}
+.catering-col-head { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+.catering-col-head img { width: 56px; height: 56px; object-fit: cover; border-radius: 12px; flex-shrink: 0; }
+.catering-col-head h3 { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 600; color: var(--dark); }
+
+.catering-item { margin-bottom: 22px; }
+.catering-item-name { font-size: 15px; font-weight: 700; color: var(--text); }
+.catering-item-price { font-size: 13px; font-weight: 700; color: var(--pink); margin-left: 6px; }
+.catering-item-detail { font-size: 13px; color: var(--muted); line-height: 1.6; margin-top: 2px; }
+.catering-item ul { margin: 6px 0 0 18px; padding: 0; font-size: 13px; color: var(--muted); line-height: 1.7; }
+
+.catering-note { font-size: 13px; color: var(--muted); line-height: 1.7; margin-top: 16px; }
+
+.delivery-banner {
+  max-width: 1120px;
+  margin: 56px auto 0;
+  background: var(--yellow);
+  border-radius: 16px;
+  padding: 18px 32px;
+  text-align: center;
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--dark);
+}
+
+.catering-contact-cta {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 24px 40px 0;
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--muted);
+}
+.catering-contact-cta a { color: var(--pink); font-weight: 700; }
+
 /* ── TUESDAY ─────────────────────────────────── */
 .tuesday { background: var(--yellow); padding: 72px 48px; }
 .tuesday-inner { max-width: 1120px; margin: 0 auto; display: flex; align-items: center; gap: 56px; flex-wrap: wrap; }
@@ -250,11 +318,7 @@ nav.nav-on-dark:not(.scrolled) .nav-logo img { filter: drop-shadow(0 1px 4px rgb
 .about-quote span { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--pink); }
 
 /* ── CATERING ────────────────────────────────── */
-.catering-section { background: var(--warm); border-top: 1px solid var(--border); padding: 88px 48px; }
-.catering-inner { max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
-.catering-h2 { font-size: clamp(28px, 2.8vw, 44px); font-weight: 600; letter-spacing: -0.3px; color: var(--dark); margin-bottom: 18px; line-height: 1.1; }
-.catering-p { font-size: 16px; line-height: 1.75; color: var(--muted); margin-bottom: 32px; }
-.catering-img { width: 100%; height: 400px; object-fit: contain; border-radius: 12px; display: block; background: white; cursor: zoom-in; }
+
 
 /* ── VISIT ───────────────────────────────────── */
 .visit { background: var(--warm); border-top: 1px solid var(--border); padding: 88px 48px; }
@@ -416,6 +480,8 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
   .menu-cards { grid-template-columns: 1fr; gap: 16px; }
   .menu-grid-section { padding: 56px 20px; }
   .drink-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .catering-grid { grid-template-columns: 1fr; gap: 40px; }
+  .catering-photo-banner img { height: 200px; }
 
   /* Tuesday */
   .tuesday { padding: 40px 20px; }
@@ -426,8 +492,7 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
   .about-section { grid-template-columns: 1fr; padding: 56px 20px; gap: 32px; }
 
   /* Catering */
-  .catering-section { padding: 56px 20px; }
-  .catering-inner { grid-template-columns: 1fr; gap: 32px; }
+  /* Catering page grid responsiveness handled by .catering-grid above */
 
   /* Visit */
   .visit { padding: 56px 20px; }
