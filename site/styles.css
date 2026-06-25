@@ -127,7 +127,7 @@ nav.nav-on-dark:not(.scrolled) .nav-toggle span { background: white; }
 .order-cta-title { font-family: 'Fraunces', serif; font-weight: 700; font-size: clamp(28px, 3.5vw, 42px); color: var(--dark); margin-bottom: 24px; }
 .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .hero-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.6); }
-.hero-inner { position: relative; z-index: 2; display: flex; align-items: center; justify-content: center; min-height: 100vh; text-align: left; padding: 150px 80px 48px; }
+.hero-inner { position: relative; z-index: 2; display: flex; align-items: center; justify-content: flex-start; min-height: 100vh; text-align: left; padding: 150px 80px 48px 12%; }
 .hero-content { max-width: 600px; }
 .hero-h1 { font-family: 'Fraunces', serif; font-weight: 600; font-size: clamp(36px, 5vw, 64px); color: var(--dark); margin: 0 0 16px; line-height: 1.1; }
 .hero-sub { font-size: 16px; line-height: 3; color: var(--muted); margin-bottom: 32px; max-width: 420px; }
