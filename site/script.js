@@ -273,6 +273,11 @@
       });
     });
 
+    var prevBtn = document.getElementById('carousel-prev');
+    var nextBtn = document.getElementById('carousel-next');
+    if (prevBtn) prevBtn.addEventListener('click', function() { setActive(activeIndex - 1); });
+    if (nextBtn) nextBtn.addEventListener('click', function() { setActive(activeIndex + 1); });
+
     window.addEventListener('resize', layout);
     setActive(0);
   }
