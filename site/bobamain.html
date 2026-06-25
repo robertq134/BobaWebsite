@@ -30,7 +30,10 @@
 
 <!-- HERO -->
 <section class="hero">
-  <img class="hero-video hero-photo" src="bobahero.png" alt="Brown sugar boba with a brulee top at Besties Boba & Bites"/>
+  <picture>
+    <source media="(max-width: 768px)" srcset="heromobile.png">
+    <img class="hero-video hero-photo" src="bobahero.png" alt="Brown sugar boba with a brulee top at Besties Boba & Bites"/>
+  </picture>
 
   <!-- Decorative flowers: each fades in once on load, then drifts slightly as the user scrolls -->
   <div class="hero-flower-wrap hero-flower-corner" id="hero-flower-corner">
@@ -41,7 +44,7 @@
   </div>
 
   <div class="hero-inner">
-    <div class="hero-content">
+    <div class="hero-content fade-in-load">
       <span class="tag">Boba Tea & Mochi Donuts</span>
       <h1 class="hero-h1">Livermore's favorite boba place.</h1>
       <p class="hero-sub">Handcrafted milk teas, fresh mochi donuts, and Taiwanese bites — made fresh, every day, right here in Livermore.</p>
