@@ -89,6 +89,20 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 16px 48
 nav.scrolled { background: rgba(249,240,236,0.97); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); box-shadow: 0 2px 16px rgba(22,14,18,.06); }
 .nav-logo img { transition: filter .25s ease; }
 .nav-links { display: flex; gap: 36px; list-style: none; }
+
+.nav-toggle {
+  display: none;
+  justify-self: end;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+}
+.nav-toggle span { display: block; width: 24px; height: 2px; border-radius: 2px; background: var(--dark); transition: background .2s; }
+nav.nav-on-dark:not(.scrolled) .nav-toggle span { background: white; }
 .nav-links a { position: relative; font-size: 16px; font-weight: 700; color: var(--muted); transition: color .15s; text-decoration: none; text-underline-offset: 6px; text-decoration-thickness: 2px; }
 .nav-links a.active { color: var(--pink); text-decoration: underline; text-decoration-color: var(--pink); }
 .nav-links a:hover { color: var(--dark); }
@@ -120,7 +134,7 @@ nav.scrolled { background: rgba(249,240,236,0.97); backdrop-filter: blur(14px); 
 
 /* ── THIS WEEK ───────────────────────────────── */
 .this-week { position: relative; padding: 140px 40px 160px; max-width: 1320px; margin: 0 auto; }
-.this-week-inner { display: grid; grid-template-columns: 0.8fr 1.3fr; gap: 64px; align-items: center; }
+.this-week-inner { display: grid; grid-template-columns: 0.8fr 1.3fr; gap: 160px; align-items: center; }
 .week-right {
   display: flex;
   flex-direction: column;
@@ -393,7 +407,16 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
   opacity: 0;
   transition: opacity 0.5s ease;
 }
-#bb-rive { display:block; width:340px; height:340px; cursor:pointer; background:transparent !important; }
+#bb-rive { display:block; width:340px; height:340px; cursor:pointer; background:transparent !important; pointer-events: none; }
+#bb-cat-hitzone {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 70px; /* roughly matches the visible peeking area on desktop */
+  cursor: pointer;
+  z-index: 2;
+}
 
 /* Chat window */
 #bb-chat {
@@ -470,7 +493,25 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
   /* Nav */
   nav { padding: 0 16px; height: 56px; }
   .nav-logo img { height: 34px !important; }
-  .nav-links { display: none; }
+  .nav-toggle { display: flex; }
+  .nav-links {
+    display: none;
+    position: fixed;
+    top: 56px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
+    background: rgba(254,249,246,0.98);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 8px 24px rgba(22,14,18,.08);
+    padding: 8px 0;
+  }
+  .nav-links.mobile-open { display: flex; }
+  .nav-links li { width: 100%; }
+  .nav-links a { display: block; padding: 14px 24px; color: var(--muted) !important; }
+  .nav-links a.active { color: var(--pink) !important; }
   .nav-cta { padding: 8px 14px; font-size: 12px; }
 
   /* Hero */
@@ -485,7 +526,7 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
   .this-week-inner { grid-template-columns: 1fr; gap: 40px; }
   .week-left { align-self:end }
   .week-right { order: -1; }
-  .flavor-carousel { --card-size: 150px; --card-spacing: 76px; height: 280px; }
+  .flavor-carousel { --card-size: 230px; --card-spacing: 130px; height: 400px; }
 
   /* Menu */
   .menu-section { padding: 56px 20px; }
@@ -545,6 +586,8 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
     height: 220px !important;
     background: transparent !important;
   }
+
+  #bb-cat-hitzone { height: 30px; }
 
   /* Peeping: show top ~50px of cat */
   #bb-cat-wrap                { transform: translateY(0px); }
