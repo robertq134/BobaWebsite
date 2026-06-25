@@ -535,10 +535,11 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
 
   /* Hero */
   .hero { min-height: 48vh; }
-  .hero-inner { padding: 80px 20px 24px; flex-direction: column; align-items: flex-start; justify-content: center; }
+  .hero-inner { padding: 80px 20px 24px; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
   .hero-photo { object-position: 25% center; }
-  .hero-content { max-width: 78%; }
-  .hero-h1 { font-size: clamp(22px, 6vw, 28px); }
+  .hero-content { max-width: 88%; }
+  .hero-h1 { font-size: clamp(30px, 9vw, 42px); }
+  .hero-btns { justify-content: center; }
   .hero-sub { font-size: 13px; line-height: 1.6; }
   .tag { font-size: 10px; }
   .btn-big { padding: 12px 24px; font-size: 14px; border-radius: 8px; }
