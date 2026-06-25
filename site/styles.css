@@ -122,35 +122,32 @@ nav.nav-on-dark:not(.scrolled) .nav-toggle span { background: white; }
   border-radius: 20px;
   backdrop-filter: blur(2px);
 }
-.hero-scroll-note { color: rgba(255,255,255,.85); font-size: 15px; font-weight: 600; margin-top: 18px; }
 .btn-smooth { border-radius: 999px; box-shadow: 0 8px 24px rgba(199,58,97,.3); }
+.order-cta { text-align: center; padding: 56px 20px 24px; }
+.order-cta-title { font-family: 'Fraunces', serif; font-weight: 700; font-size: clamp(28px, 3.5vw, 42px); color: var(--dark); margin-bottom: 24px; }
 .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .hero-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.6); }
-.hero-inner { position: relative; z-index: 2; display: flex; align-items: center; justify-content: space-between; min-height: 100vh; text-align: left; padding: 150px 80px 48px; }
+.hero-inner { position: relative; z-index: 2; display: flex; align-items: center; justify-content: center; min-height: 100vh; text-align: left; padding: 150px 80px 48px; }
 .hero-content { max-width: 600px; }
 .hero-h1 { font-family: 'Fraunces', serif; font-weight: 600; font-size: clamp(36px, 5vw, 64px); color: var(--dark); margin: 0 0 16px; line-height: 1.1; }
 .hero-sub { font-size: 16px; line-height: 3; color: var(--muted); margin-bottom: 32px; max-width: 420px; }
 .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
 
 /* ── THIS WEEK ───────────────────────────────── */
-.this-week { position: relative; padding: 140px 40px 160px; max-width: 1320px; margin: 0 auto; }
+.this-week { position: relative; padding: 140px 80px 160px; max-width: 1320px; margin: 0 auto; }
 .this-week-inner {
   display: grid;
   grid-template-columns: 0.8fr 1.3fr;
-  grid-template-areas: "header right" "left right";
-  column-gap: 160px;
-  row-gap: 16px;
+  column-gap: 220px;
   align-items: center;
 }
-.week-header { grid-area: header; }
+.week-col-left { display: flex; flex-direction: column; gap: 32px; }
+.week-header {}
 .week-left {
-  grid-area: left;
-  align-self: center;
   /* Push down slightly to perfectly balance against the carousel element */
   margin-top: -40px;
 }
 .week-right {
-  grid-area: right;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -534,11 +531,14 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
   /* This week */
   .this-week { padding: 56px 20px; }
   .this-week-inner {
-    grid-template-columns: 1fr;
-    grid-template-areas: "header" "right" "left";
-    row-gap: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
   }
-  .week-left { align-self: start; margin-top: 0; }
+  .week-col-left { display: contents; }
+  .week-header { order: 1; }
+  .week-right { order: 2; }
+  .week-left { order: 3; align-self: auto; margin-top: 0; }
   .flavor-carousel { --card-size: 230px; --card-spacing: 130px; height: 400px; }
   .flavor-item, .flavor-btn { font-size: 15px; }
 
