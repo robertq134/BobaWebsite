@@ -177,8 +177,8 @@ nav.nav-on-dark:not(.scrolled) .nav-toggle span { background: white; }
   top: 50%;
   left: 50%;
   width: var(--card-size);
-  height: var(--card-size);
-  margin-top: calc(var(--card-size) / -2);
+  height: var(--card-height, var(--card-size));
+  margin-top: calc(var(--card-height, var(--card-size)) / -2);
   margin-left: calc(var(--card-size) / -2);
   background: #FFFFFF;
   border-radius: 28px;
@@ -188,6 +188,8 @@ nav.nav-on-dark:not(.scrolled) .nav-toggle span { background: white; }
   transition: transform .65s cubic-bezier(.22,1,.36,1), opacity .5s ease, box-shadow .45s ease;
 }
 .carousel-item img { width: 100%; height: 100%; object-fit: contain; display: block; padding: 20px; pointer-events: none; }
+.carousel-card-label { display: none; }
+.carousel-arrow { display: none; }
 .carousel-item.is-active {
   box-shadow: 0 0 0 3px rgba(232,82,122,.55), 0 0 50px 8px rgba(232,82,122,.35), 0 25px 50px rgba(199,58,97,.22);
   cursor: default;
@@ -498,11 +500,11 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
 @media (max-width: 768px) {
 
   /* Nav */
-  nav { padding: 0 16px; height: 56px; }
+  nav { padding: 0 16px; height: 56px; flex-direction: row; justify-content: space-between; gap: 0; }
   .nav-logo img { height: 34px !important; }
   .nav-toggle { display: flex; }
   .nav-links {
-    display: none;
+    display: flex;
     position: fixed;
     top: 56px;
     left: 0;
@@ -513,16 +515,30 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
     backdrop-filter: blur(14px);
     border-bottom: 1px solid var(--border);
     box-shadow: 0 8px 24px rgba(22,14,18,.08);
-    padding: 8px 0;
+    padding: 0;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    pointer-events: none;
+    transition: max-height .32s ease, opacity .25s ease, padding .32s ease;
   }
-  .nav-links.mobile-open { display: flex; }
+  .nav-links.mobile-open {
+    max-height: 400px;
+    opacity: 1;
+    padding: 8px 0;
+    pointer-events: auto;
+  }
   .nav-links li { width: 100%; }
   .nav-links a { display: block; padding: 14px 24px; color: var(--muted) !important; }
   .nav-links a.active { color: var(--pink) !important; }
   .nav-cta { padding: 8px 14px; font-size: 12px; }
 
   /* Hero */
+  .hero { min-height: 65vh; }
   .hero-inner { padding: 80px 20px 24px; flex-direction: column; align-items: flex-start; justify-content: center; }
+  .hero-h1 { font-size: clamp(26px, 7vw, 34px); }
+  .hero-sub { font-size: 14px; line-height: 1.7; }
+  .tag { font-size: 10px; }
   .hero.hero-compact { min-height: 320px; }
   .hero.hero-compact .hero-inner { padding: 100px 20px 24px; }
   .hero-flower-corner { width: 80px; top: 70px; right: 20px; }
@@ -539,8 +555,45 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
   .week-header { order: 1; }
   .week-right { order: 2; }
   .week-left { order: 3; align-self: auto; margin-top: 0; }
-  .flavor-carousel { --card-size: 230px; --card-spacing: 130px; height: 400px; justify-content: center; }
-  .flavor-item, .flavor-btn { font-size: 15px; }
+  .flavors-grid { display: none; }
+  .flavor-carousel {
+    --card-size: 280px;
+    --card-height: 420px;
+    --card-spacing: 150px;
+    height: 480px;
+    justify-content: center;
+  }
+  .carousel-card-label {
+    display: block;
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    padding: 14px 12px;
+    background: linear-gradient(to top, rgba(22,14,18,.78), transparent);
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: center;
+  }
+  .carousel-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: white;
+    border: none;
+    box-shadow: 0 8px 20px rgba(22,14,18,.18);
+    font-size: 24px;
+    color: var(--pink);
+    cursor: pointer;
+    z-index: 200;
+  }
+  .carousel-arrow-left { left: 4px; }
+  .carousel-arrow-right { right: 4px; }
 
   /* Menu */
   .menu-section { padding: 56px 20px; }
