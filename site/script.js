@@ -146,7 +146,7 @@
     clearTimeout(sleepTimer);
     addMsg('user', msg); showDots();
     try {
-      var res = await fetch(WEBHOOK, { method:'POST', headers:{'Content-Type':'application/json', 'X-Site-Key':'a9z3t3?LvZ25vlp+69e3ztLAb+!'}, body: JSON.stringify({message: msg, session_id: sessionId}) });
+      var res = await fetch(WEBHOOK, { method:'POST', headers:{'Content-Type':'application/json', 'X-Site-Key':'z34q2?L5t?!+3t9zbASW+!DFYPOQ'}, body: JSON.stringify({message: msg, session_id: sessionId}) });
       var data = await res.json();
       var reply = data.reply || "Hmm, I didn't catch that — try again?";
       hideDots(); addMsg('bot', reply);
