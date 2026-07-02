@@ -254,11 +254,11 @@ nav.nav-on-dark:not(.scrolled) .nav-toggle span { background: white; }
 .deco-icon.fade-in-scroll.visible { opacity: 0.85; }
 .deco-icon.deco-1 { top: 3%;  left: 2%;   width: 180px; transform: rotate(-12deg); }
 .deco-icon.deco-2 { top: 10%; right: 4%;  width: 130px; transform: rotate(9deg); }
-.deco-icon.deco-3 { top: 42%; left: 1%;   width: 150px; transform: rotate(6deg); }
+.deco-icon.deco-3 { top: 42%; left: 50%;   width: 150px; transform: rotate(6deg); }
 .deco-icon.deco-4 { bottom: 6%; right: 2%; width: 190px; transform: rotate(-8deg); }
 .deco-icon.deco-5 { top: 4%;  right: 18%; width: 120px; transform: rotate(14deg); }
 .deco-icon.deco-6 { bottom: 4%; left: 3%;  width: 160px; transform: rotate(-15deg); }
-.deco-icon.deco-7 { top: 50%; right: -1%; width: 130px; transform: rotate(5deg); }
+.deco-icon.deco-7 { top: 50%; right: -50%; width: 130px; transform: rotate(5deg); }
 .menu-grid-section.is-white { background: #FFFFFF; }
 .menu-grid-section.is-warm  { background: var(--warm); border-top: 1px solid var(--border); }
 .menu-grid-head { max-width: 1120px; margin: 0 auto 40px; }
