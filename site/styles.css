@@ -225,13 +225,13 @@ nav.nav-on-dark:not(.scrolled) .nav-toggle span { background: white; }
 }
 .deco-icon.fade-in-scroll { transition: opacity 0.7s ease; opacity: 0; }
 .deco-icon.fade-in-scroll.visible { opacity: 0.85; }
-.deco-icon.deco-1 { top: 3%;  left: 2%;   width: 180px; transform: rotate(-12deg); }
-.deco-icon.deco-2 { top: 10%; right: 4%;  width: 130px; transform: rotate(9deg); }
-.deco-icon.deco-3 { top: 42%; left: -15%;   width: 150px; transform: rotate(6deg); }
+.deco-icon.deco-1 { top: 3%;  left: 10%;   width: 180px; transform: rotate(-12deg); }
+.deco-icon.deco-2 { top: 10%; right: 10%;  width: 130px; transform: rotate(9deg); }
+.deco-icon.deco-3 { top: 30%; left: -15%;   width: 150px; transform: rotate(6deg); }
 .deco-icon.deco-4 { bottom: 6%; right: 2%; width: 190px; transform: rotate(-8deg); }
 .deco-icon.deco-5 { top: 4%;  right: 10%; width: 120px; transform: rotate(14deg); }
 .deco-icon.deco-6 { bottom: 4%; left: 3%;  width: 160px; transform: rotate(-15deg); }
-.deco-icon.deco-7 { top: 50%; right: -15%; width: 130px; transform: rotate(5deg); }
+.deco-icon.deco-7 { top: 90%; right: -15%; width: 130px; transform: rotate(5deg); }
 
 /* Menu-page-only extra icons (deco-m1 to deco-m5) — used only in menu.html,
    filling gaps the shared deco-1..7 positions don't cover on that page. */
