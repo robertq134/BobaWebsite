@@ -494,7 +494,7 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
     display: block;
     width: 72px;
     opacity: 0.75;
-    z-index: 0;
+    z-index: -1;
   }
 
   /* Homepage — This Week: 3 icons, tucked near the top and bottom edges,
