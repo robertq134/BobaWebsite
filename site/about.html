@@ -60,7 +60,7 @@
       </div>
       <div class="f-col">
         <div class="f-col-head">Contact</div>
-        <ul><li><a href="tel:9258007822">(925) 800-7822</a></li><li><a href="mailto:BestiesLivermore@gmail.com">Email Us</a></li><li><a>4520 Las Positas Rd</a></li><li><a>Livermore, CA 94551</a></li></ul>
+        <ul><li><a href="tel:9258007822">(925) 800-7822</a></li><li><a href="mailto:BestiesLivermore@gmail.com">Email Us</a></li><li><a>4520 Las Positas Rd</a></li><li><a>Livermore, CA 94551</a></li><li><a href="privacy.html">Privacy Policy</a></li></ul>
       </div>
     </div>
     <div class="footer-bot">
@@ -107,14 +107,9 @@
   </div>
 </div>
 
-<!-- ============================================================
-     CONSENT GATE — self-contained. Paste this block right BEFORE
-     the closing </body> tag on every page that has the chat widget
-     (bobamain.html, menu.html, about.html, catering.html).
-     It needs no changes to your existing script.js — it watches the
-     chat window for the "open" class on its own.
-     ============================================================ -->
+<script src="script.js"></script>
 
+<!-- ===== CONSENT GATE (injected) ===== -->
 <style>
   #bb-consent-gate {
     position: absolute;
@@ -131,6 +126,11 @@
     border-radius: 20px;
   }
   #bb-consent-gate.show { display: flex; }
+  /* While the gate is up, physically block interaction with the input row and chips
+     behind it, so a mobile tap can't slip through and open the keyboard.
+     Driven by the .bb-gated class the JS toggles on #bb-chat (works on all browsers). */
+  #bb-chat.bb-gated #bb-input-row,
+  #bb-chat.bb-gated #bb-chips { pointer-events: none; opacity: 0.5; }
   #bb-consent-gate .cg-icon { font-size: 34px; margin-bottom: 14px; }
   #bb-consent-gate h3 {
     font-family: 'Fraunces', serif;
@@ -167,6 +167,7 @@
 </style>
 
 <div id="bb-consent-gate">
+  <div class="cg-icon">🐱</div>
   <h3>Before you chat</h3>
   <p>To continue chatting, you agree to our <a href="privacy.html" target="_blank">Privacy Policy</a>. Conversations may be reviewed to improve service.</p>
   <p class="cg-fine">Mochi is an AI assistant, not a person, and can make mistakes — its answers are for general info only, aren't professional advice or a binding offer, so please confirm prices and details with the shop.</p>
@@ -183,31 +184,60 @@
   // Move the gate inside the chat window so it overlays only the chat.
   chat.appendChild(gate);
 
+  var input = document.getElementById('bb-input');
+  var sendBtn = document.getElementById('bb-send');
+  var chips = chat.querySelectorAll('.bb-chip');
+
   function hasConsented() {
     try { return sessionStorage.getItem(STORAGE_KEY) === 'yes'; }
     catch (e) { return false; }  // if sessionStorage is blocked, gate shows every open (safer)
   }
 
+  // Actually lock the interactive elements — not just cover them — so mobile
+  // taps can't reach the input behind the overlay and pop the keyboard.
+  function lockChat() {
+    chat.classList.add('bb-gated');
+    if (input) {
+      input.blur();                 // dismiss keyboard if it opened
+      input.setAttribute('disabled', 'disabled');
+    }
+    if (sendBtn) sendBtn.setAttribute('disabled', 'disabled');
+    chips.forEach(function (c) { c.setAttribute('disabled', 'disabled'); });
+  }
+  function unlockChat() {
+    chat.classList.remove('bb-gated');
+    if (input) input.removeAttribute('disabled');
+    if (sendBtn) sendBtn.removeAttribute('disabled');
+    chips.forEach(function (c) { c.removeAttribute('disabled'); });
+  }
+
   function showGateIfNeeded() {
     if (chat.classList.contains('open') && !hasConsented()) {
       gate.classList.add('show');
+      lockChat();
     } else {
       gate.classList.remove('show');
+      if (hasConsented()) unlockChat();
     }
   }
 
   document.getElementById('bb-consent-agree').addEventListener('click', function () {
     try { sessionStorage.setItem(STORAGE_KEY, 'yes'); } catch (e) {}
     gate.classList.remove('show');
+    unlockChat();
   });
 
   // Watch the chat window for the "open" class toggling, without touching script.js.
   var observer = new MutationObserver(showGateIfNeeded);
   observer.observe(chat, { attributes: true, attributeFilter: ['class'] });
 
+  // If consent hasn't been given yet, lock immediately so nothing is interactive on load.
+  if (!hasConsented()) lockChat();
+
   // Also check once on load in case it starts open.
   showGateIfNeeded();
 })();
 </script>
+<!-- ===== END CONSENT GATE ===== -->
 </body>
 </html>
