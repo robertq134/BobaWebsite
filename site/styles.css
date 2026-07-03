@@ -492,45 +492,13 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
      hand-picked subset per page at mobile-appropriate size and position.
      Uses the pg-home / pg-menu / pg-catering wrapper class (added alongside
      deco-icon in the HTML) so the three pages don't fight over shared deco-N rules. */
-  .deco-icon { display: none; }
-
+  /* All decorative icons are hidden on mobile — the icon PNGs aren't transparent,
+     so at mobile size they render as white boxes over the content. Hidden here
+     with !important so nothing can re-enable them. They still show on desktop. */
+  .deco-icon,
   .pg-home.deco-icon,
   .pg-menu.deco-icon,
-  .pg-catering.deco-icon {
-    display: block;
-    width: 72px;
-    opacity: 0.75;
-    z-index: 0;
-  }
-
-  /* Homepage — This Week: 3 icons, tucked near the top and bottom edges,
-     clear of the carousel and flavor list which both sit centered. */
-  .pg-home.deco-1 { top: 0.5%; left: -2%; bottom: auto; right: auto; }
-  .pg-home.deco-2 { top: 0.5%; right: -2%; left: auto; bottom: auto; }
-  .pg-home.deco-3 { top: 17%; left: 50%; right: auto; bottom: auto; transform: translateX(-50%) rotate(6deg); }
-  .pg-home.deco-4 { top: auto; bottom: 34%; right: 2%; left: auto; }
-  .pg-home.deco-5 { top: 38%; right: 1%; left: auto; bottom: auto; }
-  .pg-home.deco-6 { top: auto; bottom: 1%; left: 8%; right: auto; transform: rotate(-15deg); }
-  .pg-home.deco-7 { top: auto; bottom: 12%; right: 6%; left: auto; }
-
-  /* Menu — Top Choices: 2 icons in the header area, above the drink grid */
-  .pg-menu.deco-1 { top: 1%; left: 3%; bottom: auto; right: auto; }
-  .pg-menu.deco-4 { top: 1%; right: 3%; left: auto; bottom: auto; }
-  .pg-menu.deco-2, .pg-menu.deco-3, .pg-menu.deco-m1, .pg-menu.deco-m2,
-  .pg-menu.deco-m3, .pg-menu.deco-m4 { display: none; }
-
-  /* Menu — Snacks: 1 icon, centered above the section */
-  .pg-menu.deco-m5 { top: 1%; left: 50%; right: auto; bottom: auto; transform: translateX(-50%) rotate(8deg); }
-  .pg-menu.deco-5, .pg-menu.deco-6, .pg-menu.deco-7 { display: none; }
-
-  /* Catering — Catering Menu section: 2 icons above the Drinks/Donuts columns */
-  .pg-catering.deco-1 { top: 1%; left: 3%; bottom: auto; right: auto; }
-  .pg-catering.deco-4 { top: 1%; right: 3%; left: auto; bottom: auto; }
-  .pg-catering.deco-2, .pg-catering.deco-3 { display: none; }
-
-  /* Catering — Boba Bar section: 1 icon, centered above the Self-Serve/Full-Service columns */
-  .pg-catering.deco-6 { top: 1%; left: 50%; right: auto; bottom: auto; transform: translateX(-50%) rotate(-15deg); }
-  .pg-catering.deco-5, .pg-catering.deco-7 { display: none; }
+  .pg-catering.deco-icon { display: none !important; }
 
   nav { padding: 0 16px; height: 56px; flex-direction: row; justify-content: space-between; gap: 0; }
   .nav-logo img { height: 34px !important; }
@@ -566,7 +534,7 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
   .nav-cta { padding: 8px 14px; font-size: 12px; }
 
   .hero { min-height: 48vh; }
-  .hero-inner { padding: 130px 20px 40px; flex-direction: column; align-items: center; justify-content: center; text-align: center; min-height: auto; }
+  .hero-inner { padding: 130px 20px 24px; flex-direction: column; align-items: center; justify-content: flex-start; text-align: center; }
   .hero-photo { object-position: 25% center; }
   .hero-content { max-width: 88%; }
   .hero-h1 { font-size: clamp(30px, 9vw, 42px); }
