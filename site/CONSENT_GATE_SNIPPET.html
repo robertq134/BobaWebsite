@@ -1,0 +1,103 @@
+<!-- ============================================================
+     CONSENT GATE — self-contained. Paste this block right BEFORE
+     the closing </body> tag on every page that has the chat widget
+     (bobamain.html, menu.html, about.html, catering.html).
+     It needs no changes to your existing script.js — it watches the
+     chat window for the "open" class on its own.
+     ============================================================ -->
+
+<style>
+  #bb-consent-gate {
+    position: absolute;
+    inset: 0;
+    z-index: 50;
+    background: rgba(254, 252, 248, 0.98);
+    backdrop-filter: blur(3px);
+    display: none;               /* shown by JS only when needed */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 28px 24px;
+    border-radius: 20px;
+  }
+  #bb-consent-gate.show { display: flex; }
+  #bb-consent-gate .cg-icon { font-size: 34px; margin-bottom: 14px; }
+  #bb-consent-gate h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 19px;
+    color: var(--dark, #160E12);
+    margin-bottom: 12px;
+  }
+  #bb-consent-gate p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--muted, #8A7278);
+    margin-bottom: 8px;
+    max-width: 280px;
+  }
+  #bb-consent-gate a { color: var(--pink, #E8527A); font-weight: 700; }
+  #bb-consent-gate .cg-fine {
+    font-size: 11px;
+    color: #a99ca1;
+    margin-bottom: 20px;
+  }
+  #bb-consent-gate button {
+    background: var(--pink, #E8527A);
+    color: #fff;
+    border: none;
+    border-radius: 999px;
+    padding: 11px 40px;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: 'Work Sans', sans-serif;
+    cursor: pointer;
+    transition: background .18s;
+  }
+  #bb-consent-gate button:hover { background: var(--pink-d, #C73A61); }
+</style>
+
+<div id="bb-consent-gate">
+  <div class="cg-icon">🐱</div>
+  <h3>Before you chat</h3>
+  <p>To continue chatting, you agree to our <a href="privacy.html" target="_blank">Privacy Policy</a>. Conversations may be reviewed to improve service.</p>
+  <p class="cg-fine">Mochi is an AI assistant and can make mistakes — please confirm prices and details with the shop.</p>
+  <button id="bb-consent-agree">Agree &amp; Continue</button>
+</div>
+
+<script>
+(function () {
+  var STORAGE_KEY = 'bb_chat_consent';
+  var chat = document.getElementById('bb-chat');
+  var gate = document.getElementById('bb-consent-gate');
+  if (!chat || !gate) return;
+
+  // Move the gate inside the chat window so it overlays only the chat.
+  chat.appendChild(gate);
+
+  function hasConsented() {
+    try { return sessionStorage.getItem(STORAGE_KEY) === 'yes'; }
+    catch (e) { return false; }  // if sessionStorage is blocked, gate shows every open (safer)
+  }
+
+  function showGateIfNeeded() {
+    if (chat.classList.contains('open') && !hasConsented()) {
+      gate.classList.add('show');
+    } else {
+      gate.classList.remove('show');
+    }
+  }
+
+  document.getElementById('bb-consent-agree').addEventListener('click', function () {
+    try { sessionStorage.setItem(STORAGE_KEY, 'yes'); } catch (e) {}
+    gate.classList.remove('show');
+  });
+
+  // Watch the chat window for the "open" class toggling, without touching script.js.
+  var observer = new MutationObserver(showGateIfNeeded);
+  observer.observe(chat, { attributes: true, attributeFilter: ['class'] });
+
+  // Also check once on load in case it starts open.
+  showGateIfNeeded();
+})();
+</script>
