@@ -501,12 +501,12 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
 
   /* Homepage — This Week: 3 icons, tucked near the top and bottom edges,
      clear of the carousel and flavor list which both sit centered. */
-  .pg-home.deco-1 { top: 0.5%; left: 3%; bottom: auto; right: auto; }
-  .pg-home.deco-2 { top: 4%; right: 4%; left: auto; bottom: auto; }
+  .pg-home.deco-1 { top: 0.5%; left: -2%; bottom: auto; right: auto; }
+  .pg-home.deco-2 { top: 0.5%; right: -2%; left: auto; bottom: auto; }
   .pg-home.deco-3 { top: 22%; left: 1%; bottom: auto; right: auto; }
   .pg-home.deco-4 { top: auto; bottom: 34%; right: 2%; left: auto; }
   .pg-home.deco-5 { top: 38%; right: 1%; left: auto; bottom: auto; }
-  .pg-home.deco-6 { top: auto; bottom: 1%; left: 4%; right: auto; }
+  .pg-home.deco-6 { top: auto; bottom: 1%; left: 50%; right: auto; transform: translateX(-50%) rotate(-15deg); }
   .pg-home.deco-7 { top: auto; bottom: 12%; right: 6%; left: auto; }
 
   /* Menu — Top Choices: 2 icons in the header area, above the drink grid */
@@ -582,7 +582,7 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
     gap: 32px;
   }
   .week-col-left { display: contents; }
-  .week-header { order: 1; }
+  .week-header { order: 1; position: relative; z-index: 2; }
   .week-right { order: 2; }
   .week-left { order: 3; align-self: auto; margin-top: 0; }
   .flavors-grid { display: none; }
