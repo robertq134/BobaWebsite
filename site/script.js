@@ -217,39 +217,36 @@
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
   }
-
-  function setupFlavorCarousel() {
+function setupFlavorCarousel() {
     var carouselEl = document.getElementById('flavor-carousel');
     if (!carouselEl) return;
     var items = Array.prototype.slice.call(document.querySelectorAll('#carousel-track .carousel-item'));
     var n = items.length;
     var activeIndex = 0;
-
     function getVar(name, fallback) {
       var v = parseFloat(getComputedStyle(carouselEl).getPropertyValue(name));
       return isNaN(v) ? fallback : v;
     }
-
     function layout() {
-      var spacing = getVar('--card-spacing', 130);
+      var spacing = getVar('--card-spacing', 250);
       items.forEach(function(item, i) {
         var d = i - activeIndex;
         if (d > n / 2) d -= n;
         if (d < -n / 2) d += n;
         var absD = Math.abs(d);
-        var visible = absD <= 3;
+        // Window of 5: center + 2 on each side visible, everything else hidden
+        var visible = absD <= 2;
         var translateX = d * spacing;
-        var rotateY = d * -28;
-        var scale = Math.max(1 - absD * 0.16, 0.4);
-        var opacity = visible ? Math.max(1 - absD * 0.28, 0) : 0;
-        item.style.transform = 'translateX(' + translateX + 'px) rotateY(' + rotateY + 'deg) scale(' + scale + ')';
-        item.style.opacity = opacity;
-        item.style.zIndex = 100 - absD;
+        // Active card is full size and lifted; side cards sit flat and slightly smaller
+        var scale = d === 0 ? 1.15 : 0.82;
+        var lift = d === 0 ? -20 : 0;
+        item.style.transform = 'translateX(' + translateX + 'px) translateY(' + lift + 'px) scale(' + scale + ')';
+        item.style.opacity = visible ? 1 : 0;
+        item.style.zIndex = d === 0 ? 100 : 50 - absD;
         item.style.pointerEvents = visible ? 'auto' : 'none';
         item.classList.toggle('is-active', d === 0);
       });
     }
-
     function setActive(index) {
       activeIndex = ((index % n) + n) % n;
       layout();
@@ -258,11 +255,9 @@
         b.classList.toggle('active', b.getAttribute('data-img') === targetSrc);
       });
     }
-
     items.forEach(function(item, i) {
       item.addEventListener('click', function() { setActive(i); });
     });
-
     document.querySelectorAll('.flavor-btn').forEach(function(btn) {
       btn.addEventListener('click', function() {
         var targetSrc = btn.getAttribute('data-img');
@@ -272,12 +267,10 @@
         if (idx !== -1) setActive(idx);
       });
     });
-
     var prevBtn = document.getElementById('carousel-prev');
     var nextBtn = document.getElementById('carousel-next');
     if (prevBtn) prevBtn.addEventListener('click', function() { setActive(activeIndex - 1); });
     if (nextBtn) nextBtn.addEventListener('click', function() { setActive(activeIndex + 1); });
-
     window.addEventListener('resize', layout);
     setActive(0);
   }
