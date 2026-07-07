@@ -21,7 +21,7 @@
     <li><a href="menu.html" class="active">Menu</a></li>
     <li><a href="about.html">About Us</a></li>
     <li><a href="catering.html">Catering</a></li>
-    <li><a href="bobamain.html#visit">Visit</a></li>
+    <li><a href="visit.html">Visit</a></li>
   </ul>
   <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
     <span></span><span></span><span></span>
@@ -156,15 +156,15 @@
   </div>
   <div class="drink-grid">
     <div class="drink-card">
-      <div class="drink-img-frame"><img class="drink-img" src="REALPOPCORN.png" alt="Popcorn Chicken"/></div>
+      <div class="drink-img-frame"><img class="drink-img" src="popcornV2.png" alt="Popcorn Chicken"/></div>
       <div class="drink-name">Popcorn Chicken</div>
     </div>
     <div class="drink-card">
-      <div class="drink-img-frame"><img class="drink-img" src="waffle.png" alt="Waffle Fries"/></div>
+      <div class="drink-img-frame"><img class="drink-img" src="wafflefries.png" alt="Waffle Fries"/></div>
       <div class="drink-name">Waffle Fries</div>
     </div>
     <div class="drink-card">
-      <div class="drink-img-frame"><img class="drink-img" src="potato.png" alt="Sweet Potato Tots"/></div>
+      <div class="drink-img-frame"><img class="drink-img" src="sweetpotatotots.png" alt="Sweet Potato Tots"/></div>
       <div class="drink-name">Sweet Potato Tots</div>
     </div>
   </div>
@@ -183,7 +183,7 @@
       </div>
       <div class="f-col">
         <div class="f-col-head">Visit</div>
-        <ul><li><a href="bobamain.html#this-week">This Week's Flavors</a></li><li><a href="catering.html">Catering</a></li><li><a href="bobamain.html#visit">Find Us</a></li><li><a href="https://instagram.com/BestiesBoba" target="_blank">Instagram</a></li></ul>
+        <ul><li><a href="bobamain.html#this-week">This Week's Flavors</a></li><li><a href="catering.html">Catering</a></li><li><a href="visit.html">Find Us</a></li><li><a href="https://instagram.com/BestiesBoba" target="_blank">Instagram</a></li></ul>
       </div>
       <div class="f-col">
         <div class="f-col-head">Contact</div>
@@ -278,7 +278,8 @@
     color: #a99ca1;
     margin-bottom: 20px;
   }
-  #bb-consent-gate button {
+  #bb-consent-gate .cg-actions { display: flex; flex-direction: column; gap: 8px; align-items: center; width: 100%; }
+  #bb-consent-gate #bb-consent-agree {
     background: var(--pink, #E8527A);
     color: #fff;
     border: none;
@@ -290,15 +291,49 @@
     cursor: pointer;
     transition: background .18s;
   }
-  #bb-consent-gate button:hover { background: var(--pink-d, #C73A61); }
+  #bb-consent-gate #bb-consent-agree:hover { background: var(--pink-d, #C73A61); }
+  #bb-consent-gate #bb-consent-decline {
+    background: none;
+    border: none;
+    color: var(--muted, #8A7278);
+    font-size: 13px;
+    font-weight: 600;
+    font-family: 'Work Sans', sans-serif;
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 4px;
+  }
+  #bb-consent-gate #bb-consent-decline:hover { color: var(--dark, #160E12); }
+  #bb-consent-gate .cg-close {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    background: rgba(0,0,0,0.06);
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    font-size: 18px;
+    line-height: 1;
+    color: var(--muted, #8A7278);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #bb-consent-gate .cg-close:hover { background: rgba(0,0,0,0.12); color: var(--dark, #160E12); }
 </style>
 
 <div id="bb-consent-gate">
+  <button class="cg-close" id="bb-consent-close" aria-label="Close">&#215;</button>
   <div class="cg-icon">🐱</div>
   <h3>Before you chat</h3>
   <p>To continue chatting, you agree to our <a href="privacy.html" target="_blank">Privacy Policy</a>. Conversations may be reviewed to improve service.</p>
   <p class="cg-fine">Mochi is an AI assistant, not a person, and can make mistakes — its answers are for general info only, aren't professional advice or a binding offer, so please confirm prices and details with the shop.</p>
-  <button id="bb-consent-agree">Agree &amp; Continue</button>
+  <div class="cg-actions">
+    <button id="bb-consent-agree">Agree &amp; Continue</button>
+    <button id="bb-consent-decline">No thanks</button>
+  </div>
 </div>
 
 <script>
@@ -360,6 +395,19 @@
     gate.classList.remove('show');
     unlockChat();
   });
+
+  // Declining or closing simply shuts the chat widget — no consent is stored,
+  // so the gate will appear again next time they open it.
+  function declineAndClose() {
+    gate.classList.remove('show');
+    if (typeof bbClose === 'function') {
+      bbClose();
+    } else {
+      chat.classList.remove('open');
+    }
+  }
+  document.getElementById('bb-consent-decline').addEventListener('click', declineAndClose);
+  document.getElementById('bb-consent-close').addEventListener('click', declineAndClose);
 
   // Watch the chat window for the "open" class toggling, without touching script.js.
   // Guard against reentrancy so the callback can never spiral into a loop.
