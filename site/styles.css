@@ -127,6 +127,14 @@ nav.nav-on-dark:not(.scrolled) .nav-toggle span { background: white; }
 .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
 
 .this-week { position: relative; padding: 140px 80px 160px; max-width: 1500px; margin: 0 auto; }
+
+/* Full-width single-column This Week layout: centered header, big carousel, centered footer */
+.this-week-full { display: flex; flex-direction: column; align-items: center; }
+.week-header-center { text-align: center; margin-bottom: 40px; }
+.week-header-center .week-dates { margin-bottom: 0; }
+.this-week-full .flavor-carousel { width: 100%; }
+.week-footer-center { text-align: center; margin-top: 40px; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+.week-footer-center .week-note { margin-top: 0; }
 .this-week-inner {
   display: grid;
   grid-template-columns: 0.8fr 1.3fr;
@@ -153,10 +161,10 @@ nav.nav-on-dark:not(.scrolled) .nav-toggle span { background: white; }
 .week-note { margin-top: 20px; font-size: 14px; color: var(--muted); font-weight: 500; line-height: 1.6; }
 
 .flavor-carousel {
-  --card-size: 300px;
-  --card-spacing: 250px;
+  --card-size: 340px;
+  --card-spacing: 320px;
   position: relative;
-  height: 560px;
+  height: 600px;
   perspective: 2000px;
   display: flex;
   align-items: center;
