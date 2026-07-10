@@ -510,6 +510,7 @@ nav.nav-on-dark:not(.scrolled) .nav-logo img { filter: drop-shadow(0 1px 4px rgb
 .promos-title { font-family: 'Fraunces', serif; font-size: clamp(28px, 3vw, 42px); font-weight: 700; color: var(--dark); }
 .promos-sub { font-size: 16px; color: var(--muted); margin-top: 8px; }
 .promos-grid { max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+.promos-arrow { display: none; }
 .promo-card { background: var(--warm); border: 1px solid var(--border); border-radius: 18px; padding: 20px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 12px; }
 .promo-img { width: 100%; aspect-ratio: 1 / 1; border-radius: 12px; }
 .promo-name { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 600; color: var(--dark); }
@@ -768,10 +769,10 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
   .week-left { order: 3; align-self: auto; margin-top: 0; }
   .flavors-grid { display: none; }
   .flavor-carousel {
-    --card-size: 280px;
-    --card-height: 420px;
-    --card-spacing: 150px;
-    height: 480px;
+    --card-size: 220px;
+    --card-height: 330px;
+    --card-spacing: 90px;
+    height: 400px;
     justify-content: center;
   }
   .carousel-card-label {
@@ -811,9 +812,10 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
   .hero.hero-sticky { height: 100vh; }
   .hero-video { object-fit: cover; }
 
-  /* ── Promos: horizontal swipe on mobile ── */
+  /* ── Promos: carousel with arrows on mobile (matches donut carousel) ── */
   .promos-section { padding: 48px 0; }
   .promos-head { padding: 0 20px; }
+  .promos-carousel { position: relative; }
   .promos-grid {
     display: flex;
     grid-template-columns: none;
@@ -827,9 +829,29 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
   }
   .promos-grid::-webkit-scrollbar { display: none; }
   .promo-card {
-    flex: 0 0 78%;
+    flex: 0 0 80%;
     scroll-snap-align: center;
   }
+  .promos-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 42%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: white;
+    border: none;
+    box-shadow: 0 8px 20px rgba(22,14,18,.18);
+    font-size: 22px;
+    color: var(--pink);
+    cursor: pointer;
+    z-index: 20;
+  }
+  .promos-arrow-left { left: 6px; }
+  .promos-arrow-right { right: 6px; }
 
   /* ── Benefits: 2×2 grid on mobile ── */
   .week-benefits {
