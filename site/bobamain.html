@@ -615,6 +615,20 @@
   next.addEventListener('click', function () {
     grid.scrollBy({ left: cardStep(), behavior: 'smooth' });
   });
+
+  // Start centered on the middle card (only matters in mobile scroll mode).
+  function centerMiddleCard() {
+    var cards = grid.querySelectorAll('.promo-card');
+    if (!cards.length) return;
+    // Only applies when the grid actually scrolls (mobile flex mode).
+    if (grid.scrollWidth <= grid.clientWidth + 4) return;
+    var mid = cards[Math.floor(cards.length / 2)];
+    var target = mid.offsetLeft - (grid.clientWidth - mid.offsetWidth) / 2;
+    grid.scrollLeft = Math.max(0, target);
+  }
+  window.addEventListener('load', centerMiddleCard);
+  window.addEventListener('resize', centerMiddleCard);
+  centerMiddleCard();
 })();
 </script>
 <!-- ===== END PROMOS CAROUSEL ARROWS ===== -->
