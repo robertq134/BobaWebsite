@@ -238,9 +238,9 @@ nav.nav-on-dark:not(.scrolled) .nav-toggle span { background: white; }
 .week-note { margin-top: 20px; font-size: 14px; color: var(--muted); font-weight: 500; line-height: 1.6; }
 
 .flavor-carousel {
-  --card-size: 290px;
-  --card-height: 500px;
-  --card-spacing: 320px;
+  --card-size: 340px;
+  --card-height: 520px;
+  --card-spacing: 300px;
   position: relative;
   height: 720px;
   perspective: 2000px;
@@ -345,6 +345,30 @@ nav.nav-on-dark:not(.scrolled) .nav-toggle span { background: white; }
 }
 .flavor-btn:hover { color: var(--pink); }
 .flavor-btn.active { color: var(--pink); font-weight: 700; }
+
+/* Carousel pagination dots */
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 28px;
+}
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  background: var(--border);
+  cursor: pointer;
+  transition: all .3s ease;
+}
+.carousel-dot.active {
+  background: var(--pink);
+  width: 24px;
+  border-radius: 4px;
+}
 .cat-1 {position: absolute; z-index: 1; top: 100px; left: 100px; transform: rotate(15deg) scale(0.5)}
 .cat-2 { position: absolute; z-index: 1; top: 50px; left: 150px; transform: rotate(-15deg) scale(0.5)}
 .cat-3 { position: absolute; z-index: 1; top: 330px; left: 150px; transform: rotate(-15deg)  scale(0.5)}
@@ -502,7 +526,7 @@ nav.nav-on-dark:not(.scrolled) .nav-logo img { filter: drop-shadow(0 1px 4px rgb
 .tue-img-placeholder { width: 320px; height: 180px; border-radius: 16px; }
 
 /* ── AWARDS & RECOGNITION ── */
-.awards-section { background: var(--warm); border-top: 1px solid var(--border); padding: 72px 48px; }
+.awards-section { background: #FBF6F1; border-top: 1px solid var(--border); padding: 130px 48px; min-height: 620px; display: flex; flex-direction: column; justify-content: center; }
 .awards-head { text-align: center; margin-bottom: 40px; }
 .awards-title { font-family: 'Fraunces', serif; font-size: clamp(28px, 3vw, 42px); font-weight: 700; color: var(--dark); }
 .awards-row { max-width: 1120px; margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: 48px; }
@@ -775,10 +799,10 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
   .week-left { order: 3; align-self: auto; margin-top: 0; }
   .flavors-grid { display: none; }
   .flavor-carousel {
-    --card-size: 165px;
-    --card-height: 300px;
-    --card-spacing: 58px;
-    height: 440px;
+    --card-size: 230px;
+    --card-height: 340px;
+    --card-spacing: 200px;
+    height: 420px;
     justify-content: center;
     overflow: hidden;
   }
