@@ -1,3 +1,21 @@
+/* ===== Loader skeleton blocks (shimmer) ===== */
+.bb-skel {
+  background: #e6e3e0;
+  position: relative;
+  overflow: hidden;
+}
+.bb-skel::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+  animation: bbShimmer 1.4s infinite;
+}
+@keyframes bbShimmer {
+  100% { transform: translateX(100%); }
+}
+
 @keyframes fadeInOnLoad {
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
