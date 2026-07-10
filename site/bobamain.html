@@ -29,9 +29,10 @@
 </nav>
 
 <!-- HERO -->
-<section class="hero hero-dark">
-  <video class="hero-video hero-photo" id="hero-scrub-video" autoplay muted playsinline preload="auto">
-    <source src="hero-boba-splash.mp4" type="video/mp4">
+<div class="hero-scroll-track" id="hero-scroll-track">
+<section class="hero hero-dark hero-sticky">
+  <video class="hero-video hero-photo" id="hero-scrub-video" muted playsinline preload="auto">
+    <source src="site/hero-boba-splash.mp4" type="video/mp4">
   </video>
 
   <div class="hero-inner">
@@ -58,6 +59,8 @@
     </div>
   </div>
 </section>
+</div>
+<!-- END hero-scroll-track -->
 
 <svg width="100%" height="120" viewBox="0 0 1440 120" preserveAspectRatio="none" style="display:block; margin-top:-100px; position:relative; z-index:3;">
   <path d="M0,100 C300,90 600,40 900,20 C1100,10 1300,0 1440,0 L1440,120 L0,120 Z" fill="#FEF9F6"/>
@@ -506,38 +509,49 @@
 </script>
 <!-- ===== END CONSENT GATE ===== -->
 
-<!-- ===== HERO SCROLL-SCRUB ===== -->
+<!-- ===== HERO SCROLL-SCRUB (desktop + mobile) ===== -->
 <script>
 (function () {
   var video = document.getElementById('hero-scrub-video');
-  var heroSection = document.querySelector('.hero');
-  if (!video || !heroSection) return;
+  var track = document.getElementById('hero-scroll-track');
+  if (!video || !track) return;
 
-  video.pause(); // scrub-driven, not autoplaying through on its own
+  // iOS needs the video "activated" once before currentTime seeks will paint.
+  var primed = false;
+  function primeVideo() {
+    if (primed) return;
+    primed = true;
+    var p = video.play();
+    if (p && p.then) { p.then(function(){ video.pause(); }).catch(function(){}); }
+    else { video.pause(); }
+  }
+  // Prime on first touch/scroll (satisfies mobile autoplay-gesture rules).
+  window.addEventListener('touchstart', primeVideo, { once: true, passive: true });
+  window.addEventListener('scroll', primeVideo, { once: true, passive: true });
+  video.addEventListener('loadedmetadata', function(){ try { video.pause(); } catch(e){} });
 
   var ticking = false;
-
-  function updateVideoOnScroll() {
-    var rect = heroSection.getBoundingClientRect();
-    var scrollDistance = rect.height - window.innerHeight;
-    var progress = scrollDistance > 0
-      ? Math.min(Math.max(-rect.top / scrollDistance, 0), 1)
+  function update() {
+    var rect = track.getBoundingClientRect();
+    // How far we've scrolled through the tall track (0 at top, 1 at bottom).
+    var scrollable = rect.height - window.innerHeight;
+    var progress = scrollable > 0
+      ? Math.min(Math.max(-rect.top / scrollable, 0), 1)
       : 0;
     if (video.duration) {
       video.currentTime = progress * video.duration;
     }
     ticking = false;
   }
-
   function onScroll() {
     if (!ticking) {
-      requestAnimationFrame(updateVideoOnScroll);
+      window.requestAnimationFrame(update);
       ticking = true;
     }
   }
-
-  window.addEventListener('scroll', onScroll);
-  video.addEventListener('loadedmetadata', updateVideoOnScroll);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  video.addEventListener('loadeddata', update);
 })();
 </script>
 <!-- ===== END HERO SCROLL-SCRUB ===== -->
