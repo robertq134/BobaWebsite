@@ -769,11 +769,12 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
   .week-left { order: 3; align-self: auto; margin-top: 0; }
   .flavors-grid { display: none; }
   .flavor-carousel {
-    --card-size: 220px;
-    --card-height: 330px;
-    --card-spacing: 90px;
-    height: 400px;
+    --card-size: 190px;
+    --card-height: 290px;
+    --card-spacing: 62px;
+    height: 360px;
     justify-content: center;
+    overflow: hidden;
   }
   .carousel-card-label {
     display: block;
@@ -808,9 +809,9 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
   .carousel-arrow-right { right: 4px; }
   .carousel-item.is-active { box-shadow: 0 16px 32px rgba(199,58,97,.18); }
 
-  /* ── Hero video: fill mobile frame nicely ── */
+  /* ── Hero video: fill mobile frame, crop biased to the cup (right-of-center in source) ── */
   .hero.hero-sticky { height: 100vh; }
-  .hero-video { object-fit: cover; }
+  .hero-video.hero-photo { object-fit: cover; object-position: 62% center; }
 
   /* ── Promos: carousel with arrows on mobile (matches donut carousel) ── */
   .promos-section { padding: 48px 0; }
