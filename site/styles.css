@@ -126,6 +126,14 @@ nav.nav-on-dark:not(.scrolled) .nav-toggle span { background: white; }
 .hero-local { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: var(--muted); }
 .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
 
+/* Dark hero variant — used with the black-background hero video */
+.hero.hero-dark { background-color: #0a0a0a; }
+.hero.hero-dark .hero-h1 { color: #ffffff; }
+.hero.hero-dark .hero-sub { color: rgba(255,255,255,0.75); }
+.hero.hero-dark .hero-rating-num { color: #ffffff; }
+.hero.hero-dark .hero-local { color: rgba(255,255,255,0.75); }
+.hero.hero-dark .hero-badge-divider { background: rgba(255,255,255,0.3); }
+
 .this-week { position: relative; padding: 140px 80px 160px; max-width: 1500px; margin: 0 auto; }
 
 /* Full-width single-column This Week layout: centered header, big carousel, centered footer */
