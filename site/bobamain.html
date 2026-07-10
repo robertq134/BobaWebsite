@@ -10,11 +10,28 @@
 <link rel="stylesheet" href="styles.css"/>
 </head>
 <body>
-<!-- ===== MOBILE LOADING SPLASH ===== -->
-<div id="bb-loader" style="position:fixed; inset:0; z-index:99999; background:#ffffff; display:flex; align-items:center; justify-content:center; transition:opacity .45s ease;">
-  <video id="bb-loader-video" muted playsinline loop autoplay
-         style="width:min(70vw, 320px); height:auto;">
-  </video>
+<!-- ===== MOBILE LOADING SPLASH (skeleton + cats) ===== -->
+<div id="bb-loader" style="position:fixed; inset:0; z-index:99999; background:#ffffff; display:flex; flex-direction:column; transition:opacity .45s ease;">
+  <!-- skeleton nav row -->
+  <div style="display:flex; align-items:center; justify-content:space-between; padding:22px 20px;">
+    <div class="bb-skel" style="width:96px; height:22px; border-radius:6px;"></div>
+    <div class="bb-skel" style="width:34px; height:22px; border-radius:6px;"></div>
+  </div>
+  <!-- skeleton small bars (eyebrow + heading lines) -->
+  <div style="padding:6px 20px;">
+    <div class="bb-skel" style="width:120px; height:16px; border-radius:6px; margin-bottom:14px;"></div>
+    <div class="bb-skel" style="width:80%; height:22px; border-radius:6px; margin-bottom:10px;"></div>
+    <div class="bb-skel" style="width:55%; height:22px; border-radius:6px;"></div>
+  </div>
+  <!-- big hero skeleton block with cats centered inside -->
+  <div style="flex:1; margin:16px 12px 12px; border-radius:14px; position:relative; overflow:hidden;" class="bb-skel">
+    <video id="bb-loader-video" muted playsinline loop autoplay
+           style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:min(66vw, 300px); height:auto;"></video>
+  </div>
+  <!-- skeleton button -->
+  <div style="display:flex; justify-content:center; padding:8px 20px 30px;">
+    <div class="bb-skel" style="width:120px; height:34px; border-radius:999px;"></div>
+  </div>
 </div>
 <script>
 (function () {
@@ -23,12 +40,10 @@
   var isMobile = window.matchMedia('(max-width: 768px)').matches;
 
   if (!isMobile) {
-    // Desktop: no splash at all.
     loader.parentNode.removeChild(loader);
     return;
   }
 
-  // Mobile: load the cats video and lock scroll while loading.
   var s = document.createElement('source');
   s.src = 'loader-cats.mp4';
   s.type = 'video/mp4';
@@ -38,23 +53,27 @@
   document.documentElement.style.overflow = 'hidden';
 
   var shownAt = Date.now();
-  var MIN_SHOW = 3000;   // never flash shorter than this
-  var MAX_SHOW = 8000;   // never trap the user longer than this
+  var MIN_SHOW = 3000;
+  var MAX_SHOW = 8000;
+  var dismissed = false;
 
   function hideLoader() {
-    if (!loader.parentNode) return;
+    if (dismissed || !loader.parentNode) return;
     var wait = Math.max(0, MIN_SHOW - (Date.now() - shownAt));
     setTimeout(function () {
+      dismissed = true;
       loader.style.opacity = '0';
       setTimeout(function () {
         if (loader.parentNode) loader.parentNode.removeChild(loader);
         document.documentElement.style.overflow = '';
+        // Tell the hero it can start now that the splash is gone.
+        window.dispatchEvent(new Event('bb-loader-done'));
       }, 500);
     }, wait);
   }
 
   window.addEventListener('load', hideLoader);
-  setTimeout(hideLoader, MAX_SHOW); // safety: always dismiss eventually
+  setTimeout(hideLoader, MAX_SHOW);
 })();
 </script>
 <!-- ===== END MOBILE LOADING SPLASH ===== -->
@@ -91,10 +110,17 @@
       source.type = 'video/mp4';
       v.appendChild(source);
       if (isMobile) {
-        // Mobile: simple autoplay (muted+playsinline allows it). Plays once,
-        // then rests on the final frame. No scrubbing on mobile.
-        v.setAttribute('autoplay', '');
+        // Mobile: play once, but ONLY after the loading splash finishes.
         v.setAttribute('data-mode', 'autoplay');
+        var startHero = function () {
+          try { v.currentTime = 0; } catch (e) {}
+          var pr = v.play(); if (pr && pr.catch) pr.catch(function(){});
+        };
+        // If the loader exists it will fire this event when done; otherwise
+        // (e.g. desktop-width edge cases) start on window load as a fallback.
+        window.addEventListener('bb-loader-done', startHero, { once: true });
+        // Safety: if no loader event arrives within 9s, start anyway.
+        setTimeout(startHero, 9000);
       } else {
         v.setAttribute('data-mode', 'scrub');
       }
