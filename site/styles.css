@@ -238,9 +238,9 @@ nav.nav-on-dark:not(.scrolled) .nav-toggle span { background: white; }
 .week-note { margin-top: 20px; font-size: 14px; color: var(--muted); font-weight: 500; line-height: 1.6; }
 
 .flavor-carousel {
-  --card-size: 340px;
-  --card-height: 520px;
-  --card-spacing: 300px;
+  --card-size: 300px;
+  --card-height: 500px;
+  --card-spacing: 250px;
   position: relative;
   height: 720px;
   perspective: 2000px;
@@ -326,7 +326,7 @@ nav.nav-on-dark:not(.scrolled) .nav-toggle span { background: white; }
 .carousel-arrow-left { left: 12px; }
 .carousel-arrow-right { right: 12px; }
 .carousel-item.is-active {
-  box-shadow: 0 0 0 3px rgba(232,82,122,.5), 0 0 50px 8px rgba(232,82,122,.3), 0 25px 50px rgba(199,58,97,.22);
+  box-shadow: 0 20px 40px rgba(0,0,0,.14);
   cursor: default;
   z-index: 100;
 }
@@ -798,14 +798,17 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
   .week-right { order: 2; }
   .week-left { order: 3; align-self: auto; margin-top: 0; }
   .flavors-grid { display: none; }
+  .week-features { display: none; }
   .flavor-carousel {
-    --card-size: 230px;
-    --card-height: 340px;
-    --card-spacing: 200px;
-    height: 420px;
+    --card-size: 260px;
+    --card-height: 400px;
+    --card-spacing: 215px;
+    height: 500px;
     justify-content: center;
     overflow: hidden;
   }
+  .ci-desc { font-size: 15px; }
+  .ci-name { font-size: 22px; }
   .carousel-card-label {
     display: block;
     position: absolute;
