@@ -160,9 +160,12 @@
     var fadeEls = document.querySelectorAll('.fade-in-scroll, .fade-in-scroll-two');
     var observer = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
-        entry.target.classList.toggle('visible', entry.isIntersecting);
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target); // fade in once, then stop watching (stays visible)
+        }
       });
-    }, { threshold: 0.15 });
+    }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
     fadeEls.forEach(function(el) { observer.observe(el); });
   }
 
@@ -234,8 +237,8 @@ function setupFlavorCarousel() {
         if (d > n / 2) d -= n;
         if (d < -n / 2) d += n;
         var absD = Math.abs(d);
-        // Window of 5: center + 2 on each side visible, everything else hidden
-        var visible = absD <= 2;
+        // Window of 3: center + 1 on each side visible, everything else hidden
+        var visible = absD <= 1;
         var translateX = d * spacing;
         // Active card is full size and lifted; side cards sit flat and slightly smaller
         var scale = d === 0 ? 1.15 : 0.82;
@@ -253,6 +256,24 @@ function setupFlavorCarousel() {
       var targetSrc = items[activeIndex].querySelector('img').getAttribute('src');
       document.querySelectorAll('.flavor-btn').forEach(function(b) {
         b.classList.toggle('active', b.getAttribute('data-img') === targetSrc);
+      });
+      // sync pagination dots
+      var dots = document.querySelectorAll('#carousel-dots .carousel-dot');
+      dots.forEach(function(dot, di) {
+        dot.classList.toggle('active', di === activeIndex);
+      });
+    }
+
+    // Build pagination dots (one per card)
+    var dotsWrap = document.getElementById('carousel-dots');
+    if (dotsWrap) {
+      dotsWrap.innerHTML = '';
+      items.forEach(function(_, di) {
+        var dot = document.createElement('button');
+        dot.className = 'carousel-dot';
+        dot.setAttribute('aria-label', 'Go to flavor ' + (di + 1));
+        dot.addEventListener('click', function() { setActive(di); });
+        dotsWrap.appendChild(dot);
       });
     }
     items.forEach(function(item, i) {
