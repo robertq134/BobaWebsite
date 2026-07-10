@@ -237,8 +237,9 @@ function setupFlavorCarousel() {
         if (d > n / 2) d -= n;
         if (d < -n / 2) d += n;
         var absD = Math.abs(d);
-        // Window of 3: center + 1 on each side visible, everything else hidden
-        var visible = absD <= 1;
+        // Responsive window: 3 cards on mobile (center + 1 each side), 5 on desktop
+        var winCards = window.matchMedia('(max-width: 768px)').matches ? 1 : 2;
+        var visible = absD <= winCards;
         var translateX = d * spacing;
         // Active card is full size and lifted; side cards sit flat and slightly smaller
         var scale = d === 0 ? 1.15 : 0.82;
