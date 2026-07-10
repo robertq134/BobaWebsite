@@ -32,10 +32,10 @@
 <div class="hero-scroll-track" id="hero-scroll-track">
 <section class="hero hero-dark hero-sticky">
   <video class="hero-video hero-photo" id="hero-scrub-video" muted playsinline preload="auto"
-         data-src-desktop="MobileHeroTrue.mp4">
+         data-src-desktop="hero-4sec.mp4">
   </video>
   <canvas class="hero-video hero-photo" id="hero-scrub-canvas"
-          data-frame-path="hf_" data-frame-count="61" data-frame-ext=".webp"
+          data-frame-path="hero-frames/hf_" data-frame-count="61" data-frame-ext=".webp"
           style="display:none;"></canvas>
   <script>
     (function () {
@@ -543,21 +543,16 @@
   /* ---------- shared scroll math ---------- */
   var targetProgress = 0;   // 0..1 through the scroll track
   var eased = 0;            // eased progress that follows target
-  var EASE = 0.14;
+  var EASE = 0.12;
 
-  // Mobile browsers change window.innerHeight as the address bar hides/shows
-  // during scroll, which makes progress jump erratically. Cache the height and
-  // only accept changes big enough to be a real resize/orientation change.
-  var stableVH = window.innerHeight;
-  window.addEventListener('resize', function () {
-    if (Math.abs(window.innerHeight - stableVH) > 150) {
-      stableVH = window.innerHeight;
-    }
-  });
+  // Correct scrollable distance for a sticky child = track height - hero height,
+  // both measured in real px. No window.innerHeight involved, so the mobile
+  // address bar hiding/showing can't disturb the math at all.
+  var heroEl = track.querySelector('.hero-sticky') || track.firstElementChild;
 
   function computeTarget() {
     var rect = track.getBoundingClientRect();
-    var scrollable = rect.height - stableVH;
+    var scrollable = track.offsetHeight - (heroEl ? heroEl.offsetHeight : window.innerHeight);
     targetProgress = scrollable > 0
       ? Math.min(Math.max(-rect.top / scrollable, 0), 1)
       : 0;
