@@ -277,8 +277,12 @@ function setupFlavorCarousel() {
         dotsWrap.appendChild(dot);
       });
     }
+    var justDragged = false;
     items.forEach(function(item, i) {
-      item.addEventListener('click', function() { setActive(i); });
+      item.addEventListener('click', function() {
+        if (justDragged) return;
+        setActive(i);
+      });
     });
     document.querySelectorAll('.flavor-btn').forEach(function(btn) {
       btn.addEventListener('click', function() {
@@ -293,6 +297,58 @@ function setupFlavorCarousel() {
     var nextBtn = document.getElementById('carousel-next');
     if (prevBtn) prevBtn.addEventListener('click', function() { setActive(activeIndex - 1); });
     if (nextBtn) nextBtn.addEventListener('click', function() { setActive(activeIndex + 1); });
+
+    /* ---- Swipe / drag support (touch + mouse) ---- */
+    var dragging = false;
+    var dragStartX = 0;
+    var dragDeltaX = 0;
+    var DRAG_THRESHOLD = 40; // px of movement needed to count as a swipe
+
+    function dragStart(clientX) {
+      dragging = true;
+      dragStartX = clientX;
+      dragDeltaX = 0;
+      carouselEl.classList.add('is-dragging');
+    }
+    function dragMove(clientX) {
+      if (!dragging) return;
+      dragDeltaX = clientX - dragStartX;
+    }
+    function dragEnd() {
+      if (!dragging) return;
+      dragging = false;
+      carouselEl.classList.remove('is-dragging');
+      if (dragDeltaX > DRAG_THRESHOLD) {
+        justDragged = true;
+        setActive(activeIndex - 1); // dragged right -> show previous
+      } else if (dragDeltaX < -DRAG_THRESHOLD) {
+        justDragged = true;
+        setActive(activeIndex + 1); // dragged left -> show next
+      }
+      dragDeltaX = 0;
+      // Clear the flag shortly after, so a normal click still works next time.
+      setTimeout(function () { justDragged = false; }, 50);
+    }
+
+    // Touch (mobile swipe)
+    carouselEl.addEventListener('touchstart', function(e) {
+      dragStart(e.touches[0].clientX);
+    }, { passive: true });
+    carouselEl.addEventListener('touchmove', function(e) {
+      dragMove(e.touches[0].clientX);
+    }, { passive: true });
+    carouselEl.addEventListener('touchend', dragEnd);
+
+    // Mouse drag (desktop trackpad/mouse users)
+    carouselEl.addEventListener('mousedown', function(e) {
+      e.preventDefault();
+      dragStart(e.clientX);
+    });
+    window.addEventListener('mousemove', function(e) {
+      dragMove(e.clientX);
+    });
+    window.addEventListener('mouseup', dragEnd);
+
     window.addEventListener('resize', layout);
     setActive(0);
   }
