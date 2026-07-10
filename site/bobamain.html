@@ -32,7 +32,7 @@
 <div class="hero-scroll-track" id="hero-scroll-track">
 <section class="hero hero-dark hero-sticky">
   <video class="hero-video hero-photo" id="hero-scrub-video" muted playsinline preload="auto"
-         data-src-desktop="hero-4sec.mp4" data-src-mobile="MobileHeroTrue.mp4">
+         data-src-desktop="hero-4sec.mp4" data-src-mobile="hero-mobile.mp4">
   </video>
   <script>
     (function () {
@@ -43,9 +43,9 @@
       source.type = 'video/mp4';
       v.appendChild(source);
       if (isMobile) {
-        // Mobile: simple autoplay loop (muted+playsinline allows it). No scrubbing on mobile.
+        // Mobile: simple autoplay (muted+playsinline allows it). Plays once,
+        // then rests on the final frame. No scrubbing on mobile.
         v.setAttribute('autoplay', '');
-        v.setAttribute('loop', '');
         v.setAttribute('data-mode', 'autoplay');
       } else {
         v.setAttribute('data-mode', 'scrub');
