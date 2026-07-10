@@ -32,7 +32,7 @@
 <div class="hero-scroll-track" id="hero-scroll-track">
 <section class="hero hero-dark hero-sticky">
   <video class="hero-video hero-photo" id="hero-scrub-video" muted playsinline preload="auto">
-    <source src="hero-boba-splash-scrub.mp4" type="video/mp4">
+    <source src="site/hero-boba-splash.mp4" type="video/mp4">
   </video>
 
   <div class="hero-inner">
@@ -509,7 +509,7 @@
 </script>
 <!-- ===== END CONSENT GATE ===== -->
 
-<!-- ===== HERO SCROLL-SCRUB (desktop + mobile) ===== -->
+<!-- ===== HERO SCROLL-SCRUB (desktop + mobile, eased) ===== -->
 <script>
 (function () {
   var video = document.getElementById('hero-scrub-video');
@@ -525,33 +525,50 @@
     if (p && p.then) { p.then(function(){ video.pause(); }).catch(function(){}); }
     else { video.pause(); }
   }
-  // Prime on first touch/scroll (satisfies mobile autoplay-gesture rules).
   window.addEventListener('touchstart', primeVideo, { once: true, passive: true });
   window.addEventListener('scroll', primeVideo, { once: true, passive: true });
   video.addEventListener('loadedmetadata', function(){ try { video.pause(); } catch(e){} });
 
-  var ticking = false;
-  function update() {
+  // targetTime = where the scroll position says we should be.
+  // currentDisplayed = where the video actually is; it eases toward target each frame.
+  var targetTime = 0;
+  var currentDisplayed = 0;
+
+  function computeTarget() {
     var rect = track.getBoundingClientRect();
-    // How far we've scrolled through the tall track (0 at top, 1 at bottom).
     var scrollable = rect.height - window.innerHeight;
     var progress = scrollable > 0
       ? Math.min(Math.max(-rect.top / scrollable, 0), 1)
       : 0;
     if (video.duration) {
-      video.currentTime = progress * video.duration;
-    }
-    ticking = false;
-  }
-  function onScroll() {
-    if (!ticking) {
-      window.requestAnimationFrame(update);
-      ticking = true;
+      targetTime = progress * video.duration;
     }
   }
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', onScroll, { passive: true });
-  video.addEventListener('loadeddata', update);
+
+  // EASE: lower = smoother/floatier, higher = snappier. 0.1 is a good middle.
+  var EASE = 0.1;
+  function raf() {
+    // Glide currentDisplayed a fraction of the way toward targetTime.
+    currentDisplayed += (targetTime - currentDisplayed) * EASE;
+    // Snap when close enough, to avoid endless tiny seeks.
+    if (Math.abs(targetTime - currentDisplayed) < 0.005) {
+      currentDisplayed = targetTime;
+    }
+    if (video.duration && !isNaN(currentDisplayed)) {
+      // Only seek if it actually changed enough to matter.
+      if (Math.abs(video.currentTime - currentDisplayed) > 0.005) {
+        try { video.currentTime = currentDisplayed; } catch (e) {}
+      }
+    }
+    window.requestAnimationFrame(raf);
+  }
+
+  window.addEventListener('scroll', computeTarget, { passive: true });
+  window.addEventListener('resize', computeTarget, { passive: true });
+  video.addEventListener('loadeddata', function(){ computeTarget(); });
+
+  computeTarget();
+  window.requestAnimationFrame(raf);
 })();
 </script>
 <!-- ===== END HERO SCROLL-SCRUB ===== -->
