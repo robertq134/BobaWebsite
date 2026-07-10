@@ -32,7 +32,7 @@
 <div class="hero-scroll-track" id="hero-scroll-track">
 <section class="hero hero-dark hero-sticky">
   <video class="hero-video hero-photo" id="hero-scrub-video" muted playsinline preload="auto"
-         data-src-desktop="hero-4sec.mp4" data-src-mobile="MobileHeroTrue.mp4">
+         data-src-desktop="hero-4sec.mp4" data-src-mobile="hero-mobile.mp4">
   </video>
   <script>
     (function () {
@@ -527,14 +527,28 @@
   var track = document.getElementById('hero-scroll-track');
   if (!video || !track) return;
 
-  // Keep the video paused ALWAYS. We never call play() — a playing video fights
-  // currentTime assignments. We only ever seek a paused video, which Chrome allows.
+  // Keep the video paused ALWAYS. We never leave it playing — a playing video fights
+  // currentTime assignments. We only ever seek a paused video, which browsers allow.
   try { video.pause(); } catch (e) {}
   try { video.load(); } catch (e) {}
-  video.addEventListener('play', function () {
-    // If anything ever tries to play it, immediately pause so seeks keep working.
-    try { video.pause(); } catch (e) {}
-  });
+
+  // MOBILE PRIMING: touch browsers won't decode/paint seeked frames until the
+  // video has been activated once. On the first touch, play muted video and
+  // pause the instant playback actually starts, then seeking paints correctly.
+  var primed = false;
+  function primeVideo() {
+    if (primed) return;
+    primed = true;
+    var onPlaying = function () {
+      video.removeEventListener('playing', onPlaying);
+      try { video.pause(); } catch (e) {}
+    };
+    video.addEventListener('playing', onPlaying);
+    var p = video.play();
+    if (p && p.catch) p.catch(function () { primed = false; });
+  }
+  window.addEventListener('touchstart', primeVideo, { once: false, passive: true });
+  window.addEventListener('pointerdown', primeVideo, { once: false, passive: true });
 
   var targetTime = 0;
   var currentDisplayed = 0;
