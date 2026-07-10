@@ -32,7 +32,7 @@
 <div class="hero-scroll-track" id="hero-scroll-track">
 <section class="hero hero-dark hero-sticky">
   <video class="hero-video hero-photo" id="hero-scrub-video" muted playsinline preload="auto">
-    <source src="hero-boba-splash.mp4" type="video/mp4">
+    <source src="hero-boba-splash-web.mp4" type="video/mp4">
   </video>
 
   <div class="hero-inner">
@@ -62,7 +62,7 @@
 </div>
 <!-- END hero-scroll-track -->
 
-<svg width="100%" height="120" viewBox="0 0 1440 120" preserveAspectRatio="none" style="display:block; margin-top:-100px; position:relative; z-index:3;">
+<svg width="100%" height="120" viewBox="0 0 1440 120" preserveAspectRatio="none" style="display:block; margin-top:-120px; position:relative; z-index:3; pointer-events:none;">
   <path d="M0,100 C300,90 600,40 900,20 C1100,10 1300,0 1440,0 L1440,120 L0,120 Z" fill="#FEF9F6"/>
 </svg>
 
@@ -516,21 +516,15 @@
   var track = document.getElementById('hero-scroll-track');
   if (!video || !track) return;
 
-  // iOS needs the video "activated" once before currentTime seeks will paint.
-  var primed = false;
-  function primeVideo() {
-    if (primed) return;
-    primed = true;
-    var p = video.play();
-    if (p && p.then) { p.then(function(){ video.pause(); }).catch(function(){}); }
-    else { video.pause(); }
-  }
-  window.addEventListener('touchstart', primeVideo, { once: true, passive: true });
-  window.addEventListener('scroll', primeVideo, { once: true, passive: true });
-  video.addEventListener('loadedmetadata', function(){ try { video.pause(); } catch(e){} });
+  // Keep the video paused ALWAYS. We never call play() — a playing video fights
+  // currentTime assignments. We only ever seek a paused video, which Chrome allows.
+  try { video.pause(); } catch (e) {}
+  try { video.load(); } catch (e) {}
+  video.addEventListener('play', function () {
+    // If anything ever tries to play it, immediately pause so seeks keep working.
+    try { video.pause(); } catch (e) {}
+  });
 
-  // targetTime = where the scroll position says we should be.
-  // currentDisplayed = where the video actually is; it eases toward target each frame.
   var targetTime = 0;
   var currentDisplayed = 0;
 
@@ -548,14 +542,12 @@
   // EASE: lower = smoother/floatier, higher = snappier. 0.1 is a good middle.
   var EASE = 0.1;
   function raf() {
-    // Glide currentDisplayed a fraction of the way toward targetTime.
+    computeTarget(); // recompute every frame so it can never get stuck on a stale value
     currentDisplayed += (targetTime - currentDisplayed) * EASE;
-    // Snap when close enough, to avoid endless tiny seeks.
     if (Math.abs(targetTime - currentDisplayed) < 0.005) {
       currentDisplayed = targetTime;
     }
     if (video.duration && !isNaN(currentDisplayed)) {
-      // Only seek if it actually changed enough to matter.
       if (Math.abs(video.currentTime - currentDisplayed) > 0.005) {
         try { video.currentTime = currentDisplayed; } catch (e) {}
       }
@@ -566,6 +558,7 @@
   window.addEventListener('scroll', computeTarget, { passive: true });
   window.addEventListener('resize', computeTarget, { passive: true });
   video.addEventListener('loadeddata', function(){ computeTarget(); });
+  video.addEventListener('canplay', function(){ computeTarget(); });
 
   computeTarget();
   window.requestAnimationFrame(raf);
