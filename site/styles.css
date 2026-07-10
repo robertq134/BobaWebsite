@@ -135,6 +135,14 @@ nav.nav-on-dark:not(.scrolled) .nav-toggle span { background: white; }
 .hero.hero-dark .hero-badge-divider { background: rgba(255,255,255,0.3); }
 .hero.hero-dark .btn-outline { color: #ffffff; border-color: rgba(255,255,255,0.5); }
 .hero.hero-dark .btn-outline:hover { border-color: #ffffff; }
+/* Make sure nothing paints a box behind the hero text on the dark hero */
+.hero.hero-dark .hero-h1,
+.hero.hero-dark .hero-sub,
+.hero.hero-dark .tag { background: transparent; }
+
+/* Pinned scroll-scrub: tall track + sticky hero (works on desktop + mobile) */
+.hero-scroll-track { position: relative; height: 300vh; }
+.hero.hero-sticky { position: sticky; top: 0; height: 100vh; min-height: 100vh; overflow: hidden; }
 
 .this-week { position: relative; padding: 140px 80px 160px; max-width: 1500px; margin: 0 auto; }
 
