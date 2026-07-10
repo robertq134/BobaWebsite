@@ -807,6 +807,53 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
   .carousel-arrow-right { right: 4px; }
   .carousel-item.is-active { box-shadow: 0 16px 32px rgba(199,58,97,.18); }
 
+  /* ── Hero video: fill mobile frame nicely ── */
+  .hero.hero-sticky { height: 100vh; }
+  .hero-video { object-fit: cover; }
+
+  /* ── Promos: horizontal swipe on mobile ── */
+  .promos-section { padding: 48px 0; }
+  .promos-head { padding: 0 20px; }
+  .promos-grid {
+    display: flex;
+    grid-template-columns: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 16px;
+    padding: 4px 20px 16px;
+    max-width: none;
+    scrollbar-width: none;
+  }
+  .promos-grid::-webkit-scrollbar { display: none; }
+  .promo-card {
+    flex: 0 0 78%;
+    scroll-snap-align: center;
+  }
+
+  /* ── Benefits: 2×2 grid on mobile ── */
+  .week-benefits {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .benefit:not(:last-child) { border-right: none; }
+
+  /* ── Awards: stack vertically, badge centered ── */
+  .awards-row {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .awards-cat { max-width: 120px; }
+
+  /* ── Instagram: stack posts, keep them tappable ── */
+  .ig-section { padding: 48px 20px; }
+  .ig-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .ig-post { aspect-ratio: 1 / 1; }
+
   .menu-section { padding: 56px 20px; }
   .menu-head { flex-direction: column; align-items: flex-start; gap: 12px; }
   .menu-cards { grid-template-columns: 1fr; gap: 16px; }
