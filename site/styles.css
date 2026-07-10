@@ -162,6 +162,11 @@ nav.nav-on-dark:not(.scrolled) .nav-toggle span { background: white; }
 /* Dark hero variant — used with the black-background hero video */
 .hero.hero-dark { background-color: #0a0a0a; }
 .hero.hero-dark .hero-h1 { color: #ffffff; }
+.hero.hero-dark .hero-inner { justify-content: center; text-align: center; padding-left: 40px; padding-right: 40px; }
+.hero.hero-dark .hero-content { margin: 0 auto; }
+.hero.hero-dark .hero-sub { margin-left: auto; margin-right: auto; }
+.hero.hero-dark .hero-btns { justify-content: center; }
+.hero.hero-dark .hero-badges { justify-content: center; }
 .hero.hero-dark .hero-sub { color: rgba(255,255,255,0.75); }
 .hero.hero-dark .hero-rating-num { color: #ffffff; }
 .hero.hero-dark .hero-local { color: rgba(255,255,255,0.75); }
@@ -246,6 +251,12 @@ nav.nav-on-dark:not(.scrolled) .nav-toggle span { background: white; }
   perspective: 2000px;
   display: flex;
   align-items: center;
+  cursor: grab;
+  user-select: none;
+  touch-action: pan-y;
+}
+.flavor-carousel.is-dragging { cursor: grabbing; }
+.flavor-carousel img { -webkit-user-drag: none; }
   justify-content: center;
   overflow: hidden;
 }
