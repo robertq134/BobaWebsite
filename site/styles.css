@@ -797,9 +797,9 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
   .carousel-arrow-right { right: 4px; }
   .carousel-item.is-active { box-shadow: 0 16px 32px rgba(199,58,97,.18); }
 
-  /* ── Hero video: dedicated portrait clip on mobile now, fills frame cleanly ── */
-  .hero.hero-sticky { height: 100vh; }
-  .hero-scroll-track { height: 320vh; }
+  /* ── Hero on mobile: normal 100vh section, video autoplays (no scrub/pin) ── */
+  .hero.hero-sticky { position: relative; height: 100vh; }
+  .hero-scroll-track { height: auto; }
   .hero-video.hero-photo {
     object-fit: cover;
     object-position: center center;
