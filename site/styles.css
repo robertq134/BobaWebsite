@@ -133,6 +133,8 @@ nav.nav-on-dark:not(.scrolled) .nav-toggle span { background: white; }
 .hero.hero-dark .hero-rating-num { color: #ffffff; }
 .hero.hero-dark .hero-local { color: rgba(255,255,255,0.75); }
 .hero.hero-dark .hero-badge-divider { background: rgba(255,255,255,0.3); }
+.hero.hero-dark .btn-outline { color: #ffffff; border-color: rgba(255,255,255,0.5); }
+.hero.hero-dark .btn-outline:hover { border-color: #ffffff; }
 
 .this-week { position: relative; padding: 140px 80px 160px; max-width: 1500px; margin: 0 auto; }
 
