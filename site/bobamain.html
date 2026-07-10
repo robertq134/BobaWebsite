@@ -29,11 +29,11 @@
 </nav>
 
 <!-- HERO -->
-<section class="hero">
-  <picture>
-    <source media="(max-width: 768px)" srcset="heromobile.png">
-    <img class="hero-video hero-photo" src="bobahero.png" alt="Brown sugar boba with a brulee top at Besties Boba & Bites"/>
-  </picture>
+<section class="hero hero-dark">
+  <video class="hero-video hero-photo" id="hero-scrub-video" autoplay muted playsinline preload="auto">
+    <source src="hero-boba-splash.webm" type="video/webm">
+    <source src="hero-boba-splash.mp4" type="video/mp4">
+  </video>
 
   <div class="hero-inner">
     <div class="hero-content fade-in-load">
@@ -506,5 +506,41 @@
 })();
 </script>
 <!-- ===== END CONSENT GATE ===== -->
+
+<!-- ===== HERO SCROLL-SCRUB ===== -->
+<script>
+(function () {
+  var video = document.getElementById('hero-scrub-video');
+  var heroSection = document.querySelector('.hero');
+  if (!video || !heroSection) return;
+
+  video.pause(); // scrub-driven, not autoplaying through on its own
+
+  var ticking = false;
+
+  function updateVideoOnScroll() {
+    var rect = heroSection.getBoundingClientRect();
+    var scrollDistance = rect.height - window.innerHeight;
+    var progress = scrollDistance > 0
+      ? Math.min(Math.max(-rect.top / scrollDistance, 0), 1)
+      : 0;
+    if (video.duration) {
+      video.currentTime = progress * video.duration;
+    }
+    ticking = false;
+  }
+
+  function onScroll() {
+    if (!ticking) {
+      requestAnimationFrame(updateVideoOnScroll);
+      ticking = true;
+    }
+  }
+
+  window.addEventListener('scroll', onScroll);
+  video.addEventListener('loadedmetadata', updateVideoOnScroll);
+})();
+</script>
+<!-- ===== END HERO SCROLL-SCRUB ===== -->
 </body>
 </html>
