@@ -6,6 +6,33 @@
   opacity: 0;
   animation: fadeInOnLoad 1s ease forwards;
 }
+
+/* ===== Scroll-reveal system (fade + slide up, with stagger) ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* Stagger: children animate in sequence. Apply .reveal-stagger to a container
+   and .reveal to each child; delays cascade. */
+.reveal-stagger .reveal:nth-child(1) { transition-delay: 0.05s; }
+.reveal-stagger .reveal:nth-child(2) { transition-delay: 0.13s; }
+.reveal-stagger .reveal:nth-child(3) { transition-delay: 0.21s; }
+.reveal-stagger .reveal:nth-child(4) { transition-delay: 0.29s; }
+.reveal-stagger .reveal:nth-child(5) { transition-delay: 0.37s; }
+.reveal-stagger .reveal:nth-child(6) { transition-delay: 0.45s; }
+.reveal-stagger .reveal:nth-child(7) { transition-delay: 0.53s; }
+.reveal-stagger .reveal:nth-child(8) { transition-delay: 0.61s; }
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
 .hero-flower-wrap {
   position: absolute;
   z-index: 3;
