@@ -7,31 +7,19 @@
   animation: fadeInOnLoad 1s ease forwards;
 }
 
-/* ===== Scroll-reveal system (fade + slide up, with stagger) ===== */
-.reveal {
-  opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
-}
-.reveal.revealed {
-  opacity: 1;
-  transform: translateY(0);
-}
-/* Stagger: children animate in sequence. Apply .reveal-stagger to a container
-   and .reveal to each child; delays cascade. */
-.reveal-stagger .reveal:nth-child(1) { transition-delay: 0.05s; }
-.reveal-stagger .reveal:nth-child(2) { transition-delay: 0.13s; }
-.reveal-stagger .reveal:nth-child(3) { transition-delay: 0.21s; }
-.reveal-stagger .reveal:nth-child(4) { transition-delay: 0.29s; }
-.reveal-stagger .reveal:nth-child(5) { transition-delay: 0.37s; }
-.reveal-stagger .reveal:nth-child(6) { transition-delay: 0.45s; }
-.reveal-stagger .reveal:nth-child(7) { transition-delay: 0.53s; }
-.reveal-stagger .reveal:nth-child(8) { transition-delay: 0.61s; }
-/* Respect users who prefer reduced motion */
+/* ===== Stagger support for the existing fade-in-scroll system =====
+   Wrap a group of .fade-in-scroll children in .stagger-group and they'll
+   reveal in sequence rather than all at once. */
+.stagger-group .fade-in-scroll:nth-child(1) { transition-delay: 0.05s; }
+.stagger-group .fade-in-scroll:nth-child(2) { transition-delay: 0.13s; }
+.stagger-group .fade-in-scroll:nth-child(3) { transition-delay: 0.21s; }
+.stagger-group .fade-in-scroll:nth-child(4) { transition-delay: 0.29s; }
+.stagger-group .fade-in-scroll:nth-child(5) { transition-delay: 0.37s; }
+.stagger-group .fade-in-scroll:nth-child(6) { transition-delay: 0.45s; }
+.stagger-group .fade-in-scroll:nth-child(7) { transition-delay: 0.53s; }
+.stagger-group .fade-in-scroll:nth-child(8) { transition-delay: 0.61s; }
 @media (prefers-reduced-motion: reduce) {
-  .reveal { opacity: 1; transform: none; transition: none; }
+  .fade-in-scroll, .fade-in-scroll-two { opacity: 1; transform: none; transition: none; }
 }
 .hero-flower-wrap {
   position: absolute;
@@ -769,10 +757,10 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
   .week-left { order: 3; align-self: auto; margin-top: 0; }
   .flavors-grid { display: none; }
   .flavor-carousel {
-    --card-size: 190px;
-    --card-height: 350px;
-    --card-spacing: 62px;
-    height: 470px;
+    --card-size: 165px;
+    --card-height: 300px;
+    --card-spacing: 58px;
+    height: 440px;
     justify-content: center;
     overflow: hidden;
   }
@@ -809,12 +797,11 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
   .carousel-arrow-right { right: 4px; }
   .carousel-item.is-active { box-shadow: 0 16px 32px rgba(199,58,97,.18); }
 
-  /* ── Hero video: show the whole video, letterboxed on the black hero ── */
+  /* ── Hero video: dedicated portrait clip on mobile now, fills frame cleanly ── */
   .hero.hero-sticky { height: 100vh; }
   .hero-video.hero-photo {
-    object-fit: contain;
-    object-position: center 70%;
-    background: #0a0a0a;
+    object-fit: cover;
+    object-position: center center;
   }
 
   /* ── Promos: carousel with arrows on mobile (matches donut carousel) ── */
