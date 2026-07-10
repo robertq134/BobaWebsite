@@ -32,28 +32,25 @@
 <div class="hero-scroll-track" id="hero-scroll-track">
 <section class="hero hero-dark hero-sticky">
   <video class="hero-video hero-photo" id="hero-scrub-video" muted playsinline preload="auto"
-         data-src-desktop="hero-4sec.mp4">
+         data-src-desktop="hero-4sec.mp4" data-src-mobile="hero-mobile.mp4">
   </video>
-  <canvas class="hero-video hero-photo" id="hero-scrub-canvas"
-          data-frame-path="hf_" data-frame-count="61" data-frame-ext=".webp"
-          style="display:none;"></canvas>
   <script>
     (function () {
       var v = document.getElementById('hero-scrub-video');
-      var c = document.getElementById('hero-scrub-canvas');
       var isMobile = window.matchMedia('(max-width: 768px)').matches;
+      var source = document.createElement('source');
+      source.src = isMobile ? v.getAttribute('data-src-mobile') : v.getAttribute('data-src-desktop');
+      source.type = 'video/mp4';
+      v.appendChild(source);
       if (isMobile) {
-        // Mobile: image-sequence canvas (smooth), no video download at all.
-        v.style.display = 'none';
-        c.style.display = 'block';
-        c.setAttribute('data-active', '1');
+        // Mobile: simple autoplay (muted+playsinline allows it). Plays once,
+        // then rests on the final frame. No scrubbing on mobile.
+        v.setAttribute('autoplay', '');
+        v.setAttribute('data-mode', 'autoplay');
       } else {
-        var source = document.createElement('source');
-        source.src = v.getAttribute('data-src-desktop');
-        source.type = 'video/mp4';
-        v.appendChild(source);
-        v.load();
+        v.setAttribute('data-mode', 'scrub');
       }
+      v.load();
     })();
   </script>
 
@@ -530,25 +527,20 @@
 </script>
 <!-- ===== END CONSENT GATE ===== -->
 
-<!-- ===== HERO SCROLL-SCRUB (desktop: video seek / mobile: canvas frames) ===== -->
+<!-- ===== HERO SCROLL-SCRUB (desktop only; mobile autoplays) ===== -->
 <script>
 (function () {
-  var video  = document.getElementById('hero-scrub-video');
-  var canvas = document.getElementById('hero-scrub-canvas');
-  var track  = document.getElementById('hero-scroll-track');
-  if (!track) return;
+  var video = document.getElementById('hero-scrub-video');
+  var track = document.getElementById('hero-scroll-track');
+  if (!video || !track) return;
+  if (video.getAttribute('data-mode') !== 'scrub') return; // mobile: autoplay handles it
 
-  var useCanvas = canvas && canvas.getAttribute('data-active') === '1';
+  try { video.pause(); } catch (e) {}
 
-  /* ---------- shared scroll math ---------- */
-  var targetProgress = 0;   // 0..1 through the scroll track
-  var eased = 0;            // eased progress that follows target
-  var EASE = 0.12;
-
-  // Correct scrollable distance for a sticky child = track height - hero height,
-  // both measured in real px. No window.innerHeight involved, so the mobile
-  // address bar hiding/showing can't disturb the math at all.
   var heroEl = track.querySelector('.hero-sticky') || track.firstElementChild;
+  var targetProgress = 0;
+  var eased = 0;
+  var EASE = 0.12;
 
   function computeTarget() {
     var rect = track.getBoundingClientRect();
@@ -558,62 +550,7 @@
       : 0;
   }
 
-  /* ---------- MOBILE: canvas image-sequence ---------- */
-  if (useCanvas) {
-    var ctx = canvas.getContext('2d');
-    var path  = canvas.getAttribute('data-frame-path');
-    var ext   = canvas.getAttribute('data-frame-ext');
-    var count = parseInt(canvas.getAttribute('data-frame-count'), 10);
-    var frames = new Array(count);
-    var lastDrawn = -1;
-
-    function pad(n) { return ('000' + n).slice(-3); }
-    for (var i = 0; i < count; i++) {
-      var img = new Image();
-      img.src = path + pad(i + 1) + ext;
-      frames[i] = img;
-    }
-
-    function sizeCanvas() {
-      var dpr = Math.min(window.devicePixelRatio || 1, 2);
-      canvas.width  = canvas.clientWidth * dpr;
-      canvas.height = canvas.clientHeight * dpr;
-      lastDrawn = -1; // force redraw at new size
-    }
-
-    function drawFrame(idx) {
-      var img = frames[idx];
-      if (!img || !img.complete || !img.naturalWidth) return;
-      var cw = canvas.width, ch = canvas.height;
-      // object-fit: cover
-      var s = Math.max(cw / img.naturalWidth, ch / img.naturalHeight);
-      var w = img.naturalWidth * s, h = img.naturalHeight * s;
-      ctx.clearRect(0, 0, cw, ch);
-      ctx.drawImage(img, (cw - w) / 2, (ch - h) / 2, w, h);
-      lastDrawn = idx;
-    }
-
-    frames[0].onload = function () { sizeCanvas(); drawFrame(0); };
-    window.addEventListener('resize', function(){ sizeCanvas(); });
-
-    function rafCanvas() {
-      computeTarget();
-      eased += (targetProgress - eased) * EASE;
-      if (Math.abs(targetProgress - eased) < 0.002) eased = targetProgress;
-      var idx = Math.round(eased * (count - 1));
-      if (idx !== lastDrawn) drawFrame(idx);
-      window.requestAnimationFrame(rafCanvas);
-    }
-    sizeCanvas();
-    window.requestAnimationFrame(rafCanvas);
-    return; // canvas mode complete — skip video wiring
-  }
-
-  /* ---------- DESKTOP: video currentTime seek ---------- */
-  if (!video) return;
-  try { video.pause(); } catch (e) {}
-
-  function rafVideo() {
+  function raf() {
     computeTarget();
     eased += (targetProgress - eased) * EASE;
     if (Math.abs(targetProgress - eased) < 0.002) eased = targetProgress;
@@ -623,9 +560,9 @@
         try { video.currentTime = t; } catch (e) {}
       }
     }
-    window.requestAnimationFrame(rafVideo);
+    window.requestAnimationFrame(raf);
   }
-  window.requestAnimationFrame(rafVideo);
+  window.requestAnimationFrame(raf);
 })();
 </script>
 <!-- ===== END HERO SCROLL-SCRUB ===== -->
