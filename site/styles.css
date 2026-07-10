@@ -799,7 +799,7 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
 
   /* ── Hero video: dedicated portrait clip on mobile now, fills frame cleanly ── */
   .hero.hero-sticky { height: 100vh; }
-  .hero-scroll-track { height: 600vh; }
+  .hero-scroll-track { height: 6000vh; }
   .hero-video.hero-photo {
     object-fit: cover;
     object-position: center center;
