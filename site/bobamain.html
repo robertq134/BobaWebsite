@@ -25,8 +25,10 @@
   </div>
   <!-- big hero skeleton block with cats centered inside -->
   <div style="flex:1; margin:16px 12px 12px; border-radius:14px; position:relative; overflow:hidden;" class="bb-skel">
-    <video id="bb-loader-video" muted playsinline loop autoplay
-           style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:min(66vw, 300px); height:auto;"></video>
+    <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:min(78vw, 340px); height:min(78vw, 340px); border-radius:50%; background:#ffffff; display:flex; align-items:center; justify-content:center; box-shadow:0 8px 30px rgba(0,0,0,0.06);">
+      <video id="bb-loader-video" muted playsinline loop autoplay
+             style="width:82%; height:auto;"></video>
+    </div>
   </div>
   <!-- skeleton button -->
   <div style="display:flex; justify-content:center; padding:8px 20px 30px;">
@@ -99,7 +101,7 @@
 <div class="hero-scroll-track" id="hero-scroll-track">
 <section class="hero hero-dark hero-sticky">
   <video class="hero-video hero-photo" id="hero-scrub-video" muted playsinline preload="auto"
-         data-src-desktop="hero-4sec.mp4" data-src-mobile="MobileHeroTrue.mp4">
+         data-src-desktop="hero-4sec.mp4" data-src-mobile="hero-mobile.mp4">
   </video>
   <script>
     (function () {
