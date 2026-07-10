@@ -401,7 +401,7 @@ nav.nav-on-dark:not(.scrolled) .nav-toggle span { background: white; }
   max-width: 1120px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 28px;
   position: relative;
   z-index: 2;
