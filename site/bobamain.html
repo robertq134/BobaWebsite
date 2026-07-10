@@ -112,14 +112,32 @@
       if (isMobile) {
         // Mobile: play once, but ONLY after the loading splash finishes.
         v.setAttribute('data-mode', 'autoplay');
+
+        // Pre-warm: while the splash is up, silently decode the video so it's
+        // ready to play instantly (no cold-start lag) when revealed.
+        var warmed = false;
+        function prewarm() {
+          if (warmed) return;
+          warmed = true;
+          v.muted = true;
+          var pw = v.play();
+          if (pw && pw.then) {
+            pw.then(function () {
+              // Immediately pause and rewind — we just wanted decoder warmed.
+              v.pause();
+              try { v.currentTime = 0; } catch (e) {}
+            }).catch(function () { warmed = false; });
+          }
+        }
+        // Warm as soon as enough is buffered to play through.
+        if (v.readyState >= 3) prewarm();
+        v.addEventListener('canplaythrough', prewarm, { once: true });
+
         var startHero = function () {
           try { v.currentTime = 0; } catch (e) {}
           var pr = v.play(); if (pr && pr.catch) pr.catch(function(){});
         };
-        // If the loader exists it will fire this event when done; otherwise
-        // (e.g. desktop-width edge cases) start on window load as a fallback.
         window.addEventListener('bb-loader-done', startHero, { once: true });
-        // Safety: if no loader event arrives within 9s, start anyway.
         setTimeout(startHero, 9000);
       } else {
         v.setAttribute('data-mode', 'scrub');
