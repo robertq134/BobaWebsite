@@ -10,6 +10,54 @@
 <link rel="stylesheet" href="styles.css"/>
 </head>
 <body>
+<!-- ===== MOBILE LOADING SPLASH ===== -->
+<div id="bb-loader" style="position:fixed; inset:0; z-index:99999; background:#ffffff; display:flex; align-items:center; justify-content:center; transition:opacity .45s ease;">
+  <video id="bb-loader-video" muted playsinline loop autoplay
+         style="width:min(70vw, 320px); height:auto;">
+  </video>
+</div>
+<script>
+(function () {
+  var loader = document.getElementById('bb-loader');
+  var lv = document.getElementById('bb-loader-video');
+  var isMobile = window.matchMedia('(max-width: 768px)').matches;
+
+  if (!isMobile) {
+    // Desktop: no splash at all.
+    loader.parentNode.removeChild(loader);
+    return;
+  }
+
+  // Mobile: load the cats video and lock scroll while loading.
+  var s = document.createElement('source');
+  s.src = 'loader-cats.mp4';
+  s.type = 'video/mp4';
+  lv.appendChild(s);
+  lv.load();
+  var p = lv.play(); if (p && p.catch) p.catch(function(){});
+  document.documentElement.style.overflow = 'hidden';
+
+  var shownAt = Date.now();
+  var MIN_SHOW = 1200;   // never flash shorter than this
+  var MAX_SHOW = 8000;   // never trap the user longer than this
+
+  function hideLoader() {
+    if (!loader.parentNode) return;
+    var wait = Math.max(0, MIN_SHOW - (Date.now() - shownAt));
+    setTimeout(function () {
+      loader.style.opacity = '0';
+      setTimeout(function () {
+        if (loader.parentNode) loader.parentNode.removeChild(loader);
+        document.documentElement.style.overflow = '';
+      }, 500);
+    }, wait);
+  }
+
+  window.addEventListener('load', hideLoader);
+  setTimeout(hideLoader, MAX_SHOW); // safety: always dismiss eventually
+})();
+</script>
+<!-- ===== END MOBILE LOADING SPLASH ===== -->
 
 <!-- NAV -->
 <nav>
@@ -32,7 +80,7 @@
 <div class="hero-scroll-track" id="hero-scroll-track">
 <section class="hero hero-dark hero-sticky">
   <video class="hero-video hero-photo" id="hero-scrub-video" muted playsinline preload="auto"
-         data-src-desktop="hero-4sec.mp4" data-src-mobile="MobileHeroTrue.mp4">
+         data-src-desktop="hero-4sec.mp4" data-src-mobile="hero-mobile.mp4">
   </video>
   <script>
     (function () {
