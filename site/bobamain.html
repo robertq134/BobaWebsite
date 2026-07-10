@@ -68,25 +68,29 @@
     <h2 class="promos-title">Specials &amp; Promos</h2>
     <p class="promos-sub">Sweet deals worth coming back for</p>
   </div>
-  <div class="promos-grid reveal-stagger">
-    <div class="promo-card reveal">
-      <div class="promo-img ph"><span>Promo Image</span></div>
-      <h3 class="promo-name">[Promo Title]</h3>
-      <p class="promo-desc">[Short description of this promo goes here.]</p>
-      <a href="#"><button class="btn-fill">Learn More</button></a>
+  <div class="promos-carousel">
+    <button class="promos-arrow promos-arrow-left" id="promos-prev" aria-label="Previous promo">&#8249;</button>
+    <div class="promos-grid reveal-stagger" id="promos-grid">
+      <div class="promo-card reveal">
+        <div class="promo-img ph"><span>Promo Image</span></div>
+        <h3 class="promo-name">[Promo Title]</h3>
+        <p class="promo-desc">[Short description of this promo goes here.]</p>
+        <a href="#"><button class="btn-fill">Learn More</button></a>
+      </div>
+      <div class="promo-card reveal">
+        <div class="promo-img ph"><span>Promo Image</span></div>
+        <h3 class="promo-name">[Promo Title]</h3>
+        <p class="promo-desc">[Short description of this promo goes here.]</p>
+        <a href="#"><button class="btn-fill">Learn More</button></a>
+      </div>
+      <div class="promo-card reveal">
+        <div class="promo-img ph"><span>Promo Image</span></div>
+        <h3 class="promo-name">[Promo Title]</h3>
+        <p class="promo-desc">[Short description of this promo goes here.]</p>
+        <a href="#"><button class="btn-fill">Learn More</button></a>
+      </div>
     </div>
-    <div class="promo-card reveal">
-      <div class="promo-img ph"><span>Promo Image</span></div>
-      <h3 class="promo-name">[Promo Title]</h3>
-      <p class="promo-desc">[Short description of this promo goes here.]</p>
-      <a href="#"><button class="btn-fill">Learn More</button></a>
-    </div>
-    <div class="promo-card reveal">
-      <div class="promo-img ph"><span>Promo Image</span></div>
-      <h3 class="promo-name">[Promo Title]</h3>
-      <p class="promo-desc">[Short description of this promo goes here.]</p>
-      <a href="#"><button class="btn-fill">Learn More</button></a>
-    </div>
+    <button class="promos-arrow promos-arrow-right" id="promos-next" aria-label="Next promo">&#8250;</button>
   </div>
 </section>
 
@@ -589,5 +593,30 @@
 })();
 </script>
 <!-- ===== END SCROLL REVEAL ===== -->
+
+<!-- ===== PROMOS CAROUSEL ARROWS ===== -->
+<script>
+(function () {
+  var grid = document.getElementById('promos-grid');
+  var prev = document.getElementById('promos-prev');
+  var next = document.getElementById('promos-next');
+  if (!grid || !prev || !next) return;
+
+  function cardStep() {
+    var card = grid.querySelector('.promo-card');
+    if (!card) return grid.clientWidth * 0.8;
+    var style = window.getComputedStyle(grid);
+    var gap = parseFloat(style.columnGap || style.gap || '16') || 16;
+    return card.getBoundingClientRect().width + gap;
+  }
+  prev.addEventListener('click', function () {
+    grid.scrollBy({ left: -cardStep(), behavior: 'smooth' });
+  });
+  next.addEventListener('click', function () {
+    grid.scrollBy({ left: cardStep(), behavior: 'smooth' });
+  });
+})();
+</script>
+<!-- ===== END PROMOS CAROUSEL ARROWS ===== -->
 </body>
 </html>
