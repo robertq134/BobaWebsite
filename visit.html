@@ -5,7 +5,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Visit — Besties Boba & Bites</title>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Roboto:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 <script src="https://unpkg.com/@rive-app/canvas@2.17.3/rive.js"></script>
 <link rel="stylesheet" href="styles.css"/>
 </head>
@@ -15,13 +15,16 @@
   <div class="nav-logo">
     <img src="mochilogoV2.png" style="height:44px;width:auto;display:block;"/>
   </div>
-  <ul class="nav-links">
+  <div class="nav-right">
+    <ul class="nav-links">
     <li><a href="bobamain.html#this-week">This Week</a></li>
     <li><a href="menu.html">Menu</a></li>
     <li><a href="about.html">About Us</a></li>
     <li><a href="catering.html">Catering</a></li>
     <li><a href="visit.html" class="active">Visit</a></li>
   </ul>
+    <a href="https://bestiesboba.square.site/" target="_blank" class="nav-order"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><span>Order</span></a>
+  </div>
   <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
     <span></span><span></span><span></span>
   </button>
@@ -74,7 +77,12 @@
 <!-- OUR LOCATION -->
 <section class="location-section">
   <div class="location-inner">
-    <div class="location-photo ph fade-in-scroll"><span>Storefront Photo</span></div>
+    <div class="location-photo fade-in-scroll">
+      <iframe
+        src="https://www.google.com/maps?q=4520+Las+Positas+Rd,+Livermore,+CA+94551&output=embed"
+        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade" title="Besties Boba & Bites location map"></iframe>
+    </div>
     <div class="location-panel fade-in-scroll">
       <h3 class="visit-card-title">Our Location</h3>
       <p class="visit-card-addr">Livermore Farmers Market<br/><strong>4520 Las Positas Rd</strong><br/>Livermore, CA 94551</p>

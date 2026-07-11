@@ -157,7 +157,7 @@
   };
 
   function setupFadeIn() {
-    var fadeEls = document.querySelectorAll('.fade-in-scroll, .fade-in-scroll-two');
+    var fadeEls = document.querySelectorAll('.fade-in-scroll, .fade-in-scroll-two, .fade-in-left, .fade-in-right, .fade-in-bottom');
     var observer = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
         if (entry.isIntersecting) {

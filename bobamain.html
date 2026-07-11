@@ -5,7 +5,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Besties Boba & Bites — Livermore, CA</title>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Roboto:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 <script src="https://unpkg.com/@rive-app/canvas@2.17.3/rive.js"></script>
 <link rel="stylesheet" href="styles.css"/>
 </head>
@@ -85,13 +85,16 @@
   <div class="nav-logo">
     <img src="mochilogoV2.png" style="height:44px;width:auto;display:block;"/>
   </div>
-  <ul class="nav-links">
+  <div class="nav-right">
+    <ul class="nav-links">
     <li><a href="#this-week">This Week</a></li>
     <li><a href="menu.html">Menu</a></li>
     <li><a href="about.html">About Us</a></li>
     <li><a href="catering.html">Catering</a></li>
     <li><a href="visit.html">Visit</a></li>
   </ul>
+    <a href="https://bestiesboba.square.site/" target="_blank" class="nav-order"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><span>Order</span></a>
+  </div>
   <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
     <span></span><span></span><span></span>
   </button>
@@ -182,23 +185,25 @@
   <div class="promos-carousel">
     <button class="promos-arrow promos-arrow-left" id="promos-prev" aria-label="Previous promo">&#8249;</button>
     <div class="promos-grid stagger-group" id="promos-grid">
-      <div class="promo-card fade-in-scroll">
+      <div class="promo-card fade-in-left">
         <div class="promo-img"><img src="mochidonutsV2.jpg" alt="$1 Mochi Donut Tuesdays"/></div>
         <h3 class="promo-name">$1 Mochi Donut Tuesdays</h3>
         <p class="promo-desc">Every Tuesday, snag a mochi donut for just $1 with any drink purchase. No coupon, no app — just show up thirsty.</p>
         <a href="#this-week"><button class="btn-fill">See This Week's Flavors</button></a>
       </div>
-      <div class="promo-card fade-in-scroll">
+      <div class="promo-card fade-in-right">
         <div class="promo-img"><img src="catering.png" alt="Catering &amp; Group Orders"/></div>
         <h3 class="promo-name">Catering &amp; Group Orders</h3>
         <p class="promo-desc">Boba flights, mochi donut towers, and drink bars for parties, offices, and everything in between. We bring the drinks — you bring the guest list.</p>
         <a href="catering.html"><button class="btn-fill">Book Catering</button></a>
       </div>
-      <div class="promo-card fade-in-scroll">
+      <div class="promo-card promo-card-wide fade-in-bottom">
         <div class="promo-img"><img src="bobahero.png" alt="Order Ahead Online"/></div>
-        <h3 class="promo-name">Order Ahead Online</h3>
-        <p class="promo-desc">Skip the line — order from your phone and swing by for pickup. Same drinks, same donuts, zero wait.</p>
-        <a href="https://bestiesboba.square.site/" target="_blank"><button class="btn-fill">Order Now</button></a>
+        <div class="promo-wide-body">
+          <h3 class="promo-name">Order Ahead Online</h3>
+          <p class="promo-desc">Skip the line — order from your phone and swing by for pickup. Same drinks, same donuts, zero wait.</p>
+          <a href="https://bestiesboba.square.site/" target="_blank"><button class="btn-fill">Order Now</button></a>
+        </div>
       </div>
     </div>
     <button class="promos-arrow promos-arrow-right" id="promos-next" aria-label="Next promo">&#8250;</button>
@@ -632,7 +637,14 @@
   var heroEl = track.querySelector('.hero-sticky') || track.firstElementChild;
   var targetProgress = 0;
   var eased = 0;
-  var EASE = 0.12;
+  var EASE = 0.18;
+  var pendingSeek = false;
+
+  // The old version called video.currentTime on every animation frame, which
+  // queues overlapping seeks faster than the decoder can service them — that's
+  // what produced the choppiness. Now we wait for each seek to actually finish
+  // (the 'seeked' event) before requesting the next one.
+  video.addEventListener('seeked', function () { pendingSeek = false; });
 
   function computeTarget() {
     var rect = track.getBoundingClientRect();
@@ -645,11 +657,12 @@
   function raf() {
     computeTarget();
     eased += (targetProgress - eased) * EASE;
-    if (Math.abs(targetProgress - eased) < 0.002) eased = targetProgress;
-    if (video.duration && !isNaN(eased)) {
+    if (Math.abs(targetProgress - eased) < 0.001) eased = targetProgress;
+    if (video.duration && !isNaN(eased) && !pendingSeek) {
       var t = eased * video.duration;
-      if (Math.abs(video.currentTime - t) > 0.005) {
-        try { video.currentTime = t; } catch (e) {}
+      if (Math.abs(video.currentTime - t) > 0.02) {
+        pendingSeek = true;
+        try { video.currentTime = t; } catch (e) { pendingSeek = false; }
       }
     }
     window.requestAnimationFrame(raf);
