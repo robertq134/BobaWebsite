@@ -220,6 +220,38 @@
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
   }
+
+  function setupFollowerCounter() {
+    var el = document.getElementById('ig-follower-count');
+    if (!el) return;
+    var target = parseInt(el.getAttribute('data-count-to'), 10) || 0;
+    var duration = 1400;
+    var started = false;
+
+    function animate() {
+      if (started) return;
+      started = true;
+      var startTime = null;
+      function tick(ts) {
+        if (!startTime) startTime = ts;
+        var progress = Math.min((ts - startTime) / duration, 1);
+        var eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.round(eased * target).toLocaleString() + '+';
+        if (progress < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          animate();
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.4 });
+    observer.observe(el);
+  }
 function setupFlavorCarousel() {
     var carouselEl = document.getElementById('flavor-carousel');
     if (!carouselEl) return;
@@ -360,6 +392,7 @@ function setupFlavorCarousel() {
     setupFlavorCarousel();
     setupNavScrollSpy();
     setupHeroFlowerParallax();
+    setupFollowerCounter();
   };
 })();
 
