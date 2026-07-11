@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="icon" type="image/png" href="android-chrome-192x192.png">
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Menu — Besties Boba & Bites</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..800&family=Work+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<script src="https://unpkg.com/@rive-app/canvas@2.17.3/rive.js"></script>
+<link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+
+<!-- NAV: nav-on-dark since this page's hero is the dark video, not a light photo -->
+<nav class="nav-on-dark">
+  <div class="nav-logo">
+    <img src="mochilogoV2.png" style="height:44px;width:auto;display:block;"/>
+  </div>
+  <ul class="nav-links">
+    <li><a href="bobamain.html#this-week">This Week</a></li>
+    <li><a href="menu.html" class="active">Menu</a></li>
+    <li><a href="about.html">About Us</a></li>
+    <li><a href="catering.html">Catering</a></li>
+    <li><a href="visit.html">Visit</a></li>
+  </ul>
+  <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO (video — same footage as the homepage's original hero) -->
+<section class="hero hero-compact">
+  <video class="hero-video" autoplay muted loop playsinline>
+    <source src="newhero.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-text-spotlight">
+        <h1 class="hero-h1" style="color:white; margin-bottom:0;">Everything we pour, bake, and fry.</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+<svg width="100%" height="120" viewBox="0 0 1440 120" preserveAspectRatio="none" style="display:block; margin-top:-100px; position:relative; z-index:3;">
+  <path d="M0,100 C300,90 600,40 900,20 C1100,10 1300,0 1440,0 L1440,120 L0,120 Z" fill="#FFFFFF"/>
+</svg>
+
+<div class="order-cta">
+  <h2 class="order-cta-title">Get ahead. Order Online.</h2>
+  <a href="https://bestiesboba.square.site/" target="_blank">
+    <button class="btn-fill btn-smooth btn-big">Order Online</button>
+  </a>
+</div>
+
+<!-- TOP CHOICES — drink grid -->
+<section class="menu-grid-section is-white">
+
+  <!-- Decorative scatter icons: swap each src for your real uploaded files -->
+  <img class="deco-icon pg-menu deco-1 fade-in-scroll" src="icon1.png" alt=""/>
+  <img class="deco-icon pg-menu deco-2 fade-in-scroll" src="icon2.png" alt=""/>
+  <img class="deco-icon pg-menu deco-3 fade-in-scroll" src="icon3.png" alt=""/>
+  <img class="deco-icon pg-menu deco-4 fade-in-scroll" src="icon4.png" alt=""/>
+  <img class="deco-icon pg-menu deco-m1 fade-in-scroll" src="icon8.png" alt=""/>
+  <img class="deco-icon pg-menu deco-m2 fade-in-scroll" src="icon9.png" alt=""/>
+  <img class="deco-icon pg-menu deco-m3 fade-in-scroll" src="icon10.png" alt=""/>
+
+  <div class="menu-grid-head">
+    <span class="tag">Drinks</span>
+    <h2 class="menu-grid-h2">Top Choices</h2>
+  </div>
+  <div class="drink-grid">
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/og-viet-coffee/28" target = "_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="drink_4(3).png" alt="OG Vietnamese Coffee"/></div>
+      </a>
+      <div class="drink-name">OG Vietnamese Coffee</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/egg-custard-cloud-viet-coffee/21?cp=true&sa=false&sbp=false&q=true" target = "_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="creme_zoomed_out.png" alt="Egg Custard Vietnamese Coffee"/></div>
+      </a>
+      <div class="drink-name">Egg Custard Vietnamese Coffee</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/brown-sugar-cookies-cream-milk-tea/38" target = "_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="oreo_zoomed_out_75 (1).png" alt="Oreo Brown Sugar"/></div>
+      </a>
+      <div class="drink-name">Oreo Brown Sugar</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/brown-sugar-milk-tea/40" target = "_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="drink_3(3).png" alt="Brown Sugar Milk Tea"/></div>
+      </a>
+      <div class="drink-name">Brown Sugar Boba</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/classic-milk-tea/60" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/classic-milk-tea.png" alt="Classic Milk Tea"/></div>
+      </a>
+      <div class="drink-name">Classic Milk Tea</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/winter-melon-milk-tea/62" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/winter-melon-milk-tea.png" alt="Wintermelon Tea"/></div>
+      </a>
+      <div class="drink-name">Wintermelon Tea</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/strawberry-uji-matcha-latte/DCWFLXSWXNLQZOJ24B5NJOLO" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/strawberry-uji-matcha-latte.jpeg" alt="Strawberry Matcha"/></div>
+      </a>
+      <div class="drink-name">Strawberry Matcha</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/thai-tea/73" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/thai-tea.png" alt="Thai Tea"/></div>
+      </a>
+      <div class="drink-name">Thai Tea</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/fresh-taro-latte/70" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/fresh-taro-latte.png" alt="Taro Milk Tea"/></div>
+      </a>
+      <div class="drink-name">Taro Milk Tea</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/real-mango-green-tea/57" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/real-mango-green-tea.png" alt="Mango Green Tea"/></div>
+      </a>
+      <div class="drink-name">Mango Green Tea</div>
+    </div>
+  </div>
+</section>
+
+<!-- SNACKS — second grid, warm background for a clear header separation between sections -->
+<section class="menu-grid-section is-warm">
+
+  <!-- Decorative scatter icons -->
+  <img class="deco-icon pg-menu deco-5 fade-in-scroll" src="icon5.png" alt=""/>
+  <img class="deco-icon pg-menu deco-6 fade-in-scroll" src="icon6.png" alt=""/>
+  <img class="deco-icon pg-menu deco-7 fade-in-scroll" src="icon7.png" alt=""/>
+  <img class="deco-icon pg-menu deco-m4 fade-in-scroll" src="icon11.png" alt=""/>
+  <img class="deco-icon pg-menu deco-m5 fade-in-scroll" src="icon12.png" alt=""/>
+
+  <div class="menu-grid-head">
+    <span class="tag">Bites</span>
+    <h2 class="menu-grid-h2">Snacks</h2>
+  </div>
+  <div class="drink-grid">
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/taiwanese-popcorn-chicken/OLGCYPQS4JFGTWS7PVLVVBMN" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/taiwanese-popcorn-chicken.jpeg" alt="Taiwanese Popcorn Chicken"/></div>
+      </a>
+      <div class="drink-name">Taiwanese Popcorn Chicken</div>
+      <div class="drink-price">$10.99</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/french-fries/SMELGMAJWH6ZCOFVREPLLV3C" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/french-fries.jpeg" alt="French Fries"/></div>
+      </a>
+      <div class="drink-name">French Fries</div>
+      <div class="drink-price">$5.49</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/sweet-potato-tater-tots/6D7EM2Y3JSHQHEPGNGPMKD5S" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/sweet-potato-tater-tots.jpeg" alt="Sweet Potato Tater Tots"/></div>
+      </a>
+      <div class="drink-name">Sweet Potato Tater Tots</div>
+      <div class="drink-price">$6.49</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/seasoned-waffle-fries/BEIFPC2N6XOLT4WZX77TQ3SQ" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/seasoned-waffle-fries.jpeg" alt="Seasoned Waffle Fries"/></div>
+      </a>
+      <div class="drink-name">Seasoned Waffle Fries</div>
+      <div class="drink-price">$6.49</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/lemongrass-chicken-potstickers/EL7E7VZDQRATESL4N63FJ7SA" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/lemongrass-chicken-potstickers.jpeg" alt="Lemongrass Chicken Potstickers"/></div>
+      </a>
+      <div class="drink-name">Lemongrass Chicken Potstickers</div>
+      <div class="drink-price">$10.99</div>
+    </div>
+  </div>
+</section>
+
+<!-- MILK TEAS -->
+<section class="menu-grid-section is-white">
+  <div class="menu-grid-head">
+    <span class="tag">Menu</span>
+    <h2 class="menu-grid-h2">Milk Teas</h2>
+  </div>
+  <div class="drink-grid">
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/brown-sugar-cookies-cream-milk-tea/38" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/brown-sugar-cookies-and-cream-milk-tea.png" alt="Brown Sugar Cookies &amp; Cream Milk Tea"/></div>
+      </a>
+      <div class="drink-name">Brown Sugar Cookies &amp; Cream Milk Tea</div>
+      <div class="drink-price">$6.90</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/brown-sugar-creme-br-l-e-milk-tea/39" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/brown-sugar-creme-brulee-milk-tea.png" alt="Brown Sugar Creme Brulee Milk Tea"/></div>
+      </a>
+      <div class="drink-name">Brown Sugar Creme Brulee Milk Tea</div>
+      <div class="drink-price">$6.90</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/brown-sugar-milk-tea/40" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/brown-sugar-milk-tea.png" alt="Brown Sugar Milk Tea"/></div>
+      </a>
+      <div class="drink-name">Brown Sugar Milk Tea</div>
+      <div class="drink-price">$6.20</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/brown-sugar-roasted-oolong-milk-tea/41" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/brown-sugar-roasted-oolong-milk-tea.png" alt="Brown Sugar Roasted Oolong Milk Tea"/></div>
+      </a>
+      <div class="drink-name">Brown Sugar Roasted Oolong Milk Tea</div>
+      <div class="drink-price">$6.20</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/classic-milk-tea/60" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/classic-milk-tea.png" alt="Classic Milk Tea"/></div>
+      </a>
+      <div class="drink-name">Classic Milk Tea</div>
+      <div class="drink-price">$5.95</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/hazelnut-milk-tea/66" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/hazelnut-milk-tea.png" alt="Hazelnut Milk Tea"/></div>
+      </a>
+      <div class="drink-name">Hazelnut Milk Tea</div>
+      <div class="drink-price">$5.95</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/jasmine-milk-tea/65" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/jasmine-milk-tea.png" alt="Jasmine Milk Tea"/></div>
+      </a>
+      <div class="drink-name">Jasmine Milk Tea</div>
+      <div class="drink-price">$5.95</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/roasted-oolong-milk-tea/63" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/roasted-oolong-milk-tea.png" alt="Roasted Oolong Milk Tea"/></div>
+      </a>
+      <div class="drink-name">Roasted Oolong Milk Tea</div>
+      <div class="drink-price">$5.95</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/thai-tea-creme-brulee/50" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/thai-tea-creme-brulee.png" alt="Thai Tea Creme Brulee"/></div>
+      </a>
+      <div class="drink-name">Thai Tea Creme Brulee</div>
+      <div class="drink-price">$6.90</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/thai-tea/73" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/thai-tea.png" alt="Thai Tea"/></div>
+      </a>
+      <div class="drink-name">Thai Tea</div>
+      <div class="drink-price">$6.80</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/the-signature-milk-tea/35" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/the-signature-milk-tea.png" alt="The Signature Milk Tea"/></div>
+      </a>
+      <div class="drink-name">The Signature Milk Tea</div>
+      <div class="drink-price">$7.20</div>
+    </div>
+  </div>
+</section>
+
+<!-- FRUIT TEAS -->
+<section class="menu-grid-section is-warm">
+  <div class="menu-grid-head">
+    <span class="tag">Menu</span>
+    <h2 class="menu-grid-h2">Fruit Teas</h2>
+  </div>
+  <div class="drink-grid">
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/chizu-mango-green-tea/53" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/chizu-mango-green-tea.png" alt="Chizu Mango Green Tea"/></div>
+      </a>
+      <div class="drink-name">Chizu Mango Green Tea</div>
+      <div class="drink-price">$7.00</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/chizu-pineapple-green-tea/47" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/chizu-pineapple-green-tea.png" alt="Chizu Pineapple Green Tea"/></div>
+      </a>
+      <div class="drink-name">Chizu Pineapple Green Tea</div>
+      <div class="drink-price">$7.00</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/chizu-strawberry-green-tea/54" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/chizu-strawberry-green-tea.png" alt="Chizu Strawberry Green Tea"/></div>
+      </a>
+      <div class="drink-name">Chizu Strawberry Green Tea</div>
+      <div class="drink-price">$7.00</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/real-grapefruit-green-tea/64" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/real-grapefruit-green-tea.png" alt="Real Grapefruit Green Tea"/></div>
+      </a>
+      <div class="drink-name">Real Grapefruit Green Tea</div>
+      <div class="drink-price">$6.70</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/real-mango-green-tea/57" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/real-mango-green-tea.png" alt="Real Mango Green Tea"/></div>
+      </a>
+      <div class="drink-name">Real Mango Green Tea</div>
+      <div class="drink-price">$6.70</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/real-pineapple-green-tea/61" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/real-pineapple-green-tea.png" alt="Real Pineapple Green Tea"/></div>
+      </a>
+      <div class="drink-name">Real Pineapple Green Tea</div>
+      <div class="drink-price">$6.70</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/real-strawberry-green-tea/58" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/real-strawberry-green-tea.png" alt="Real Strawberry Green Tea"/></div>
+      </a>
+      <div class="drink-name">Real Strawberry Green Tea</div>
+      <div class="drink-price">$6.70</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/passionfruit-jasmine-green-tea/WBO2DIIUBEIEZGNPQOGBPYGC" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/passionfruit-jasmine-green-tea.png" alt="Passionfruit Jasmine Green Tea"/></div>
+      </a>
+      <div class="drink-name">Passionfruit Jasmine Green Tea</div>
+      <div class="drink-price">$6.70</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/mix-match-fruit-tea/HNFGEL7PKQ2JKW2QGYZKXETZ" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/mix-and-match-fruit-tea.png" alt="Mix &amp; Match Fruit Tea"/></div>
+      </a>
+      <div class="drink-name">Mix &amp; Match Fruit Tea</div>
+      <div class="drink-price">$6.90</div>
+    </div>
+  </div>
+</section>
+
+<!-- ICED VIET COFFEE -->
+<section class="menu-grid-section is-white">
+  <div class="menu-grid-head">
+    <span class="tag">Menu</span>
+    <h2 class="menu-grid-h2">Iced Viet Coffee</h2>
+  </div>
+  <div class="drink-grid">
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/coconut-cloud-viet-coffee/22" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/coconut-cloud-viet-coffee.png" alt="Coconut Cloud Viet Coffee"/></div>
+      </a>
+      <div class="drink-name">Coconut Cloud Viet Coffee</div>
+      <div class="drink-price">$6.80</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/egg-custard-cloud-viet-coffee/21" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/egg-custard-cloud-viet-coffee.png" alt="Egg Custard Cloud Viet Coffee"/></div>
+      </a>
+      <div class="drink-name">Egg Custard Cloud Viet Coffee</div>
+      <div class="drink-price">$6.80</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/hazelnut-viet-coffee/27" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/hazelnut-viet-coffee.png" alt="Hazelnut Viet Coffee"/></div>
+      </a>
+      <div class="drink-name">Hazelnut Viet Coffee</div>
+      <div class="drink-price">$6.80</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/matcha-cloud-viet-coffee/25" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/matcha-cloud-viet-coffee.png" alt="Matcha Cloud Viet Coffee"/></div>
+      </a>
+      <div class="drink-name">Matcha Cloud Viet Coffee</div>
+      <div class="drink-price">$6.80</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/og-viet-coffee/28" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/og-viet-coffee.png" alt="OG Viet Coffee"/></div>
+      </a>
+      <div class="drink-name">OG Viet Coffee</div>
+      <div class="drink-price">$6.00</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/pandan-coco-cloud-viet-coffee/24" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/pandan-coco-cloud-viet-coffee.png" alt="Pandan Coco Cloud Viet Coffee"/></div>
+      </a>
+      <div class="drink-name">Pandan Coco Cloud Viet Coffee</div>
+      <div class="drink-price">$6.80</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/tiramisu-cloud-viet/34A75B4TPQ7GUZ7V2Y6HPDME" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/tiramisu-cloud-viet.png" alt="Tiramisu Cloud Viet"/></div>
+      </a>
+      <div class="drink-name">Tiramisu Cloud Viet</div>
+      <div class="drink-price">$6.95</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/ube-coco-cloud-viet-coffee/23" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/ube-coco-cloud-viet-coffee.png" alt="Ube Coco Cloud Viet Coffee"/></div>
+      </a>
+      <div class="drink-name">Ube Coco Cloud Viet Coffee</div>
+      <div class="drink-price">$6.80</div>
+    </div>
+  </div>
+</section>
+
+<!-- ICED / HOT SPECIALTY COFFEE -->
+<section class="menu-grid-section is-warm">
+  <div class="menu-grid-head">
+    <span class="tag">Menu</span>
+    <h2 class="menu-grid-h2">Iced / Hot Specialty Coffee</h2>
+  </div>
+  <div class="drink-grid">
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/cookie-butter-latte/77" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/cookie-butter-latte.png" alt="Cookie Butter Latte"/></div>
+      </a>
+      <div class="drink-name">Cookie Butter Latte</div>
+      <div class="drink-price">$7.50</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/cookies-cream-latte/GO53PE57YC765HTLF6XNZD7Z" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/cookies-and-cream-latte.png" alt="Cookies &amp; Cream Latte"/></div>
+      </a>
+      <div class="drink-name">Cookies &amp; Cream Latte</div>
+      <div class="drink-price">$7.50</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/sea-salt-caramel-latte/78" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/sea-salt-caramel-latte.png" alt="Sea Salt Caramel Latte"/></div>
+      </a>
+      <div class="drink-name">Sea Salt Caramel Latte</div>
+      <div class="drink-price">$7.50</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/pumpkin-pie-latte/80" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/pumpkin-pie-latte.png" alt="Pumpkin Pie Latte"/></div>
+      </a>
+      <div class="drink-name">Pumpkin Pie Latte</div>
+      <div class="drink-price">$7.25</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/coconut-taro-latte/75" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/coconut-taro-latte.png" alt="Coconut Taro Latte"/></div>
+      </a>
+      <div class="drink-name">Coconut Taro Latte</div>
+      <div class="drink-price">$6.95</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/rose-latte/79" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/rose-latte.png" alt="Rose Latte"/></div>
+      </a>
+      <div class="drink-name">Rose Latte</div>
+      <div class="drink-price">$7.25</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/latte/87" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/latte.png" alt="Latte"/></div>
+      </a>
+      <div class="drink-name">Latte</div>
+      <div class="drink-price">$6.00</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/americano/86" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/americano.png" alt="Americano"/></div>
+      </a>
+      <div class="drink-name">Americano</div>
+      <div class="drink-price">$5.00</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/hot-mocha/92" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/hot-mocha.png" alt="HOT Mocha"/></div>
+      </a>
+      <div class="drink-name">HOT Mocha</div>
+      <div class="drink-price">$6.50</div>
+    </div>
+  </div>
+</section>
+
+<!-- UJI CEREMONIAL MATCHA -->
+<section class="menu-grid-section is-white">
+  <div class="menu-grid-head">
+    <span class="tag">Menu</span>
+    <h2 class="menu-grid-h2">Uji Ceremonial Matcha</h2>
+  </div>
+  <div class="drink-grid">
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/brown-sugar-uji-matcha-latte/37" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/brown-sugar-uji-matcha-latte.png" alt="Brown Sugar Uji Matcha Latte"/></div>
+      </a>
+      <div class="drink-name">Brown Sugar Uji Matcha Latte</div>
+      <div class="drink-price">$7.00</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/chizu-uji-matcha-latte/48" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/uji-matcha-latte.png" alt="Chizu Uji Matcha Latte"/></div>
+      </a>
+      <div class="drink-name">Chizu Uji Matcha Latte</div>
+      <div class="drink-price">$7.00</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/uji-matcha-latte/72" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/uji-matcha-latte.png" alt="Uji Matcha Latte"/></div>
+      </a>
+      <div class="drink-name">Uji Matcha Latte</div>
+      <div class="drink-price">$6.85</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/strawberry-uji-matcha-latte/DCWFLXSWXNLQZOJ24B5NJOLO" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/strawberry-uji-matcha-latte.jpeg" alt="Strawberry Uji Matcha Latte"/></div>
+      </a>
+      <div class="drink-name">Strawberry Uji Matcha Latte</div>
+      <div class="drink-price">$7.20</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/blueberry-uji-matcha-latte/P66PMXPTFWKIF6UOCIOM4QE5" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/blueberry-uji-matcha-latte.png" alt="Blueberry Uji Matcha Latte"/></div>
+      </a>
+      <div class="drink-name">Blueberry Uji Matcha Latte</div>
+      <div class="drink-price">$7.20</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/ube-coconut-matcha-latte/UPLNWX4I4GQMOPURGGYYFYXT" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/ube-coconut-matcha-latte.png" alt="Ube Coconut Matcha Latte"/></div>
+      </a>
+      <div class="drink-name">Ube Coconut Matcha Latte</div>
+      <div class="drink-price">$7.20</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/coconut-uji-matcha-cloud/SNIPXXIOG22BLONK5CDGCOMU" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/coconut-uji-matcha-cloud.png" alt="Coconut Uji Matcha Cloud"/></div>
+      </a>
+      <div class="drink-name">Coconut Uji Matcha Cloud</div>
+      <div class="drink-price">$7.00</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/jasmine-uji-matcha-cloud/PQN2CNP552XP27T64KNQCUO4" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/jasmine-uji-matcha-cloud.png" alt="Jasmine Uji Matcha Cloud"/></div>
+      </a>
+      <div class="drink-name">Jasmine Uji Matcha Cloud</div>
+      <div class="drink-price">$7.00</div>
+    </div>
+  </div>
+</section>
+
+<!-- LEMONADE SERIES -->
+<section class="menu-grid-section is-warm">
+  <div class="menu-grid-head">
+    <span class="tag">Menu</span>
+    <h2 class="menu-grid-h2">Lemonade Series</h2>
+  </div>
+  <div class="drink-grid">
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/strawberry-lemonade/X5GXLSPCZI7HJT7ESEWDKTZF" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/strawberry-lemonade.png" alt="Strawberry Lemonade"/></div>
+      </a>
+      <div class="drink-name">Strawberry Lemonade</div>
+      <div class="drink-price">$7.00</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/dragonfruit-lemonade/VZZIWHJYKIKV7PAASKBYWQHW" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/dragonfruit-lemonade.png" alt="Dragonfruit Lemonade"/></div>
+      </a>
+      <div class="drink-name">Dragonfruit Lemonade</div>
+      <div class="drink-price">$7.00</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/white-peach-lemonade/GGA7BY27Q4S7ERNC7HRCCOHO" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/white-peach-lemonade.png" alt="White Peach Lemonade"/></div>
+      </a>
+      <div class="drink-name">White Peach Lemonade</div>
+      <div class="drink-price">$7.00</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/lavender-lemonade/56LOAK5E3CNA3V5XCZIMZ243" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/lavender-lemonade.png" alt="Lavender Lemonade"/></div>
+      </a>
+      <div class="drink-name">Lavender Lemonade</div>
+      <div class="drink-price">$7.00</div>
+    </div>
+  </div>
+</section>
+
+<!-- LOOSE LEAF TEAS -->
+<section class="menu-grid-section is-white">
+  <div class="menu-grid-head">
+    <span class="tag">Menu</span>
+    <h2 class="menu-grid-h2">Loose Leaf Teas</h2>
+  </div>
+  <div class="drink-grid">
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/chizu-assam-black-tea/52" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/chizu-assam-black-tea.png" alt="Chizu Assam Black Tea"/></div>
+      </a>
+      <div class="drink-name">Chizu Assam Black Tea</div>
+      <div class="drink-price">$5.80</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/jasmine-green-tea/90" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/jasmine-green-tea.png" alt="Jasmine Green Tea"/></div>
+      </a>
+      <div class="drink-name">Jasmine Green Tea</div>
+      <div class="drink-price">$5.50</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/assam-black-tea/88" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/assam-black-tea.png" alt="Assam Black Tea"/></div>
+      </a>
+      <div class="drink-name">Assam Black Tea</div>
+      <div class="drink-price">$5.50</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/pure-honey-jasmine-green-tea/89" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/pure-honey-jasmine-green-tea.png" alt="Pure Honey Jasmine Green Tea"/></div>
+      </a>
+      <div class="drink-name">Pure Honey Jasmine Green Tea</div>
+      <div class="drink-price">$5.90</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/hot-jasmine-green-tea/6M2SLJWU76YN4DHTZAWDLQMG" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/hot-jasmine-green-tea.png" alt="HOT Jasmine Green Tea"/></div>
+      </a>
+      <div class="drink-name">HOT Jasmine Green Tea</div>
+      <div class="drink-price">$5.60</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/hot-assam-black-tea/VSJN3HIE7PQHUQVNTQHSYOAL" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/hot-assam-black-tea.png" alt="HOT Assam Black Tea"/></div>
+      </a>
+      <div class="drink-name">HOT Assam Black Tea</div>
+      <div class="drink-price">$5.60</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/hot-roasted-oolong-tea/4H4OMILN5TIDM23FOQGBOVVJ" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/hot-roasted-oolong-tea.png" alt="HOT Roasted Oolong Tea"/></div>
+      </a>
+      <div class="drink-name">HOT Roasted Oolong Tea</div>
+      <div class="drink-price">$5.60</div>
+    </div>
+  </div>
+</section>
+
+<!-- CAFFEINE-FREE -->
+<section class="menu-grid-section is-warm">
+  <div class="menu-grid-head">
+    <span class="tag">Menu</span>
+    <h2 class="menu-grid-h2">Caffeine-Free</h2>
+  </div>
+  <div class="drink-grid">
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/brown-sugar-cookies-cream-milk/767XMQUNWGC4JOTUBOI4WUT6" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/brown-sugar-cookies-and-cream-milk.png" alt="Brown Sugar Cookies &amp; Cream MILK"/></div>
+      </a>
+      <div class="drink-name">Brown Sugar Cookies &amp; Cream MILK</div>
+      <div class="drink-price">$6.90</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/brown-sugar-milk/EU4UAAYA757XN64SUULIXUJH" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/brown-sugar-milk.jpeg" alt="Brown Sugar MILK"/></div>
+      </a>
+      <div class="drink-name">Brown Sugar MILK</div>
+      <div class="drink-price">$6.20</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/chizu-fresh-taro-latte/68" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/chizu-fresh-taro-latte.png" alt="Chizu Fresh Taro Latte"/></div>
+      </a>
+      <div class="drink-name">Chizu Fresh Taro Latte</div>
+      <div class="drink-price">$6.90</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/mung-bean-pandan-latte/67" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/mung-bean-pandan-latte.png" alt="Mung Bean Pandan Latte"/></div>
+      </a>
+      <div class="drink-name">Mung Bean Pandan Latte</div>
+      <div class="drink-price">$6.90</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/fresh-taro-latte/70" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/fresh-taro-latte.png" alt="Fresh Taro Latte"/></div>
+      </a>
+      <div class="drink-name">Fresh Taro Latte</div>
+      <div class="drink-price">$6.50</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/winter-melon-milk-tea/62" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/winter-melon-milk-tea.png" alt="Winter Melon Milk Tea"/></div>
+      </a>
+      <div class="drink-name">Winter Melon Milk Tea</div>
+      <div class="drink-price">$5.95</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/strawberry-milk/R5GZSWYUALH3FZUXXH5TEB7M" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/strawberry-milk.png" alt="Strawberry Milk"/></div>
+      </a>
+      <div class="drink-name">Strawberry Milk</div>
+      <div class="drink-price">$6.20</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/hot-chocolate/RKV3WORAVYEQZK6PLPSJVE2F" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/hot-chocolate.png" alt="HOT Chocolate"/></div>
+      </a>
+      <div class="drink-name">HOT Chocolate</div>
+      <div class="drink-price">$5.50</div>
+    </div>
+  </div>
+</section>
+
+<!-- VIRAL ICE CREAM -->
+<section class="menu-grid-section is-white">
+  <div class="menu-grid-head">
+    <span class="tag">Menu</span>
+    <h2 class="menu-grid-h2">Viral Ice Cream</h2>
+  </div>
+  <div class="drink-grid">
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/crispy-chicken-burger-ice-cream/KFQNFEL26M35P7TG5DGWHZ5Z" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/crispy-chicken-burger-ice-cream.jpeg" alt="Crispy Chicken Burger Ice Cream"/></div>
+      </a>
+      <div class="drink-name">Crispy Chicken Burger Ice Cream</div>
+      <div class="drink-price">$6.99</div>
+    </div>
+    <div class="drink-card out-of-stock">
+      <a href="https://bestiesboba.square.site/product/french-fries-ice-cream/SZIF74PYQTV5GB7KXLRZ75KR" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/french-fries-ice-cream.jpeg" alt="French Fries Ice Cream"/></div>
+      </a>
+      <div class="drink-name">French Fries Ice Cream</div>
+      <div class="drink-price">$5.99</div>
+      <div class="drink-oos-tag">Sold Out</div>
+    </div>
+    <div class="drink-card out-of-stock">
+      <a href="https://bestiesboba.square.site/product/fried-cluckin-ice-cream/XVTRETTD5EW5MUFEBLAMHRIQ" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/fried-cluckin-ice-cream.jpeg" alt="Fried Cluckin' Ice Cream"/></div>
+      </a>
+      <div class="drink-name">Fried Cluckin' Ice Cream</div>
+      <div class="drink-price">$6.99</div>
+      <div class="drink-oos-tag">Sold Out</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/steak-shaped-ice-cream-bar/Y7WQEF4BFME5RAHWUKE3BX2I" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/steak-shaped-ice-cream-bar.jpeg" alt="Steak-Shaped Ice Cream Bar"/></div>
+      </a>
+      <div class="drink-name">Steak-Shaped Ice Cream Bar</div>
+      <div class="drink-price">$5.99</div>
+    </div>
+  </div>
+</section>
+
+<!-- MOCHI DONUTS -->
+<section class="menu-grid-section is-warm">
+  <div class="menu-grid-head">
+    <span class="tag">Menu</span>
+    <h2 class="menu-grid-h2">Mochi Donuts</h2>
+  </div>
+  <div class="drink-grid">
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/-single-mochi-donut/93" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/single-mochi-donut.jpeg" alt="Single Mochi Donut"/></div>
+      </a>
+      <div class="drink-name">Single Mochi Donut</div>
+      <div class="drink-price">$3.50</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/-box-of-3-mochi-donuts/20" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/box-of-3-mochi-donuts.jpeg" alt="Box of 3 Mochi Donuts"/></div>
+      </a>
+      <div class="drink-name">Box of 3 Mochi Donuts</div>
+      <div class="drink-price">$9.50</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/-box-of-6-mochi-donuts/19" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/box-of-6-mochi-donuts.jpeg" alt="Box of 6 Mochi Donuts"/></div>
+      </a>
+      <div class="drink-name">Box of 6 Mochi Donuts</div>
+      <div class="drink-price">$18.00</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/-box-of-12-mochi-donuts/17" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/box-of-12-mochi-donuts.jpeg" alt="Box of 12 Mochi Donuts"/></div>
+      </a>
+      <div class="drink-name">Box of 12 Mochi Donuts</div>
+      <div class="drink-price">$35.00</div>
+    </div>
+  </div>
+</section>
+
+<!-- MERCH -->
+<section class="menu-grid-section is-white">
+  <div class="menu-grid-head">
+    <span class="tag">Menu</span>
+    <h2 class="menu-grid-h2">Merch</h2>
+  </div>
+  <div class="drink-grid">
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/minibubu-keychain/MV64ZEJP5QACU44C75NLDTBH" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/minibubu-keychain.png" alt="Minibubu Keychain"/></div>
+      </a>
+      <div class="drink-name">Minibubu Keychain</div>
+      <div class="drink-price">$4.99</div>
+    </div>
+    <div class="drink-card out-of-stock">
+      <a href="https://bestiesboba.square.site/product/blind-box-plushies-series-1/IQYIUVNTRTF6YTOR66UKGNBL" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/blind-box-plushies-series-1.png" alt="Blind Box Plushies Series 1"/></div>
+      </a>
+      <div class="drink-name">Blind Box Plushies Series 1</div>
+      <div class="drink-price">$8.99</div>
+      <div class="drink-oos-tag">Sold Out</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/blind-box-plushies-series-2/UR7VK3FEPER5I5OEIGR5XMHQ" target="_blank">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/blind-box-plushies-series-2.png" alt="Blind Box Plushies Series 2"/></div>
+      </a>
+      <div class="drink-name">Blind Box Plushies Series 2</div>
+      <div class="drink-price">$8.99</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="f-logo">Besties <span>Boba</span> & Bites</div>
+        <div class="f-sub">Boba Tea, Coffee & Mochi Donuts &mdash; Livermore, CA</div>
+      </div>
+      <div class="f-col">
+        <div class="f-col-head">Menu</div>
+        <ul><li><a href="menu.html">Drinks</a></li><li><a href="bobamain.html#this-week">Mochi Donuts</a></li><li><a href="menu.html">Snacks</a></li><li><a href="https://bestiesboba.square.site/" target="_blank">Order Online</a></li></ul>
+      </div>
+      <div class="f-col">
+        <div class="f-col-head">Visit</div>
+        <ul><li><a href="bobamain.html#this-week">This Week's Flavors</a></li><li><a href="catering.html">Catering</a></li><li><a href="visit.html">Find Us</a></li><li><a href="https://instagram.com/BestiesBoba" target="_blank">Instagram</a></li></ul>
+      </div>
+      <div class="f-col">
+        <div class="f-col-head">Contact</div>
+        <ul><li><a href="tel:9258007822">(925) 800-7822</a></li><li><a href="mailto:BestiesLivermore@gmail.com">Email Us</a></li><li><a>4520 Las Positas Rd</a></li><li><a>Livermore, CA 94551</a></li><li><a href="privacy.html">Privacy Policy</a></li></ul>
+      </div>
+    </div>
+    <div class="footer-bot">
+      <span class="f-copy">&copy; 2026 Besties Boba & Bites. All rights reserved.</span>
+      <a href="https://instagram.com/BestiesBoba" target="_blank" class="f-ig">@BestiesBoba</a>
+    </div>
+  </div>
+</footer>
+
+<div id="bb-widget">
+  <div id="bb-chat">
+    <div id="bb-header">
+      <div class="bb-header-left">
+        <div class="bb-header-avatar">🐱</div>
+        <div>
+          <div class="bb-name">Besties Boba & Bites</div>
+          <div class="bb-status" id="bb-status">Ask us anything!</div>
+        </div>
+      </div>
+      <button id="bb-close" onclick="bbClose()">&#215;</button>
+    </div>
+    <div id="bb-msgs">
+      <div class="bb-row">
+        <div class="bb-avatar">🐱</div>
+        <div class="bb-bubble bot">Hey! I'm Mochi, the AI chat assistant for Besties Boba & Bites — not a real person, just a friendly bot! Ask me about our menu, specials, or catering. (I can make mistakes, so please confirm details with the shop.)</div>
+      </div>
+    </div>
+    <div id="bb-chips">
+      <button class="bb-chip" onclick="bbChip(this)">Menu?</button>
+      <button class="bb-chip" onclick="bbChip(this)">Catering?</button>
+      <button class="bb-chip" onclick="bbChip(this)">Tuesday deal?</button>
+    </div>
+    <div id="bb-input-row">
+      <input id="bb-input" type="text" placeholder="Type a message..."/>
+      <button id="bb-send" onclick="bbSend()">Send</button>
+    </div>
+  </div>
+  <div id="bb-cat-stage" class="bb-s-peep">
+    <div id="bb-meow-bubble">Meow!</div>
+    <div id="bb-cat-wrap">
+      <canvas id="bb-rive" width="340" height="340"></canvas>
+    </div>
+    <div id="bb-cat-hitzone"></div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+
+<!-- ===== CONSENT GATE (injected) ===== -->
+<style>
+  #bb-consent-gate {
+    position: absolute;
+    inset: 0;
+    z-index: 50;
+    background: rgba(254, 252, 248, 0.98);
+    backdrop-filter: blur(3px);
+    display: none;               /* shown by JS only when needed */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 28px 24px;
+    border-radius: 20px;
+  }
+  #bb-consent-gate.show { display: flex; }
+  /* While the gate is up, physically block interaction with the input row and chips
+     behind it, so a mobile tap can't slip through and open the keyboard.
+     Driven by the .bb-gated class the JS toggles on #bb-chat (works on all browsers). */
+  #bb-input-row.bb-gated-row,
+  #bb-chips.bb-gated-row { pointer-events: none; opacity: 0.5; }
+  #bb-consent-gate .cg-icon { font-size: 34px; margin-bottom: 14px; }
+  #bb-consent-gate h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 19px;
+    color: var(--dark, #160E12);
+    margin-bottom: 12px;
+  }
+  #bb-consent-gate p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--muted, #8A7278);
+    margin-bottom: 8px;
+    max-width: 280px;
+  }
+  #bb-consent-gate a { color: var(--pink, #E8527A); font-weight: 700; }
+  #bb-consent-gate .cg-fine {
+    font-size: 11px;
+    color: #a99ca1;
+    margin-bottom: 20px;
+  }
+  #bb-consent-gate .cg-actions { display: flex; flex-direction: column; gap: 8px; align-items: center; width: 100%; }
+  #bb-consent-gate #bb-consent-agree {
+    background: var(--pink, #E8527A);
+    color: #fff;
+    border: none;
+    border-radius: 999px;
+    padding: 11px 40px;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: 'Work Sans', sans-serif;
+    cursor: pointer;
+    transition: background .18s;
+  }
+  #bb-consent-gate #bb-consent-agree:hover { background: var(--pink-d, #C73A61); }
+  #bb-consent-gate #bb-consent-decline {
+    background: none;
+    border: none;
+    color: var(--muted, #8A7278);
+    font-size: 13px;
+    font-weight: 600;
+    font-family: 'Work Sans', sans-serif;
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 4px;
+  }
+  #bb-consent-gate #bb-consent-decline:hover { color: var(--dark, #160E12); }
+  #bb-consent-gate .cg-close {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    background: rgba(0,0,0,0.06);
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    font-size: 18px;
+    line-height: 1;
+    color: var(--muted, #8A7278);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #bb-consent-gate .cg-close:hover { background: rgba(0,0,0,0.12); color: var(--dark, #160E12); }
+</style>
+
+<div id="bb-consent-gate">
+  <button class="cg-close" id="bb-consent-close" aria-label="Close">&#215;</button>
+  <div class="cg-icon">🐱</div>
+  <h3>Before you chat</h3>
+  <p>To continue chatting, you agree to our <a href="privacy.html" target="_blank">Privacy Policy</a>. Conversations may be reviewed to improve service.</p>
+  <p class="cg-fine">Mochi is an AI assistant, not a person, and can make mistakes — its answers are for general info only, aren't professional advice or a binding offer, so please confirm prices and details with the shop.</p>
+  <div class="cg-actions">
+    <button id="bb-consent-agree">Agree &amp; Continue</button>
+    <button id="bb-consent-decline">No thanks</button>
+  </div>
+</div>
+
+<script>
+(function () {
+  var STORAGE_KEY = 'bb_chat_consent';
+  var chat = document.getElementById('bb-chat');
+  var gate = document.getElementById('bb-consent-gate');
+  if (!chat || !gate) return;
+
+  // Move the gate inside the chat window so it overlays only the chat.
+  chat.appendChild(gate);
+
+  var input = document.getElementById('bb-input');
+  var sendBtn = document.getElementById('bb-send');
+  var chips = chat.querySelectorAll('.bb-chip');
+
+  function hasConsented() {
+    try { return sessionStorage.getItem(STORAGE_KEY) === 'yes'; }
+    catch (e) { return false; }  // if sessionStorage is blocked, gate shows every open (safer)
+  }
+
+  // Actually lock the interactive elements — not just cover them — so mobile
+  // taps can't reach the input behind the overlay and pop the keyboard.
+  var inputRow = document.getElementById('bb-input-row');
+  var chipsRow = document.getElementById('bb-chips');
+
+  function lockChat() {
+    // NOTE: do NOT add a class to `chat` here — the MutationObserver watches
+    // `chat` for class changes, so doing so would retrigger it in an infinite loop.
+    if (inputRow) inputRow.classList.add('bb-gated-row');
+    if (chipsRow) chipsRow.classList.add('bb-gated-row');
+    if (input) {
+      input.blur();                 // dismiss keyboard if it opened
+      input.setAttribute('disabled', 'disabled');
+    }
+    if (sendBtn) sendBtn.setAttribute('disabled', 'disabled');
+    chips.forEach(function (c) { c.setAttribute('disabled', 'disabled'); });
+  }
+  function unlockChat() {
+    if (inputRow) inputRow.classList.remove('bb-gated-row');
+    if (chipsRow) chipsRow.classList.remove('bb-gated-row');
+    if (input) input.removeAttribute('disabled');
+    if (sendBtn) sendBtn.removeAttribute('disabled');
+    chips.forEach(function (c) { c.removeAttribute('disabled'); });
+  }
+
+  function showGateIfNeeded() {
+    if (chat.classList.contains('open') && !hasConsented()) {
+      gate.classList.add('show');
+      lockChat();
+    } else {
+      gate.classList.remove('show');
+      if (hasConsented()) unlockChat();
+    }
+  }
+
+  document.getElementById('bb-consent-agree').addEventListener('click', function () {
+    try { sessionStorage.setItem(STORAGE_KEY, 'yes'); } catch (e) {}
+    gate.classList.remove('show');
+    unlockChat();
+  });
+
+  // Declining or closing simply shuts the chat widget — no consent is stored,
+  // so the gate will appear again next time they open it.
+  function declineAndClose() {
+    gate.classList.remove('show');
+    if (typeof bbClose === 'function') {
+      bbClose();
+    } else {
+      chat.classList.remove('open');
+    }
+  }
+  document.getElementById('bb-consent-decline').addEventListener('click', declineAndClose);
+  document.getElementById('bb-consent-close').addEventListener('click', declineAndClose);
+
+  // Watch the chat window for the "open" class toggling, without touching script.js.
+  // Guard against reentrancy so the callback can never spiral into a loop.
+  var running = false;
+  var observer = new MutationObserver(function () {
+    if (running) return;
+    running = true;
+    showGateIfNeeded();
+    running = false;
+  });
+  observer.observe(chat, { attributes: true, attributeFilter: ['class'] });
+
+  // If consent hasn't been given yet, lock immediately so nothing is interactive on load.
+  if (!hasConsented()) lockChat();
+
+  // Also check once on load in case it starts open.
+  showGateIfNeeded();
+})();
+</script>
+<!-- ===== END CONSENT GATE ===== -->
+</body>
+</html>
