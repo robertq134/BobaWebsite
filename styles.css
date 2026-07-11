@@ -108,6 +108,9 @@ html { scroll-behavior: smooth; }
   --border: #EAD8DF;
   --cream:  #FEF9F6;
   --warm:   #F9F0EC;
+  --purple: #9B7FE0;
+  --purple-d: #7C5FC4;
+  --pink-pastel: #FBD9E3;
 }
 
 body { font-family: 'Roboto', sans-serif; background: var(--cream); color: var(--text); -webkit-font-smoothing: antialiased; }
@@ -344,18 +347,6 @@ nav.nav-on-dark:not(.scrolled) .nav-toggle span { background: white; }
   border-radius: 999px;
   box-shadow: 0 4px 12px rgba(199,58,97,.3);
 }
-/* Dark overlay dims non-active cards */
-.carousel-item::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(22,14,18,.42);
-  border-radius: 24px;
-  transition: opacity .5s ease;
-  pointer-events: none;
-  z-index: 3;
-}
-.carousel-item.is-active::after { opacity: 0; }
 /* Selection is shown as a translucent darker-pink wash over the active card's
    photo, instead of scaling the whole card up — a gentler "this one's picked" cue. */
 .ci-img { position: relative; }
@@ -618,63 +609,95 @@ nav.nav-on-dark:not(.scrolled) .nav-logo img { filter: drop-shadow(0 1px 4px rgb
 .award-item-img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }
 
 /* ── PROMOS & SPECIALS ── */
-.promos-section { background: linear-gradient(135deg, var(--pink) 0%, var(--pink-d) 100%); padding: 88px 48px; overflow: hidden; }
-.promos-inner { max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: 300px 1fr; gap: 40px; align-items: center; }
+.promos-section { background: var(--pink-pastel); padding: 120px 48px; overflow: hidden; position: relative; }
+.promos-deco { position: absolute; pointer-events: none; z-index: 1; color: var(--pink); opacity: .55; }
+.promos-inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 340px 1fr; gap: 48px; align-items: center; position: relative; z-index: 2; }
 .promos-head { text-align: left; margin-bottom: 0; }
-.promos-title { font-family: 'Fredoka', sans-serif; font-size: clamp(30px, 3.2vw, 44px); font-weight: 700; color: #fff; line-height: 1.1; }
-.promos-sub { font-size: 16px; color: rgba(255,255,255,0.9); margin-top: 10px; }
-.promos-cats { display: flex; align-items: flex-end; margin-top: 28px; }
-.promos-cats img { width: 74px; height: auto; filter: drop-shadow(0 8px 14px rgba(0,0,0,0.2)); }
-.promos-cats img:not(:first-child) { margin-left: -14px; }
-.promos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.promos-title {
+  font-family: 'Fredoka', sans-serif;
+  font-size: clamp(42px, 5vw, 64px);
+  font-weight: 700;
+  line-height: 1.02;
+  color: #fff;
+  -webkit-text-stroke: 2px var(--dark);
+  text-shadow: -3px -3px 0 var(--dark), 3px -3px 0 var(--dark), -3px 3px 0 var(--dark), 3px 3px 0 var(--dark), 0 6px 0 rgba(22,14,18,0.15);
+}
+.promos-sub { font-size: 18px; font-weight: 700; color: var(--pink-d); margin-top: 16px; }
+.promos-cats { display: flex; align-items: flex-end; margin-top: 32px; }
+.promos-cats img { width: 110px; height: auto; filter: drop-shadow(0 10px 16px rgba(0,0,0,0.18)); }
+.promos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
 .promos-arrow { display: none; }
-.promo-card { background: #fff; border: 1px solid var(--border); border-radius: 18px; padding: 22px; text-align: left; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; box-shadow: 0 14px 32px rgba(0,0,0,0.16); transition: transform .25s ease, box-shadow .25s ease; }
-.promo-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.24); }
-.promo-tag { display: inline-block; padding: 5px 14px; border-radius: 999px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; }
-.promo-tag-pink { background: var(--pink); color: #fff; }
-.promo-tag-yellow { background: var(--yellow); color: var(--dark); }
-.promo-tag-dark { background: var(--dark); color: #fff; }
-.promo-img { width: 100%; aspect-ratio: 1 / 1; max-height: 200px; border-radius: 12px; overflow: hidden; box-sizing: border-box; }
+.promo-card {
+  border-radius: 24px;
+  padding: 28px 26px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  min-height: 460px;
+  box-shadow: 0 16px 36px rgba(0,0,0,0.16);
+  transition: transform .25s ease, box-shadow .25s ease;
+  position: relative;
+}
+.promo-card:hover { transform: translateY(-10px); box-shadow: 0 24px 48px rgba(0,0,0,0.22); }
+.promo-card-pink { background: var(--pink); }
+.promo-card-yellow { background: var(--yellow); }
+.promo-card-purple { background: var(--purple); }
+.promo-tag-row { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+.promo-tag { display: inline-block; padding: 6px 16px; border-radius: 999px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .5px; background: #fff; }
+.promo-card-pink .promo-tag { color: var(--pink-d); }
+.promo-card-yellow .promo-tag { color: #B8790A; }
+.promo-card-purple .promo-tag { color: var(--purple-d); }
+.promo-name { font-family: 'Fredoka', sans-serif; font-size: 26px; font-weight: 700; line-height: 1.2; color: var(--dark); text-transform: uppercase; }
+.promo-divider { width: 100%; height: 0; border-top: 2px dashed rgba(22,14,18,0.35); position: relative; margin: 2px 0; }
+.promo-divider span { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); padding: 0 8px; font-size: 15px; color: #fff; }
+.promo-card-pink .promo-divider span { background: var(--pink); }
+.promo-card-yellow .promo-divider span { background: var(--yellow); }
+.promo-card-purple .promo-divider span { background: var(--purple); }
+.promo-desc { font-size: 14px; color: rgba(22,14,18,0.75); line-height: 1.6; flex: 1; }
+.promo-img { width: 100%; aspect-ratio: 1 / 1; max-height: 170px; border-radius: 14px; overflow: hidden; box-sizing: border-box; border: 3px solid rgba(255,255,255,0.6); }
 .promo-img img { width: 100%; height: 100%; max-width: 100%; max-height: 100%; object-fit: cover; display: block; }
-.promo-name { font-family: 'Fredoka', sans-serif; font-size: 19px; font-weight: 600; color: var(--dark); }
-.promo-desc { font-size: 13px; color: var(--muted); line-height: 1.6; flex: 1; }
+.promo-card .btn-fill { background: var(--dark); border-color: transparent; }
+.promo-card .btn-fill:hover { background: #000; }
 
 /* ── INSTAGRAM: polaroid / scrapbook style ── */
-.ig-section { background: var(--warm); padding: 88px 48px; border-top: 1px solid var(--border); position: relative; overflow: hidden; }
-.ig-head { text-align: center; margin-bottom: 56px; position: relative; z-index: 2; }
-.ig-title { font-family: 'Fredoka', sans-serif; font-size: clamp(28px, 3vw, 42px); font-weight: 700; color: var(--dark); }
-.ig-handle { display: inline-block; margin-top: 8px; font-size: 16px; font-weight: 700; color: var(--pink); }
-.ig-grid { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; position: relative; z-index: 2; align-items: start; }
+.ig-section { background: var(--warm); padding: 140px 48px; border-top: 1px solid var(--border); position: relative; overflow: hidden; }
+.ig-head { text-align: center; margin-bottom: 72px; position: relative; z-index: 2; }
+.ig-title { font-family: 'Fredoka', sans-serif; font-size: clamp(40px, 5vw, 58px); font-weight: 700; color: var(--dark); }
+.ig-handle { display: inline-block; margin-top: 10px; font-size: 20px; font-weight: 700; color: var(--pink); }
+.ig-grid { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 56px; position: relative; z-index: 2; align-items: start; }
 .ig-post {
   background: #fff;
-  padding: 14px 14px 44px;
-  border-radius: 4px;
-  box-shadow: 0 14px 30px rgba(22,14,18,0.16);
+  padding: 22px 22px 64px;
+  border-radius: 6px;
+  box-shadow: 0 20px 44px rgba(22,14,18,0.18);
   position: relative;
   transition: transform .3s ease, box-shadow .3s ease;
 }
-.ig-post-1 { transform: rotate(-5deg); }
-.ig-post-2 { transform: rotate(3deg); margin-top: 18px; }
-.ig-post-3 { transform: rotate(-3deg); }
-.ig-post:hover { transform: rotate(0deg) translateY(-6px) scale(1.04); box-shadow: 0 22px 44px rgba(22,14,18,0.22); z-index: 5; }
+/* First and third lean inward toward the center card, like a fanned stack of photos */
+.ig-post-1 { transform: rotate(5deg); }
+.ig-post-2 { transform: rotate(0deg); margin-top: 28px; }
+.ig-post-3 { transform: rotate(-5deg); }
+.ig-post:hover { transform: rotate(0deg) translateY(-8px) scale(1.05); box-shadow: 0 28px 56px rgba(22,14,18,0.24); z-index: 5; }
 .ig-post-tape {
   position: absolute;
-  top: -14px;
+  top: -18px;
   left: 50%;
   transform: translateX(-50%) rotate(-3deg);
-  width: 60px;
-  height: 22px;
+  width: 84px;
+  height: 30px;
   background: rgba(232,82,122,0.35);
   border: 1px solid rgba(232,82,122,0.15);
 }
 .ig-post-photo { width: 100%; aspect-ratio: 1 / 1; overflow: hidden; background: #000; }
 .ig-post-photo video { width: 100%; height: 100%; object-fit: cover; display: block; }
-.ig-post-caption { font-family: 'Caveat', cursive; font-size: 22px; font-weight: 700; color: var(--text); text-align: center; margin-top: 10px; }
-.ig-followers { text-align: center; font-size: 20px; font-weight: 700; color: var(--pink); margin-bottom: 8px; }
-.ig-followers .ig-follower-num { font-size: clamp(30px, 4vw, 44px); font-weight: 800; color: var(--dark); display: block; }
-.ig-cta { text-align: center; margin-top: 56px; position: relative; z-index: 2; }
-.ig-follow-btn { display: inline-flex; align-items: center; gap: 10px; }
-.ig-follow-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+.ig-post-caption { font-family: 'Caveat', cursive; font-size: 30px; font-weight: 700; color: var(--text); text-align: center; margin-top: 14px; }
+.ig-followers { text-align: center; font-size: 26px; font-weight: 700; color: var(--pink); margin-bottom: 10px; }
+.ig-followers .ig-follower-num { font-size: clamp(46px, 6vw, 64px); font-weight: 800; color: var(--dark); display: block; }
+.ig-cta { text-align: center; margin-top: 72px; position: relative; z-index: 2; }
+.ig-follow-btn { display: inline-flex; align-items: center; gap: 10px; padding: 16px 32px; font-size: 17px; }
+.ig-follow-btn svg { width: 22px; height: 22px; flex-shrink: 0; }
 
 /* ── VISIT PAGE ── */
 .visit-hero-split { background: var(--warm); padding: 100px 48px 80px; border-bottom: 1px solid var(--border); }
@@ -977,7 +1000,10 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
   .promos-section { padding: 48px 0; }
   .promos-inner { grid-template-columns: 1fr; gap: 20px; }
   .promos-head { padding: 0 20px; text-align: center; }
+  .promos-title { font-size: 34px; -webkit-text-stroke-width: 1.5px; }
   .promos-cats { justify-content: center; margin-top: 20px; }
+  .promos-cats img { width: 80px; }
+  .promo-card { min-height: 0; }
   .promos-carousel { position: relative; }
   .promos-grid {
     display: flex;
