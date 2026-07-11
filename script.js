@@ -273,10 +273,10 @@ function setupFlavorCarousel() {
         var winCards = window.matchMedia('(max-width: 768px)').matches ? 1 : 2;
         var visible = absD <= winCards;
         var translateX = d * spacing;
-        // Active card is full size and lifted; side cards sit flat and slightly smaller
-        var scale = d === 0 ? 1.15 : 0.82;
-        var lift = d === 0 ? -20 : 0;
-        item.style.transform = 'translateX(' + translateX + 'px) translateY(' + lift + 'px) scale(' + scale + ')';
+        // Selection is shown via a pink tint overlay (see .carousel-item.is-active::before)
+        // rather than scaling the active card up — side cards just sit a little smaller for depth.
+        var scale = d === 0 ? 1 : 0.85;
+        item.style.transform = 'translateX(' + translateX + 'px) scale(' + scale + ')';
         item.style.opacity = visible ? 1 : 0;
         item.style.zIndex = d === 0 ? 100 : 50 - absD;
         item.style.pointerEvents = visible ? 'auto' : 'none';

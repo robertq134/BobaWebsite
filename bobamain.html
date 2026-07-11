@@ -5,7 +5,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Besties Boba & Bites — Livermore, CA</title>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Roboto:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fredoka:wght@500;600;700&family=Roboto:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 <script src="https://unpkg.com/@rive-app/canvas@2.17.3/rive.js"></script>
 <link rel="stylesheet" href="styles.css"/>
 </head>
@@ -154,7 +154,7 @@
   <div class="hero-inner">
     <div class="hero-content fade-in-load">
       <span class="tag">Boba Tea &amp; Mochi Donuts</span>
-      <h1 class="hero-h1">Livermore's favorite boba &amp; mochi spot</h1>
+      <h1 class="hero-h1">You and I. Boba &amp; Bites. <span class="hero-heart">&#9825;</span></h1>
       <p class="hero-sub">Handcrafted drinks, fresh mochi donuts, and good vibes — made daily with love.</p>
       <div class="hero-btns">
         <a href="https://bestiesboba.square.site/" target="_blank">
@@ -178,35 +178,43 @@
 
 <!-- ════════════ PROMOS & SPECIALS ════════════ -->
 <section class="promos-section">
-  <div class="promos-head fade-in-scroll">
-    <h2 class="promos-title">Specials &amp; Promos</h2>
-    <p class="promos-sub">Sweet deals worth coming back for</p>
-  </div>
-  <div class="promos-carousel">
-    <button class="promos-arrow promos-arrow-left" id="promos-prev" aria-label="Previous promo">&#8249;</button>
-    <div class="promos-grid stagger-group" id="promos-grid">
-      <div class="promo-card fade-in-left">
-        <div class="promo-img"><img src="mochidonutsV2.jpg" alt="$1 Mochi Donut Tuesdays"/></div>
-        <h3 class="promo-name">$1 Mochi Donut Tuesdays</h3>
-        <p class="promo-desc">Every Tuesday, snag a mochi donut for just $1 with any drink purchase. No coupon, no app — just show up thirsty.</p>
-        <a href="#this-week"><button class="btn-fill">See This Week's Flavors</button></a>
+  <div class="promos-inner">
+    <div class="promos-head fade-in-left">
+      <h2 class="promos-title">Specials &amp; Promos</h2>
+      <p class="promos-sub">Sweet deals worth coming back for!</p>
+      <div class="promos-cats">
+        <img src="cat-white.png" alt=""/>
+        <img src="cat-black.png" alt=""/>
+        <img src="cat-orange.png" alt=""/>
       </div>
-      <div class="promo-card fade-in-right">
-        <div class="promo-img"><img src="catering.png" alt="Catering &amp; Group Orders"/></div>
-        <h3 class="promo-name">Catering &amp; Group Orders</h3>
-        <p class="promo-desc">Boba flights, mochi donut towers, and drink bars for parties, offices, and everything in between. We bring the drinks — you bring the guest list.</p>
-        <a href="catering.html"><button class="btn-fill">Book Catering</button></a>
-      </div>
-      <div class="promo-card promo-card-wide fade-in-bottom">
-        <div class="promo-img"><img src="bobahero.png" alt="Order Ahead Online"/></div>
-        <div class="promo-wide-body">
+    </div>
+    <div class="promos-carousel">
+      <button class="promos-arrow promos-arrow-left" id="promos-prev" aria-label="Previous promo">&#8249;</button>
+      <div class="promos-grid stagger-group" id="promos-grid">
+        <div class="promo-card fade-in-left">
+          <span class="promo-tag promo-tag-pink">This Week</span>
+          <div class="promo-img"><img src="mochidonutsV2.jpg" alt="$1 Mochi Donut Tuesdays"/></div>
+          <h3 class="promo-name">$1 Mochi Donut Tuesdays</h3>
+          <p class="promo-desc">Every Tuesday, snag a mochi donut for just $1 with any drink purchase. No coupon, no app — just show up thirsty.</p>
+          <a href="#this-week"><button class="btn-fill">See This Week's Flavors</button></a>
+        </div>
+        <div class="promo-card fade-in-bottom">
+          <span class="promo-tag promo-tag-yellow">Group Orders</span>
+          <div class="promo-img"><img src="catering.png" alt="Catering &amp; Group Orders"/></div>
+          <h3 class="promo-name">Catering &amp; Group Orders</h3>
+          <p class="promo-desc">Boba flights, mochi donut towers, and drink bars for parties, offices, and everything in between.</p>
+          <a href="catering.html"><button class="btn-fill">Book Catering</button></a>
+        </div>
+        <div class="promo-card fade-in-right">
+          <span class="promo-tag promo-tag-dark">Order Online</span>
+          <div class="promo-img"><img src="bobahero.png" alt="Order Ahead Online"/></div>
           <h3 class="promo-name">Order Ahead Online</h3>
-          <p class="promo-desc">Skip the line — order from your phone and swing by for pickup. Same drinks, same donuts, zero wait.</p>
+          <p class="promo-desc">Skip the line — order from your phone and pick up fast!</p>
           <a href="https://bestiesboba.square.site/" target="_blank"><button class="btn-fill">Order Now</button></a>
         </div>
       </div>
+      <button class="promos-arrow promos-arrow-right" id="promos-next" aria-label="Next promo">&#8250;</button>
     </div>
-    <button class="promos-arrow promos-arrow-right" id="promos-next" aria-label="Next promo">&#8250;</button>
   </div>
 </section>
 
@@ -356,12 +364,27 @@
     <a href="https://instagram.com/BestiesBoba" target="_blank" class="ig-handle">@bestiesboba</a>
   </div>
   <div class="ig-grid stagger-group">
-    <div class="ig-post fade-in-scroll"><video src="ig-post-1.mp4" autoplay muted loop playsinline></video></div>
-    <div class="ig-post fade-in-scroll"><video src="ig-post-2.mp4" autoplay muted loop playsinline></video></div>
-    <div class="ig-post fade-in-scroll"><video src="ig-post-3.mp4" autoplay muted loop playsinline></video></div>
+    <div class="ig-post ig-post-1 fade-in-scroll">
+      <div class="ig-post-tape"></div>
+      <div class="ig-post-photo"><video src="ig-post-1.mp4" autoplay muted loop playsinline></video></div>
+      <div class="ig-post-caption">Sip happens! &#9825;</div>
+    </div>
+    <div class="ig-post ig-post-2 fade-in-scroll">
+      <div class="ig-post-tape"></div>
+      <div class="ig-post-photo"><video src="ig-post-2.mp4" autoplay muted loop playsinline></video></div>
+      <div class="ig-post-caption">Fresh boba daily</div>
+    </div>
+    <div class="ig-post ig-post-3 fade-in-scroll">
+      <div class="ig-post-tape"></div>
+      <div class="ig-post-photo"><video src="ig-post-3.mp4" autoplay muted loop playsinline></video></div>
+      <div class="ig-post-caption">Cheers, besties! &#9825;</div>
+    </div>
   </div>
   <div class="ig-cta fade-in-scroll">
-    <a href="https://instagram.com/BestiesBoba" target="_blank"><button class="btn-fill">Follow on Instagram</button></a>
+    <a href="https://instagram.com/BestiesBoba" target="_blank"><button class="btn-fill ig-follow-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      Follow on Instagram
+    </button></a>
   </div>
 </section>
 
@@ -382,7 +405,7 @@
       </div>
       <div class="f-col">
         <div class="f-col-head">Contact</div>
-        <ul><li><a href="tel:9258007822">(925) 800-7822</a></li><li><a href="mailto:BestiesLivermore@gmail.com">Email Us</a></li><li><a>4520 Las Positas Rd</a></li><li><a>Livermore, CA 94551</a></li><li><a href="privacy.html">Privacy Policy</a></li></ul>
+        <ul><li><a href="tel:9258007822">(925) 800 7822</a></li><li><a href="mailto:BestiesLivermore@gmail.com">Email Us</a></li><li><a>4520 Las Positas Rd</a></li><li><a>Livermore, CA 94551</a></li><li><a href="privacy.html">Privacy Policy</a></li></ul>
       </div>
     </div>
     <div class="footer-bot">
