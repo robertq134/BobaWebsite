@@ -222,16 +222,13 @@
   }
 
   function setupFollowerCounter() {
-    var el = document.getElementById('ig-follower-count');
-    if (!el) return;
-    var start = parseInt(el.getAttribute('data-count-from'), 10) || 0;
-    var target = parseInt(el.getAttribute('data-count-to'), 10) || 0;
-    var duration = 3200;
-    var started = false;
+    var els = Array.prototype.slice.call(document.querySelectorAll('.ig-counter'));
+    if (!els.length) return;
 
-    function animate() {
-      if (started) return;
-      started = true;
+    function animateEl(el) {
+      var start = parseInt(el.getAttribute('data-count-from'), 10) || 0;
+      var target = parseInt(el.getAttribute('data-count-to'), 10) || 0;
+      var duration = 3200;
       var startTime = null;
       function tick(ts) {
         if (!startTime) startTime = ts;
@@ -247,12 +244,12 @@
     var observer = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
         if (entry.isIntersecting) {
-          animate();
+          animateEl(entry.target);
           observer.unobserve(entry.target);
         }
       });
     }, { threshold: 0.4 });
-    observer.observe(el);
+    els.forEach(function(el) { observer.observe(el); });
   }
 
   function setupWeekFeature() {
