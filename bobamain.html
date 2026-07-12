@@ -245,29 +245,44 @@
   <div class="this-week this-week-full">
 
     <div class="week-redesign">
-      <div class="week-feature-card fade-in-scroll" id="week-feature-card">
-        <button class="week-arrow week-arrow-left" id="week-prev" aria-label="Previous flavor">&#8249;</button>
-        <button class="week-arrow week-arrow-right" id="week-next" aria-label="Next flavor">&#8250;</button>
-
-        <div class="week-feature-top">
-          <div class="week-feature-img-wrap">
-            <span class="week-feature-badge" id="week-feature-badge">Featured</span>
-            <img class="week-feature-img" id="week-feature-img" src="tropical.png" alt="Tropical Punch mochi donut"/>
-          </div>
-          <div class="week-feature-info">
+      <div class="week-hero-split">
+        <div class="week-hero-photo" id="week-feature-card">
+          <img class="week-hero-img" id="week-feature-img" src="tropical.png" alt="Tropical Punch mochi donut"/>
+          <div class="week-hero-scrim"></div>
+          <svg class="week-doodle week-doodle-1" viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="20" fill="none" stroke="#fff" stroke-width="2" opacity=".5"/><circle cx="30" cy="30" r="7" fill="none" stroke="#fff" stroke-width="2" opacity=".5"/></svg>
+          <svg class="week-doodle week-doodle-2" viewBox="0 0 60 70" aria-hidden="true"><path d="M14 22h32l-4 40a4 4 0 0 1-4 4H22a4 4 0 0 1-4-4z" fill="none" stroke="#fff" stroke-width="2" opacity=".5"/><path d="M20 22a10 10 0 0 1 20 0" fill="none" stroke="#fff" stroke-width="2" opacity=".5"/></svg>
+          <button class="week-arrow week-arrow-onphoto" data-dir="prev" aria-label="Previous flavor">&#8249;</button>
+          <div class="week-hero-overlay">
+            <span class="week-feature-badge" id="week-feature-badge">Featured Flavor</span>
             <h3 class="week-feature-name" id="week-feature-name">Tropical Punch</h3>
             <p class="week-feature-desc" id="week-feature-desc">Sweet tropical glaze with fruity crunch.</p>
             <div class="week-feature-icons">
-              <div class="wfi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg><span>Made Fresh Daily</span></div>
-              <div class="wfi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M3 8l9-5 9 5"/></svg><span>Small Batches</span></div>
-              <div class="wfi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg><span>Rotates Weekly</span></div>
+              <div class="wfi wfi-onphoto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg><span>Made Fresh Daily</span></div>
+              <div class="wfi wfi-onphoto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M3 8l9-5 9 5"/></svg><span>Small Batches</span></div>
+              <div class="wfi wfi-onphoto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg><span>Rotates Weekly</span></div>
             </div>
-            <a href="https://bestiesboba.square.site/" target="_blank" class="week-feature-order"><button class="btn-fill">Order Now</button></a>
           </div>
         </div>
 
+        <button class="week-arrow week-arrow-mid" data-dir="next" aria-label="Next flavor">&#8250;</button>
+
+        <div class="week-side fade-in-scroll">
+          <svg class="week-side-icon" viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg>
+          <span class="tag">Mochi Donuts</span>
+          <h2 class="week-h2">Handcrafted happiness in every bite. <span class="week-heart">&#9825;</span></h2>
+          <p class="week-desc">We make our mochi donuts fresh every morning in small batches with high quality ingredients and lots of love.</p>
+          <div class="week-side-btns">
+            <a href="https://bestiesboba.square.site/" target="_blank"><button class="btn-fill btn-big">Order Now</button></a>
+            <a href="https://bestiesboba.square.site/" target="_blank"><button class="btn-outline btn-big">Order Ahead</button></a>
+          </div>
+          <p class="week-side-helper">Skip the line and pick up faster!</p>
+        </div>
+      </div>
+
+      <div class="week-thumb-strip">
+        <button class="week-arrow week-arrow-small" data-dir="prev" aria-label="Previous flavor">&#8249;</button>
         <div class="week-thumbs" id="week-thumbs">
-          <button class="week-thumb is-active" data-index="0" data-img="tropical.png" data-name="Tropical Punch" data-desc="Sweet tropical glaze with fruity crunch." data-badge="Featured"><img src="tropical.png" alt="Tropical Punch"/></button>
+          <button class="week-thumb is-active" data-index="0" data-img="tropical.png" data-name="Tropical Punch" data-desc="Sweet tropical glaze with fruity crunch." data-badge="Featured Flavor"><img src="tropical.png" alt="Tropical Punch"/></button>
           <button class="week-thumb" data-index="1" data-img="lavender.png" data-name="Lavender Yuzu" data-desc="Floral lavender meets bright citrus yuzu." data-badge=""><img src="lavender.png" alt="Lavender Yuzu"/></button>
           <button class="week-thumb" data-index="2" data-img="cookiebutt.png" data-name="Cookie Butter" data-desc="Creamy cookie butter glaze with a crumble on top." data-badge="Employee Favorite"><img src="cookiebutt.png" alt="Cookie Butter"/></button>
           <button class="week-thumb" data-index="3" data-img="creme.png" data-name="Creme Brulee" data-desc="Torched sugar glaze with a caramelized crunch." data-badge=""><img src="creme.png" alt="Creme Brulee"/></button>
@@ -275,23 +290,10 @@
           <button class="week-thumb" data-index="5" data-img="chocolatecherry.png" data-name="Chocolate Cherry Drizzle" data-desc="Rich chocolate glaze with a cherry drizzle." data-badge=""><img src="chocolatecherry.png" alt="Chocolate Cherry Drizzle"/></button>
           <button class="week-thumb" data-index="6" data-img="chocolatesprinkles.png" data-name="Chocolate Sprinkles" data-desc="Classic chocolate glaze loaded with sprinkles." data-badge=""><img src="chocolatesprinkles.png" alt="Chocolate Sprinkles"/></button>
           <button class="week-thumb" data-index="7" data-img="orange.png" data-name="Orange Mochi Donut" data-desc="Bright orange glaze with a citrus zing." data-badge=""><img src="orange.png" alt="Orange Mochi Donut"/></button>
+          <button class="week-thumb" data-index="8" data-img="bobahero.png" data-name="Classic Milk Tea" data-desc="Our signature boba, always ready to go." data-badge=""><img src="bobahero.png" alt="Classic Milk Tea"/></button>
         </div>
+        <button class="week-arrow week-arrow-small" data-dir="next" aria-label="Next flavor">&#8250;</button>
       </div>
-
-      <div class="week-side fade-in-scroll">
-        <span class="tag">Mochi Donuts</span>
-        <h2 class="week-h2">This week's flavors <span class="week-heart">&#9825;</span></h2>
-        <div class="week-dates">May 25 &ndash; May 31</div>
-        <p class="week-desc">Handcrafted every morning with love. Flavors rotate weekly and are available while supplies last.</p>
-        <a href="https://bestiesboba.square.site/" target="_blank"><button class="btn-fill btn-big">Order Now</button></a>
-      </div>
-    </div>
-
-    <div class="week-footer-center">
-      <a href="https://bestiesboba.square.site/" target="_blank">
-        <button class="btn-fill btn-big">Order Ahead</button>
-      </a>
-      <p class="week-note">Skip the line and get your favorites faster!</p>
     </div>
 
     <div class="week-benefits stagger-group">

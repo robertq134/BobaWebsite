@@ -260,22 +260,22 @@
     var name = document.getElementById('week-feature-name');
     var desc = document.getElementById('week-feature-desc');
     var badge = document.getElementById('week-feature-badge');
-    var prevBtn = document.getElementById('week-prev');
-    var nextBtn = document.getElementById('week-next');
+    var prevBtns = document.querySelectorAll('.week-arrow[data-dir="prev"]');
+    var nextBtns = document.querySelectorAll('.week-arrow[data-dir="next"]');
     var activeIndex = 0;
 
     function setActive(index) {
       activeIndex = ((index % thumbs.length) + thumbs.length) % thumbs.length;
       var t = thumbs[activeIndex];
       img.src = t.getAttribute('data-img');
-      img.alt = t.getAttribute('data-name') + ' mochi donut';
+      img.alt = t.getAttribute('data-name');
       name.textContent = t.getAttribute('data-name');
       desc.textContent = t.getAttribute('data-desc');
       var badgeText = t.getAttribute('data-badge');
       if (badgeText) {
         badge.textContent = badgeText;
         badge.style.display = 'inline-block';
-        badge.classList.toggle('week-feature-badge-alt', badgeText !== 'Featured');
+        badge.classList.toggle('week-feature-badge-alt', badgeText !== 'Featured Flavor');
       } else {
         badge.style.display = 'none';
       }
@@ -285,8 +285,8 @@
     thumbs.forEach(function(t, i) {
       t.addEventListener('click', function() { setActive(i); });
     });
-    if (prevBtn) prevBtn.addEventListener('click', function() { setActive(activeIndex - 1); });
-    if (nextBtn) nextBtn.addEventListener('click', function() { setActive(activeIndex + 1); });
+    prevBtns.forEach(function(b) { b.addEventListener('click', function() { setActive(activeIndex - 1); }); });
+    nextBtns.forEach(function(b) { b.addEventListener('click', function() { setActive(activeIndex + 1); }); });
   }
 function setupFlavorCarousel() {
     var carouselEl = document.getElementById('flavor-carousel');
