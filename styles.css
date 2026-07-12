@@ -766,57 +766,65 @@ nav.nav-on-dark:not(.scrolled) .nav-logo img { filter: drop-shadow(0 1px 4px rgb
 .promos-dot.is-active { background: var(--pink); width: 22px; border-radius: 4px; }
 .promos-mascot { display: none; }
 
-/* ── Desktop only: circular-photo layout with heading + cat mascot on the left.
-   Mobile keeps the stacked horizontal-split cards defined above untouched. ── */
-@media (min-width: 769px) {
-  .promos-section { padding: 168px 56px; }
-  .promos-layout { display: grid; grid-template-columns: 380px 1fr; gap: 64px; align-items: center; max-width: 1400px; margin: 0 auto; position: relative; z-index: 2; }
+/* ── Circular-photo layout with heading + cat mascot on the left. Kicks in at
+   1220px (not the usual 769px desktop breakpoint) because the 3-circle-plus-
+   left-column geometry needs real room to breathe — below that, the stacked
+   horizontal-split cards defined above (already used on phones) take over as
+   a perfectly good fallback instead of squeezing the circles too small. ── */
+@media (min-width: 1220px) {
+  .promos-section { padding: 190px 56px; }
+  .promos-layout { display: grid; grid-template-columns: 340px 1fr; gap: 40px; align-items: center; max-width: 1700px; margin: 0 auto; position: relative; z-index: 2; }
   .promos-head-center { text-align: left; max-width: none; margin: 0; }
-  .promos-title { font-size: clamp(42px, 4.6vw, 58px); }
-  .promos-sub { font-size: 19px; }
-  .promos-mascot { display: block; position: relative; width: 190px; margin-top: 40px; }
-  .promos-cup { width: 100%; height: auto; display: block; filter: drop-shadow(0 10px 16px rgba(0,0,0,0.15)); }
-  .promos-cat-peek { position: absolute; width: 116px; left: 50%; bottom: 78px; transform: translateX(-50%); }
+  .promos-title { font-size: clamp(52px, 5.6vw, 76px); }
+  .promos-sub { font-size: 22px; }
+  .promos-mascot { display: block; position: relative; width: 260px; margin-top: 36px; }
+  .promos-cats-img { width: 100%; height: auto; display: block; filter: drop-shadow(0 16px 26px rgba(0,0,0,0.2)); }
 
-  .promos-stack { max-width: none; display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; align-items: stretch; gap: 0 32px; }
+  /* minmax(0,1fr) lets these tracks shrink below their content's natural size
+     instead of forcing the row to overflow on narrower desktop/laptop widths. */
+  .promos-stack { max-width: none; display: grid; grid-template-columns: minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr); align-items: stretch; gap: 0 18px; }
   .promo-divider { display: block; width: 2px; align-self: stretch; margin: 6px 0; background: linear-gradient(180deg, transparent, var(--pink) 18%, var(--pink) 82%, transparent); opacity: .3; }
   .promo-row {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 14px;
+    gap: 16px;
     background: transparent;
     border: none;
     box-shadow: none;
     padding: 0;
+    min-width: 0;
   }
   .promo-row:hover { transform: none; box-shadow: none; border-color: transparent; }
   .promo-row-photo {
-    width: 208px;
-    height: 208px;
+    /* Scales with its grid track (so it never overflows on tighter desktop
+       widths) but is capped generously — roughly double the original size. */
+    width: clamp(230px, 94%, 400px);
+    height: auto;
+    aspect-ratio: 1 / 1;
     border-radius: 50%;
-    border: 5px solid #fff;
-    box-shadow: 0 18px 38px rgba(0,0,0,0.18);
+    border: 6px solid #fff;
+    box-shadow: 0 22px 46px rgba(0,0,0,0.2);
     margin: 0 auto;
     transition: transform .25s ease, box-shadow .25s ease;
   }
-  .promo-row:hover .promo-row-photo { transform: translateY(-8px) scale(1.04); box-shadow: 0 24px 48px rgba(0,0,0,0.26); }
+  .promo-row:hover .promo-row-photo { transform: translateY(-8px) scale(1.04); box-shadow: 0 28px 56px rgba(0,0,0,0.28); }
   .promo-row-body { flex: none; display: flex; flex-direction: column; align-items: center; }
   .promo-tag {
     position: absolute;
-    top: -16px;
+    top: -18px;
     left: 50%;
     transform: translateX(-50%);
     margin-bottom: 0;
     white-space: nowrap;
-    font-size: 11px;
-    padding: 7px 18px;
+    font-size: 13px;
+    padding: 9px 22px;
     z-index: 3;
     box-shadow: 0 4px 12px rgba(199,58,97,.3);
   }
-  .promo-row .promo-name { font-size: 24px; margin-top: 4px; }
-  .promo-row .promo-desc { font-size: 15px; max-width: 250px; margin: 8px auto 0; }
-  .promo-arrow-btn { position: static; transform: none; margin-top: 8px; width: 46px; height: 46px; font-size: 20px; }
+  .promo-row .promo-name { font-size: 30px; margin-top: 6px; }
+  .promo-row .promo-desc { font-size: 17px; max-width: 320px; margin: 10px auto 0; }
+  .promo-arrow-btn { position: static; transform: none; margin-top: 10px; width: 56px; height: 56px; font-size: 24px; }
   .promo-arrow-btn:hover { transform: scale(1.1); }
   .promos-dots { display: none; }
 }
@@ -1182,7 +1190,17 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
      bar hides, because the section was sized for the shorter initial viewport. */
   .hero.hero-sticky { position: relative; height: 100vh; height: 100dvh; }
   .hero-scroll-track { height: auto; }
+  /* Oversize the video a few % beyond the section box (instead of an exact
+     inset:0 match) so any leftover mobile viewport-height rounding/dvh support
+     gap can't expose the black section background underneath — it just crops
+     a sliver more of the video instead. */
   .hero-video.hero-photo {
+    top: -3%;
+    bottom: -3%;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 106%;
     object-fit: cover;
     object-position: center center;
   }
