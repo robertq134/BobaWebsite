@@ -224,8 +224,9 @@
   function setupFollowerCounter() {
     var el = document.getElementById('ig-follower-count');
     if (!el) return;
+    var start = parseInt(el.getAttribute('data-count-from'), 10) || 0;
     var target = parseInt(el.getAttribute('data-count-to'), 10) || 0;
-    var duration = 1400;
+    var duration = 3200;
     var started = false;
 
     function animate() {
@@ -236,7 +237,8 @@
         if (!startTime) startTime = ts;
         var progress = Math.min((ts - startTime) / duration, 1);
         var eased = 1 - Math.pow(1 - progress, 3);
-        el.textContent = Math.round(eased * target).toLocaleString() + '+';
+        var value = start + eased * (target - start);
+        el.textContent = Math.round(value).toLocaleString() + '+';
         if (progress < 1) requestAnimationFrame(tick);
       }
       requestAnimationFrame(tick);

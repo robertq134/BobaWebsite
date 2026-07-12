@@ -897,8 +897,12 @@ nav.nav-on-dark:not(.scrolled) .nav-logo img { filter: drop-shadow(0 1px 4px rgb
 .ig-post-photo { width: 100%; aspect-ratio: 1 / 1; overflow: hidden; background: #000; }
 .ig-post-photo video { width: 100%; height: 100%; object-fit: cover; display: block; }
 .ig-post-caption { font-family: 'Caveat', cursive; font-size: 30px; font-weight: 700; color: var(--text); text-align: center; margin-top: 14px; }
-.ig-followers { text-align: center; font-size: 26px; font-weight: 700; color: var(--pink); margin-bottom: 10px; }
-.ig-followers .ig-follower-num { font-size: clamp(46px, 6vw, 64px); font-weight: 800; color: var(--dark); display: block; }
+.ig-followers { display: flex; align-items: center; justify-content: center; gap: 28px; margin-bottom: 10px; }
+.ig-stat { display: flex; flex-direction: column; align-items: center; }
+.ig-stat-divider { width: 1px; height: 46px; background: var(--border); }
+.ig-followers .ig-follower-num { font-size: clamp(46px, 6vw, 64px); font-weight: 800; color: var(--dark); display: block; line-height: 1; }
+.ig-stat-label { font-size: 16px; font-weight: 700; color: var(--pink); margin-top: 6px; }
+.ig-followers .ig-posts-num { font-size: clamp(32px, 4vw, 44px); }
 .ig-cta { text-align: center; margin-top: 72px; position: relative; z-index: 2; }
 .ig-follow-btn { display: inline-flex; align-items: center; gap: 10px; padding: 16px 32px; font-size: 17px; margin-top: 20px; }
 .ig-follow-btn svg { width: 22px; height: 22px; flex-shrink: 0; }
