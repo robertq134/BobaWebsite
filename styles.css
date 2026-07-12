@@ -283,6 +283,77 @@ nav.nav-on-dark:not(.scrolled) .nav-toggle span { background: white; }
 }
 .week-h2 { font-size: clamp(32px, 3.2vw, 48px); font-weight: 600; letter-spacing: -0.5px; color: var(--dark); margin-bottom: 12px; line-height: 1.1; }
 .week-dates { display: inline-block; background: var(--warm); border: 1px solid var(--border); border-radius: 6px; padding: 7px 16px; font-size: 14px; font-weight: 700; color: var(--muted); margin-bottom: 32px; }
+
+/* ── This Week's Flavors: feature card + thumbnail strip ── */
+.week-redesign { width: 100%; max-width: 1220px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr; gap: 56px; align-items: center; }
+.week-feature-card { position: relative; background: #fff; border-radius: 28px; padding: 28px; box-shadow: 0 20px 50px rgba(22,14,18,0.08); }
+.week-arrow {
+  position: absolute;
+  top: 34%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--pink);
+  color: #fff;
+  border: none;
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(199,58,97,.35);
+  transition: background .15s, transform .15s;
+  z-index: 5;
+}
+.week-arrow:hover { background: var(--pink-d); transform: translateY(-50%) scale(1.08); }
+.week-arrow-left { left: -22px; }
+.week-arrow-right { right: -22px; }
+.week-feature-top { display: flex; gap: 32px; align-items: center; }
+.week-feature-img-wrap { position: relative; flex: 1 1 50%; aspect-ratio: 1 / 1; border-radius: 20px; overflow: hidden; background: var(--warm); }
+.week-feature-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.week-feature-badge {
+  position: absolute;
+  top: 16px; left: 16px;
+  z-index: 2;
+  background: var(--pink);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  padding: 7px 16px;
+  border-radius: 999px;
+  box-shadow: 0 4px 12px rgba(199,58,97,.3);
+}
+.week-feature-badge-alt { background: var(--dark); }
+.week-feature-info { flex: 1 1 50%; }
+.week-feature-name { font-family: 'Fredoka', sans-serif; font-size: clamp(24px, 2.4vw, 32px); font-weight: 700; color: var(--dark); }
+.week-feature-name::after { content: ''; display: block; width: 44px; height: 3px; background: var(--pink); border-radius: 2px; margin-top: 10px; }
+.week-feature-desc { font-size: 15px; color: var(--muted); line-height: 1.6; margin-top: 14px; }
+.week-feature-icons { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 22px; }
+.wfi { display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; width: 84px; }
+.wfi svg { width: 26px; height: 26px; color: var(--pink); }
+.wfi span { font-size: 11px; font-weight: 600; color: var(--muted); line-height: 1.3; }
+.week-feature-order { display: inline-block; margin-top: 24px; }
+.week-thumbs { display: flex; gap: 12px; margin-top: 28px; overflow-x: auto; padding-bottom: 4px; }
+.week-thumb {
+  flex: 0 0 auto;
+  width: 76px;
+  height: 76px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 3px solid transparent;
+  padding: 0;
+  cursor: pointer;
+  background: var(--warm);
+  transition: border-color .2s, transform .2s;
+}
+.week-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.week-thumb:hover { transform: translateY(-3px); }
+.week-thumb.is-active { border-color: var(--pink); }
+.week-side { text-align: left; }
+.week-heart { color: var(--pink); font-size: 0.75em; }
 .flavors-grid { display: grid; grid-template-columns: 1fr 1fr; column-gap: 40px; }
 .flavor-item { padding: 16px 0; border-bottom: 1px solid var(--border); font-size: 17px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 10px; }
 .flavor-item::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--pink); flex-shrink: 0; transition: border-color .30s; }
@@ -615,12 +686,10 @@ nav.nav-on-dark:not(.scrolled) .nav-logo img { filter: drop-shadow(0 1px 4px rgb
 .promos-head { text-align: left; margin-bottom: 0; }
 .promos-title {
   font-family: 'Fredoka', sans-serif;
-  font-size: clamp(42px, 5vw, 64px);
+  font-size: clamp(36px, 4.2vw, 52px);
   font-weight: 700;
-  line-height: 1.02;
-  color: #fff;
-  -webkit-text-stroke: 2px var(--dark);
-  text-shadow: -3px -3px 0 var(--dark), 3px -3px 0 var(--dark), -3px 3px 0 var(--dark), 3px 3px 0 var(--dark), 0 6px 0 rgba(22,14,18,0.15);
+  line-height: 1.1;
+  color: var(--dark);
 }
 .promos-sub { font-size: 18px; font-weight: 700; color: var(--pink-d); margin-top: 16px; }
 .promos-cats { display: flex; align-items: flex-end; margin-top: 32px; }
@@ -953,6 +1022,15 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
     overflow: hidden;
   }
   .carousel-dots { margin-top: -28px; }
+
+  .week-redesign { grid-template-columns: 1fr; gap: 32px; }
+  .week-side { text-align: center; }
+  .week-feature-card { padding: 18px; border-radius: 20px; }
+  .week-feature-top { flex-direction: column; }
+  .week-feature-img-wrap { width: 100%; }
+  .week-feature-icons { justify-content: center; }
+  /* Arrows overlap awkwardly at this width — thumbnails alone are enough to navigate on mobile. */
+  .week-arrow { display: none; }
   .ci-desc { font-size: 15px; }
   .ci-name { font-size: 22px; }
   .carousel-card-label {
@@ -1000,7 +1078,7 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
   .promos-section { padding: 48px 0; }
   .promos-inner { grid-template-columns: 1fr; gap: 20px; }
   .promos-head { padding: 0 20px; text-align: center; }
-  .promos-title { font-size: 34px; -webkit-text-stroke-width: 1.5px; }
+  .promos-title { font-size: 34px; }
   .promos-cats { justify-content: center; margin-top: 20px; }
   .promos-cats img { width: 80px; }
   .promo-card { min-height: 0; }
