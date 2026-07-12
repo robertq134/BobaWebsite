@@ -692,37 +692,50 @@ nav.nav-on-dark:not(.scrolled) .nav-logo img { filter: drop-shadow(0 1px 4px rgb
 .tue-img-placeholder { width: 320px; height: 180px; border-radius: 16px; }
 
 /* ── AWARDS & RECOGNITION ── */
-.awards-section { background: #FBF6F1; border-top: 1px solid var(--border); padding: 130px 48px; min-height: 620px; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden; }
-.awards-head { text-align: center; margin-bottom: 48px; position: relative; z-index: 2; }
-.awards-title { font-family: 'Caveat', cursive; font-size: clamp(36px, 4vw, 54px); font-weight: 700; color: var(--pink); }
-.awards-sub { font-size: 16px; color: var(--muted); max-width: 480px; margin: 10px auto 0; line-height: 1.6; }
+.awards-section { background: #FBF6F1; border-top: 1px solid var(--border); padding: 160px 48px; min-height: 620px; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden; }
+.awards-head { text-align: center; margin-bottom: 56px; position: relative; z-index: 2; }
+.awards-title { font-family: 'Caveat', cursive; font-size: clamp(46px, 5vw, 68px); font-weight: 700; color: var(--pink); }
+.awards-sub { font-size: 18px; color: var(--muted); max-width: 540px; margin: 12px auto 0; line-height: 1.6; }
 
-.awards-row { max-width: 1360px; margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: 28px; flex-wrap: wrap; position: relative; z-index: 2; }
-.awards-cat { display: flex; justify-content: center; position: relative; flex-shrink: 0; }
-.awards-cat-ph { width: 170px; height: 170px; object-fit: contain; flex-shrink: 0; filter: drop-shadow(0 6px 14px rgba(0,0,0,0.08)); }
+/* Grid (not flex-wrap) so the five items — cat, testimonial, badge, testimonial,
+   cat — always stay on one row and scale proportionally with the available
+   width instead of wrapping when they don't all fit at a fixed size. */
+.awards-row {
+  max-width: 1760px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 0.8fr 1.35fr 2.2fr 1.35fr 0.8fr;
+  align-items: center;
+  gap: 22px;
+  position: relative;
+  z-index: 2;
+}
+.awards-cat { display: flex; justify-content: center; align-items: center; position: relative; }
+.awards-cat-ph { width: 100%; max-width: 230px; aspect-ratio: 1 / 1; object-fit: contain; filter: drop-shadow(0 6px 14px rgba(0,0,0,0.08)); }
 .awards-deco { position: absolute; pointer-events: none; color: var(--pink); opacity: .5; }
 .awards-deco-gold { color: #E8B84A; opacity: .65; }
 
-.awards-badges { display: flex; justify-content: center; flex-shrink: 0; }
-.award-item { width: min(420px, 40vw); aspect-ratio: 1 / 1; border-radius: 24px; background: #fff; box-shadow: 0 16px 40px rgba(0,0,0,0.12); display: flex; align-items: center; justify-content: center; padding: 28px; overflow: hidden; box-sizing: border-box; transition: transform .25s ease, box-shadow .25s ease; }
-.award-item:hover { transform: translateY(-6px) scale(1.02); box-shadow: 0 22px 48px rgba(0,0,0,0.18); }
+.awards-badges { display: flex; justify-content: center; }
+.award-item { width: 100%; max-width: 560px; aspect-ratio: 1 / 1; border-radius: 28px; background: #fff; box-shadow: 0 18px 44px rgba(0,0,0,0.13); display: flex; align-items: center; justify-content: center; padding: 32px; overflow: hidden; box-sizing: border-box; transition: transform .25s ease, box-shadow .25s ease; }
+.award-item:hover { transform: translateY(-6px) scale(1.02); box-shadow: 0 24px 52px rgba(0,0,0,0.19); }
 .award-item-img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }
 
 .awards-testimonial {
   position: relative;
-  width: 280px;
-  flex-shrink: 0;
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto;
   background: var(--pink-pastel);
-  border-radius: 22px;
-  padding: 32px 26px 26px;
-  box-shadow: 0 14px 30px rgba(199,58,97,.12);
+  border-radius: 24px;
+  padding: 36px 30px 30px;
+  box-shadow: 0 16px 34px rgba(199,58,97,.14);
 }
-.awards-quote-icon { width: 34px; height: 26px; color: var(--pink); opacity: .55; margin-bottom: 10px; }
-.awards-quote { font-size: 15px; line-height: 1.6; color: var(--dark); font-style: italic; }
-.awards-reviewer { display: flex; align-items: center; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
-.awards-reviewer-name { font-weight: 700; color: var(--pink-d); font-size: 14px; }
-.awards-stars { color: var(--pink); letter-spacing: 2px; font-size: 13px; }
-.awards-card-heart { position: absolute; top: 16px; right: 18px; color: var(--pink); opacity: .4; font-size: 18px; }
+.awards-quote-icon { width: 40px; height: 30px; color: var(--pink); opacity: .55; margin-bottom: 12px; }
+.awards-quote { font-size: 17px; line-height: 1.6; color: var(--dark); font-style: italic; }
+.awards-reviewer { display: flex; align-items: center; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
+.awards-reviewer-name { font-weight: 700; color: var(--pink-d); font-size: 15px; }
+.awards-stars { color: var(--pink); letter-spacing: 2px; font-size: 14px; }
+.awards-card-heart { position: absolute; top: 18px; right: 20px; color: var(--pink); opacity: .4; font-size: 20px; }
 
 /* ── PROMOS & SPECIALS ── */
 .promos-section { background: var(--pink-pastel); padding: 100px 48px; overflow: hidden; position: relative; }
@@ -1244,14 +1257,15 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
   }
   .benefit:not(:last-child) { border-right: none; }
 
-  /* ── Awards: stack vertically, badge centered ── */
+  /* ── Awards: stack vertically, badge centered (grid becomes a single column) ── */
   .awards-section { padding: 72px 20px; }
   .awards-row {
+    display: flex;
     flex-direction: column;
     gap: 24px;
   }
-  .awards-cat-ph { width: 90px; height: 90px; }
-  .award-item { width: min(280px, 78vw); }
+  .awards-cat-ph { width: 90px; max-width: none; height: 90px; }
+  .award-item { width: min(280px, 78vw); max-width: none; }
   .awards-testimonial { width: 100%; max-width: 320px; }
 
   /* ── Instagram: stack posts, keep them tappable ── */
