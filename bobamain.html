@@ -188,38 +188,50 @@
   <span class="promos-deco" style="bottom:10%; left:8%; font-size:20px;">&#9825;</span>
   <span class="promos-deco" style="bottom:6%; right:10%; font-size:22px;">&#10022;</span>
 
-  <div class="promos-head-center fade-in-scroll">
-    <h2 class="promos-title">Specials &amp; Promos</h2>
-    <p class="promos-sub">Sweet deals worth coming back for! <span class="promos-heart">&#9825;</span></p>
-  </div>
+  <div class="promos-layout">
+    <div class="promos-head-center fade-in-scroll">
+      <h2 class="promos-title">Specials &amp; Promos</h2>
+      <p class="promos-sub">Sweet deals worth coming back for! <span class="promos-heart">&#9825;</span></p>
+      <div class="promos-mascot">
+        <span class="promos-deco" style="top:6%; left:8%; font-size:18px;">&#9825;</span>
+        <span class="promos-deco" style="top:0; right:4%; font-size:16px;">&#9825;</span>
+        <svg class="promos-cup" viewBox="0 0 160 170" aria-hidden="true">
+          <rect x="94" y="8" width="10" height="52" rx="4" fill="var(--pink-d)" transform="rotate(12 99 34)"/>
+          <path d="M22 62 L138 62 L118 164 Q80 176 42 164 Z" fill="var(--pink)"/>
+          <ellipse cx="80" cy="62" rx="58" ry="13" fill="#fff" stroke="var(--pink)" stroke-width="3"/>
+        </svg>
+        <img class="promos-cat-peek" src="cat-white.png" alt="Besties cat mascot"/>
+      </div>
+    </div>
 
-  <div class="promos-stack">
-    <div class="promo-row fade-in-left">
-      <div class="promo-row-photo"><img src="mochidonutsV2.jpg" alt="$1 Mochi Donut Tuesdays"/></div>
-      <div class="promo-row-body">
-        <span class="promo-tag">This Week</span>
-        <h3 class="promo-name">$1 Mochi Donut Tuesdays</h3>
-        <p class="promo-desc">Every Tuesday, get a mochi donut for just $1 with any drink purchase!</p>
+    <div class="promos-stack">
+      <div class="promo-row fade-in-left">
+        <div class="promo-row-photo"><img src="mochidonutsV2.jpg" alt="$1 Mochi Donut Tuesdays"/></div>
+        <div class="promo-row-body">
+          <span class="promo-tag">This Week</span>
+          <h3 class="promo-name">$1 Mochi Donut Tuesdays</h3>
+          <p class="promo-desc">Every Tuesday, get a mochi donut for just $1 with any drink purchase!</p>
+        </div>
+        <a href="#this-week" class="promo-arrow-btn" aria-label="See this week's flavors">&#8594;</a>
       </div>
-      <a href="#this-week" class="promo-arrow-btn" aria-label="See this week's flavors">&#8594;</a>
-    </div>
-    <div class="promo-row fade-in-right">
-      <div class="promo-row-photo"><img src="drinks.jpg" alt="Catering &amp; Group Orders"/></div>
-      <div class="promo-row-body">
-        <span class="promo-tag">Group Orders</span>
-        <h3 class="promo-name">Catering &amp; Group Orders</h3>
-        <p class="promo-desc">Boba flights, mochi donut towers, and drink bars for any occasion.</p>
+      <div class="promo-row fade-in-right">
+        <div class="promo-row-photo"><img src="drinks.jpg" alt="Catering &amp; Group Orders"/></div>
+        <div class="promo-row-body">
+          <span class="promo-tag">Group Orders</span>
+          <h3 class="promo-name">Catering &amp; Group Orders</h3>
+          <p class="promo-desc">Boba flights, mochi donut towers, and drink bars for any occasion.</p>
+        </div>
+        <a href="catering.html" class="promo-arrow-btn" aria-label="Book catering">&#8594;</a>
       </div>
-      <a href="catering.html" class="promo-arrow-btn" aria-label="Book catering">&#8594;</a>
-    </div>
-    <div class="promo-row fade-in-left">
-      <div class="promo-row-photo"><img src="bobahero.png" alt="Order Ahead Online"/></div>
-      <div class="promo-row-body">
-        <span class="promo-tag">Order Online</span>
-        <h3 class="promo-name">Order Ahead Online</h3>
-        <p class="promo-desc">Skip the line — order from your phone and pick up fast!</p>
+      <div class="promo-row fade-in-left">
+        <div class="promo-row-photo"><img src="bobahero.png" alt="Order Ahead Online"/></div>
+        <div class="promo-row-body">
+          <span class="promo-tag">Order Online</span>
+          <h3 class="promo-name">Order Ahead Online</h3>
+          <p class="promo-desc">Skip the line — order from your phone and pick up fast!</p>
+        </div>
+        <a href="https://bestiesboba.square.site/" target="_blank" class="promo-arrow-btn" aria-label="Order ahead online">&#8594;</a>
       </div>
-      <a href="https://bestiesboba.square.site/" target="_blank" class="promo-arrow-btn" aria-label="Order ahead online">&#8594;</a>
     </div>
   </div>
 
@@ -242,6 +254,7 @@
           <svg class="week-doodle week-doodle-1" viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="20" fill="none" stroke="#fff" stroke-width="2" opacity=".5"/><circle cx="30" cy="30" r="7" fill="none" stroke="#fff" stroke-width="2" opacity=".5"/></svg>
           <svg class="week-doodle week-doodle-2" viewBox="0 0 60 70" aria-hidden="true"><path d="M14 22h32l-4 40a4 4 0 0 1-4 4H22a4 4 0 0 1-4-4z" fill="none" stroke="#fff" stroke-width="2" opacity=".5"/><path d="M20 22a10 10 0 0 1 20 0" fill="none" stroke="#fff" stroke-width="2" opacity=".5"/></svg>
           <button class="week-arrow week-arrow-onphoto" data-dir="prev" aria-label="Previous flavor">&#8249;</button>
+          <button class="week-arrow week-arrow-onphoto-right" data-dir="next" aria-label="Next flavor">&#8250;</button>
           <div class="week-hero-overlay">
             <span class="week-feature-badge" id="week-feature-badge">Featured Flavor</span>
             <h3 class="week-feature-name" id="week-feature-name">Tropical Punch</h3>

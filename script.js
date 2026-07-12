@@ -282,6 +282,11 @@
         badge.style.display = 'none';
       }
       thumbs.forEach(function(el, i) { el.classList.toggle('is-active', i === activeIndex); });
+      // Keep the highlighted thumbnail in view even when the strip scrolls off-screen
+      // (e.g. after several arrow clicks) — otherwise the strip looks out of sync.
+      if (t.scrollIntoView) {
+        t.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      }
     }
 
     // Cross-fade the photo + overlay text out, swap content, then fade back in —
