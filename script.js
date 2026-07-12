@@ -260,6 +260,8 @@
     var name = document.getElementById('week-feature-name');
     var desc = document.getElementById('week-feature-desc');
     var badge = document.getElementById('week-feature-badge');
+    var sideName = document.getElementById('week-side-name');
+    var sideDesc = document.getElementById('week-side-desc');
     var prevBtns = document.querySelectorAll('.week-arrow[data-dir="prev"]');
     var nextBtns = document.querySelectorAll('.week-arrow[data-dir="next"]');
     var overlay = document.querySelector('.week-hero-overlay');
@@ -273,6 +275,8 @@
       img.alt = t.getAttribute('data-name');
       name.textContent = t.getAttribute('data-name');
       desc.textContent = t.getAttribute('data-desc');
+      if (sideName) sideName.innerHTML = t.getAttribute('data-name') + ' <span class="week-heart">&#9825;</span>';
+      if (sideDesc) sideDesc.textContent = t.getAttribute('data-desc') + ' Handcrafted fresh every morning in small batches with lots of love.';
       var badgeText = t.getAttribute('data-badge');
       if (badgeText) {
         badge.textContent = badgeText;
@@ -289,26 +293,56 @@
       }
     }
 
-    // Cross-fade the photo + overlay text out, swap content, then fade back in —
-    // instant swaps felt jarring, this makes flavor changes feel intentional.
-    function setActive(index) {
+    var slideEls = [img, overlay, sideName, sideDesc].filter(Boolean);
+
+    function setSlideState(els, x, opacity, withTransition) {
+      els.forEach(function(el) {
+        el.style.transition = withTransition ? 'opacity .24s ease, transform .24s ease' : 'none';
+        el.style.transform = x === 0 ? 'none' : 'translateX(' + x + ')';
+        el.style.opacity = opacity;
+      });
+    }
+
+    // Slide the photo, overlay text, and side panel text out in the direction of
+    // travel, swap content while off-canvas, then slide the new content back in —
+    // a plain fade felt static, this makes the carousel feel like it's moving.
+    function setActive(index, dir) {
       if (transitioning) return;
       transitioning = true;
-      img.style.opacity = '0';
-      if (overlay) overlay.style.opacity = '0';
+
+      var forward;
+      if (dir === 'prev') {
+        forward = false;
+      } else if (dir === 'next') {
+        forward = true;
+      } else {
+        var diff = (((index - activeIndex) % thumbs.length) + thumbs.length) % thumbs.length;
+        forward = diff <= thumbs.length / 2;
+      }
+      var outX = forward ? '-32px' : '32px';
+      var inX = forward ? '32px' : '-32px';
+
+      setSlideState(slideEls, outX, '0', true);
+
       setTimeout(function() {
         applyActive(index);
-        img.style.opacity = '1';
-        if (overlay) overlay.style.opacity = '1';
-        setTimeout(function() { transitioning = false; }, 260);
-      }, 200);
+        setSlideState(slideEls, inX, '0', false);
+        void (img && img.offsetWidth);
+        // A plain rAF here can get skipped in a backgrounded/inactive tab; a short
+        // timeout after the forced reflow is a more reliable way to let the
+        // "no-transition" state paint before re-enabling the transition.
+        setTimeout(function() {
+          setSlideState(slideEls, 0, '1', true);
+        }, 20);
+        setTimeout(function() { transitioning = false; }, 280);
+      }, 220);
     }
 
     thumbs.forEach(function(t, i) {
       t.addEventListener('click', function() { setActive(i); });
     });
-    prevBtns.forEach(function(b) { b.addEventListener('click', function() { setActive(activeIndex - 1); }); });
-    nextBtns.forEach(function(b) { b.addEventListener('click', function() { setActive(activeIndex + 1); }); });
+    prevBtns.forEach(function(b) { b.addEventListener('click', function() { setActive(activeIndex - 1, 'prev'); }); });
+    nextBtns.forEach(function(b) { b.addEventListener('click', function() { setActive(activeIndex + 1, 'next'); }); });
   }
 function setupFlavorCarousel() {
     var carouselEl = document.getElementById('flavor-carousel');

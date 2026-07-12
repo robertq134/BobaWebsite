@@ -187,6 +187,12 @@
   <span class="promos-deco" style="top:24%; right:14%; font-size:18px;">&#10022;</span>
   <span class="promos-deco" style="bottom:10%; left:8%; font-size:20px;">&#9825;</span>
   <span class="promos-deco" style="bottom:6%; right:10%; font-size:22px;">&#10022;</span>
+  <span class="promos-deco promos-deco-gold" style="top:16%; left:26%; font-size:13px;">&#10022;</span>
+  <span class="promos-deco promos-deco-gold" style="top:38%; left:44%; font-size:10px;">&#10022;</span>
+  <span class="promos-deco promos-deco-gold" style="top:12%; right:28%; font-size:12px;">&#10022;</span>
+  <span class="promos-deco promos-deco-gold" style="bottom:32%; left:36%; font-size:11px;">&#10022;</span>
+  <span class="promos-deco promos-deco-gold" style="bottom:16%; right:38%; font-size:14px;">&#10022;</span>
+  <span class="promos-deco promos-deco-gold" style="bottom:44%; right:20%; font-size:10px;">&#10022;</span>
 
   <div class="promos-layout">
     <div class="promos-head-center fade-in-scroll">
@@ -214,6 +220,7 @@
         </div>
         <a href="#this-week" class="promo-arrow-btn" aria-label="See this week's flavors">&#8594;</a>
       </div>
+      <div class="promo-divider" aria-hidden="true"></div>
       <div class="promo-row fade-in-right">
         <div class="promo-row-photo"><img src="drinks.jpg" alt="Catering &amp; Group Orders"/></div>
         <div class="promo-row-body">
@@ -223,6 +230,7 @@
         </div>
         <a href="catering.html" class="promo-arrow-btn" aria-label="Book catering">&#8594;</a>
       </div>
+      <div class="promo-divider" aria-hidden="true"></div>
       <div class="promo-row fade-in-left">
         <div class="promo-row-photo"><img src="bobahero.png" alt="Order Ahead Online"/></div>
         <div class="promo-row-body">
@@ -243,7 +251,11 @@
 </section>
 
 <!-- THIS WEEK -->
-<section id="this-week">
+<section id="this-week" class="week-pink-zone">
+  <span class="promos-deco" style="top:8%; left:6%; font-size:22px;">&#9825;</span>
+  <span class="promos-deco" style="top:14%; right:8%; font-size:26px;">&#10022;</span>
+  <span class="promos-deco promos-deco-gold" style="bottom:20%; left:10%; font-size:12px;">&#10022;</span>
+  <span class="promos-deco promos-deco-gold" style="top:30%; right:14%; font-size:11px;">&#10022;</span>
   <div class="this-week this-week-full">
 
     <div class="week-redesign">
@@ -272,8 +284,8 @@
         <div class="week-side fade-in-scroll">
           <svg class="week-side-icon" viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg>
           <span class="tag">Mochi Donuts</span>
-          <h2 class="week-h2">Handcrafted happiness in every bite. <span class="week-heart">&#9825;</span></h2>
-          <p class="week-desc">We make our mochi donuts fresh every morning in small batches with high quality ingredients and lots of love.</p>
+          <h2 class="week-h2 week-side-name" id="week-side-name">Tropical Punch <span class="week-heart">&#9825;</span></h2>
+          <p class="week-desc week-side-desc" id="week-side-desc">Sweet tropical glaze with fruity crunch. Handcrafted fresh every morning in small batches with lots of love.</p>
           <div class="week-side-btns">
             <a href="https://bestiesboba.square.site/" target="_blank"><button class="btn-fill btn-big btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>Order Now</button></a>
             <a href="https://bestiesboba.square.site/" target="_blank"><button class="btn-outline btn-big btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>Order Ahead</button></a>
@@ -298,36 +310,41 @@
         <button class="week-arrow week-arrow-small" data-dir="next" aria-label="Next flavor">&#8250;</button>
       </div>
     </div>
+  </div>
+  <svg class="week-zone-wave" viewBox="0 0 1440 100" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0,55 C240,10 480,90 720,45 C960,5 1200,85 1440,35 L1440,100 L0,100 Z" fill="var(--cream)"/>
+  </svg>
+</section>
 
-    <div class="week-benefits stagger-group">
-      <div class="benefit fade-in-scroll">
-        <div class="benefit-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
-        </div>
-        <div class="benefit-title">Made Fresh Daily</div>
-        <div class="benefit-desc">Handcrafted every morning in Livermore</div>
+<section class="week-benefits-section">
+  <div class="week-benefits stagger-group">
+    <div class="benefit fade-in-scroll">
+      <div class="benefit-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
       </div>
-      <div class="benefit fade-in-scroll">
-        <div class="benefit-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1 11a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
-        </div>
-        <div class="benefit-title">Order Online</div>
-        <div class="benefit-desc">Skip the line and pick up in store</div>
+      <div class="benefit-title">Made Fresh Daily</div>
+      <div class="benefit-desc">Handcrafted every morning in Livermore</div>
+    </div>
+    <div class="benefit fade-in-scroll">
+      <div class="benefit-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1 11a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
       </div>
-      <div class="benefit fade-in-scroll">
-        <div class="benefit-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/><path d="M12 8S10 3 7.5 3 5 6 5 6s2.5 2 7 2M12 8s2-5 4.5-5S19 6 19 6s-2.5 2-7 2"/></svg>
-        </div>
-        <div class="benefit-title">Catering Available</div>
-        <div class="benefit-desc">Boba bars &amp; donuts for your event</div>
+      <div class="benefit-title">Order Online</div>
+      <div class="benefit-desc">Skip the line and pick up in store</div>
+    </div>
+    <div class="benefit fade-in-scroll">
+      <div class="benefit-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/><path d="M12 8S10 3 7.5 3 5 6 5 6s2.5 2 7 2M12 8s2-5 4.5-5S19 6 19 6s-2.5 2-7 2"/></svg>
       </div>
-      <div class="benefit fade-in-scroll">
-        <div class="benefit-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        </div>
-        <div class="benefit-title">Find Us at Markets</div>
-        <div class="benefit-desc">Livermore Farmers Market weekly</div>
+      <div class="benefit-title">Catering Available</div>
+      <div class="benefit-desc">Boba bars &amp; donuts for your event</div>
+    </div>
+    <div class="benefit fade-in-scroll">
+      <div class="benefit-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
       </div>
+      <div class="benefit-title">Find Us at Markets</div>
+      <div class="benefit-desc">Livermore Farmers Market weekly</div>
     </div>
   </div>
 </section>
