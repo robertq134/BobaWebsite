@@ -132,6 +132,7 @@ button { font-family: 'Roboto', sans-serif; cursor: pointer; }
 nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 16px 48px; display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: 24px; background: transparent; border-bottom: 1px solid transparent; transition: background .25s ease, border-color .25s ease, box-shadow .25s ease; }
 nav.scrolled { background: rgba(249,240,236,0.97); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); box-shadow: 0 2px 16px rgba(22,14,18,.06); }
 .nav-logo { margin-right: auto; }
+.nav-logo a { display: block; }
 .nav-logo img { transition: filter .25s ease; }
 .nav-right { display: flex; align-items: center; gap: 36px; }
 .nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
@@ -235,7 +236,6 @@ nav.nav-on-dark:not(.scrolled) .nav-toggle span { background: white; }
 #this-week.week-pink-zone { background: var(--pink-pastel); position: relative; overflow: hidden; }
 .week-pink-zone .this-week { padding-bottom: 50px; }
 .week-zone-wave { display: block; width: 100%; height: 90px; position: relative; z-index: 1; margin-top: -1px; }
-.week-benefits-section { max-width: 1500px; margin: 0 auto; padding: 0 80px 100px; background: var(--cream); }
 .this-week { position: relative; padding: 90px 80px 100px; max-width: 1500px; margin: 0 auto; }
 
 /* Full-width single-column This Week layout: centered header, big carousel, centered footer */
@@ -249,25 +249,6 @@ nav.nav-on-dark:not(.scrolled) .nav-toggle span { background: white; }
 .week-footer-center { text-align: center; margin-top: 40px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
 .week-footer-center .week-note { margin-top: 0; }
 
-/* Four-benefit icon row (below carousel) */
-.week-benefits {
-  width: 100%;
-  max-width: 1000px;
-  margin: 56px auto 0;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-  background: var(--warm);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 32px 28px;
-}
-.benefit { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 0 12px; }
-.benefit:not(:last-child) { border-right: 1px solid var(--border); }
-.benefit-icon { width: 40px; height: 40px; color: var(--pink); }
-.benefit-icon svg { width: 100%; height: 100%; }
-.benefit-title { font-family: 'Fredoka', sans-serif; font-size: 17px; font-weight: 600; color: var(--dark); }
-.benefit-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
 .this-week-inner {
   display: grid;
   grid-template-columns: 0.8fr 1.3fr;
@@ -1143,7 +1124,6 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
 
   .this-week { padding: 56px 20px; }
   .week-pink-zone .this-week { padding-bottom: 36px; }
-  .week-benefits-section { padding: 0 20px 56px; }
   .week-zone-wave { height: 50px; }
   .this-week-inner {
     display: flex;
@@ -1251,14 +1231,6 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
   .promo-row-photo { width: 100%; height: 160px; }
   .promo-arrow-btn { position: static; transform: none; margin: 14px auto 0; }
   .promo-row:hover .promo-arrow-btn { transform: none; }
-
-  /* ── Benefits: 2×2 grid on mobile ── */
-  .week-benefits {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-  }
-  .benefit:not(:last-child) { border-right: none; }
 
   /* ── Awards: stack vertically, badge centered (grid becomes a single column) ── */
   .awards-section { padding: 72px 20px; }
