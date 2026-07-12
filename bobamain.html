@@ -86,6 +86,7 @@
     <img src="mochilogoV2.png" style="height:44px;width:auto;display:block;"/>
   </div>
   <div class="nav-right">
+    <a href="https://bestiesboba.square.site/" target="_blank" class="nav-order"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><span>Order</span></a>
     <ul class="nav-links">
     <li><a href="#this-week">This Week</a></li>
     <li><a href="menu.html">Menu</a></li>
@@ -93,7 +94,6 @@
     <li><a href="catering.html">Catering</a></li>
     <li><a href="visit.html">Visit</a></li>
   </ul>
-    <a href="https://bestiesboba.square.site/" target="_blank" class="nav-order"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><span>Order</span></a>
   </div>
   <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
     <span></span><span></span><span></span>
@@ -178,65 +178,55 @@
 
 <!-- ════════════ PROMOS & SPECIALS ════════════ -->
 <section class="promos-section">
-  <span class="promos-deco" style="top:8%; left:4%; font-size:34px;">&#10022;</span>
-  <span class="promos-deco" style="top:20%; left:15%; font-size:20px;">&#9825;</span>
-  <span class="promos-deco" style="top:4%; left:34%; font-size:22px;">&#10022;</span>
-  <span class="promos-deco" style="top:70%; left:6%; font-size:26px;">&#9825;</span>
-  <span class="promos-deco" style="top:85%; left:20%; font-size:18px;">&#10022;</span>
-  <span class="promos-deco" style="top:10%; right:4%; font-size:28px;">&#9825;</span>
-  <span class="promos-deco" style="top:30%; right:2%; font-size:20px;">&#10022;</span>
-  <span class="promos-deco" style="bottom:8%; right:8%; font-size:24px;">&#9825;</span>
-  <div class="promos-inner">
-    <div class="promos-head fade-in-left">
-      <h2 class="promos-title">Specials &amp; Promos</h2>
-      <p class="promos-sub">Sweet deals worth coming back for!</p>
-      <div class="promos-mascot">
-        <span class="promos-deco" style="top:6%; left:8%; font-size:18px;">&#9825;</span>
-        <span class="promos-deco" style="top:0; right:4%; font-size:16px;">&#9825;</span>
-        <svg class="promos-cup" viewBox="0 0 160 170" aria-hidden="true">
-          <rect x="94" y="8" width="10" height="52" rx="4" fill="var(--pink-d)" transform="rotate(12 99 34)"/>
-          <path d="M22 62 L138 62 L118 164 Q80 176 42 164 Z" fill="var(--pink)"/>
-          <ellipse cx="80" cy="62" rx="58" ry="13" fill="#fff" stroke="var(--pink)" stroke-width="3"/>
-        </svg>
-        <img class="promos-cat-peek" src="cat-white.png" alt="Besties cat mascot"/>
+  <svg class="promos-wave" viewBox="0 0 1440 100" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0,40 C240,90 480,0 720,30 C960,60 1200,10 1440,50 L1440,0 L0,0 Z" fill="var(--pink)" opacity="0.15"/>
+  </svg>
+  <span class="promos-deco" style="top:8%; left:4%; font-size:30px;">&#10022;</span>
+  <span class="promos-deco" style="top:22%; left:12%; font-size:18px;">&#9825;</span>
+  <span class="promos-deco" style="top:6%; right:6%; font-size:26px;">&#9825;</span>
+  <span class="promos-deco" style="top:24%; right:14%; font-size:18px;">&#10022;</span>
+  <span class="promos-deco" style="bottom:10%; left:8%; font-size:20px;">&#9825;</span>
+  <span class="promos-deco" style="bottom:6%; right:10%; font-size:22px;">&#10022;</span>
+
+  <div class="promos-head-center fade-in-scroll">
+    <h2 class="promos-title">Specials &amp; Promos</h2>
+    <p class="promos-sub">Sweet deals worth coming back for! <span class="promos-heart">&#9825;</span></p>
+  </div>
+
+  <div class="promos-stack">
+    <div class="promo-row fade-in-left">
+      <div class="promo-row-photo"><img src="mochidonutsV2.jpg" alt="$1 Mochi Donut Tuesdays"/></div>
+      <div class="promo-row-body">
+        <span class="promo-tag">This Week</span>
+        <h3 class="promo-name">$1 Mochi Donut Tuesdays</h3>
+        <p class="promo-desc">Every Tuesday, get a mochi donut for just $1 with any drink purchase!</p>
       </div>
+      <a href="#this-week" class="promo-arrow-btn" aria-label="See this week's flavors">&#8594;</a>
     </div>
-    <div class="promos-carousel">
-      <button class="promos-arrow promos-arrow-left" id="promos-prev" aria-label="Previous promo">&#8249;</button>
-      <div class="promos-grid stagger-group" id="promos-grid">
-        <div class="promo-item fade-in-left">
-          <div class="promo-photo-wrap">
-            <span class="promo-tag">This Week</span>
-            <svg class="promo-squiggle" viewBox="0 0 40 20" aria-hidden="true"><path d="M2 10 Q8 2 14 10 T26 10 T38 10" fill="none" stroke="var(--pink)" stroke-width="2.5" stroke-linecap="round"/></svg>
-            <div class="promo-photo"><img src="mochidonutsV2.jpg" alt="$1 Mochi Donut Tuesdays"/></div>
-          </div>
-          <h3 class="promo-name">$1 Mochi Donut Tuesdays</h3>
-          <p class="promo-desc">Every Tuesday, get a mochi donut for just $1 with any drink purchase!</p>
-          <a href="#this-week" class="promo-arrow-btn" aria-label="See this week's flavors">&#8594;</a>
-        </div>
-        <div class="promo-item fade-in-bottom">
-          <div class="promo-photo-wrap">
-            <span class="promo-tag">Group Orders</span>
-            <svg class="promo-squiggle" viewBox="0 0 40 20" aria-hidden="true"><path d="M2 10 Q8 2 14 10 T26 10 T38 10" fill="none" stroke="var(--pink)" stroke-width="2.5" stroke-linecap="round"/></svg>
-            <div class="promo-photo"><img src="drinks.jpg" alt="Catering &amp; Group Orders"/></div>
-          </div>
-          <h3 class="promo-name">Catering &amp; Group Orders</h3>
-          <p class="promo-desc">Boba flights, mochi donuts, and drink bars for any occasion.</p>
-          <a href="catering.html" class="promo-arrow-btn" aria-label="Book catering">&#8594;</a>
-        </div>
-        <div class="promo-item fade-in-right">
-          <div class="promo-photo-wrap">
-            <span class="promo-tag">Order Online</span>
-            <svg class="promo-squiggle" viewBox="0 0 40 20" aria-hidden="true"><path d="M2 10 Q8 2 14 10 T26 10 T38 10" fill="none" stroke="var(--pink)" stroke-width="2.5" stroke-linecap="round"/></svg>
-            <div class="promo-photo"><img src="bobahero.png" alt="Order Ahead Online"/></div>
-          </div>
-          <h3 class="promo-name">Order Ahead Online</h3>
-          <p class="promo-desc">Skip the line — order from your phone and pick up fast!</p>
-          <a href="https://bestiesboba.square.site/" target="_blank" class="promo-arrow-btn" aria-label="Order ahead online">&#8594;</a>
-        </div>
+    <div class="promo-row fade-in-right">
+      <div class="promo-row-photo"><img src="drinks.jpg" alt="Catering &amp; Group Orders"/></div>
+      <div class="promo-row-body">
+        <span class="promo-tag">Group Orders</span>
+        <h3 class="promo-name">Catering &amp; Group Orders</h3>
+        <p class="promo-desc">Boba flights, mochi donut towers, and drink bars for any occasion.</p>
       </div>
-      <button class="promos-arrow promos-arrow-right" id="promos-next" aria-label="Next promo">&#8250;</button>
+      <a href="catering.html" class="promo-arrow-btn" aria-label="Book catering">&#8594;</a>
     </div>
+    <div class="promo-row fade-in-left">
+      <div class="promo-row-photo"><img src="bobahero.png" alt="Order Ahead Online"/></div>
+      <div class="promo-row-body">
+        <span class="promo-tag">Order Online</span>
+        <h3 class="promo-name">Order Ahead Online</h3>
+        <p class="promo-desc">Skip the line — order from your phone and pick up fast!</p>
+      </div>
+      <a href="https://bestiesboba.square.site/" target="_blank" class="promo-arrow-btn" aria-label="Order ahead online">&#8594;</a>
+    </div>
+  </div>
+
+  <div class="promos-dots">
+    <span class="promos-dot is-active"></span>
+    <span class="promos-dot"></span>
+    <span class="promos-dot"></span>
   </div>
 </section>
 
@@ -272,8 +262,8 @@
           <h2 class="week-h2">Handcrafted happiness in every bite. <span class="week-heart">&#9825;</span></h2>
           <p class="week-desc">We make our mochi donuts fresh every morning in small batches with high quality ingredients and lots of love.</p>
           <div class="week-side-btns">
-            <a href="https://bestiesboba.square.site/" target="_blank"><button class="btn-fill btn-big">Order Now</button></a>
-            <a href="https://bestiesboba.square.site/" target="_blank"><button class="btn-outline btn-big">Order Ahead</button></a>
+            <a href="https://bestiesboba.square.site/" target="_blank"><button class="btn-fill btn-big btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>Order Now</button></a>
+            <a href="https://bestiesboba.square.site/" target="_blank"><button class="btn-outline btn-big btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>Order Ahead</button></a>
           </div>
           <p class="week-side-helper">Skip the line and pick up faster!</p>
         </div>
@@ -357,7 +347,10 @@
       <span class="ig-follower-num" id="ig-follower-count" data-count-to="3000">0</span>
       Bestie Boba Lovers
     </div>
-    <a href="https://instagram.com/BestiesBoba" target="_blank" class="ig-handle">@bestiesboba</a>
+    <a href="https://instagram.com/BestiesBoba" target="_blank" class="btn-fill ig-follow-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      Follow on Instagram
+    </a>
   </div>
   <div class="ig-grid stagger-group">
     <div class="ig-post ig-post-1 fade-in-scroll">
@@ -367,20 +360,14 @@
     </div>
     <div class="ig-post ig-post-2 fade-in-scroll">
       <div class="ig-post-tape"></div>
-      <div class="ig-post-photo"><video src="ig-post-2.mp4" autoplay muted loop playsinline></video></div>
-      <div class="ig-post-caption">Fresh boba daily</div>
-    </div>
-    <div class="ig-post ig-post-3 fade-in-scroll">
-      <div class="ig-post-tape"></div>
       <div class="ig-post-photo"><video src="ig-post-3.mp4" autoplay muted loop playsinline></video></div>
       <div class="ig-post-caption">Cheers, besties! &#9825;</div>
     </div>
-  </div>
-  <div class="ig-cta fade-in-scroll">
-    <a href="https://instagram.com/BestiesBoba" target="_blank"><button class="btn-fill ig-follow-btn">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-      Follow on Instagram
-    </button></a>
+    <div class="ig-post ig-post-3 fade-in-scroll">
+      <div class="ig-post-tape"></div>
+      <div class="ig-post-photo"><video src="ig-post-2.mp4" autoplay muted loop playsinline></video></div>
+      <div class="ig-post-caption">Fresh boba daily</div>
+    </div>
   </div>
 </section>
 

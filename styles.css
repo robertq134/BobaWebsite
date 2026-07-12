@@ -123,6 +123,8 @@ button { font-family: 'Roboto', sans-serif; cursor: pointer; }
 .tag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--pink); margin-bottom: 14px; }
 .btn-fill { display: inline-block; background: var(--pink); color: white; border: 1.5px solid transparent; border-radius: 6px; padding: 13px 28px; font-size: 14px; font-weight: 600; line-height: 1.2; transition: background .15s, transform .15s, box-shadow .15s; cursor: pointer; }
 .btn-big { padding: 20px 44px; font-size: 18px; border-radius: 10px; }
+.btn-icon { display: inline-flex; align-items: center; gap: 10px; }
+.btn-icon svg { width: 20px; height: 20px; flex-shrink: 0; }
 .btn-fill:hover { background: var(--pink-d); transform: translateY(-2px) scale(1.03); box-shadow: 0 8px 20px rgba(199,58,97,.35); }
 .btn-outline { display: inline-block; background: transparent; color: var(--dark); border: 1.5px solid var(--border); border-radius: 6px; padding: 13px 28px; font-size: 14px; font-weight: 600; line-height: 1.2; transition: border-color .15s, transform .15s, background .15s; cursor: pointer; }
 .btn-outline:hover { border-color: var(--dark); transform: translateY(-2px) scale(1.03); background: rgba(0,0,0,0.03); }
@@ -231,7 +233,7 @@ nav.nav-on-dark:not(.scrolled) .nav-toggle span { background: white; }
 .hero.hero-sticky .hero-inner { min-height: 100%; height: 100%; }
 
 #this-week { background: #FFFFFF; }
-.this-week { position: relative; padding: 140px 80px 160px; max-width: 1500px; margin: 0 auto; }
+.this-week { position: relative; padding: 90px 80px 100px; max-width: 1500px; margin: 0 auto; }
 
 /* Full-width single-column This Week layout: centered header, big carousel, centered footer */
 .this-week-full { display: flex; flex-direction: column; align-items: center; }
@@ -285,10 +287,10 @@ nav.nav-on-dark:not(.scrolled) .nav-toggle span { background: white; }
 .week-dates { display: inline-block; background: var(--warm); border: 1px solid var(--border); border-radius: 6px; padding: 7px 16px; font-size: 14px; font-weight: 700; color: var(--muted); margin-bottom: 32px; }
 
 /* ── This Week's Flavors: immersive full-bleed photo hero ── */
-.week-redesign { width: 100%; max-width: 1280px; margin: 0 auto; background: var(--cream); border-radius: 32px; overflow: hidden; box-shadow: 0 24px 60px rgba(22,14,18,0.10); }
+.week-redesign { width: 100%; max-width: 1440px; margin: 0 auto; background: var(--cream); border-radius: 32px; overflow: hidden; box-shadow: 0 24px 60px rgba(22,14,18,0.10); }
 .week-hero-split { display: grid; grid-template-columns: 1.6fr 1fr; position: relative; }
-.week-hero-photo { position: relative; overflow: hidden; min-height: 560px; background: var(--pink-pastel); }
-.week-hero-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.week-hero-photo { position: relative; overflow: hidden; min-height: 420px; background: var(--pink-pastel); }
+.week-hero-img { width: 100%; height: 100%; object-fit: cover; display: block; transition: opacity .2s ease; }
 .week-hero-scrim { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(22,14,18,0.75) 0%, rgba(22,14,18,0.4) 40%, rgba(22,14,18,0) 65%); }
 .week-doodle { position: absolute; pointer-events: none; z-index: 1; }
 .week-doodle-1 { top: 10%; right: 14%; width: 56px; height: 56px; }
@@ -320,7 +322,7 @@ nav.nav-on-dark:not(.scrolled) .nav-toggle span { background: white; }
   z-index: 6;
 }
 .week-arrow-mid:hover { transform: translate(-50%, -50%) scale(1.08); }
-.week-hero-overlay { position: absolute; left: 36px; right: 36px; bottom: 32px; z-index: 2; color: #fff; }
+.week-hero-overlay { position: absolute; left: 36px; right: 36px; bottom: 32px; z-index: 2; color: #fff; transition: opacity .2s ease; }
 .week-feature-badge {
   display: inline-block;
   background: var(--pink);
@@ -682,6 +684,7 @@ nav.nav-on-dark:not(.scrolled) .nav-logo img { filter: drop-shadow(0 1px 4px rgb
 .awards-head { text-align: center; margin-bottom: 40px; }
 .awards-title { font-family: 'Fredoka', sans-serif; font-size: clamp(28px, 3vw, 42px); font-weight: 700; color: var(--dark); }
 .awards-row { max-width: 1120px; margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: 48px; }
+.awards-cat { display: flex; justify-content: center; }
 .awards-cat-ph { width: 190px; height: 190px; object-fit: contain; flex-shrink: 0; filter: drop-shadow(0 6px 14px rgba(0,0,0,0.08)); }
 .awards-badges { flex: 1; display: flex; justify-content: center; gap: 32px; }
 .award-item { width: min(640px, 85vw); aspect-ratio: 1 / 1; border-radius: 24px; background: #fff; box-shadow: 0 10px 32px rgba(0,0,0,0.08); display: flex; align-items: center; justify-content: center; padding: 28px; overflow: hidden; box-sizing: border-box; transition: transform .25s ease, box-shadow .25s ease; }
@@ -689,58 +692,49 @@ nav.nav-on-dark:not(.scrolled) .nav-logo img { filter: drop-shadow(0 1px 4px rgb
 .award-item-img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }
 
 /* ── PROMOS & SPECIALS ── */
-.promos-section { background: var(--pink-pastel); padding: 120px 48px; overflow: hidden; position: relative; }
+.promos-section { background: var(--pink-pastel); padding: 100px 48px; overflow: hidden; position: relative; }
+.promos-wave { position: absolute; top: 0; left: 0; width: 100%; height: 100px; z-index: 0; }
 .promos-deco { position: absolute; pointer-events: none; z-index: 1; color: var(--pink); opacity: .55; }
-.promos-inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 340px 1fr; gap: 48px; align-items: center; position: relative; z-index: 2; }
-.promos-head { text-align: left; margin-bottom: 0; }
-.promos-title {
-  font-family: 'Fredoka', sans-serif;
-  font-size: clamp(36px, 4.2vw, 52px);
-  font-weight: 700;
-  line-height: 1.1;
-  color: var(--pink);
+.promos-head-center { text-align: center; max-width: 640px; margin: 0 auto 48px; position: relative; z-index: 2; }
+.promos-title { font-family: 'Fredoka', sans-serif; font-size: clamp(34px, 4vw, 48px); font-weight: 700; line-height: 1.1; color: var(--pink); }
+.promos-sub { font-size: 17px; font-weight: 700; color: var(--pink-d); margin-top: 14px; }
+.promos-heart { color: var(--pink); }
+
+.promos-stack { max-width: 860px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; position: relative; z-index: 2; }
+.promo-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  background: #fff;
+  border: 2px solid var(--border);
+  border-radius: 24px;
+  padding: 20px 64px 20px 20px;
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
 }
-.promos-sub { font-size: 18px; font-weight: 700; color: var(--pink-d); margin-top: 16px; }
-.promos-mascot { position: relative; width: 150px; margin-top: 32px; }
-.promos-cup { width: 100%; height: auto; display: block; filter: drop-shadow(0 10px 16px rgba(0,0,0,0.15)); }
-.promos-cat-peek { position: absolute; width: 92px; left: 50%; bottom: 62px; transform: translateX(-50%); }
-.promos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-.promos-arrow { display: none; }
-.promo-item { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 10px; }
-.promo-photo-wrap { position: relative; margin-bottom: 8px; }
+.promo-row:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.10); border-color: var(--pink); }
+.promo-row-photo { width: 130px; height: 130px; border-radius: 18px; overflow: hidden; flex-shrink: 0; }
+.promo-row-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.promo-row-body { flex: 1; }
 .promo-tag {
-  position: absolute;
-  top: -14px;
-  left: 50%;
-  transform: translateX(-50%);
-  white-space: nowrap;
   display: inline-block;
-  padding: 6px 16px;
+  padding: 5px 14px;
   border-radius: 999px;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: .5px;
   background: var(--pink);
   color: #fff;
-  box-shadow: 0 4px 12px rgba(199,58,97,.3);
-  z-index: 3;
+  margin-bottom: 8px;
 }
-.promo-squiggle { position: absolute; top: -6px; right: -14px; width: 34px; height: 18px; z-index: 3; }
-.promo-photo {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 4px solid #fff;
-  box-shadow: 0 14px 30px rgba(0,0,0,0.16);
-  transition: transform .25s ease, box-shadow .25s ease;
-}
-.promo-item:hover .promo-photo { transform: translateY(-8px) scale(1.04); box-shadow: 0 20px 40px rgba(0,0,0,0.24); }
-.promo-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.promo-name { font-family: 'Fredoka', sans-serif; font-size: 19px; font-weight: 700; line-height: 1.25; color: var(--dark); }
-.promo-desc { font-size: 13px; color: var(--muted); line-height: 1.6; max-width: 240px; }
+.promo-name { font-family: 'Fredoka', sans-serif; font-size: 20px; font-weight: 700; line-height: 1.25; color: var(--dark); }
+.promo-desc { font-size: 14px; color: var(--muted); line-height: 1.6; margin-top: 6px; }
 .promo-arrow-btn {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -750,11 +744,14 @@ nav.nav-on-dark:not(.scrolled) .nav-logo img { filter: drop-shadow(0 1px 4px rgb
   background: var(--pink);
   color: #fff;
   font-size: 18px;
-  margin-top: 6px;
   transition: background .15s, transform .15s;
   box-shadow: 0 6px 16px rgba(199,58,97,.3);
 }
-.promo-arrow-btn:hover { background: var(--pink-d); transform: scale(1.1); }
+.promo-arrow-btn:hover { background: var(--pink-d); transform: translateY(-50%) scale(1.1); }
+
+.promos-dots { display: flex; justify-content: center; gap: 8px; margin-top: 40px; position: relative; z-index: 2; }
+.promos-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); }
+.promos-dot.is-active { background: var(--pink); width: 22px; border-radius: 4px; }
 
 /* ── INSTAGRAM: polaroid / scrapbook style ── */
 .ig-section { background: var(--warm); padding: 140px 48px; border-top: 1px solid var(--border); position: relative; overflow: hidden; }
@@ -791,7 +788,7 @@ nav.nav-on-dark:not(.scrolled) .nav-logo img { filter: drop-shadow(0 1px 4px rgb
 .ig-followers { text-align: center; font-size: 26px; font-weight: 700; color: var(--pink); margin-bottom: 10px; }
 .ig-followers .ig-follower-num { font-size: clamp(46px, 6vw, 64px); font-weight: 800; color: var(--dark); display: block; }
 .ig-cta { text-align: center; margin-top: 72px; position: relative; z-index: 2; }
-.ig-follow-btn { display: inline-flex; align-items: center; gap: 10px; padding: 16px 32px; font-size: 17px; }
+.ig-follow-btn { display: inline-flex; align-items: center; gap: 10px; padding: 16px 32px; font-size: 17px; margin-top: 20px; }
 .ig-follow-btn svg { width: 22px; height: 22px; flex-shrink: 0; }
 
 /* ── VISIT PAGE ── */
@@ -1059,6 +1056,7 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
   /* The mid-seam arrow only makes sense between two side-by-side columns; thumbnails
      plus the on-photo arrow are enough to navigate once the layout stacks. */
   .week-arrow-mid { display: none; }
+  .week-arrow-onphoto { left: 10px; width: 34px; height: 34px; font-size: 16px; }
   .week-thumb-strip { padding: 16px 20px; }
   .week-thumb { width: 64px; height: 64px; }
   .ci-desc { font-size: 15px; }
@@ -1104,49 +1102,13 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
     object-position: center center;
   }
 
-  /* ── Promos: carousel with arrows on mobile (matches donut carousel) ── */
-  .promos-section { padding: 48px 0; }
-  .promos-inner { grid-template-columns: 1fr; gap: 20px; }
-  .promos-head { padding: 0 20px; text-align: center; }
-  .promos-title { font-size: 34px; }
-  .promos-mascot { margin: 20px auto 0; }
-  .promos-carousel { position: relative; }
-  .promos-grid {
-    display: flex;
-    grid-template-columns: none;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    gap: 16px;
-    padding: 4px 20px 16px;
-    max-width: none;
-    scrollbar-width: none;
-  }
-  .promos-grid::-webkit-scrollbar { display: none; }
-  .promo-item {
-    flex: 0 0 80%;
-    scroll-snap-align: center;
-  }
-  .promos-arrow {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    top: 42%;
-    transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: white;
-    border: none;
-    box-shadow: 0 8px 20px rgba(22,14,18,.18);
-    font-size: 22px;
-    color: var(--pink);
-    cursor: pointer;
-    z-index: 20;
-  }
-  .promos-arrow-left { left: 6px; }
-  .promos-arrow-right { right: 6px; }
+  /* ── Promos: stacked cards go photo-on-top on narrow screens ── */
+  .promos-section { padding: 56px 20px; }
+  .promos-title { font-size: 32px; }
+  .promo-row { flex-direction: column; align-items: stretch; padding: 20px; text-align: center; }
+  .promo-row-photo { width: 100%; height: 160px; }
+  .promo-arrow-btn { position: static; transform: none; margin: 14px auto 0; }
+  .promo-row:hover .promo-arrow-btn { transform: none; }
 
   /* ── Benefits: 2×2 grid on mobile ── */
   .week-benefits {
@@ -1161,7 +1123,7 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
     flex-direction: column;
     gap: 20px;
   }
-  .awards-cat { max-width: 120px; }
+  .awards-cat-ph { width: 90px; height: 90px; }
 
   /* ── Instagram: stack posts, keep them tappable ── */
   .ig-section { padding: 48px 20px; }

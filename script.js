@@ -262,9 +262,11 @@
     var badge = document.getElementById('week-feature-badge');
     var prevBtns = document.querySelectorAll('.week-arrow[data-dir="prev"]');
     var nextBtns = document.querySelectorAll('.week-arrow[data-dir="next"]');
+    var overlay = document.querySelector('.week-hero-overlay');
     var activeIndex = 0;
+    var transitioning = false;
 
-    function setActive(index) {
+    function applyActive(index) {
       activeIndex = ((index % thumbs.length) + thumbs.length) % thumbs.length;
       var t = thumbs[activeIndex];
       img.src = t.getAttribute('data-img');
@@ -280,6 +282,21 @@
         badge.style.display = 'none';
       }
       thumbs.forEach(function(el, i) { el.classList.toggle('is-active', i === activeIndex); });
+    }
+
+    // Cross-fade the photo + overlay text out, swap content, then fade back in —
+    // instant swaps felt jarring, this makes flavor changes feel intentional.
+    function setActive(index) {
+      if (transitioning) return;
+      transitioning = true;
+      img.style.opacity = '0';
+      if (overlay) overlay.style.opacity = '0';
+      setTimeout(function() {
+        applyActive(index);
+        img.style.opacity = '1';
+        if (overlay) overlay.style.opacity = '1';
+        setTimeout(function() { transitioning = false; }, 260);
+      }, 200);
     }
 
     thumbs.forEach(function(t, i) {
