@@ -360,7 +360,9 @@ nav.nav-on-dark:not(.scrolled) .nav-toggle span { background: white; }
 .week-side-name { transition: opacity .18s ease; }
 .week-side-desc { transition: opacity .18s ease; }
 
-.week-thumb-strip { background: var(--pink-pastel); padding: 22px 32px; display: flex; align-items: center; justify-content: center; gap: 16px; }
+.week-thumb-strip { background: var(--pink-pastel); padding: 22px 32px; display: flex; flex-direction: column; gap: 14px; }
+.week-thumb-strip-title { font-family: 'Caveat', cursive; font-size: clamp(24px, 2.4vw, 32px); font-weight: 700; color: var(--dark); text-align: center; }
+.week-thumb-row { display: flex; align-items: center; justify-content: center; gap: 16px; }
 .week-arrow-small { width: 34px; height: 34px; font-size: 17px; }
 .week-thumbs { display: flex; gap: 16px; overflow-x: auto; padding-bottom: 4px; flex: 1; min-width: 0; justify-content: center; }
 .week-thumb {
