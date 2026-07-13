@@ -927,11 +927,11 @@ nav.nav-on-dark:not(.scrolled) .nav-logo img { filter: drop-shadow(0 1px 4px rgb
 .vu-stack-item-2 { left: 34%; top: 14%; transform: rotate(5deg); z-index: 2; }
 .vu-tape { position: absolute; top: -4%; left: 50%; transform: translateX(-50%) rotate(-3deg); width: 24%; height: 8%; background: rgba(214,192,160,.85); box-shadow: 0 2px 5px rgba(0,0,0,.12); }
 
-.vu-market-name { font-family: 'Playfair Display', serif; font-size: clamp(26px, 2.6vw, 36px); font-weight: 700; color: var(--dark); }
-.vu-market-addr { font-size: clamp(16px, 1.4vw, 19px); color: var(--muted); line-height: 1.6; margin-top: 12px; }
-.vu-market-divider { width: 64px; height: 3px; background: var(--pink); margin: 28px auto; }
-.vu-market-hours-label { font-size: 14px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--pink); margin-bottom: 10px; }
-.vu-market-hours div { font-size: clamp(16px, 1.4vw, 19px); color: var(--dark); line-height: 1.7; }
+.vu-market-name { font-family: 'Playfair Display', serif; font-size: clamp(32px, 3.6vw, 48px); font-weight: 700; color: var(--dark); }
+.vu-market-addr { font-size: clamp(18px, 1.9vw, 23px); color: var(--muted); line-height: 1.6; margin-top: 14px; }
+.vu-market-divider { width: 84px; height: 4px; background: var(--pink); margin: 34px auto; }
+.vu-market-hours-label { font-size: 17px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--pink); margin-bottom: 12px; }
+.vu-market-hours div { font-size: clamp(18px, 1.9vw, 23px); color: var(--dark); line-height: 1.8; }
 .tue-price { font-size: clamp(80px, 9vw, 128px); font-weight: 600; color: var(--dark); line-height: 1; letter-spacing: -1px; flex-shrink: 0; font-family: 'Roboto', sans-serif; }
 .tue-line { width: 1px; height: 90px; background: rgba(22,14,18,.15); flex-shrink: 0; }
 .tue-label { font-size: 11px; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(22,14,18,.45); margin-bottom: 10px; }
