@@ -591,7 +591,7 @@ nav.nav-on-dark:not(.scrolled) .nav-links a:hover { color: white; }
 nav.nav-on-dark:not(.scrolled) .nav-logo img { filter: drop-shadow(0 1px 4px rgba(0,0,0,.45)); }
 
 .hero-catering {
-  background-image: linear-gradient(rgba(22,14,18,0.42), rgba(22,14,18,0.55)), url('catering-hero.jpg');
+  background-image: linear-gradient(rgba(22,14,18,0.42), rgba(22,14,18,0.55)), url('cateringhero.jpg');
   background-size: cover;
   background-position: center;
 }
@@ -672,6 +672,37 @@ nav.nav-on-dark:not(.scrolled) .nav-logo img { filter: drop-shadow(0 1px 4px rgb
 .catering-cta-phone { font-size: 22px; line-height: 1.6; color: var(--text); font-weight: 600; }
 .catering-cta-phone a { color: var(--pink); font-weight: 800; font-size: 27px; }
 .catering-cta-phone a.cta-email-link { font-size: 21px; }
+
+.catering-flyer-section { max-width: 1300px; margin: 0 auto; padding: 40px 48px 0; text-align: center; }
+.catering-flyer-head { margin-bottom: 44px; }
+.catering-flyer-link {
+  position: relative;
+  display: block;
+  max-width: 940px;
+  margin: 0 auto;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 22px 50px rgba(22,14,18,.14);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.catering-flyer-link:hover { transform: translateY(-6px); box-shadow: 0 28px 60px rgba(22,14,18,.2); }
+.catering-flyer-img { width: 100%; display: block; }
+.catering-flyer-badge {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--pink);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 12px 22px;
+  border-radius: 999px;
+  box-shadow: 0 8px 18px rgba(199,58,97,.35);
+}
+.catering-flyer-badge svg { width: 17px; height: 17px; flex-shrink: 0; }
 
 .tuesday { background: var(--yellow); padding: 72px 48px; }
 .tuesday-inner { max-width: 1120px; margin: 0 auto; display: flex; align-items: center; gap: 40px; flex-wrap: wrap; }
@@ -1311,6 +1342,11 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
   .catering-cta-phone a.cta-email-link { font-size: 18px; }
   .hero-catering .hero-h1 { font-size: clamp(33px, 9vw, 44px); }
   .hero.hero-catering { min-height: 440px; }
+  .catering-flyer-section { padding: 28px 20px 0; }
+  .catering-flyer-head { margin-bottom: 28px; }
+  .catering-flyer-link { border-radius: 16px; }
+  .catering-flyer-badge { right: 12px; bottom: 12px; font-size: 12px; padding: 8px 14px; gap: 6px; }
+  .catering-flyer-badge svg { width: 14px; height: 14px; }
 
   .tuesday { padding: 40px 20px; }
   .tuesday-inner { gap: 20px; }
