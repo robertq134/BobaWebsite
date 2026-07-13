@@ -210,7 +210,7 @@ nav.nav-on-dark:not(.scrolled) .nav-toggle span { background: white; }
   letter-spacing: 0;
 }
 .hero-heart { color: var(--pink); }
-.hero.hero-dark .hero-inner { justify-content: center; text-align: center; padding-left: 40px; padding-right: 40px; }
+.hero.hero-dark .hero-inner { justify-content: center; text-align: center; padding-left: 40px; padding-right: 40px; padding-top: 90px; padding-bottom: 140px; }
 .hero.hero-dark .hero-content { margin: 0 auto; }
 .hero.hero-dark .hero-sub { margin-left: auto; margin-right: auto; }
 .hero.hero-dark .hero-btns { justify-content: center; }
@@ -887,35 +887,46 @@ nav.nav-on-dark:not(.scrolled) .nav-logo img { filter: drop-shadow(0 1px 4px rgb
 .ig-follow-btn { display: inline-flex; align-items: center; gap: 10px; padding: 16px 32px; font-size: 17px; margin-top: 20px; }
 .ig-follow-btn svg { width: 22px; height: 22px; flex-shrink: 0; }
 
-/* ── VISIT PAGE ── */
-.visit-hero-split { background: var(--warm); padding: 100px 48px 80px; border-bottom: 1px solid var(--border); }
-.visit-hero-inner { max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
-.visit-hero-text h1 { font-family: 'Fredoka', sans-serif; font-weight: 700; font-size: clamp(30px, 3.6vw, 46px); color: var(--dark); line-height: 1.15; margin-top: 12px; }
-.visit-hero-text p { font-size: 16px; line-height: 1.7; color: var(--muted); margin-top: 16px; max-width: 460px; }
-.visit-hero-photo { aspect-ratio: 4 / 3; border-radius: 20px; }
+/* ── VISIT PAGE (professional/editorial redesign — serif headings, restrained
+   pink, no mascots) ── */
+.vu-h1 { font-family: 'Playfair Display', serif; font-size: clamp(48px, 6vw, 80px); font-weight: 700; color: var(--dark); line-height: 1.05; }
+.vu-h2 { font-family: 'Playfair Display', serif; font-size: clamp(28px, 3vw, 38px); font-weight: 700; color: var(--dark); }
 
-.day-cards { max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
-.day-card { background: var(--warm); border: 1px solid var(--border); border-radius: 18px; overflow: hidden; transition: transform .25s ease, box-shadow .25s ease; }
-.day-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(22,14,18,0.14); }
-.day-card-photo { width: 100%; aspect-ratio: 16 / 10; border-radius: 0; }
-.day-card-body { padding: 28px 32px; }
-.day-card-every { font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--pink); }
-.day-card-name { font-family: 'Fredoka', sans-serif; font-size: 32px; font-weight: 700; color: var(--dark); line-height: 1.15; margin-top: 4px; }
-.day-card-tag { display: inline-block; margin-top: 10px; font-size: 11px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; padding: 5px 14px; border-radius: 999px; background: #fff; }
-.day-card-tag-thurs { color: var(--pink); }
-.day-card-tag-sun { color: #8B5CF6; }
-.day-card-desc { font-size: 14px; color: var(--muted); line-height: 1.6; margin-top: 14px; }
+.vu-hero { max-width: 1400px; margin: 0 auto; padding: 156px 48px 80px; }
+.vu-hero-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.vu-hero-sub { font-size: 18px; line-height: 1.7; color: var(--muted); margin-top: 20px; max-width: 440px; }
+.vu-hero-photo img { width: 100%; height: 480px; object-fit: cover; border-radius: 24px; box-shadow: 0 24px 60px rgba(22,14,18,.14); display: block; }
 
-.location-section { background: var(--warm); border-top: 1px solid var(--border); padding: 88px 48px; }
-.location-inner { max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; }
-.location-photo { border-radius: 20px; min-height: 340px; overflow: hidden; }
-.location-photo iframe { display: block; }
-.location-panel { background: #fff; border: 1px solid var(--border); border-radius: 20px; padding: 36px; }
-.visit-card-title { font-family: 'Caveat', cursive; font-size: 32px; font-weight: 700; color: var(--dark); margin-bottom: 14px; }
-.visit-card-addr { font-size: 15px; line-height: 1.6; color: var(--muted); margin-bottom: 20px; }
-.hours-rows { margin-bottom: 16px; }
-.hours-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 14px; font-weight: 600; color: var(--text); }
-.visit-note { font-size: 13px; color: var(--muted); line-height: 1.6; }
+.vu-shop-section { max-width: 1400px; margin: 0 auto; padding: 0 48px 100px; }
+.vu-shop-card { background: #fff; border-radius: 28px; box-shadow: 0 20px 50px rgba(22,14,18,.08); display: grid; grid-template-columns: 1fr 1.2fr; overflow: hidden; }
+.vu-shop-details { padding: 56px; }
+.vu-address { font-size: 16px; line-height: 1.6; color: var(--muted); margin: 14px 0 24px; }
+.vu-directions-btn { display: inline-block; }
+.vu-hours { margin-top: 36px; border-top: 1px solid var(--border); padding-top: 24px; }
+.vu-hours-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--pink); margin-bottom: 14px; }
+.vu-hours-row { display: flex; justify-content: space-between; font-size: 14px; color: var(--dark); padding: 8px 0; border-bottom: 1px solid var(--border); }
+.vu-hours-row:last-child { border-bottom: none; }
+.vu-shop-map { position: relative; min-height: 420px; }
+.vu-shop-map iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+.vu-markets-section { max-width: 1400px; margin: 0 auto; padding: 20px 48px 130px; text-align: center; }
+.vu-markets-head { margin-bottom: 64px; }
+.vu-markets-sub { font-size: 16px; color: var(--muted); margin-top: 10px; }
+.vu-markets-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; max-width: 900px; margin: 0 auto; }
+.vu-market-block { text-align: center; }
+
+.vu-photo-stack { position: relative; height: 300px; width: 230px; margin: 0 auto 34px; }
+.vu-stack-item { position: absolute; width: 150px; height: 210px; background: #fff; padding: 8px; border-radius: 3px; box-shadow: 0 16px 32px rgba(22,14,18,.18); }
+.vu-stack-item video { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 1px; }
+.vu-stack-item-1 { left: 0; top: 6px; transform: rotate(-6deg); z-index: 1; }
+.vu-stack-item-2 { left: 78px; top: 40px; transform: rotate(5deg); z-index: 2; }
+.vu-tape { position: absolute; top: -9px; left: 50%; transform: translateX(-50%) rotate(-3deg); width: 52px; height: 20px; background: rgba(214,192,160,.85); box-shadow: 0 2px 5px rgba(0,0,0,.12); }
+
+.vu-market-name { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--dark); }
+.vu-market-addr { font-size: 14px; color: var(--muted); line-height: 1.6; margin-top: 8px; }
+.vu-market-divider { width: 40px; height: 2px; background: var(--pink); margin: 22px auto; }
+.vu-market-hours-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--pink); margin-bottom: 6px; }
+.vu-market-hours div { font-size: 14px; color: var(--dark); line-height: 1.6; }
 .tue-price { font-size: clamp(80px, 9vw, 128px); font-weight: 600; color: var(--dark); line-height: 1; letter-spacing: -1px; flex-shrink: 0; font-family: 'Roboto', sans-serif; }
 .tue-line { width: 1px; height: 90px; background: rgba(22,14,18,.15); flex-shrink: 0; }
 .tue-label { font-size: 11px; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(22,14,18,.45); margin-bottom: 10px; }
@@ -952,6 +963,9 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
 .f-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
 .f-col ul a { font-size: 13px; font-weight: 500; color: rgba(255,255,255,.38); transition: color .15s; }
 .f-col ul a:hover { color: white; }
+.f-col-text { font-size: 13px; font-weight: 500; color: rgba(255,255,255,.55); line-height: 1.8; }
+.f-col-text a { color: rgba(255,255,255,.55); transition: color .15s; }
+.f-col-text a:hover { color: white; }
 .footer-bot { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
 .f-copy { font-size: 12px; color: rgba(255,255,255,.18); }
 .f-ig { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,.28); transition: color .15s; }
@@ -1106,7 +1120,8 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
   .nav-order span { display: none; }
 
   .hero { min-height: 48vh; }
-  .hero-inner { padding: 78px 20px 20px; flex-direction: column; align-items: center; justify-content: flex-start; text-align: center; }
+  .hero-inner { padding: 52px 20px 20px; flex-direction: column; align-items: center; justify-content: flex-start; text-align: center; }
+  .hero.hero-dark .hero-inner { padding-top: 52px; padding-bottom: 20px; }
   .hero-photo { object-position: 25% center; }
   .hero-content { max-width: 88%; }
   .hero-content .tag { margin-bottom: 6px; }
@@ -1296,15 +1311,20 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
   .visit-btns { flex-direction: column; }
   .visit-btns button { width: 100%; }
 
-  .visit-hero-split { padding: 56px 20px; }
-  .visit-hero-inner { grid-template-columns: 1fr; gap: 28px; }
-  .visit-hero-photo { order: -1; aspect-ratio: 16 / 10; }
-  .day-cards { grid-template-columns: 1fr; gap: 20px; }
-  .location-section { padding: 48px 20px; }
-  .location-inner { grid-template-columns: 1fr; gap: 24px; }
-  .location-photo { min-height: 200px; }
-  .location-panel { padding: 24px; }
   .visit-map { height: 260px !important; }
+
+  /* ── Visit Us page ── */
+  .vu-hero { padding: 110px 20px 48px; }
+  .vu-hero-inner { grid-template-columns: 1fr; gap: 28px; }
+  .vu-hero-photo { order: -1; }
+  .vu-hero-photo img { height: 260px; }
+  .vu-shop-section { padding: 0 20px 64px; }
+  .vu-shop-card { grid-template-columns: 1fr; border-radius: 20px; }
+  .vu-shop-details { padding: 32px 24px; }
+  .vu-shop-map { min-height: 260px; order: -1; }
+  .vu-markets-section { padding: 12px 20px 72px; }
+  .vu-markets-head { margin-bottom: 40px; }
+  .vu-markets-grid { grid-template-columns: 1fr; gap: 56px; max-width: 300px; }
 
   footer { padding: 40px 20px 24px; }
   .footer-top { flex-direction: column; gap: 28px; }

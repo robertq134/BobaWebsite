@@ -4,27 +4,26 @@
 <link rel="icon" type="image/png" href="android-chrome-192x192.png">
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Visit — Besties Boba & Bites</title>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fredoka:wght@500;600;700&family=Roboto:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<title>Visit Us — Besties Boba & Bites</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Roboto:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 <script src="https://unpkg.com/@rive-app/canvas@2.17.3/rive.js"></script>
 <link rel="stylesheet" href="styles.css"/>
 </head>
 <body>
 
-<nav class="nav-on-dark">
+<nav>
   <div class="nav-logo">
     <a href="bobamain.html" aria-label="Besties Boba &amp; Bites home">
       <img src="mochilogoV2.png" style="height:44px;width:auto;display:block;"/>
     </a>
   </div>
   <div class="nav-right">
-    <a href="https://bestiesboba.square.site/" target="_blank" class="nav-order"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><span>Order</span></a>
+    <a href="https://bestiesboba.square.site/" target="_blank" class="nav-order"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><span>Order Online</span></a>
     <ul class="nav-links">
-    <li><a href="bobamain.html#this-week">This Week</a></li>
     <li><a href="menu.html">Menu</a></li>
-    <li><a href="about.html">About Us</a></li>
     <li><a href="catering.html">Catering</a></li>
-    <li><a href="visit.html" class="active">Visit</a></li>
+    <li><a href="about.html">About Us</a></li>
+    <li><a href="visit.html" class="active">Visit Us</a></li>
   </ul>
   </div>
   <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
@@ -32,70 +31,91 @@
   </button>
 </nav>
 
-<!-- HERO: split photo + text, matching the market booth -->
-<section class="visit-hero-split">
-  <div class="visit-hero-inner">
-    <div class="visit-hero-text fade-in-scroll">
-      <span class="tag">Farmers Market</span>
-      <h1>Find us at the Livermore Farmers Market</h1>
-      <p>We're a seasonal vendor at the Livermore Farmers Market twice a week. Come grab your favorite boba and mochi donuts!</p>
+<!-- ════════════ HERO ════════════ -->
+<section class="vu-hero">
+  <div class="vu-hero-inner">
+    <div class="vu-hero-text fade-in-scroll">
+      <h1 class="vu-h1">Visit Us</h1>
+      <p class="vu-hero-sub">Stop by our shop in downtown Livermore or find us at a local farmers market. We&rsquo;d love to see you!</p>
     </div>
-    <div class="visit-hero-photo ph fade-in-scroll"><span>Market Photo</span></div>
+    <div class="vu-hero-photo fade-in-scroll">
+      <img src="MainPicture.jpg" alt="Besties Boba &amp; Bites storefront"/>
+    </div>
   </div>
 </section>
 
-<!-- WHEN TO FIND US -->
-<section class="menu-grid-section is-white">
-  <div class="catering-section-head">
-    <h2 class="catering-section-title">When to Find Us</h2>
-    <p class="catering-section-subtitle">Two days. Two chances to treat yourself.</p>
-  </div>
+<!-- ════════════ SHOP + MAP ════════════ -->
+<section class="vu-shop-section">
+  <div class="vu-shop-card fade-in-scroll">
+    <div class="vu-shop-details">
+      <h2 class="vu-h2">Besties Boba &amp; Bites</h2>
+      <p class="vu-address">4520 Las Positas Rd<br/>Livermore, CA 94551</p>
+      <a href="https://maps.app.goo.gl/xfkBfg51nW4FmRsM7" target="_blank"><button class="btn-fill vu-directions-btn">Get Directions</button></a>
 
-  <div class="day-cards stagger-group">
-    <div class="day-card fade-in-scroll">
-      <div class="day-card-photo ph"><span>Thursday Market</span></div>
-      <div class="day-card-body">
-        <div class="day-card-every">Every</div>
-        <div class="day-card-name">Thursday</div>
-        <span class="day-card-tag day-card-tag-thurs">Seasonal</span>
-        <p class="day-card-desc">Join us every Thursday during the season. Dates and times vary — follow us on Instagram for the latest updates!</p>
+      <div class="vu-hours">
+        <div class="vu-hours-label">Hours</div>
+        <div class="vu-hours-row"><span>Mon &ndash; Thu</span><span>11:00 AM &ndash; 8:00 PM</span></div>
+        <div class="vu-hours-row"><span>Fri &ndash; Sat</span><span>11:00 AM &ndash; 9:00 PM</span></div>
+        <div class="vu-hours-row"><span>Sunday</span><span>11:00 AM &ndash; 7:00 PM</span></div>
       </div>
     </div>
-
-    <div class="day-card fade-in-scroll">
-      <div class="day-card-photo ph"><span>Sunday Market</span></div>
-      <div class="day-card-body">
-        <div class="day-card-every">Every</div>
-        <div class="day-card-name">Sunday</div>
-        <span class="day-card-tag day-card-tag-sun">Year Round</span>
-        <p class="day-card-desc">Find us every Sunday, all year long. Follow us on Instagram for exact times and booth location!</p>
-      </div>
-    </div>
-  </div>
-
-  <p class="catering-note" style="text-align:center; margin-top:32px;">Market details may change — follow <a href="https://instagram.com/BestiesBoba" target="_blank">@bestiesboba</a> for the latest.</p>
-</section>
-
-<!-- OUR LOCATION -->
-<section class="location-section">
-  <div class="location-inner">
-    <div class="location-photo fade-in-scroll">
+    <div class="vu-shop-map">
       <iframe
         src="https://www.google.com/maps?q=4520+Las+Positas+Rd,+Livermore,+CA+94551&output=embed"
         width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
         referrerpolicy="no-referrer-when-downgrade" title="Besties Boba & Bites location map"></iframe>
     </div>
-    <div class="location-panel fade-in-scroll">
-      <h3 class="visit-card-title">Our Location</h3>
-      <p class="visit-card-addr">Livermore Farmers Market<br/><strong>4520 Las Positas Rd</strong><br/>Livermore, CA 94551</p>
-      <a href="https://maps.app.goo.gl/xfkBfg51nW4FmRsM7" target="_blank"><button class="btn-fill">Get Directions</button></a>
+  </div>
+</section>
 
-      <h3 class="visit-card-title" style="margin-top:32px;">Market Hours</h3>
-      <div class="hours-rows">
-        <div class="hours-row"><span>Thursday (Seasonal)</span><span>Varies by season</span></div>
-        <div class="hours-row"><span>Sunday (Year Round)</span><span>9:00 AM – 1:00 PM</span></div>
+<!-- ════════════ FARMERS MARKETS ════════════ -->
+<section class="vu-markets-section">
+  <div class="vu-markets-head fade-in-scroll">
+    <h2 class="vu-h2">Find us at a Farmers Market</h2>
+    <p class="vu-markets-sub">We love bringing boba and donuts to our community.</p>
+  </div>
+
+  <div class="vu-markets-grid stagger-group">
+    <div class="vu-market-block fade-in-scroll">
+      <div class="vu-photo-stack">
+        <div class="vu-stack-item vu-stack-item-1">
+          <span class="vu-tape"></span>
+          <video src="farm1.mp4" autoplay muted loop playsinline preload="metadata"></video>
+        </div>
+        <div class="vu-stack-item vu-stack-item-2">
+          <span class="vu-tape"></span>
+          <video src="farm2.mp4" autoplay muted loop playsinline preload="metadata"></video>
+        </div>
       </div>
-      <p class="visit-note">Follow us on Instagram for the latest hours, events, and market updates!</p>
+      <h3 class="vu-market-name">Livermore Farmers Market</h3>
+      <p class="vu-market-addr">First St. &amp; Livermore Ave<br/>Livermore, CA 94550</p>
+      <div class="vu-market-divider"></div>
+      <div class="vu-market-hours">
+        <div class="vu-market-hours-label">Hours</div>
+        <div>Thursdays (Seasonal)</div>
+        <div>4:00 PM &ndash; 8:00 PM</div>
+      </div>
+    </div>
+
+    <div class="vu-market-block fade-in-scroll">
+      <div class="vu-photo-stack">
+        <div class="vu-stack-item vu-stack-item-1">
+          <span class="vu-tape"></span>
+          <video src="farm3.mp4" autoplay muted loop playsinline preload="metadata"></video>
+        </div>
+        <div class="vu-stack-item vu-stack-item-2">
+          <span class="vu-tape"></span>
+          <video src="farm4.mp4" autoplay muted loop playsinline preload="metadata"></video>
+        </div>
+      </div>
+      <h3 class="vu-market-name">Tri-Valley Sunday Market</h3>
+      <p class="vu-market-addr">Heritage Park<br/>4501 Pleasanton Ave<br/>Pleasanton, CA 94566</p>
+      <div class="vu-market-divider"></div>
+      <div class="vu-market-hours">
+        <div class="vu-market-hours-label">Hours</div>
+        <div>Sundays (Year Round)</div>
+        <div>9:00 AM &ndash; 1:00 PM</div>
+      </div>
     </div>
   </div>
 </section>
@@ -103,25 +123,21 @@
 <footer>
   <div class="footer-inner">
     <div class="footer-top">
-      <div>
-        <div class="f-logo">Besties <span>Boba</span> & Bites</div>
-        <div class="f-sub">Boba Tea, Coffee & Mochi Donuts &mdash; Livermore, CA</div>
-      </div>
       <div class="f-col">
-        <div class="f-col-head">Menu</div>
-        <ul><li><a href="menu.html">Drinks</a></li><li><a href="bobamain.html#this-week">Mochi Donuts</a></li><li><a href="menu.html">Snacks</a></li><li><a href="https://bestiesboba.square.site/" target="_blank">Order Online</a></li></ul>
-      </div>
-      <div class="f-col">
-        <div class="f-col-head">Visit</div>
-        <ul><li><a href="bobamain.html#this-week">This Week's Flavors</a></li><li><a href="catering.html">Catering</a></li><li><a href="visit.html">Find Us</a></li><li><a href="https://instagram.com/BestiesBoba" target="_blank">Instagram</a></li></ul>
+        <div class="f-col-head">Location</div>
+        <p class="f-col-text">4520 Las Positas Rd<br/>Livermore, CA 94551</p>
       </div>
       <div class="f-col">
         <div class="f-col-head">Contact</div>
-        <ul><li><a href="tel:9258007822">(925) 800 7822</a></li><li><a href="mailto:BestiesLivermore@gmail.com">Email Us</a></li><li><a>4520 Las Positas Rd</a></li><li><a>Livermore, CA 94551</a></li><li><a href="privacy.html">Privacy Policy</a></li></ul>
+        <p class="f-col-text"><a href="tel:9258007822">(925) 800-7822</a><br/><a href="mailto:hello@bestiesboba.com">hello@bestiesboba.com</a></p>
+      </div>
+      <div class="f-col">
+        <div class="f-col-head">Hours</div>
+        <p class="f-col-text">Mon &ndash; Thu: 11:00 AM &ndash; 8:00 PM<br/>Fri &ndash; Sat: 11:00 AM &ndash; 9:00 PM<br/>Sunday: 11:00 AM &ndash; 7:00 PM</p>
       </div>
     </div>
     <div class="footer-bot">
-      <span class="f-copy">&copy; 2026 Besties Boba & Bites. All rights reserved.</span>
+      <span class="f-copy">&copy; 2026 Besties Boba &amp; Bites. All rights reserved.</span>
       <a href="https://instagram.com/BestiesBoba" target="_blank" class="f-ig">@BestiesBoba</a>
     </div>
   </div>
