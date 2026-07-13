@@ -909,17 +909,18 @@ nav.nav-on-dark:not(.scrolled) .nav-logo img { filter: drop-shadow(0 1px 4px rgb
 .vu-shop-map { position: relative; min-height: 420px; }
 .vu-shop-map iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 
-.vu-markets-section { max-width: 1400px; margin: 0 auto; padding: 20px 48px 160px; text-align: center; }
+.vu-markets-section { max-width: 1800px; margin: 0 auto; padding: 20px 48px 170px; text-align: center; }
 .vu-markets-head { margin-bottom: 72px; }
 .vu-markets-sub { font-size: 16px; color: var(--muted); margin-top: 10px; }
 /* minmax(0,1fr) lets each column shrink below the photo stack's natural size
    instead of overflowing on narrower desktop widths. */
-.vu-markets-grid { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 64px; max-width: 1500px; margin: 0 auto; }
+.vu-markets-grid { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 64px; max-width: 1700px; margin: 0 auto; }
 .vu-market-block { text-align: center; }
 
-/* Photo stack scales with the viewport (clamp) — roughly 4x the visual size
-   of the original fixed 230x300 stack on a typical desktop width. */
-.vu-photo-stack { position: relative; width: clamp(260px, 36vw, 520px); height: clamp(340px, 46vw, 660px); margin: 0 auto 44px; }
+/* Width is a percentage of the market-block's own column (not the viewport),
+   so it can never exceed its track and collide with the other column no
+   matter how wide the ceiling is — height just follows via aspect-ratio. */
+.vu-photo-stack { position: relative; width: clamp(260px, 96%, 780px); aspect-ratio: 230 / 300; margin: 0 auto 48px; }
 .vu-stack-item { position: absolute; width: 64%; height: 68%; background: #fff; padding: 3.5%; border-radius: 3px; box-shadow: 0 24px 48px rgba(22,14,18,.2); }
 .vu-stack-item video { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 1px; }
 .vu-stack-item-1 { left: 0; top: 2%; transform: rotate(-6deg); z-index: 1; }
