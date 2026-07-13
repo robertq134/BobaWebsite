@@ -909,24 +909,28 @@ nav.nav-on-dark:not(.scrolled) .nav-logo img { filter: drop-shadow(0 1px 4px rgb
 .vu-shop-map { position: relative; min-height: 420px; }
 .vu-shop-map iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 
-.vu-markets-section { max-width: 1400px; margin: 0 auto; padding: 20px 48px 130px; text-align: center; }
-.vu-markets-head { margin-bottom: 64px; }
+.vu-markets-section { max-width: 1400px; margin: 0 auto; padding: 20px 48px 160px; text-align: center; }
+.vu-markets-head { margin-bottom: 72px; }
 .vu-markets-sub { font-size: 16px; color: var(--muted); margin-top: 10px; }
-.vu-markets-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; max-width: 900px; margin: 0 auto; }
+/* minmax(0,1fr) lets each column shrink below the photo stack's natural size
+   instead of overflowing on narrower desktop widths. */
+.vu-markets-grid { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 64px; max-width: 1500px; margin: 0 auto; }
 .vu-market-block { text-align: center; }
 
-.vu-photo-stack { position: relative; height: 300px; width: 230px; margin: 0 auto 34px; }
-.vu-stack-item { position: absolute; width: 150px; height: 210px; background: #fff; padding: 8px; border-radius: 3px; box-shadow: 0 16px 32px rgba(22,14,18,.18); }
+/* Photo stack scales with the viewport (clamp) — roughly 4x the visual size
+   of the original fixed 230x300 stack on a typical desktop width. */
+.vu-photo-stack { position: relative; width: clamp(260px, 36vw, 520px); height: clamp(340px, 46vw, 660px); margin: 0 auto 44px; }
+.vu-stack-item { position: absolute; width: 64%; height: 68%; background: #fff; padding: 3.5%; border-radius: 3px; box-shadow: 0 24px 48px rgba(22,14,18,.2); }
 .vu-stack-item video { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 1px; }
-.vu-stack-item-1 { left: 0; top: 6px; transform: rotate(-6deg); z-index: 1; }
-.vu-stack-item-2 { left: 78px; top: 40px; transform: rotate(5deg); z-index: 2; }
-.vu-tape { position: absolute; top: -9px; left: 50%; transform: translateX(-50%) rotate(-3deg); width: 52px; height: 20px; background: rgba(214,192,160,.85); box-shadow: 0 2px 5px rgba(0,0,0,.12); }
+.vu-stack-item-1 { left: 0; top: 2%; transform: rotate(-6deg); z-index: 1; }
+.vu-stack-item-2 { left: 34%; top: 14%; transform: rotate(5deg); z-index: 2; }
+.vu-tape { position: absolute; top: -4%; left: 50%; transform: translateX(-50%) rotate(-3deg); width: 24%; height: 8%; background: rgba(214,192,160,.85); box-shadow: 0 2px 5px rgba(0,0,0,.12); }
 
-.vu-market-name { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--dark); }
-.vu-market-addr { font-size: 14px; color: var(--muted); line-height: 1.6; margin-top: 8px; }
-.vu-market-divider { width: 40px; height: 2px; background: var(--pink); margin: 22px auto; }
-.vu-market-hours-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--pink); margin-bottom: 6px; }
-.vu-market-hours div { font-size: 14px; color: var(--dark); line-height: 1.6; }
+.vu-market-name { font-family: 'Playfair Display', serif; font-size: clamp(26px, 2.6vw, 36px); font-weight: 700; color: var(--dark); }
+.vu-market-addr { font-size: clamp(16px, 1.4vw, 19px); color: var(--muted); line-height: 1.6; margin-top: 12px; }
+.vu-market-divider { width: 64px; height: 3px; background: var(--pink); margin: 28px auto; }
+.vu-market-hours-label { font-size: 14px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--pink); margin-bottom: 10px; }
+.vu-market-hours div { font-size: clamp(16px, 1.4vw, 19px); color: var(--dark); line-height: 1.7; }
 .tue-price { font-size: clamp(80px, 9vw, 128px); font-weight: 600; color: var(--dark); line-height: 1; letter-spacing: -1px; flex-shrink: 0; font-family: 'Roboto', sans-serif; }
 .tue-line { width: 1px; height: 90px; background: rgba(22,14,18,.15); flex-shrink: 0; }
 .tue-label { font-size: 11px; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(22,14,18,.45); margin-bottom: 10px; }
@@ -1324,7 +1328,7 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
   .vu-shop-map { min-height: 260px; order: -1; }
   .vu-markets-section { padding: 12px 20px 72px; }
   .vu-markets-head { margin-bottom: 40px; }
-  .vu-markets-grid { grid-template-columns: 1fr; gap: 56px; max-width: 300px; }
+  .vu-markets-grid { grid-template-columns: 1fr; gap: 56px; max-width: 340px; }
 
   footer { padding: 40px 20px 24px; }
   .footer-top { flex-direction: column; gap: 28px; }
