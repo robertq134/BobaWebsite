@@ -596,76 +596,82 @@ nav.nav-on-dark:not(.scrolled) .nav-logo img { filter: drop-shadow(0 1px 4px rgb
   background-position: center;
 }
 .hero-catering .hero-sub { color: rgba(255,255,255,.85); max-width: 480px; margin: 0 auto; }
+/* Catering hero scaled up ~1.5x — scoped to .hero-catering so it doesn't
+   affect menu.html, which shares the base .hero-compact rules. */
+.hero.hero-catering { min-height: 630px; }
+.hero-catering .hero-h1 { font-size: clamp(56px, 7.4vw, 108px); }
 
+/* Catering page content scaled up ~1.5x from the original sizing. */
 .catering-desc {
-  max-width: 720px;
+  max-width: 900px;
   margin: 0 auto;
-  padding: 48px 40px 16px;
+  padding: 64px 48px 20px;
   text-align: center;
-  font-size: 16px;
+  font-size: 22px;
   line-height: 1.7;
   color: var(--muted);
 }
 
-.catering-section-head { text-align: center; max-width: 1120px; margin: 0 auto 40px; position: relative; z-index: 2; }
-.catering-section-title { font-family: 'Caveat', cursive; font-weight: 700; font-size: clamp(38px, 5vw, 60px); color: var(--dark); line-height: 1.15; }
-.catering-section-subtitle { font-size: 16px; font-weight: 600; color: var(--muted); margin-top: 8px; letter-spacing: 0.3px; }
+.catering-section-head { text-align: center; max-width: 1300px; margin: 0 auto 56px; position: relative; z-index: 2; }
+.catering-section-title { font-family: 'Caveat', cursive; font-weight: 700; font-size: clamp(52px, 6.6vw, 86px); color: var(--dark); line-height: 1.15; }
+.catering-section-subtitle { font-size: 22px; font-weight: 600; color: var(--muted); margin-top: 10px; letter-spacing: 0.3px; }
 
 .catering-photo-banner {
-  max-width: 1120px;
-  margin: 0 auto 40px;
-  border-radius: 20px;
+  max-width: 1300px;
+  margin: 0 auto 56px;
+  border-radius: 26px;
   overflow: hidden;
 }
-.catering-photo-banner img { width: 100%; height: 220px; object-fit: cover; display: block; }
+.catering-photo-banner img { width: 100%; height: 320px; object-fit: cover; display: block; }
 
 .catering-grid {
-  max-width: 1120px;
+  max-width: 1300px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 48px;
+  gap: 68px;
   position: relative;
   z-index: 2;
 }
-.catering-col-head { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
-.catering-col-head img { width: 56px; height: 56px; object-fit: cover; border-radius: 12px; flex-shrink: 0; }
-.catering-col-head h3 { font-family: 'Caveat', cursive; font-size: 30px; font-weight: 700; color: var(--dark); }
+.catering-col-head { display: flex; align-items: center; gap: 22px; margin-bottom: 28px; }
+.catering-col-head img { width: 80px; height: 80px; object-fit: cover; border-radius: 16px; flex-shrink: 0; }
+.catering-col-head h3 { font-family: 'Caveat', cursive; font-size: 42px; font-weight: 700; color: var(--dark); }
 
-.catering-item { margin-bottom: 22px; }
-.catering-item-name { font-size: 16px; font-weight: 700; color: var(--text); }
-.catering-item-price { font-size: 14px; font-weight: 700; color: var(--pink); margin-left: 8px; }
-.catering-item-detail { font-size: 13px; color: var(--muted); line-height: 1.5; margin-top: 4px; }
-.catering-item ul { margin: 8px 0 0 20px; padding: 0; font-size: 13px; color: var(--muted); line-height: 1.7; }
+.catering-item { margin-bottom: 32px; }
+.catering-item-name { font-size: 22px; font-weight: 700; color: var(--text); }
+.catering-item-price { font-size: 19px; font-weight: 700; color: var(--pink); margin-left: 11px; }
+.catering-item-detail { font-size: 18px; color: var(--muted); line-height: 1.5; margin-top: 6px; }
+.catering-item ul { margin: 10px 0 0 28px; padding: 0; font-size: 18px; color: var(--muted); line-height: 1.7; }
 
-.catering-note { font-size: 13px; color: var(--muted); line-height: 1.7; margin-top: 16px; }
+.catering-note { font-size: 18px; color: var(--muted); line-height: 1.7; margin-top: 22px; }
 
 .delivery-banner {
-  max-width: 1120px;
-  margin: 40px auto 0;
+  max-width: 1300px;
+  margin: 56px auto 0;
   background: var(--yellow);
-  border-radius: 16px;
-  padding: 20px 28px;
+  border-radius: 22px;
+  padding: 28px 40px;
   text-align: center;
   font-family: 'Roboto', sans-serif;
   font-weight: 600;
-  font-size: 17px;
+  font-size: 23px;
   color: var(--dark);
 }
 
 .catering-contact-cta {
   text-align: center;
-  max-width: 680px;
+  max-width: 980px;
   margin: 64px auto 0;
-  padding: 48px 40px;
+  padding: 68px 56px;
   background: var(--warm);
-  border-radius: 24px;
+  border-radius: 32px;
 }
-.catering-cta-title { font-family: 'Caveat', cursive; font-weight: 700; font-size: clamp(32px, 4vw, 46px); color: var(--dark); margin-bottom: 14px; }
-.catering-cta-desc { font-size: 15px; line-height: 1.7; color: var(--muted); margin-bottom: 8px; }
-.catering-cta-phone { font-size: 16px; line-height: 1.6; color: var(--text); font-weight: 600; }
-.catering-cta-phone a { color: var(--pink); font-weight: 800; font-size: 20px; }
-.catering-cta-phone a.cta-email-link { font-size: 15px; }
+.catering-contact-cta-top { margin-top: 44px; }
+.catering-cta-title { font-family: 'Caveat', cursive; font-weight: 700; font-size: clamp(44px, 5.4vw, 64px); color: var(--dark); margin-bottom: 18px; }
+.catering-cta-desc { font-size: 21px; line-height: 1.7; color: var(--muted); margin-bottom: 10px; }
+.catering-cta-phone { font-size: 22px; line-height: 1.6; color: var(--text); font-weight: 600; }
+.catering-cta-phone a { color: var(--pink); font-weight: 800; font-size: 27px; }
+.catering-cta-phone a.cta-email-link { font-size: 21px; }
 
 .tuesday { background: var(--yellow); padding: 72px 48px; }
 .tuesday-inner { max-width: 1120px; margin: 0 auto; display: flex; align-items: center; gap: 40px; flex-wrap: wrap; }
@@ -1279,31 +1285,32 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
   .menu-grid-section { padding: 56px 20px; }
   .drink-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
 
-  /* ── Catering: scale everything down ~45% on mobile ── */
-  .catering-grid { grid-template-columns: 1fr; gap: 24px; }
-  .catering-section-head { margin: 0 auto 30px; }
-  .catering-section-title { font-size: 40px; line-height: 1.05; }
-  .catering-section-subtitle { font-size: 14px; margin-top: 6px; }
-  .catering-col-head { gap: 12px; margin-bottom: 16px; }
-  .catering-col-head h3 { font-size: 27px; }
-  .catering-col-head img { width: 46px; height: 46px; border-radius: 10px; }
-  .catering-item { margin-bottom: 18px; }
-  .catering-item-name { font-size: 15px; }
-  .catering-item-price { font-size: 13px; margin-left: 5px; }
-  .catering-item-detail { font-size: 12px; margin-top: 2px; }
-  .catering-item ul { font-size: 12px; margin: 6px 0 0 16px; line-height: 1.6; }
-  .catering-note { font-size: 12px; margin-top: 12px; line-height: 1.6; }
-  .catering-desc { font-size: 14px; padding: 36px 20px 16px; }
-  .delivery-banner { font-size: 16px; padding: 16px 20px; margin-top: 32px; }
-  .catering-photo-banner img { height: 160px; }
-  .catering-photo-banner { border-radius: 14px; margin-bottom: 24px; }
-  .catering-contact-cta { padding: 32px 20px; margin-top: 40px; border-radius: 20px; }
-  .catering-cta-title { font-size: 26px; margin-bottom: 12px; }
-  .catering-cta-desc { font-size: 14px; }
-  .catering-cta-phone { font-size: 16px; }
-  .catering-cta-phone a { font-size: 19px; }
-  .catering-cta-phone a.cta-email-link { font-size: 14px; }
-  .hero-catering .hero-h1 { font-size: clamp(24px, 7vw, 32px); }
+  /* ── Catering: scale everything down for mobile, still ~1.5x the original mobile sizing ── */
+  .catering-grid { grid-template-columns: 1fr; gap: 28px; }
+  .catering-section-head { margin: 0 auto 40px; }
+  .catering-section-title { font-size: 54px; line-height: 1.05; }
+  .catering-section-subtitle { font-size: 19px; margin-top: 8px; }
+  .catering-col-head { gap: 17px; margin-bottom: 22px; }
+  .catering-col-head h3 { font-size: 37px; }
+  .catering-col-head img { width: 64px; height: 64px; border-radius: 14px; }
+  .catering-item { margin-bottom: 25px; }
+  .catering-item-name { font-size: 20px; }
+  .catering-item-price { font-size: 17px; margin-left: 7px; }
+  .catering-item-detail { font-size: 16px; margin-top: 3px; }
+  .catering-item ul { font-size: 16px; margin: 8px 0 0 22px; line-height: 1.6; }
+  .catering-note { font-size: 16px; margin-top: 16px; line-height: 1.6; }
+  .catering-desc { font-size: 19px; padding: 50px 24px 22px; }
+  .delivery-banner { font-size: 21px; padding: 22px 26px; margin-top: 44px; }
+  .catering-photo-banner img { height: 220px; }
+  .catering-photo-banner { border-radius: 18px; margin-bottom: 32px; }
+  .catering-contact-cta { padding: 44px 26px; margin-top: 56px; border-radius: 26px; }
+  .catering-cta-title { font-size: 35px; margin-bottom: 16px; }
+  .catering-cta-desc { font-size: 19px; }
+  .catering-cta-phone { font-size: 21px; }
+  .catering-cta-phone a { font-size: 25px; }
+  .catering-cta-phone a.cta-email-link { font-size: 18px; }
+  .hero-catering .hero-h1 { font-size: clamp(33px, 9vw, 44px); }
+  .hero.hero-catering { min-height: 440px; }
 
   .tuesday { padding: 40px 20px; }
   .tuesday-inner { gap: 20px; }
