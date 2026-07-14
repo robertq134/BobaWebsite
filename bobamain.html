@@ -103,52 +103,48 @@
 </nav>
 
 <!-- HERO -->
-<div class="hero-scroll-track" id="hero-scroll-track">
-<section class="hero hero-dark hero-sticky">
-  <video class="hero-video hero-photo" id="hero-scrub-video" muted playsinline preload="auto"
-         data-src-desktop="hero-4sec.mp4" data-src-mobile="MobileHeroTrue.mp4">
+<section class="hero hero-dark">
+  <!-- Desktop: static image, no scroll-scrub. Mobile: keeps its autoplay video. -->
+  <img class="hero-photo hero-photo-desktop" src="MAINREALHEROFORREAL.jpg" alt="Boba drink splash"/>
+  <video class="hero-video hero-photo hero-photo-mobile" id="hero-mobile-video" muted playsinline preload="auto"
+         data-src-mobile="MobileHeroTrue.mp4">
   </video>
+  <span class="hero-photo-credit">Styled imagery for visual presentation.</span>
   <script>
     (function () {
-      var v = document.getElementById('hero-scrub-video');
+      var v = document.getElementById('hero-mobile-video');
       var isMobile = window.matchMedia('(max-width: 768px)').matches;
+      if (!isMobile) return; // desktop uses the static image above, no video needed
+
       var source = document.createElement('source');
-      source.src = isMobile ? v.getAttribute('data-src-mobile') : v.getAttribute('data-src-desktop');
+      source.src = v.getAttribute('data-src-mobile');
       source.type = 'video/mp4';
       v.appendChild(source);
-      if (isMobile) {
-        // Mobile: play once, but ONLY after the loading splash finishes.
-        v.setAttribute('data-mode', 'autoplay');
 
-        // Pre-warm: while the splash is up, silently decode the video so it's
-        // ready to play instantly (no cold-start lag) when revealed.
-        var warmed = false;
-        function prewarm() {
-          if (warmed) return;
-          warmed = true;
-          v.muted = true;
-          var pw = v.play();
-          if (pw && pw.then) {
-            pw.then(function () {
-              // Immediately pause and rewind — we just wanted decoder warmed.
-              v.pause();
-              try { v.currentTime = 0; } catch (e) {}
-            }).catch(function () { warmed = false; });
-          }
+      // Pre-warm: while the splash is up, silently decode the video so it's
+      // ready to play instantly (no cold-start lag) when revealed.
+      var warmed = false;
+      function prewarm() {
+        if (warmed) return;
+        warmed = true;
+        v.muted = true;
+        var pw = v.play();
+        if (pw && pw.then) {
+          pw.then(function () {
+            v.pause();
+            try { v.currentTime = 0; } catch (e) {}
+          }).catch(function () { warmed = false; });
         }
-        // Warm as soon as enough is buffered to play through.
-        if (v.readyState >= 3) prewarm();
-        v.addEventListener('canplaythrough', prewarm, { once: true });
-
-        var startHero = function () {
-          try { v.currentTime = 0; } catch (e) {}
-          var pr = v.play(); if (pr && pr.catch) pr.catch(function(){});
-        };
-        window.addEventListener('bb-loader-done', startHero, { once: true });
-        setTimeout(startHero, 9000);
-      } else {
-        v.setAttribute('data-mode', 'scrub');
       }
+      if (v.readyState >= 3) prewarm();
+      v.addEventListener('canplaythrough', prewarm, { once: true });
+
+      var startHero = function () {
+        try { v.currentTime = 0; } catch (e) {}
+        var pr = v.play(); if (pr && pr.catch) pr.catch(function(){});
+      };
+      window.addEventListener('bb-loader-done', startHero, { once: true });
+      setTimeout(startHero, 9000);
       v.load();
     })();
   </script>
@@ -170,8 +166,6 @@
     </div>
   </div>
 </section>
-</div>
-<!-- END hero-scroll-track -->
 
 <!-- ════════════ TODAY'S PICK — PROMO CARD-STACK CAROUSEL ════════════ -->
 <section class="promo-carousel-section">
@@ -213,16 +207,27 @@
   </div>
 </section>
 
+<!-- ════════════ MOBILE-ONLY PROMO BANNER (desktop keeps the card-stack carousel above) ════════════ -->
+<section class="promo-banner-mobile">
+  <img class="promo-banner-bg" src="mountain.jpg" alt=""/>
+  <div class="promo-banner-overlay"></div>
+  <div class="promo-banner-content fade-in-scroll">
+    <span class="promo-banner-eyebrow">This Week Only</span>
+    <div class="promo-banner-divider"></div>
+    <h2 class="promo-banner-headline">$1 Mochi Donut</h2>
+    <div class="promo-banner-script">Tuesdays</div>
+    <p class="promo-banner-desc">Just $1 with any drink purchase.</p>
+    <a href="#this-week" class="promo-banner-btn">Order Now &#8594;</a>
+  </div>
+</section>
+
 <!-- THIS WEEK -->
 <section id="this-week" class="week-pink-zone">
-  <span class="promos-deco" style="top:8%; left:6%; font-size:22px;">&#9825;</span>
-  <span class="promos-deco" style="top:14%; right:8%; font-size:26px;">&#10022;</span>
-  <span class="promos-deco promos-deco-gold" style="bottom:20%; left:10%; font-size:12px;">&#10022;</span>
-  <span class="promos-deco promos-deco-gold" style="top:30%; right:14%; font-size:11px;">&#10022;</span>
   <div class="this-week this-week-full">
 
+    <h3 class="week-carousel-title fade-in-scroll">Our Mochi Donut Flavors</h3>
+
     <div class="week-redesign">
-      <h3 class="week-carousel-title">Our Mochi Donut Flavors</h3>
       <div class="week-hero-split">
         <div class="week-hero-photo" id="week-feature-card">
           <img class="week-hero-img" id="week-feature-img" src="tropical.png" alt="Tropical Punch mochi donut"/>
@@ -291,8 +296,6 @@
 
   <div class="awards-row stagger-group">
     <div class="awards-cat awards-cat-left fade-in-scroll">
-      <span class="awards-deco" style="top:2%; left:10%; font-size:16px;">&#9825;</span>
-      <span class="awards-deco awards-deco-gold" style="bottom:8%; right:6%; font-size:13px;">&#10022;</span>
       <img class="awards-cat-ph" src="awards-cat-white.png" alt="Besties cat mascot holding a mochi donut"/>
     </div>
 
@@ -303,7 +306,6 @@
         <span class="awards-reviewer-name">Jennifer L.</span>
         <span class="awards-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
       </div>
-      <span class="awards-card-heart">&#9825;</span>
     </div>
 
     <div class="awards-badges fade-in-scroll">
@@ -319,12 +321,9 @@
         <span class="awards-reviewer-name">Michael T.</span>
         <span class="awards-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
       </div>
-      <span class="awards-card-heart">&#9825;</span>
     </div>
 
     <div class="awards-cat awards-cat-right fade-in-scroll">
-      <span class="awards-deco" style="top:2%; right:10%; font-size:16px;">&#9825;</span>
-      <span class="awards-deco awards-deco-gold" style="bottom:8%; left:6%; font-size:13px;">&#10022;</span>
       <img class="awards-cat-ph" src="awards-cat-orange.png" alt="Besties cat mascot holding a boba drink"/>
     </div>
   </div>
@@ -628,53 +627,6 @@
 </script>
 <!-- ===== END CONSENT GATE ===== -->
 
-<!-- ===== HERO SCROLL-SCRUB (desktop only; mobile autoplays) ===== -->
-<script>
-(function () {
-  var video = document.getElementById('hero-scrub-video');
-  var track = document.getElementById('hero-scroll-track');
-  if (!video || !track) return;
-  if (video.getAttribute('data-mode') !== 'scrub') return; // mobile: autoplay handles it
-
-  try { video.pause(); } catch (e) {}
-
-  var heroEl = track.querySelector('.hero-sticky') || track.firstElementChild;
-  var targetProgress = 0;
-  var eased = 0;
-  var EASE = 0.18;
-  var pendingSeek = false;
-
-  // The old version called video.currentTime on every animation frame, which
-  // queues overlapping seeks faster than the decoder can service them — that's
-  // what produced the choppiness. Now we wait for each seek to actually finish
-  // (the 'seeked' event) before requesting the next one.
-  video.addEventListener('seeked', function () { pendingSeek = false; });
-
-  function computeTarget() {
-    var rect = track.getBoundingClientRect();
-    var scrollable = track.offsetHeight - (heroEl ? heroEl.offsetHeight : window.innerHeight);
-    targetProgress = scrollable > 0
-      ? Math.min(Math.max(-rect.top / scrollable, 0), 1)
-      : 0;
-  }
-
-  function raf() {
-    computeTarget();
-    eased += (targetProgress - eased) * EASE;
-    if (Math.abs(targetProgress - eased) < 0.001) eased = targetProgress;
-    if (video.duration && !isNaN(eased) && !pendingSeek) {
-      var t = eased * video.duration;
-      if (Math.abs(video.currentTime - t) > 0.02) {
-        pendingSeek = true;
-        try { video.currentTime = t; } catch (e) { pendingSeek = false; }
-      }
-    }
-    window.requestAnimationFrame(raf);
-  }
-  window.requestAnimationFrame(raf);
-})();
-</script>
-<!-- ===== END HERO SCROLL-SCRUB ===== -->
 
 </body>
 </html>

@@ -213,11 +213,13 @@ nav.nav-on-dark:not(.scrolled) .nav-toggle span { background: white; }
 }
 .hero-heart { color: var(--pink); }
 .hero-h1-accent { color: var(--pink); font-style: italic; }
-.hero.hero-dark .hero-inner { justify-content: center; text-align: center; padding-left: 40px; padding-right: 40px; padding-top: 90px; padding-bottom: 140px; }
-.hero.hero-dark .hero-content { margin: 0 auto; }
-.hero.hero-dark .hero-sub { margin-left: auto; margin-right: auto; }
-.hero.hero-dark .hero-btns { justify-content: center; }
-.hero.hero-dark .hero-badges { justify-content: center; }
+/* Left-aligned now that the hero is a static image (drink sits right, text
+   sits in the darker left portion of the photo) instead of a centered video. */
+.hero.hero-dark .hero-inner { justify-content: flex-start; text-align: left; padding-left: 7%; padding-right: 40px; padding-top: 90px; padding-bottom: 140px; }
+.hero.hero-dark .hero-content { margin: 0; }
+.hero.hero-dark .hero-sub { margin-left: 0; margin-right: 0; }
+.hero.hero-dark .hero-btns { justify-content: flex-start; }
+.hero.hero-dark .hero-badges { justify-content: flex-start; }
 .hero.hero-dark .hero-sub { color: rgba(255,255,255,0.75); }
 .hero.hero-dark .hero-rating-num { color: #ffffff; }
 .hero.hero-dark .hero-local { color: rgba(255,255,255,0.75); }
@@ -229,12 +231,29 @@ nav.nav-on-dark:not(.scrolled) .nav-toggle span { background: white; }
 .hero.hero-dark .hero-sub,
 .hero.hero-dark .tag { background: transparent; }
 
-/* Pinned scroll-scrub: tall track + sticky hero (works on desktop + mobile) */
-.hero-scroll-track { position: relative; height: 200vh; z-index: 1; }
-.hero.hero-sticky { position: sticky; top: 0; height: 100vh; min-height: 100vh; overflow: hidden; }
-/* Inside a fixed-height sticky hero, the inner must not force its own 100vh
-   (that overflows the pin and makes it jump). Fill the parent instead. */
-.hero.hero-sticky .hero-inner { min-height: 100%; height: 100%; }
+/* Static hero image (desktop) / video (mobile) — no more scroll-scrub. A left
+   gradient scrim keeps the text readable over the photo regardless of crop. */
+.hero.hero-dark { position: relative; }
+.hero.hero-dark::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(90deg, rgba(0,0,0,.6) 0%, rgba(0,0,0,.28) 40%, rgba(0,0,0,0) 66%);
+  pointer-events: none;
+}
+.hero-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.hero-photo-desktop { object-position: 68% center; }
+.hero-photo-mobile { display: none; }
+.hero-photo-credit {
+  position: absolute;
+  left: 28px;
+  bottom: 20px;
+  z-index: 2;
+  font-size: 11px;
+  color: rgba(255,255,255,.5);
+  letter-spacing: .2px;
+}
 
 #this-week.week-pink-zone { background: var(--offwhite-dark); position: relative; overflow: hidden; }
 .week-pink-zone .this-week { padding-bottom: 50px; }
@@ -344,7 +363,18 @@ nav.nav-on-dark:not(.scrolled) .nav-toggle span { background: white; }
 .week-side-name { transition: opacity .18s ease; }
 .week-side-desc { transition: opacity .18s ease; }
 
-.week-carousel-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 2.8vw, 38px); font-weight: 700; color: var(--dark); text-align: center; padding: 30px 32px 6px; }
+/* Its own standalone heading now (not nested inside the card), so it reads
+   as a real section title rather than default-styled text sitting on a card. */
+.week-carousel-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(46px, 5.6vw, 72px);
+  font-weight: 700;
+  color: var(--pink);
+  text-align: center;
+  margin: 0 auto 44px;
+  max-width: 900px;
+}
 .week-thumb-strip { background: var(--offwhite-dark); padding: 22px 32px; }
 .week-thumb-row { display: flex; align-items: center; justify-content: center; gap: 16px; }
 .week-arrow-small { width: 34px; height: 34px; font-size: 17px; }
@@ -733,8 +763,6 @@ nav.nav-on-dark:not(.scrolled) .nav-logo img { filter: drop-shadow(0 1px 4px rgb
 }
 .awards-cat { display: flex; justify-content: center; align-items: center; position: relative; }
 .awards-cat-ph { width: 100%; max-width: 230px; aspect-ratio: 1 / 1; object-fit: contain; filter: drop-shadow(0 6px 14px rgba(0,0,0,0.08)); }
-.awards-deco { position: absolute; pointer-events: none; color: var(--pink); opacity: .5; }
-.awards-deco-gold { color: #E8B84A; opacity: .65; }
 
 .awards-badges { display: flex; justify-content: center; }
 .award-item { width: 100%; max-width: 560px; aspect-ratio: 1 / 1; border-radius: 28px; background: #fff; box-shadow: 0 18px 44px rgba(0,0,0,0.13); display: flex; align-items: center; justify-content: center; padding: 32px; overflow: hidden; box-sizing: border-box; transition: transform .25s ease, box-shadow .25s ease; }
@@ -756,13 +784,9 @@ nav.nav-on-dark:not(.scrolled) .nav-logo img { filter: drop-shadow(0 1px 4px rgb
 .awards-reviewer { display: flex; align-items: center; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
 .awards-reviewer-name { font-weight: 700; color: var(--pink-d); font-size: 15px; }
 .awards-stars { color: var(--pink); letter-spacing: 2px; font-size: 14px; }
-.awards-card-heart { position: absolute; top: 18px; right: 20px; color: var(--pink); opacity: .4; font-size: 20px; }
 
 /* ── PROMOS & SPECIALS: "Today's pick" card-stack carousel ──
    Premium/editorial, not bubbly — warm beige bg, white cards, soft depth. ── */
-.promos-deco { position: absolute; pointer-events: none; z-index: 1; color: var(--pink); opacity: .55; }
-.promos-deco-gold { color: #E8B84A; opacity: .65; }
-
 .promo-carousel-section { background: var(--beige); padding: 150px 48px; overflow: hidden; }
 /* minmax(0,1fr) on the right column lets the stack+arrows shrink to fit
    instead of overflowing (and getting clipped by overflow:hidden above) at
@@ -816,6 +840,11 @@ nav.nav-on-dark:not(.scrolled) .nav-logo img { filter: drop-shadow(0 1px 4px rgb
   transition: background .15s ease, transform .15s ease;
 }
 .promo-card-arrow-btn:hover { background: var(--pink-d); transform: scale(1.08); }
+
+/* Mobile-only full-bleed photo promo banner — hidden on desktop, where the
+   card-stack carousel above is shown instead. Sizing/visibility for mobile
+   lives entirely in the max-width:768px block below. */
+.promo-banner-mobile { display: none; }
 
 /* ── INSTAGRAM: polaroid / scrapbook style ── */
 .ig-section { background: var(--warm); padding: 140px 48px; border-top: 1px solid var(--border); position: relative; overflow: hidden; }
@@ -1098,7 +1127,13 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
 
   .hero { min-height: 48vh; }
   .hero-inner { padding: 52px 20px 20px; flex-direction: column; align-items: center; justify-content: flex-start; text-align: center; }
-  .hero.hero-dark .hero-inner { padding-top: 52px; padding-bottom: 20px; }
+  .hero.hero-dark .hero-inner { padding-top: 52px; padding-bottom: 20px; padding-left: 20px; padding-right: 20px; justify-content: flex-start; text-align: center; }
+  .hero.hero-dark .hero-content { margin: 0 auto; }
+  .hero.hero-dark .hero-btns { justify-content: center; }
+  .hero.hero-dark .hero-badges { justify-content: center; }
+  /* Mobile text is centered, not left-aligned, so a left-biased gradient
+     doesn't fit — use a bottom-weighted one instead. */
+  .hero.hero-dark::before { background: linear-gradient(180deg, rgba(0,0,0,.1) 0%, rgba(0,0,0,.5) 100%); }
   .hero-photo { object-position: 25% center; }
   .hero-content { max-width: 88%; }
   .hero-content .tag { margin-bottom: 6px; }
@@ -1199,8 +1234,11 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
      100dvh (dynamic viewport height) tracks the browser chrome collapsing/expanding
      on scroll — plain 100vh leaves a black gap below the video once the address
      bar hides, because the section was sized for the shorter initial viewport. */
-  .hero.hero-sticky { position: relative; height: 100vh; height: 100dvh; }
-  .hero-scroll-track { height: auto; }
+  .hero.hero-dark { height: 100vh; height: 100dvh; }
+  /* Desktop shows the static image; mobile shows the video instead. */
+  .hero-photo-desktop { display: none; }
+  .hero-photo-mobile { display: block; }
+  .hero-photo-credit { display: none; }
   /* Oversize the video a few % beyond the section box (instead of an exact
      inset:0 match) so any leftover mobile viewport-height rounding/dvh support
      gap can't expose the black section background underneath — it just crops
@@ -1216,23 +1254,36 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
     object-position: center center;
   }
 
-  /* ── Promo card-stack carousel: copy centered on top, stack below.
-     Arrows move on top of the card (like the This Week photo arrows
-     elsewhere on the site) instead of sitting beside it, so the stack
-     itself can use almost the full width instead of being squeezed. ── */
-  .promo-carousel-section { padding: 64px 20px; }
-  .promo-carousel-inner { grid-template-columns: 1fr; gap: 36px; text-align: center; }
-  .promo-carousel-sub { margin-left: auto; margin-right: auto; }
-  .promo-carousel-dots { justify-content: center; }
-  .promo-stack-wrap { position: relative; padding-right: 0; gap: 0; margin: 0 auto; width: 100%; max-width: 320px; }
-  .promo-stack { width: 100%; max-width: 320px; height: 440px; margin: 0 auto; }
-  .promo-stack-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 5; width: 40px; height: 40px; font-size: 18px; }
-  .promo-stack-arrow:hover { transform: translateY(-50%) scale(1.08); }
-  .promo-stack-arrow-left { left: 6px; }
-  .promo-stack-arrow-right { right: 6px; margin-left: 0; }
-  .promo-card-body { padding: 18px 20px 22px; }
-  .promo-card-title { font-size: 21px; }
-  .promo-card-desc { font-size: 14px; }
+  /* ── Mobile: the desktop card-stack carousel is replaced entirely by the
+     full-bleed photo promo banner (only the promo section changes for
+     mobile — everything else on this page keeps its own responsive CSS). ── */
+  .promo-carousel-section { display: none; }
+  .promo-banner-mobile { display: block; position: relative; min-height: 540px; overflow: hidden; }
+  .promo-banner-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+  .promo-banner-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(35,18,10,.35) 0%, rgba(25,13,7,.72) 100%);
+  }
+  .promo-banner-content {
+    position: relative; z-index: 2; min-height: 540px; padding: 64px 28px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; color: #fff;
+  }
+  .promo-banner-eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,.85); }
+  .promo-banner-divider { width: 40px; height: 1px; background: rgba(255,255,255,.5); margin: 16px 0; }
+  .promo-banner-headline {
+    font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 38px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase;
+    color: #fff; line-height: 1.1; margin: 0; text-shadow: 0 4px 18px rgba(0,0,0,.4);
+  }
+  .promo-banner-script { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 600; font-size: 44px; color: var(--pink); margin-top: 2px; }
+  .promo-banner-desc { font-size: 16px; color: rgba(255,255,255,.85); margin-top: 18px; max-width: 280px; }
+  .promo-banner-btn {
+    display: inline-block; margin-top: 30px; padding: 14px 32px; background: var(--pink); color: #fff;
+    font-size: 13px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; border-radius: 4px;
+    box-shadow: 0 10px 26px rgba(199,58,97,.35); transition: transform .15s ease, background .15s ease;
+  }
+  .promo-banner-btn:hover { background: var(--pink-d); transform: translateY(-2px); }
 
   /* ── Awards: stack vertically, badge centered (grid becomes a single column) ── */
   .awards-section { padding: 72px 20px; }
