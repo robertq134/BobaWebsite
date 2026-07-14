@@ -5,7 +5,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Besties Boba & Bites — Livermore, CA</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fredoka:wght@500;600;700&family=Roboto:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 <script src="https://unpkg.com/@rive-app/canvas@2.17.3/rive.js"></script>
 <link rel="stylesheet" href="styles.css"/>
 </head>
@@ -103,48 +103,52 @@
 </nav>
 
 <!-- HERO -->
-<section class="hero hero-dark">
-  <!-- Desktop: static image, no scroll-scrub. Mobile: keeps its autoplay video. -->
-  <img class="hero-photo hero-photo-desktop" src="MAINREALHEROFORREAL.png" alt="Boba drink splash"/>
-  <video class="hero-video hero-photo hero-photo-mobile" id="hero-mobile-video" muted playsinline preload="auto"
-         data-src-mobile="MobileHeroTrue.mp4">
+<div class="hero-scroll-track" id="hero-scroll-track">
+<section class="hero hero-dark hero-sticky">
+  <video class="hero-video hero-photo" id="hero-scrub-video" muted playsinline preload="auto"
+         data-src-desktop="hero-4sec.mp4" data-src-mobile="MobileHeroTrue.mp4">
   </video>
-  <span class="hero-photo-credit">Styled imagery for visual presentation.</span>
   <script>
     (function () {
-      var v = document.getElementById('hero-mobile-video');
+      var v = document.getElementById('hero-scrub-video');
       var isMobile = window.matchMedia('(max-width: 768px)').matches;
-      if (!isMobile) return; // desktop uses the static image above, no video needed
-
       var source = document.createElement('source');
-      source.src = v.getAttribute('data-src-mobile');
+      source.src = isMobile ? v.getAttribute('data-src-mobile') : v.getAttribute('data-src-desktop');
       source.type = 'video/mp4';
       v.appendChild(source);
+      if (isMobile) {
+        // Mobile: play once, but ONLY after the loading splash finishes.
+        v.setAttribute('data-mode', 'autoplay');
 
-      // Pre-warm: while the splash is up, silently decode the video so it's
-      // ready to play instantly (no cold-start lag) when revealed.
-      var warmed = false;
-      function prewarm() {
-        if (warmed) return;
-        warmed = true;
-        v.muted = true;
-        var pw = v.play();
-        if (pw && pw.then) {
-          pw.then(function () {
-            v.pause();
-            try { v.currentTime = 0; } catch (e) {}
-          }).catch(function () { warmed = false; });
+        // Pre-warm: while the splash is up, silently decode the video so it's
+        // ready to play instantly (no cold-start lag) when revealed.
+        var warmed = false;
+        function prewarm() {
+          if (warmed) return;
+          warmed = true;
+          v.muted = true;
+          var pw = v.play();
+          if (pw && pw.then) {
+            pw.then(function () {
+              // Immediately pause and rewind — we just wanted decoder warmed.
+              v.pause();
+              try { v.currentTime = 0; } catch (e) {}
+            }).catch(function () { warmed = false; });
+          }
         }
-      }
-      if (v.readyState >= 3) prewarm();
-      v.addEventListener('canplaythrough', prewarm, { once: true });
+        // Warm as soon as enough is buffered to play through.
+        if (v.readyState >= 3) prewarm();
+        v.addEventListener('canplaythrough', prewarm, { once: true });
 
-      var startHero = function () {
-        try { v.currentTime = 0; } catch (e) {}
-        var pr = v.play(); if (pr && pr.catch) pr.catch(function(){});
-      };
-      window.addEventListener('bb-loader-done', startHero, { once: true });
-      setTimeout(startHero, 9000);
+        var startHero = function () {
+          try { v.currentTime = 0; } catch (e) {}
+          var pr = v.play(); if (pr && pr.catch) pr.catch(function(){});
+        };
+        window.addEventListener('bb-loader-done', startHero, { once: true });
+        setTimeout(startHero, 9000);
+      } else {
+        v.setAttribute('data-mode', 'scrub');
+      }
       v.load();
     })();
   </script>
@@ -166,18 +170,46 @@
     </div>
   </div>
 </section>
+</div>
+<!-- END hero-scroll-track -->
 
-<!-- ════════════ $1 MOCHI DONUT TUESDAYS — PROMO BANNER (all screen sizes) ════════════ -->
-<section class="promo-banner-mobile">
-  <img class="promo-banner-bg" src="mountain.jpg" alt=""/>
-  <div class="promo-banner-overlay"></div>
-  <div class="promo-banner-content fade-in-scroll">
-    <span class="promo-banner-eyebrow">This Week Only</span>
-    <div class="promo-banner-divider"></div>
-    <h2 class="promo-banner-headline">$1 Mochi Donut</h2>
-    <div class="promo-banner-script">Tuesdays</div>
-    <p class="promo-banner-desc">Just $1 with any drink purchase.</p>
-    <a href="#this-week" class="promo-banner-btn">Order Now &#8594;</a>
+<!-- ════════════ TODAY'S PICK — PROMO CARD-STACK CAROUSEL ════════════ -->
+<section class="promo-carousel-section">
+  <div class="promo-carousel-inner">
+    <div class="promo-carousel-copy fade-in-scroll">
+      <span class="tag">Specials</span>
+      <h2 class="promo-carousel-title">Today&rsquo;s pick<br/>just for you</h2>
+      <p class="promo-carousel-sub">Swipe to explore our latest specials.</p>
+      <div class="promo-carousel-dots" id="promo-dots">
+        <button class="promo-dot is-active" data-index="0" aria-label="Show promo 1"></button>
+        <button class="promo-dot" data-index="1" aria-label="Show promo 2"></button>
+        <button class="promo-dot" data-index="2" aria-label="Show promo 3"></button>
+      </div>
+    </div>
+
+    <div class="promo-stack-wrap">
+      <button class="promo-stack-arrow promo-stack-arrow-left" id="promo-prev" aria-label="Previous promo">&#8249;</button>
+
+      <div class="promo-stack" id="promo-stack">
+        <div class="promo-card promo-card-back promo-card-back-2" id="promo-back-2" aria-hidden="true">
+          <div class="promo-card-photo"><img id="promo-back-2-img" src="" alt=""/></div>
+        </div>
+        <div class="promo-card promo-card-back promo-card-back-1" id="promo-back-1" aria-hidden="true">
+          <div class="promo-card-photo"><img id="promo-back-1-img" src="" alt=""/></div>
+        </div>
+        <div class="promo-card promo-card-active" id="promo-active">
+          <div class="promo-card-photo"><img id="promo-active-img" src="mochidonutsV2.jpg" alt="$1 Mochi Donut Tuesdays"/></div>
+          <div class="promo-card-body">
+            <span class="promo-card-pill" id="promo-active-pill">This Week</span>
+            <h3 class="promo-card-title" id="promo-active-title">$1 Mochi Donut Tuesdays</h3>
+            <p class="promo-card-desc" id="promo-active-desc">Just $1 with any drink purchase!</p>
+            <a href="#this-week" class="promo-card-arrow-btn" id="promo-active-link" aria-label="See this week's flavors">&#8594;</a>
+          </div>
+        </div>
+      </div>
+
+      <button class="promo-stack-arrow promo-stack-arrow-right" id="promo-next" aria-label="Next promo">&#8250;</button>
+    </div>
   </div>
 </section>
 
@@ -418,7 +450,7 @@
   #bb-chips.bb-gated-row { pointer-events: none; opacity: 0.5; }
   #bb-consent-gate .cg-icon { font-size: 34px; margin-bottom: 14px; }
   #bb-consent-gate h3 {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 19px;
     color: var(--dark, #160E12);
     margin-bottom: 12px;
@@ -445,7 +477,7 @@
     padding: 11px 40px;
     font-size: 15px;
     font-weight: 700;
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Roboto', sans-serif;
     cursor: pointer;
     transition: background .18s;
   }
@@ -456,7 +488,7 @@
     color: var(--muted, #8A7278);
     font-size: 13px;
     font-weight: 600;
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Roboto', sans-serif;
     cursor: pointer;
     text-decoration: underline;
     padding: 4px;
@@ -587,6 +619,53 @@
 </script>
 <!-- ===== END CONSENT GATE ===== -->
 
+<!-- ===== HERO SCROLL-SCRUB (desktop only; mobile autoplays) ===== -->
+<script>
+(function () {
+  var video = document.getElementById('hero-scrub-video');
+  var track = document.getElementById('hero-scroll-track');
+  if (!video || !track) return;
+  if (video.getAttribute('data-mode') !== 'scrub') return; // mobile: autoplay handles it
+
+  try { video.pause(); } catch (e) {}
+
+  var heroEl = track.querySelector('.hero-sticky') || track.firstElementChild;
+  var targetProgress = 0;
+  var eased = 0;
+  var EASE = 0.18;
+  var pendingSeek = false;
+
+  // The old version called video.currentTime on every animation frame, which
+  // queues overlapping seeks faster than the decoder can service them — that's
+  // what produced the choppiness. Now we wait for each seek to actually finish
+  // (the 'seeked' event) before requesting the next one.
+  video.addEventListener('seeked', function () { pendingSeek = false; });
+
+  function computeTarget() {
+    var rect = track.getBoundingClientRect();
+    var scrollable = track.offsetHeight - (heroEl ? heroEl.offsetHeight : window.innerHeight);
+    targetProgress = scrollable > 0
+      ? Math.min(Math.max(-rect.top / scrollable, 0), 1)
+      : 0;
+  }
+
+  function raf() {
+    computeTarget();
+    eased += (targetProgress - eased) * EASE;
+    if (Math.abs(targetProgress - eased) < 0.001) eased = targetProgress;
+    if (video.duration && !isNaN(eased) && !pendingSeek) {
+      var t = eased * video.duration;
+      if (Math.abs(video.currentTime - t) > 0.02) {
+        pendingSeek = true;
+        try { video.currentTime = t; } catch (e) { pendingSeek = false; }
+      }
+    }
+    window.requestAnimationFrame(raf);
+  }
+  window.requestAnimationFrame(raf);
+})();
+</script>
+<!-- ===== END HERO SCROLL-SCRUB ===== -->
 
 </body>
 </html>
