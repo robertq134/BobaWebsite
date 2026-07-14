@@ -866,8 +866,8 @@ nav.nav-on-dark:not(.scrolled) .nav-logo img { filter: drop-shadow(0 1px 4px rgb
 /* ── VISIT PAGE (professional/editorial redesign — restrained pink, no
    mascots). Headings use the same sitewide font as body text instead of a
    second display font, so the whole page reads as one consistent typeface. ── */
-.vu-h1 { font-family: 'Roboto', sans-serif; font-size: clamp(48px, 6vw, 80px); font-weight: 700; color: var(--dark); line-height: 1.05; }
-.vu-h2 { font-family: 'Roboto', sans-serif; font-size: clamp(28px, 3vw, 38px); font-weight: 700; color: var(--dark); }
+.vu-h1 { font-family: 'Caveat', cursive; font-size: clamp(56px, 7vw, 96px); font-weight: 700; color: var(--dark); line-height: 1.05; }
+.vu-h2 { font-family: 'Caveat', cursive; font-size: clamp(34px, 3.6vw, 46px); font-weight: 700; color: var(--dark); }
 
 .vu-hero { max-width: 1400px; margin: 0 auto; padding: 156px 48px 80px; }
 .vu-hero-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
@@ -904,7 +904,7 @@ nav.nav-on-dark:not(.scrolled) .nav-logo img { filter: drop-shadow(0 1px 4px rgb
 .vu-stack-item-2 { left: 34%; top: 14%; transform: rotate(5deg); z-index: 2; }
 .vu-tape { position: absolute; top: -4%; left: 50%; transform: translateX(-50%) rotate(-3deg); width: 24%; height: 8%; background: rgba(214,192,160,.85); box-shadow: 0 2px 5px rgba(0,0,0,.12); }
 
-.vu-market-name { font-family: 'Roboto', sans-serif; font-size: clamp(32px, 3.6vw, 48px); font-weight: 700; color: var(--dark); }
+.vu-market-name { font-family: 'Fredoka', sans-serif; font-size: clamp(32px, 3.6vw, 48px); font-weight: 700; color: var(--dark); }
 .vu-market-addr { font-size: clamp(18px, 1.9vw, 23px); color: var(--muted); line-height: 1.6; margin-top: 14px; }
 .vu-market-divider { width: 84px; height: 4px; background: var(--pink); margin: 34px auto; }
 .vu-market-hours-label { font-size: 17px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--pink); margin-bottom: 12px; }
