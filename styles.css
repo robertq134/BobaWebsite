@@ -798,12 +798,16 @@ nav.nav-on-dark:not(.scrolled) .nav-logo img { filter: drop-shadow(0 1px 4px rgb
    scaling with width, since the card holds real text content that would
    otherwise get clipped by .promo-card's overflow:hidden at narrower widths. */
 .promo-stack { position: relative; width: 100%; max-width: 460px; height: 620px; flex-shrink: 1; min-width: 0; }
-.promo-card { position: absolute; inset: 0; border-radius: 32px; background: #fff; overflow: hidden; box-shadow: 0 26px 60px rgba(60,40,20,.18); }
-.promo-card-back { pointer-events: none; transition: transform .3s ease, opacity .3s ease; }
+.promo-card {
+  position: absolute; inset: 0; border-radius: 32px; background: #fff; overflow: hidden; box-shadow: 0 26px 60px rgba(60,40,20,.18);
+  transition: transform .55s cubic-bezier(.22,.61,.36,1), opacity .45s ease, filter .45s ease, z-index 0s .1s;
+}
+.promo-card-back { pointer-events: none; }
+.promo-card-back .promo-card-body { display: none; }
 .promo-card-back img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .promo-card-back-1 { transform: translate(9%, 7%) scale(.95); opacity: .75; filter: blur(1px); z-index: 1; }
 .promo-card-back-2 { transform: translate(17%, 13%) scale(.9); opacity: .5; filter: blur(2px); z-index: 0; }
-.promo-card-active { z-index: 2; transition: opacity .18s ease; }
+.promo-card-active { transform: translate(0, 0) scale(1); opacity: 1; filter: none; z-index: 2; }
 .promo-card-photo { height: 52%; }
 .promo-card-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .promo-card-body { padding: 22px 26px 28px; }

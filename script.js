@@ -344,66 +344,44 @@
     nextBtns.forEach(function(b) { b.addEventListener('click', function() { setActive(activeIndex + 1, 'next'); }); });
   }
 function setupPromoCarousel() {
-    var promos = [
-      { img: 'mochidonutsV2.jpg', pill: 'This Week', title: '$1 Mochi Donut Tuesdays', desc: 'Just $1 with any drink purchase!', link: '#this-week' },
-      { img: 'drinks.jpg', pill: 'Group Orders', title: 'Catering & Group Orders', desc: 'Boba flights, mochi donut towers, and drink bars for any occasion.', link: 'catering.html' },
-      { img: 'bobahero.png', pill: 'Order Online', title: 'Order Ahead Online', desc: 'Skip the line — order from your phone and pick up fast!', link: 'https://bestiesboba.square.site/' }
-    ];
-    var activeImg = document.getElementById('promo-active-img');
-    if (!activeImg) return;
-    var activePill = document.getElementById('promo-active-pill');
-    var activeTitle = document.getElementById('promo-active-title');
-    var activeDesc = document.getElementById('promo-active-desc');
-    var activeLink = document.getElementById('promo-active-link');
-    var activeCard = document.getElementById('promo-active');
-    var back1Img = document.getElementById('promo-back-1-img');
-    var back2Img = document.getElementById('promo-back-2-img');
+    var cards = Array.prototype.slice.call(document.querySelectorAll('#promo-stack .promo-card'));
+    if (!cards.length) return;
+    // Each physical card is permanently bound to one promo (content is baked into
+    // the HTML). Navigating just rotates which role class — active/back-1/back-2 —
+    // each card wears; the CSS transition on .promo-card animates the transform/
+    // opacity/filter change, which is what produces the cards-shuffling-back motion.
     var dots = Array.prototype.slice.call(document.querySelectorAll('#promo-dots .promo-dot'));
     var prevBtn = document.getElementById('promo-prev');
     var nextBtn = document.getElementById('promo-next');
-    var n = promos.length;
-    var activeIndex = 0;
+    var n = cards.length;
+    var order = cards.map(function(c) { return parseInt(c.getAttribute('data-card'), 10); });
     var transitioning = false;
 
-    function applyActive() {
-      var p = promos[activeIndex];
-      activeImg.src = p.img;
-      activeImg.alt = p.title;
-      activePill.textContent = p.pill;
-      activeTitle.textContent = p.title;
-      activeDesc.textContent = p.desc;
-      activeLink.setAttribute('href', p.link);
-      if (p.link.indexOf('http') === 0) {
-        activeLink.setAttribute('target', '_blank');
-      } else {
-        activeLink.removeAttribute('target');
-      }
-      var next1 = promos[(activeIndex + 1) % n];
-      var next2 = promos[(activeIndex + 2) % n];
-      back1Img.src = next1.img;
-      back2Img.src = next2.img;
-      dots.forEach(function(d, i) { d.classList.toggle('is-active', i === activeIndex); });
+    function applyOrder() {
+      var roleClasses = ['promo-card-active', 'promo-card-back promo-card-back-1', 'promo-card-back promo-card-back-2'];
+      order.forEach(function(cardIdx, role) {
+        var card = cards[cardIdx];
+        card.className = 'promo-card ' + roleClasses[role];
+        card.setAttribute('aria-hidden', role === 0 ? 'false' : 'true');
+      });
+      dots.forEach(function(d, i) { d.classList.toggle('is-active', i === order[0]); });
     }
 
-    // Fade the front card's content out, swap it, fade back in — an instant
-    // swap felt jarring for a "premium" card-stack, this makes it feel considered.
-    function goTo(index) {
+    function rotateTo(targetCardIdx) {
       if (transitioning) return;
-      activeIndex = ((index % n) + n) % n;
+      var p = order.indexOf(targetCardIdx);
+      if (p === 0) return;
+      order = order.slice(p).concat(order.slice(0, p));
       transitioning = true;
-      activeCard.style.opacity = '0';
-      setTimeout(function() {
-        applyActive();
-        activeCard.style.opacity = '1';
-        setTimeout(function() { transitioning = false; }, 220);
-      }, 160);
+      applyOrder();
+      setTimeout(function() { transitioning = false; }, 560);
     }
 
-    prevBtn.addEventListener('click', function() { goTo(activeIndex - 1); });
-    nextBtn.addEventListener('click', function() { goTo(activeIndex + 1); });
-    dots.forEach(function(d, i) { d.addEventListener('click', function() { goTo(i); }); });
+    prevBtn.addEventListener('click', function() { rotateTo(order[2]); });
+    nextBtn.addEventListener('click', function() { rotateTo(order[1]); });
+    dots.forEach(function(d, i) { d.addEventListener('click', function() { rotateTo(i); }); });
 
-    applyActive();
+    applyOrder();
   }
 
 function setupFlavorCarousel() {
