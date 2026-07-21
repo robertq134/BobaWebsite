@@ -124,35 +124,46 @@
       source.type = 'video/mp4';
       v.appendChild(source);
 
-      // Both breakpoints: play once through, only after the loading splash finishes.
       v.setAttribute('data-mode', 'autoplay');
 
-      // Pre-warm: while the splash is up, silently decode the video so it's
-      // ready to play instantly (no cold-start lag) when revealed.
-      var warmed = false;
-      function prewarm() {
-        if (warmed) return;
-        warmed = true;
-        v.muted = true;
-        var pw = v.play();
-        if (pw && pw.then) {
-          pw.then(function () {
-            // Immediately pause and rewind — we just wanted decoder warmed.
-            v.pause();
-            try { v.currentTime = 0; } catch (e) {}
-          }).catch(function () { warmed = false; });
-        }
-      }
-      // Warm as soon as enough is buffered to play through.
-      if (v.readyState >= 3) prewarm();
-      v.addEventListener('canplaythrough', prewarm, { once: true });
-
+      var started = false;
       var startHero = function () {
+        if (started) return;
+        started = true;
         try { v.currentTime = 0; } catch (e) {}
         var pr = v.play(); if (pr && pr.catch) pr.catch(function(){});
       };
-      window.addEventListener('bb-loader-done', startHero, { once: true });
-      setTimeout(startHero, 9000);
+
+      if (isMobile) {
+        // Mobile has a loading splash — don't start until it's dismissed.
+        // Pre-warm the decoder while the splash is up so playback is instant
+        // once revealed, instead of cold-starting at that moment.
+        var warmed = false;
+        function prewarm() {
+          if (warmed) return;
+          warmed = true;
+          v.muted = true;
+          var pw = v.play();
+          if (pw && pw.then) {
+            pw.then(function () {
+              v.pause();
+              try { v.currentTime = 0; } catch (e) {}
+            }).catch(function () { warmed = false; });
+          }
+        }
+        if (v.readyState >= 3) prewarm();
+        v.addEventListener('canplaythrough', prewarm, { once: true });
+
+        window.addEventListener('bb-loader-done', startHero, { once: true });
+        setTimeout(startHero, 9000);
+      } else {
+        // Desktop has no loading splash (that div removes itself immediately),
+        // so 'bb-loader-done' never fires here — start as soon as the video
+        // can actually play, instead of waiting on a mobile-only event.
+        if (v.readyState >= 3) startHero();
+        else v.addEventListener('canplaythrough', startHero, { once: true });
+        window.addEventListener('load', startHero);
+      }
 
       v.load();
     })();
@@ -433,7 +444,8 @@
     </div>
   </div>
   <div id="bb-cat-stage" class="bb-s-peep">
-    <div id="bb-meow-bubble">Meow!</div>
+    <div id="bb-meow-bubble-l" class="bb-meow-bubble">Meow!</div>
+    <div id="bb-meow-bubble-r" class="bb-meow-bubble">Meow!</div>
     <div id="bb-cat-wrap">
       <canvas id="bb-rive" width="340" height="340"></canvas>
     </div>

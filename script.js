@@ -14,12 +14,14 @@
   var msgs     = document.getElementById('bb-msgs');
   var input    = document.getElementById('bb-input');
   var sendBtn  = document.getElementById('bb-send');
-  var meowBubble = document.getElementById('bb-meow-bubble');
+  // Some pages (privacy, cookie policy, terms of service) don't include the
+  // chat widget markup at all — guard so this IIFE doesn't throw on those
+  // pages and silently take out the unrelated window.onload setup below.
+  var hasChat = !!(stage && chat && input && sendBtn && msgs);
 
   var statusText = { peep:'Click me!', spring:"We're online!", idle:"We're online!", sleep:'Tap to wake me up! /ᐠ - ˕-マ｡˚' };
 
   var ri = null, rIn = {};
-  var meowIntervalId = null;
 
   var sessionId = sessionStorage.getItem('bb_session_id');
   if (!sessionId) {
@@ -60,18 +62,7 @@
   function setState(next) {
     state = next;
 
-    if (state === S.PEEP) {
-      if (!meowIntervalId) {
-        meowIntervalId = setInterval(function() {
-          meowBubble.style.opacity = (meowBubble.style.opacity === "0") ? "1" : "0";
-        }, 1000);
-      }
-    } else {
-      clearInterval(meowIntervalId);
-      meowIntervalId = null;
-      meowBubble.style.opacity = "0";
-    }
-
+    // Meow-bubble blinking is driven entirely by CSS off the .bb-s-peep class below.
     stage.className = 'bb-s-' + next;
     statusEl.textContent = statusText[next] || '';
     var open = (next===S.SPRING||next===S.IDLE||next===S.SLEEP);
@@ -107,13 +98,15 @@
     bbSend(btn.textContent);
   };
 
-  input.addEventListener('input', function() {
-    if (state===S.SLEEP) { clearTimeout(sleepTimer); setState(S.IDLE); }
-    resetSleep();
-  });
-  input.addEventListener('keydown', function(e) {
-    if (e.key==='Enter'&&!e.shiftKey) { e.preventDefault(); bbSend(); }
-  });
+  if (hasChat) {
+    input.addEventListener('input', function() {
+      if (state===S.SLEEP) { clearTimeout(sleepTimer); setState(S.IDLE); }
+      resetSleep();
+    });
+    input.addEventListener('keydown', function(e) {
+      if (e.key==='Enter'&&!e.shiftKey) { e.preventDefault(); bbSend(); }
+    });
+  }
 
   function addMsg(role, text) {
     var row = document.createElement('div');
@@ -517,8 +510,10 @@ function setupFlavorCarousel() {
   }
 
   window.onload = function() {
-    setState(S.PEEP);
-    if (typeof rive !== 'undefined') initRive();
+    if (hasChat) {
+      setState(S.PEEP);
+      if (typeof rive !== 'undefined') initRive();
+    }
     setupFadeIn();
     setupWeekFeature();
     setupPromoCarousel();
@@ -538,19 +533,31 @@ function setupFlavorCarousel() {
   onScroll();
 })();
 
-// Mobile nav toggle: opens/closes the dropdown, closes automatically once a link is tapped
+// Mobile nav toggle: opens/closes the sliding drawer, closes on backdrop tap or link tap
 (function() {
   var toggleBtn = document.getElementById('nav-toggle');
   var navLinks = document.querySelector('.nav-links');
+  var backdrop = document.getElementById('nav-backdrop');
   if (!toggleBtn || !navLinks) return;
 
-  toggleBtn.addEventListener('click', function() {
-    navLinks.classList.toggle('mobile-open');
-  });
+  function openMenu() {
+    navLinks.classList.add('mobile-open');
+    toggleBtn.classList.add('active');
+    if (backdrop) backdrop.classList.add('show');
+    document.body.classList.add('nav-open-lock');
+  }
+  function closeMenu() {
+    navLinks.classList.remove('mobile-open');
+    toggleBtn.classList.remove('active');
+    if (backdrop) backdrop.classList.remove('show');
+    document.body.classList.remove('nav-open-lock');
+  }
 
+  toggleBtn.addEventListener('click', function() {
+    if (navLinks.classList.contains('mobile-open')) closeMenu(); else openMenu();
+  });
+  if (backdrop) backdrop.addEventListener('click', closeMenu);
   navLinks.querySelectorAll('a').forEach(function(link) {
-    link.addEventListener('click', function() {
-      navLinks.classList.remove('mobile-open');
-    });
+    link.addEventListener('click', closeMenu);
   });
 })();
