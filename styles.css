@@ -194,6 +194,9 @@ nav.nav-on-dark:not(.scrolled) .nav-toggle span { background: white; }
    have it just fades to transparent underneath. */
 .hero-video.hero-photo { opacity: 0; transition: opacity .9s ease; }
 .hero-video.hero-photo.is-active { opacity: 1; }
+/* Light scrim so the hero heading/rating stay readable over the video without
+   flattening it into a dark backdrop. */
+.hero-dark-scrim { position: absolute; inset: 0; z-index: 1; background: rgba(0,0,0,.32); pointer-events: none; }
 
 .hero-slide-arrow {
   display: flex; align-items: center; justify-content: center;
