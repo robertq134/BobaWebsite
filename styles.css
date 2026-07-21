@@ -131,9 +131,9 @@ button { font-family: 'Roboto', sans-serif; cursor: pointer; }
 .btn-outline { display: inline-block; background: transparent; color: var(--dark); border: 1.5px solid var(--border); border-radius: 6px; padding: 13px 28px; font-size: 14px; font-weight: 600; line-height: 1.2; transition: border-color .15s, transform .15s, background .15s; cursor: pointer; }
 .btn-outline:hover { border-color: var(--dark); transform: translateY(-2px) scale(1.03); background: rgba(0,0,0,0.03); }
 
-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 16px 48px; display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: 24px; background: transparent; border-bottom: 1px solid transparent; transition: background .25s ease, border-color .25s ease, box-shadow .25s ease; }
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 14px 48px 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; background: transparent; border-bottom: 1px solid transparent; transition: background .25s ease, border-color .25s ease, box-shadow .25s ease; }
 nav.scrolled { background: rgba(249,240,236,0.97); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); box-shadow: 0 2px 16px rgba(22,14,18,.06); }
-.nav-logo { margin-right: auto; }
+.nav-logo { margin-right: 0; }
 .nav-logo a { display: block; }
 .nav-logo img { transition: filter .25s ease; }
 .nav-right { display: flex; align-items: center; gap: 36px; }
@@ -229,11 +229,10 @@ nav.nav-on-dark:not(.scrolled) .nav-toggle span { background: white; }
 .hero.hero-dark .hero-sub,
 .hero.hero-dark .tag { background: transparent; }
 
-/* Pinned scroll-scrub: tall track + sticky hero (works on desktop + mobile) */
-.hero-scroll-track { position: relative; height: 200vh; z-index: 1; }
-.hero.hero-sticky { position: sticky; top: 0; height: 100vh; min-height: 100vh; overflow: hidden; }
-/* Inside a fixed-height sticky hero, the inner must not force its own 100vh
-   (that overflows the pin and makes it jump). Fill the parent instead. */
+/* Hero plays through once on load — no scroll-jacking, so the track is just
+   a normal-height wrapper and the hero itself is a regular (non-sticky) section. */
+.hero-scroll-track { position: relative; height: auto; z-index: 1; }
+.hero.hero-sticky { position: relative; height: 100vh; min-height: 100vh; overflow: hidden; }
 .hero.hero-sticky .hero-inner { min-height: 100%; height: 100%; }
 
 #this-week.week-pink-zone { background: var(--offwhite-dark); position: relative; overflow: hidden; }
@@ -1067,34 +1066,57 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
 
   nav { padding: 0 16px; height: 56px; flex-direction: row; justify-content: space-between; gap: 0; }
   .nav-logo img { height: 34px !important; }
-  .nav-toggle { display: flex; }
+
+  /* Hamburger that morphs into an X when the drawer is open */
+  .nav-toggle { display: flex; position: relative; width: 24px; height: 18px; padding: 0; }
+  .nav-toggle span {
+    position: absolute; left: 0; width: 24px; height: 2px;
+    transition: transform .3s ease, opacity .2s ease, top .3s ease;
+  }
+  .nav-toggle span:nth-child(1) { top: 0; }
+  .nav-toggle span:nth-child(2) { top: 8px; }
+  .nav-toggle span:nth-child(3) { top: 16px; }
+  .nav-toggle.active span:nth-child(1) { top: 8px; transform: rotate(45deg); }
+  .nav-toggle.active span:nth-child(2) { opacity: 0; }
+  .nav-toggle.active span:nth-child(3) { top: 8px; transform: rotate(-45deg); }
+
+  /* Dimmed backdrop behind the sliding drawer */
+  .nav-backdrop {
+    position: fixed; inset: 0; z-index: 199;
+    background: rgba(22,14,18,.45);
+    opacity: 0; pointer-events: none;
+    transition: opacity .35s ease;
+  }
+  .nav-backdrop.show { opacity: 1; pointer-events: auto; }
+  body.nav-open-lock { overflow: hidden; }
+
+  /* Slide-in drawer — takes 85% of the viewport width, slides from the right */
   .nav-links {
     display: flex;
     position: fixed;
-    top: 56px;
-    left: 0;
+    top: 0;
     right: 0;
+    height: 100vh;
+    height: 100dvh;
+    width: 85%;
+    max-width: 360px;
     flex-direction: column;
     gap: 0;
-    background: rgba(254,249,246,0.98);
+    background: rgba(254,249,246,0.99);
     backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--border);
-    box-shadow: 0 8px 24px rgba(22,14,18,.08);
-    padding: 0;
-    max-height: 0;
-    opacity: 0;
-    overflow: hidden;
-    pointer-events: none;
-    transition: max-height .32s ease, opacity .25s ease, padding .32s ease;
+    box-shadow: -12px 0 40px rgba(22,14,18,.18);
+    padding: 100px 0 24px;
+    margin: 0;
+    overflow-y: auto;
+    z-index: 200;
+    transform: translateX(100%);
+    transition: transform .4s cubic-bezier(.32,.72,0,1);
   }
   .nav-links.mobile-open {
-    max-height: 400px;
-    opacity: 1;
-    padding: 8px 0;
-    pointer-events: auto;
+    transform: translateX(0);
   }
   .nav-links li { width: 100%; }
-  .nav-links a { display: block; padding: 14px 24px; color: var(--muted) !important; }
+  .nav-links a { display: block; padding: 16px 28px; font-size: 17px; color: var(--muted) !important; }
   .nav-links a.active { color: var(--pink) !important; }
   .nav-cta { padding: 8px 14px; font-size: 12px; }
   .nav-right { gap: 10px; }
@@ -1205,7 +1227,6 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
      on scroll — plain 100vh leaves a black gap below the video once the address
      bar hides, because the section was sized for the shorter initial viewport. */
   .hero.hero-sticky { position: relative; height: 100vh; height: 100dvh; }
-  .hero-scroll-track { height: auto; }
   /* Oversize the video a few % beyond the section box (instead of an exact
      inset:0 match) so any leftover mobile viewport-height rounding/dvh support
      gap can't expose the black section background underneath — it just crops

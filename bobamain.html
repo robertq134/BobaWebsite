@@ -94,7 +94,7 @@
     </a>
   </div>
   <div class="nav-right">
-    <a href="https://bestiesboba.square.site/" target="_blank" class="nav-order"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><span>Order</span></a>
+    <a href="https://bestiesboba.square.site/" target="_blank" rel="noopener noreferrer" class="nav-order"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><span>Order</span></a>
     <ul class="nav-links">
     <li><a href="#this-week">This Week</a></li>
     <li><a href="menu.html">Menu</a></li>
@@ -123,39 +123,37 @@
       source.src = isMobile ? v.getAttribute('data-src-mobile') : v.getAttribute('data-src-desktop');
       source.type = 'video/mp4';
       v.appendChild(source);
-      if (isMobile) {
-        // Mobile: play once, but ONLY after the loading splash finishes.
-        v.setAttribute('data-mode', 'autoplay');
 
-        // Pre-warm: while the splash is up, silently decode the video so it's
-        // ready to play instantly (no cold-start lag) when revealed.
-        var warmed = false;
-        function prewarm() {
-          if (warmed) return;
-          warmed = true;
-          v.muted = true;
-          var pw = v.play();
-          if (pw && pw.then) {
-            pw.then(function () {
-              // Immediately pause and rewind — we just wanted decoder warmed.
-              v.pause();
-              try { v.currentTime = 0; } catch (e) {}
-            }).catch(function () { warmed = false; });
-          }
+      // Both breakpoints: play once through, only after the loading splash finishes.
+      v.setAttribute('data-mode', 'autoplay');
+
+      // Pre-warm: while the splash is up, silently decode the video so it's
+      // ready to play instantly (no cold-start lag) when revealed.
+      var warmed = false;
+      function prewarm() {
+        if (warmed) return;
+        warmed = true;
+        v.muted = true;
+        var pw = v.play();
+        if (pw && pw.then) {
+          pw.then(function () {
+            // Immediately pause and rewind — we just wanted decoder warmed.
+            v.pause();
+            try { v.currentTime = 0; } catch (e) {}
+          }).catch(function () { warmed = false; });
         }
-        // Warm as soon as enough is buffered to play through.
-        if (v.readyState >= 3) prewarm();
-        v.addEventListener('canplaythrough', prewarm, { once: true });
-
-        var startHero = function () {
-          try { v.currentTime = 0; } catch (e) {}
-          var pr = v.play(); if (pr && pr.catch) pr.catch(function(){});
-        };
-        window.addEventListener('bb-loader-done', startHero, { once: true });
-        setTimeout(startHero, 9000);
-      } else {
-        v.setAttribute('data-mode', 'scrub');
       }
+      // Warm as soon as enough is buffered to play through.
+      if (v.readyState >= 3) prewarm();
+      v.addEventListener('canplaythrough', prewarm, { once: true });
+
+      var startHero = function () {
+        try { v.currentTime = 0; } catch (e) {}
+        var pr = v.play(); if (pr && pr.catch) pr.catch(function(){});
+      };
+      window.addEventListener('bb-loader-done', startHero, { once: true });
+      setTimeout(startHero, 9000);
+
       v.load();
     })();
   </script>
@@ -222,7 +220,7 @@
             <span class="promo-card-pill">Order Online</span>
             <h3 class="promo-card-title">Order Ahead Online</h3>
             <p class="promo-card-desc">Skip the line — order from your phone and pick up fast!</p>
-            <a href="https://bestiesboba.square.site/" target="_blank" class="promo-card-arrow-btn" aria-label="Order online">&#8594;</a>
+            <a href="https://bestiesboba.square.site/" target="_blank" rel="noopener noreferrer" class="promo-card-arrow-btn" aria-label="Order online">&#8594;</a>
           </div>
         </div>
       </div>
@@ -267,8 +265,8 @@
           <h2 class="week-h2 week-side-name" id="week-side-name">Tropical Punch <span class="week-heart">&#9825;</span></h2>
           <p class="week-desc week-side-desc" id="week-side-desc">Sweet tropical glaze with fruity crunch. Handcrafted fresh every morning in small batches with lots of love.</p>
           <div class="week-side-btns">
-            <a href="https://bestiesboba.square.site/" target="_blank"><button class="btn-fill btn-big btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>Order Now</button></a>
-            <a href="https://bestiesboba.square.site/" target="_blank"><button class="btn-outline btn-big btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>Order Ahead</button></a>
+            <a href="https://bestiesboba.square.site/" target="_blank" rel="noopener noreferrer"><button class="btn-fill btn-big btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>Order Now</button></a>
+            <a href="https://bestiesboba.square.site/" target="_blank" rel="noopener noreferrer"><button class="btn-outline btn-big btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>Order Ahead</button></a>
           </div>
           <p class="week-side-helper">Skip the line and pick up faster!</p>
         </div>
@@ -355,7 +353,7 @@
         <span class="ig-stat-label">Posts</span>
       </div>
     </div>
-    <a href="https://instagram.com/BestiesBoba" target="_blank" class="btn-fill ig-follow-btn">
+    <a href="https://instagram.com/BestiesBoba" target="_blank" rel="noopener noreferrer" class="btn-fill ig-follow-btn">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
       Follow on Instagram
     </a>
@@ -388,11 +386,11 @@
       </div>
       <div class="f-col">
         <div class="f-col-head">Menu</div>
-        <ul><li><a href="menu.html">Drinks</a></li><li><a href="#this-week">Mochi Donuts</a></li><li><a href="menu.html">Snacks</a></li><li><a href="https://bestiesboba.square.site/" target="_blank">Order Online</a></li></ul>
+        <ul><li><a href="menu.html">Drinks</a></li><li><a href="#this-week">Mochi Donuts</a></li><li><a href="menu.html">Snacks</a></li><li><a href="https://bestiesboba.square.site/" target="_blank" rel="noopener noreferrer">Order Online</a></li></ul>
       </div>
       <div class="f-col">
         <div class="f-col-head">Visit</div>
-        <ul><li><a href="#this-week">This Week's Flavors</a></li><li><a href="catering.html">Catering</a></li><li><a href="visit.html">Find Us</a></li><li><a href="https://instagram.com/BestiesBoba" target="_blank">Instagram</a></li></ul>
+        <ul><li><a href="#this-week">This Week's Flavors</a></li><li><a href="catering.html">Catering</a></li><li><a href="visit.html">Find Us</a></li><li><a href="https://instagram.com/BestiesBoba" target="_blank" rel="noopener noreferrer">Instagram</a></li></ul>
       </div>
       <div class="f-col">
         <div class="f-col-head">Contact</div>
@@ -401,7 +399,7 @@
     </div>
     <div class="footer-bot">
       <span class="f-copy">&copy; 2026 Besties Boba & Bites. All rights reserved.</span>
-      <a href="https://instagram.com/BestiesBoba" target="_blank" class="f-ig">@BestiesBoba</a>
+      <a href="https://instagram.com/BestiesBoba" target="_blank" rel="noopener noreferrer" class="f-ig">@BestiesBoba</a>
     </div>
   </div>
 </footer>
@@ -537,7 +535,7 @@
   <button class="cg-close" id="bb-consent-close" aria-label="Close">&#215;</button>
   <div class="cg-icon">🐱</div>
   <h3>Before you chat</h3>
-  <p>To continue chatting, you agree to our <a href="privacy.html" target="_blank">Privacy Policy</a>. Conversations may be reviewed to improve service.</p>
+  <p>To continue chatting, you agree to our <a href="privacy.html" target="_blank" rel="noopener noreferrer">Privacy Policy</a>. Conversations may be reviewed to improve service.</p>
   <p class="cg-fine">Mochi is an AI assistant, not a person, and can make mistakes — its answers are for general info only, aren't professional advice or a binding offer, so please confirm prices and details with the shop.</p>
   <div class="cg-actions">
     <button id="bb-consent-agree">Agree &amp; Continue</button>
@@ -638,53 +636,6 @@
 </script>
 <!-- ===== END CONSENT GATE ===== -->
 
-<!-- ===== HERO SCROLL-SCRUB (desktop only; mobile autoplays) ===== -->
-<script>
-(function () {
-  var video = document.getElementById('hero-scrub-video');
-  var track = document.getElementById('hero-scroll-track');
-  if (!video || !track) return;
-  if (video.getAttribute('data-mode') !== 'scrub') return; // mobile: autoplay handles it
-
-  try { video.pause(); } catch (e) {}
-
-  var heroEl = track.querySelector('.hero-sticky') || track.firstElementChild;
-  var targetProgress = 0;
-  var eased = 0;
-  var EASE = 0.18;
-  var pendingSeek = false;
-
-  // The old version called video.currentTime on every animation frame, which
-  // queues overlapping seeks faster than the decoder can service them — that's
-  // what produced the choppiness. Now we wait for each seek to actually finish
-  // (the 'seeked' event) before requesting the next one.
-  video.addEventListener('seeked', function () { pendingSeek = false; });
-
-  function computeTarget() {
-    var rect = track.getBoundingClientRect();
-    var scrollable = track.offsetHeight - (heroEl ? heroEl.offsetHeight : window.innerHeight);
-    targetProgress = scrollable > 0
-      ? Math.min(Math.max(-rect.top / scrollable, 0), 1)
-      : 0;
-  }
-
-  function raf() {
-    computeTarget();
-    eased += (targetProgress - eased) * EASE;
-    if (Math.abs(targetProgress - eased) < 0.001) eased = targetProgress;
-    if (video.duration && !isNaN(eased) && !pendingSeek) {
-      var t = eased * video.duration;
-      if (Math.abs(video.currentTime - t) > 0.02) {
-        pendingSeek = true;
-        try { video.currentTime = t; } catch (e) { pendingSeek = false; }
-      }
-    }
-    window.requestAnimationFrame(raf);
-  }
-  window.requestAnimationFrame(raf);
-})();
-</script>
-<!-- ===== END HERO SCROLL-SCRUB ===== -->
 
 </body>
 </html>
