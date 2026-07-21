@@ -7,6 +7,14 @@
   window.addEventListener('load', function () { if (window.Cookiebot && !Cookiebot.hasResponse) Cookiebot.show(); });
 </script>
 <link rel="preconnect" href="https://consent.cookiebot.com">
+<!-- Google tag (gtag.js) — gated behind Cookiebot consent (Statistics category) -->
+<script type="text/plain" data-cookieconsent="statistics" async src="https://www.googletagmanager.com/gtag/js?id=G-V4S0LWFPND"></script>
+<script type="text/plain" data-cookieconsent="statistics">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-V4S0LWFPND');
+</script>
 <link rel="icon" type="image/png" href="android-chrome-192x192.png">
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>

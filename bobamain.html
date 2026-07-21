@@ -7,6 +7,14 @@
   window.addEventListener('load', function () { if (window.Cookiebot && !Cookiebot.hasResponse) Cookiebot.show(); });
 </script>
 <link rel="preconnect" href="https://consent.cookiebot.com">
+<!-- Google tag (gtag.js) — gated behind Cookiebot consent (Statistics category) -->
+<script type="text/plain" data-cookieconsent="statistics" async src="https://www.googletagmanager.com/gtag/js?id=G-V4S0LWFPND"></script>
+<script type="text/plain" data-cookieconsent="statistics">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-V4S0LWFPND');
+</script>
 <link rel="icon" type="image/png" href="android-chrome-192x192.png">
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -115,6 +123,8 @@
   <video class="hero-video hero-photo" id="hero-scrub-video" muted playsinline preload="auto"
          data-src-desktop="hero-4sec.mp4" data-src-mobile="MobileHeroTrue.mp4">
   </video>
+  <video class="hero-video hero-photo hero-video-next" id="hero-scrub-video-2" muted playsinline preload="auto">
+  </video>
   <script>
     (function () {
       var v = document.getElementById('hero-scrub-video');
@@ -164,6 +174,41 @@
         else v.addEventListener('canplaythrough', startHero, { once: true });
         window.addEventListener('load', startHero);
       }
+
+      // Slideshow, part 2: preload newhero.mp4 into the stacked second video
+      // layer in the background — seeked to 5s (skips its slow opening) and
+      // fully ready — so the moment the first clip ends we can crossfade
+      // straight into it instead of a hard cut / reload stutter.
+      var v2 = document.getElementById('hero-scrub-video-2');
+      var source2 = document.createElement('source');
+      source2.src = 'newhero.mp4';
+      source2.type = 'video/mp4';
+      v2.appendChild(source2);
+
+      var v2Ready = false;
+      v2.addEventListener('loadedmetadata', function () {
+        try { v2.currentTime = 5; } catch (e) {}
+      }, { once: true });
+      v2.addEventListener('seeked', function onSeeked() {
+        v2.removeEventListener('seeked', onSeeked);
+        v2Ready = true;
+      });
+      v2.load();
+
+      var crossfadeStarted = false;
+      function crossfadeToSecondClip() {
+        if (crossfadeStarted) return;
+        crossfadeStarted = true;
+        function go() {
+          var pr = v2.play(); if (pr && pr.catch) pr.catch(function(){});
+          v.classList.add('is-fading-out');
+          v2.classList.add('is-active');
+          v.addEventListener('transitionend', function () { v.pause(); }, { once: true });
+        }
+        if (v2Ready) go();
+        else v2.addEventListener('seeked', go, { once: true });
+      }
+      v.addEventListener('ended', crossfadeToSecondClip);
 
       v.load();
     })();
