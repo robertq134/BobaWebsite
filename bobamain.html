@@ -120,10 +120,10 @@
 <!-- HERO -->
 <div class="hero-scroll-track" id="hero-scroll-track">
 <section class="hero hero-dark hero-sticky">
-  <video class="hero-video hero-photo" id="hero-scrub-video" muted playsinline preload="auto"
+  <video class="hero-video hero-photo is-active" id="hero-scrub-video" muted playsinline preload="auto"
          data-src-desktop="hero-4sec.mp4" data-src-mobile="MobileHeroTrue.mp4">
   </video>
-  <video class="hero-video hero-photo hero-video-next" id="hero-scrub-video-2" muted playsinline preload="auto">
+  <video class="hero-video hero-photo" id="hero-scrub-video-2" muted playsinline preload="auto">
   </video>
   <script>
     (function () {
@@ -175,40 +175,80 @@
         window.addEventListener('load', startHero);
       }
 
-      // Slideshow, part 2: preload newhero.mp4 into the stacked second video
-      // layer in the background — seeked to 5s (skips its slow opening) and
-      // fully ready — so the moment the first clip ends we can crossfade
-      // straight into it instead of a hard cut / reload stutter.
+      // Slideshow: 2 slides. Dots + arrows let visitors switch at will, and
+      // each clip auto-advances into the next when it finishes (looping back
+      // to slide 1 after slide 2). Slide 2 preloads in the background, seeked
+      // to 5s (skips its slow opening), so switching to it — automatic or
+      // manual — is instant instead of a hard cut / reload stutter.
       var v2 = document.getElementById('hero-scrub-video-2');
+      var slides = [
+        { el: v, start: 0 },
+        { el: v2, start: 5 }
+      ];
+      var currentSlide = 0;
+      var slide2Ready = false;
+      var transitioning = false;
+
       var source2 = document.createElement('source');
       source2.src = 'newhero.mp4';
       source2.type = 'video/mp4';
       v2.appendChild(source2);
-
-      var v2Ready = false;
       v2.addEventListener('loadedmetadata', function () {
-        try { v2.currentTime = 5; } catch (e) {}
+        try { v2.currentTime = slides[1].start; } catch (e) {}
       }, { once: true });
       v2.addEventListener('seeked', function onSeeked() {
         v2.removeEventListener('seeked', onSeeked);
-        v2Ready = true;
+        slide2Ready = true;
       });
       v2.load();
 
-      var crossfadeStarted = false;
-      function crossfadeToSecondClip() {
-        if (crossfadeStarted) return;
-        crossfadeStarted = true;
-        function go() {
-          var pr = v2.play(); if (pr && pr.catch) pr.catch(function(){});
-          v.classList.add('is-fading-out');
-          v2.classList.add('is-active');
-          v.addEventListener('transitionend', function () { v.pause(); }, { once: true });
-        }
-        if (v2Ready) go();
-        else v2.addEventListener('seeked', go, { once: true });
+      function setActiveDot(idx) {
+        var dots = document.querySelectorAll('#hero-slide-dots .hero-slide-dot');
+        dots.forEach(function (d, i) { d.classList.toggle('is-active', i === idx); });
       }
-      v.addEventListener('ended', crossfadeToSecondClip);
+
+      function crossfadeTo(idx) {
+        if (transitioning || idx === currentSlide) return;
+        transitioning = true;
+        var incoming = slides[idx].el;
+        var outgoing = slides[currentSlide].el;
+        var pr = incoming.play(); if (pr && pr.catch) pr.catch(function(){});
+        incoming.classList.add('is-active');
+        outgoing.classList.remove('is-active');
+        currentSlide = idx;
+        setActiveDot(idx);
+        outgoing.addEventListener('transitionend', function onEnd() {
+          outgoing.removeEventListener('transitionend', onEnd);
+          outgoing.pause();
+        }, { once: true });
+        setTimeout(function () { transitioning = false; }, 950);
+      }
+
+      // Jump to a slide. If it already played through to the end, restart it
+      // from its defined start point instead of resuming at its dead end;
+      // otherwise just resume wherever it was left (e.g. manually switched
+      // away from mid-clip).
+      function goToSlide(idx) {
+        idx = ((idx % slides.length) + slides.length) % slides.length;
+        function ready() {
+          var el = slides[idx].el;
+          if (el.ended || (el.duration && el.currentTime >= el.duration - 0.15)) {
+            try { el.currentTime = slides[idx].start; } catch (e) {}
+          }
+          crossfadeTo(idx);
+        }
+        if (idx === 1 && !slide2Ready) v2.addEventListener('seeked', ready, { once: true });
+        else ready();
+      }
+
+      v.addEventListener('ended', function () { goToSlide(1); });
+      v2.addEventListener('ended', function () { goToSlide(0); });
+
+      document.getElementById('hero-slide-prev').addEventListener('click', function () { goToSlide(currentSlide - 1); });
+      document.getElementById('hero-slide-next').addEventListener('click', function () { goToSlide(currentSlide + 1); });
+      document.querySelectorAll('#hero-slide-dots .hero-slide-dot').forEach(function (dot, i) {
+        dot.addEventListener('click', function () { goToSlide(i); });
+      });
 
       v.load();
     })();
@@ -229,6 +269,13 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <button class="hero-slide-arrow hero-slide-arrow-left" id="hero-slide-prev" aria-label="Previous slide">&#8249;</button>
+  <button class="hero-slide-arrow hero-slide-arrow-right" id="hero-slide-next" aria-label="Next slide">&#8250;</button>
+  <div class="hero-slide-dots" id="hero-slide-dots">
+    <button class="hero-slide-dot is-active" data-slide="0" aria-label="Show slide 1"></button>
+    <button class="hero-slide-dot" data-slide="1" aria-label="Show slide 2"></button>
   </div>
 </section>
 </div>
