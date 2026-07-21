@@ -987,7 +987,13 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
 .f-ig { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,.28); transition: color .15s; }
 .f-ig:hover { color: var(--pink); }
 
-@keyframes _peep-bob  { 0%,100%{transform:translateY(0)} 50%{transform:translateY(0)} }
+/* Must bob AROUND the resting peek offset (250px) — hardcoding 0px here (as
+   this used to) makes the running animation override the rule's own
+   translateY(250px) for as long as it plays, since an animated `transform`
+   always wins over a static one on the same rule. That kept the cat fully
+   popped up at rest instead of peeking, and made .bb-s-spring's 0% keyframe
+   (250px) snap visibly on click instead of continuing smoothly from 250px. */
+@keyframes _peep-bob  { 0%,100%{transform:translateY(250px)} 50%{transform:translateY(240px)} }
 @keyframes _spring-up-desk {
   0%{transform:translateY(250px)} 52%{transform:translateY(-22px)}
   68%{transform:translateY(10px)} 82%{transform:translateY(-8px)}
@@ -1116,6 +1122,13 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
   .nav-toggle.active span:nth-child(1) { top: 8px; transform: rotate(45deg); }
   .nav-toggle.active span:nth-child(2) { opacity: 0; }
   .nav-toggle.active span:nth-child(3) { top: 8px; transform: rotate(-45deg); }
+
+  /* nav establishes its own stacking context (position:fixed + z-index), so
+     .nav-links' z-index:200 is only compared *inside* nav — against other
+     top-level elements like .nav-backdrop, what matters is nav's own z-index.
+     Raise it above the backdrop (199) so the drawer inside it stays clickable
+     instead of the backdrop rendering on top of the whole nav. */
+  nav { z-index: 201; }
 
   /* Dimmed backdrop behind the sliding drawer */
   .nav-backdrop {
@@ -1417,13 +1430,20 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
   #bb-meow-bubble-l { top: 122px; left: 2px; }
   #bb-meow-bubble-r { top: 122px; left: 158px; }
 
-  #bb-cat-wrap                { transform: translateY(0px); }
-  .bb-s-peep #bb-cat-wrap     { transform: translateY(0px); animation: _peep-bob-m 2.6s ease-in-out infinite; }
+  /* Resting/peek position must match the spring animation's own 0% keyframe
+     (110px) — otherwise the moment .bb-s-spring is applied, the animation
+     snaps instantly to 110px (its start value) before animating back up,
+     which reads as the cat suddenly dropping to half-hidden on click. */
+  #bb-cat-wrap                { transform: translateY(110px); }
+  .bb-s-peep #bb-cat-wrap     { transform: translateY(110px); animation: _peep-bob-m 2.6s ease-in-out infinite; }
   .bb-s-spring #bb-cat-wrap   { animation: _spring-up-m 0.85s cubic-bezier(0.22,1,0.36,1) forwards; }
   .bb-s-idle #bb-cat-wrap     { transform: translateY(0); }
   .bb-s-sleep #bb-cat-wrap    { transform: translateY(0); }
 
-  @keyframes _peep-bob-m  { 0%,100%{transform:translateY(0px)} 50%{transform:translateY(0px)} }
+  /* Same fix as desktop's _peep-bob — bob around the actual resting offset
+     (110px on mobile) instead of hardcoding 0px, which overrode the rule's
+     own translateY(110px) for the animation's whole duration. */
+  @keyframes _peep-bob-m  { 0%,100%{transform:translateY(110px)} 50%{transform:translateY(102px)} }
   @keyframes _spring-up-m {
     0%{transform:translateY(110px)} 52%{transform:translateY(-14px)}
     68%{transform:translateY(6px)}  82%{transform:translateY(-5px)}
