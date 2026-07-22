@@ -987,15 +987,18 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
 .f-ig { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,.28); transition: color .15s; }
 .f-ig:hover { color: var(--pink); }
 
-/* Must bob AROUND the resting peek offset (250px) — hardcoding 0px here (as
-   this used to) makes the running animation override the rule's own
-   translateY(250px) for as long as it plays, since an animated `transform`
-   always wins over a static one on the same rule. That kept the cat fully
-   popped up at rest instead of peeking, and made .bb-s-spring's 0% keyframe
-   (250px) snap visibly on click instead of continuing smoothly from 250px. */
-@keyframes _peep-bob  { 0%,100%{transform:translateY(250px)} 50%{transform:translateY(240px)} }
+/* The cat's "peek" vs "popped up" pose is drawn by the Rive state machine
+   itself (isOpen input), not by clipping the canvas — the actual artwork
+   sits flush with the bottom of its 340px canvas either way, so the resting
+   offset here must be 0, not a large push-down. A stale translateY(250px)
+   left over from an older art revision was pushing the whole canvas below
+   the viewport, hiding the cat completely (only ever masked before this fix
+   because the old keyframe hardcoded 0px at every stop, which silently
+   overrode that 250px and accidentally rendered the correct position). Bob
+   gently around 0 instead, and start the spring bounce from 0 too. */
+@keyframes _peep-bob  { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
 @keyframes _spring-up-desk {
-  0%{transform:translateY(250px)} 52%{transform:translateY(-22px)}
+  0%{transform:translateY(0)}    52%{transform:translateY(-22px)}
   68%{transform:translateY(10px)} 82%{transform:translateY(-8px)}
   91%{transform:translateY(3px)}  100%{transform:translateY(0)}
 }
@@ -1010,8 +1013,8 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
 
 #bb-widget { position:fixed; bottom:0; right:24px; z-index:9999; width:340px; }
 
-#bb-cat-wrap { transform:translateY(250px); transform-origin:bottom center; }
-.bb-s-peep   #bb-cat-wrap { animation:_peep-bob 2.6s ease-in-out infinite; transform:translateY(250px); }
+#bb-cat-wrap { transform:translateY(0); transform-origin:bottom center; }
+.bb-s-peep   #bb-cat-wrap { animation:_peep-bob 2.6s ease-in-out infinite; transform:translateY(0); }
 .bb-s-spring #bb-cat-wrap { animation:_spring-up-desk 0.85s cubic-bezier(0.22,1,0.36,1) forwards; }
 .bb-s-idle   #bb-cat-wrap { transform:translateY(0); }
 .bb-s-sleep  #bb-cat-wrap { transform:translateY(0); }
@@ -1430,22 +1433,18 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
   #bb-meow-bubble-l { top: 122px; left: 2px; }
   #bb-meow-bubble-r { top: 122px; left: 158px; }
 
-  /* Resting/peek position must match the spring animation's own 0% keyframe
-     (110px) — otherwise the moment .bb-s-spring is applied, the animation
-     snaps instantly to 110px (its start value) before animating back up,
-     which reads as the cat suddenly dropping to half-hidden on click. */
-  #bb-cat-wrap                { transform: translateY(110px); }
-  .bb-s-peep #bb-cat-wrap     { transform: translateY(110px); animation: _peep-bob-m 2.6s ease-in-out infinite; }
+  /* Same fix as desktop — the Rive art sits flush with the canvas bottom in
+     both the peek and open poses, so resting offset is 0, not a push-down.
+     A stale translateY(110px) was hiding the cat below the viewport entirely. */
+  #bb-cat-wrap                { transform: translateY(0); }
+  .bb-s-peep #bb-cat-wrap     { transform: translateY(0); animation: _peep-bob-m 2.6s ease-in-out infinite; }
   .bb-s-spring #bb-cat-wrap   { animation: _spring-up-m 0.85s cubic-bezier(0.22,1,0.36,1) forwards; }
   .bb-s-idle #bb-cat-wrap     { transform: translateY(0); }
   .bb-s-sleep #bb-cat-wrap    { transform: translateY(0); }
 
-  /* Same fix as desktop's _peep-bob — bob around the actual resting offset
-     (110px on mobile) instead of hardcoding 0px, which overrode the rule's
-     own translateY(110px) for the animation's whole duration. */
-  @keyframes _peep-bob-m  { 0%,100%{transform:translateY(110px)} 50%{transform:translateY(102px)} }
+  @keyframes _peep-bob-m  { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
   @keyframes _spring-up-m {
-    0%{transform:translateY(110px)} 52%{transform:translateY(-14px)}
+    0%{transform:translateY(0)}    52%{transform:translateY(-14px)}
     68%{transform:translateY(6px)}  82%{transform:translateY(-5px)}
     91%{transform:translateY(2px)}  100%{transform:translateY(0)}
   }
