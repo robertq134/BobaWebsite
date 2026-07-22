@@ -1433,18 +1433,23 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
   #bb-meow-bubble-l { top: 122px; left: 2px; }
   #bb-meow-bubble-r { top: 122px; left: 158px; }
 
-  /* Same fix as desktop — the Rive art sits flush with the canvas bottom in
-     both the peek and open poses, so resting offset is 0, not a push-down.
-     A stale translateY(110px) was hiding the cat below the viewport entirely. */
-  #bb-cat-wrap                { transform: translateY(0); }
-  .bb-s-peep #bb-cat-wrap     { transform: translateY(0); animation: _peep-bob-m 2.6s ease-in-out infinite; }
+  /* The Rive art sits flush with the canvas bottom in both the peek and open
+     poses, so a large push-down (the old 110px) hides it entirely below the
+     viewport. But #bb-cat-stage's own fixed bottom:0 sits at the browser's
+     visual viewport edge, which is above the browser's own bottom chrome
+     (address bar / home-indicator strip on phones) — leaving a gap that
+     reads as the cat floating disconnected from the true bottom of the
+     screen. Nudge the resting peek down a bit to close that gap without
+     going far enough to hide the head again. */
+  #bb-cat-wrap                { transform: translateY(22px); }
+  .bb-s-peep #bb-cat-wrap     { transform: translateY(22px); animation: _peep-bob-m 2.6s ease-in-out infinite; }
   .bb-s-spring #bb-cat-wrap   { animation: _spring-up-m 0.85s cubic-bezier(0.22,1,0.36,1) forwards; }
   .bb-s-idle #bb-cat-wrap     { transform: translateY(0); }
   .bb-s-sleep #bb-cat-wrap    { transform: translateY(0); }
 
-  @keyframes _peep-bob-m  { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+  @keyframes _peep-bob-m  { 0%,100%{transform:translateY(22px)} 50%{transform:translateY(14px)} }
   @keyframes _spring-up-m {
-    0%{transform:translateY(0)}    52%{transform:translateY(-14px)}
+    0%{transform:translateY(22px)} 52%{transform:translateY(-14px)}
     68%{transform:translateY(6px)}  82%{transform:translateY(-5px)}
     91%{transform:translateY(2px)}  100%{transform:translateY(0)}
   }

@@ -36,10 +36,20 @@
       autoplay: true,
       stateMachines: RIVE_SM,
       onLoad: function() {
-        var inputs = ri.stateMachineInputs(RIVE_SM);
-        rIn.open  = inputs.find(function(i){ return i.name===IN_OPEN; });
-        rIn.sleep = inputs.find(function(i){ return i.name===IN_SLEEP; });
-        syncRive();
+        // stateMachineInputs() can briefly return undefined right at onLoad,
+        // before the state machine has advanced its first tick — without this
+        // retry, that throws, rIn.open never gets set, and clicking the cat
+        // forever fails to fire the isOpen input (body never pops up).
+        (function grabInputs(attempt) {
+          var inputs = ri.stateMachineInputs(RIVE_SM);
+          if (inputs && inputs.length) {
+            rIn.open  = inputs.find(function(i){ return i.name===IN_OPEN; });
+            rIn.sleep = inputs.find(function(i){ return i.name===IN_SLEEP; });
+            syncRive();
+          } else if (attempt < 30) {
+            requestAnimationFrame(function(){ grabInputs(attempt + 1); });
+          }
+        })(0);
       }
     });
     var hitzone = document.getElementById('bb-cat-hitzone');
