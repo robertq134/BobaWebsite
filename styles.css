@@ -192,7 +192,7 @@ nav.nav-on-dark:not(.scrolled) .nav-toggle span { background: white; }
    doesn't affect the plain autoplay-loop .hero-video used on other pages).
    Both slide layers are toggled purely via .is-active; whichever doesn't
    have it just fades to transparent underneath. */
-.hero-video.hero-photo { opacity: 0; transition: opacity .9s ease; }
+.hero-video.hero-photo { opacity: 0; transition: opacity .9s ease; will-change: opacity; }
 .hero-video.hero-photo.is-active { opacity: 1; }
 /* Light scrim so the hero heading/rating stay readable over the video without
    flattening it into a dark backdrop. */
@@ -987,18 +987,14 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
 .f-ig { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,.28); transition: color .15s; }
 .f-ig:hover { color: var(--pink); }
 
-/* The cat's "peek" vs "popped up" pose is drawn by the Rive state machine
-   itself (isOpen input), not by clipping the canvas — the actual artwork
-   sits flush with the bottom of its 340px canvas either way, so the resting
-   offset here must be 0, not a large push-down. A stale translateY(250px)
-   left over from an older art revision was pushing the whole canvas below
-   the viewport, hiding the cat completely (only ever masked before this fix
-   because the old keyframe hardcoded 0px at every stop, which silently
-   overrode that 250px and accidentally rendered the correct position). Bob
-   gently around 0 instead, and start the spring bounce from 0 too. */
-@keyframes _peep-bob  { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+/* translateY(0) is flush with the canvas box's own bottom edge, but that
+   still left a visible gap under the head on desktop — same category of
+   issue as the mobile browser-chrome gap, just from the canvas art itself
+   having empty headroom rather than filling all the way to its edge. Nudge
+   the resting peek down to close it, same pattern as mobile's fix. */
+@keyframes _peep-bob  { 0%,100%{transform:translateY(40px)} 50%{transform:translateY(32px)} }
 @keyframes _spring-up-desk {
-  0%{transform:translateY(0)}    52%{transform:translateY(-22px)}
+  0%{transform:translateY(40px)} 52%{transform:translateY(-22px)}
   68%{transform:translateY(10px)} 82%{transform:translateY(-8px)}
   91%{transform:translateY(3px)}  100%{transform:translateY(0)}
 }
@@ -1013,16 +1009,16 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
 
 #bb-widget { position:fixed; bottom:0; right:24px; z-index:9999; width:340px; }
 
-#bb-cat-wrap { transform:translateY(0); transform-origin:bottom center; }
-.bb-s-peep   #bb-cat-wrap { animation:_peep-bob 2.6s ease-in-out infinite; transform:translateY(0); }
+#bb-cat-wrap { transform:translateY(40px); transform-origin:bottom center; }
+.bb-s-peep   #bb-cat-wrap { animation:_peep-bob 2.6s ease-in-out infinite; transform:translateY(40px); }
 .bb-s-spring #bb-cat-wrap { animation:_spring-up-desk 0.85s cubic-bezier(0.22,1,0.36,1) forwards; }
 .bb-s-idle   #bb-cat-wrap { transform:translateY(0); }
 .bb-s-sleep  #bb-cat-wrap { transform:translateY(0); }
 
 #bb-cat-stage { position:relative; width:340px; margin-left:auto; cursor:pointer; overflow:visible; }
 .bb-meow-bubble { position: absolute; opacity: 0; pointer-events: none; font-weight: 700; }
-#bb-meow-bubble-l { top: 190px; left: 6px;   --meow-tilt: -10deg; }
-#bb-meow-bubble-r { top: 190px; left: 246px; --meow-tilt: 10deg; }
+#bb-meow-bubble-l { top: 228px; left: 6px;   --meow-tilt: -10deg; }
+#bb-meow-bubble-r { top: 228px; left: 246px; --meow-tilt: 10deg; }
 .bb-s-peep #bb-meow-bubble-l { animation: _meow-blink 2.4s ease-in-out infinite; }
 .bb-s-peep #bb-meow-bubble-r { animation: _meow-blink 2.4s ease-in-out infinite; animation-delay: 1.2s; }
 #bb-rive { display:block; width:340px; height:340px; cursor:pointer; background:transparent !important; pointer-events: none; }
@@ -1430,8 +1426,8 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
 
   #bb-cat-hitzone { height: 30px; }
 
-  #bb-meow-bubble-l { top: 122px; left: 2px; }
-  #bb-meow-bubble-r { top: 122px; left: 158px; }
+  #bb-meow-bubble-l { top: 148px; left: 2px; }
+  #bb-meow-bubble-r { top: 148px; left: 158px; }
 
   /* The Rive art sits flush with the canvas bottom in both the peek and open
      poses, so a large push-down (the old 110px) hides it entirely below the

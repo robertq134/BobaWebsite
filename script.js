@@ -69,6 +69,22 @@
     rIn.sleep.value = (state===S.SLEEP);
   }
 
+  // Rive keeps its own render loop going every frame for as long as it isn't
+  // explicitly paused — on top of the hero's autoplaying/crossfading videos,
+  // that's real, continuous GPU work stacking up for the whole time someone
+  // is reading/typing in the chat, which is exactly when the reported lag
+  // happens. There's nothing left to animate once the open/sleep pose has
+  // settled, so pause Rive shortly after each state settles and only resume
+  // it while an actual pose transition is playing.
+  var riveSettleTimer = null;
+  function scheduleRivePause() {
+    clearTimeout(riveSettleTimer);
+    riveSettleTimer = setTimeout(function () {
+      if (!ri || typeof ri.pause !== 'function') return;
+      if (state === S.IDLE || state === S.SLEEP) ri.pause();
+    }, 600);
+  }
+
   function setState(next) {
     state = next;
 
@@ -78,6 +94,9 @@
     var open = (next===S.SPRING||next===S.IDLE||next===S.SLEEP);
     open ? chat.classList.add('open') : chat.classList.remove('open');
     syncRive();
+
+    if (ri && typeof ri.play === 'function') ri.play(); // let this transition render
+    scheduleRivePause();
   }
 
   function springUp() {
