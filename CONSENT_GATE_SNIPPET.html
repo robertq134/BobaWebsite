@@ -1,11 +1,4 @@
-<!-- ============================================================
-     CONSENT GATE — self-contained. Paste this block right BEFORE
-     the closing </body> tag on every page that has the chat widget
-     (bobamain.html, menu.html, about.html, catering.html).
-     It needs no changes to your existing script.js — it watches the
-     chat window for the "open" class on its own.
-     ============================================================ -->
-
+<!-- ===== CONSENT GATE (injected) ===== -->
 <style>
   #bb-consent-gate {
     position: absolute;
@@ -22,9 +15,14 @@
     border-radius: 20px;
   }
   #bb-consent-gate.show { display: flex; }
+  /* While the gate is up, physically block interaction with the input row and chips
+     behind it, so a mobile tap can't slip through and open the keyboard.
+     Driven by the .bb-gated class the JS toggles on #bb-chat (works on all browsers). */
+  #bb-input-row.bb-gated-row,
+  #bb-chips.bb-gated-row { pointer-events: none; opacity: 0.5; }
   #bb-consent-gate .cg-icon { font-size: 34px; margin-bottom: 14px; }
   #bb-consent-gate h3 {
-    font-family: 'Fraunces', serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 19px;
     color: var(--dark, #160E12);
     margin-bottom: 12px;
@@ -42,7 +40,8 @@
     color: #a99ca1;
     margin-bottom: 20px;
   }
-  #bb-consent-gate button {
+  #bb-consent-gate .cg-actions { display: flex; flex-direction: column; gap: 8px; align-items: center; width: 100%; }
+  #bb-consent-gate #bb-consent-agree {
     background: var(--pink, #E8527A);
     color: #fff;
     border: none;
@@ -50,19 +49,53 @@
     padding: 11px 40px;
     font-size: 15px;
     font-weight: 700;
-    font-family: 'Work Sans', sans-serif;
+    font-family: 'Roboto', sans-serif;
     cursor: pointer;
     transition: background .18s;
   }
-  #bb-consent-gate button:hover { background: var(--pink-d, #C73A61); }
+  #bb-consent-gate #bb-consent-agree:hover { background: var(--pink-d, #C73A61); }
+  #bb-consent-gate #bb-consent-decline {
+    background: none;
+    border: none;
+    color: var(--muted, #8A7278);
+    font-size: 13px;
+    font-weight: 600;
+    font-family: 'Roboto', sans-serif;
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 4px;
+  }
+  #bb-consent-gate #bb-consent-decline:hover { color: var(--dark, #160E12); }
+  #bb-consent-gate .cg-close {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    background: rgba(0,0,0,0.06);
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    font-size: 18px;
+    line-height: 1;
+    color: var(--muted, #8A7278);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #bb-consent-gate .cg-close:hover { background: rgba(0,0,0,0.12); color: var(--dark, #160E12); }
 </style>
 
 <div id="bb-consent-gate">
+  <button class="cg-close" id="bb-consent-close" aria-label="Close">&#215;</button>
   <div class="cg-icon">🐱</div>
   <h3>Before you chat</h3>
-  <p>To continue chatting, you agree to our <a href="privacy.html" target="_blank">Privacy Policy</a>. Conversations may be reviewed to improve service.</p>
-  <p class="cg-fine">Mochi is an AI assistant and can make mistakes — please confirm prices and details with the shop.</p>
-  <button id="bb-consent-agree">Agree &amp; Continue</button>
+  <p>To continue chatting, you agree to our <a href="privacy.html" target="_blank" rel="noopener noreferrer">Privacy Policy</a>. Conversations may be reviewed to improve service.</p>
+  <p class="cg-fine">Mochi is an AI assistant, not a person, and can make mistakes — its answers are for general info only, aren't professional advice or a binding offer, so please confirm prices and details with the shop.</p>
+  <div class="cg-actions">
+    <button id="bb-consent-agree">Agree &amp; Continue</button>
+    <button id="bb-consent-decline">No thanks</button>
+  </div>
 </div>
 
 <script>
@@ -75,29 +108,85 @@
   // Move the gate inside the chat window so it overlays only the chat.
   chat.appendChild(gate);
 
+  var input = document.getElementById('bb-input');
+  var sendBtn = document.getElementById('bb-send');
+  var chips = chat.querySelectorAll('.bb-chip');
+
   function hasConsented() {
     try { return sessionStorage.getItem(STORAGE_KEY) === 'yes'; }
     catch (e) { return false; }  // if sessionStorage is blocked, gate shows every open (safer)
   }
 
+  // Actually lock the interactive elements — not just cover them — so mobile
+  // taps can't reach the input behind the overlay and pop the keyboard.
+  var inputRow = document.getElementById('bb-input-row');
+  var chipsRow = document.getElementById('bb-chips');
+
+  function lockChat() {
+    // NOTE: do NOT add a class to `chat` here — the MutationObserver watches
+    // `chat` for class changes, so doing so would retrigger it in an infinite loop.
+    if (inputRow) inputRow.classList.add('bb-gated-row');
+    if (chipsRow) chipsRow.classList.add('bb-gated-row');
+    if (input) {
+      input.blur();                 // dismiss keyboard if it opened
+      input.setAttribute('disabled', 'disabled');
+    }
+    if (sendBtn) sendBtn.setAttribute('disabled', 'disabled');
+    chips.forEach(function (c) { c.setAttribute('disabled', 'disabled'); });
+  }
+  function unlockChat() {
+    if (inputRow) inputRow.classList.remove('bb-gated-row');
+    if (chipsRow) chipsRow.classList.remove('bb-gated-row');
+    if (input) input.removeAttribute('disabled');
+    if (sendBtn) sendBtn.removeAttribute('disabled');
+    chips.forEach(function (c) { c.removeAttribute('disabled'); });
+  }
+
   function showGateIfNeeded() {
     if (chat.classList.contains('open') && !hasConsented()) {
       gate.classList.add('show');
+      lockChat();
     } else {
       gate.classList.remove('show');
+      if (hasConsented()) unlockChat();
     }
   }
 
   document.getElementById('bb-consent-agree').addEventListener('click', function () {
     try { sessionStorage.setItem(STORAGE_KEY, 'yes'); } catch (e) {}
     gate.classList.remove('show');
+    unlockChat();
   });
 
+  // Declining or closing simply shuts the chat widget — no consent is stored,
+  // so the gate will appear again next time they open it.
+  function declineAndClose() {
+    gate.classList.remove('show');
+    if (typeof bbClose === 'function') {
+      bbClose();
+    } else {
+      chat.classList.remove('open');
+    }
+  }
+  document.getElementById('bb-consent-decline').addEventListener('click', declineAndClose);
+  document.getElementById('bb-consent-close').addEventListener('click', declineAndClose);
+
   // Watch the chat window for the "open" class toggling, without touching script.js.
-  var observer = new MutationObserver(showGateIfNeeded);
+  // Guard against reentrancy so the callback can never spiral into a loop.
+  var running = false;
+  var observer = new MutationObserver(function () {
+    if (running) return;
+    running = true;
+    showGateIfNeeded();
+    running = false;
+  });
   observer.observe(chat, { attributes: true, attributeFilter: ['class'] });
+
+  // If consent hasn't been given yet, lock immediately so nothing is interactive on load.
+  if (!hasConsented()) lockChat();
 
   // Also check once on load in case it starts open.
   showGateIfNeeded();
 })();
 </script>
+<!-- ===== END CONSENT GATE ===== -->
