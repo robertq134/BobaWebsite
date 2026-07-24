@@ -143,6 +143,11 @@
     (function () {
       var v = document.getElementById('hero-scrub-video');
       var isMobile = window.matchMedia('(max-width: 768px)').matches;
+      // A ~20KB first-frame poster paints as soon as it downloads, so the
+      // hero (the LCP element) shows real content immediately instead of
+      // staying blank until the video file has buffered enough to render
+      // its own first frame.
+      v.poster = isMobile ? 'hero-poster-mobile.jpg' : 'hero-poster-desktop.jpg';
       var source = document.createElement('source');
       source.src = isMobile ? v.getAttribute('data-src-mobile') : v.getAttribute('data-src-desktop');
       source.type = 'video/mp4';
@@ -495,20 +500,44 @@
   <div class="ig-grid stagger-group">
     <div class="ig-post ig-post-1 fade-in-scroll">
       <div class="ig-post-tape"></div>
-      <div class="ig-post-photo"><video src="ig-post-1.mp4" autoplay muted loop playsinline></video></div>
+      <div class="ig-post-photo"><video data-lazy-src="ig-post-1-sm.mp4" preload="none" muted loop playsinline></video></div>
       <div class="ig-post-caption">Sip happens! &#9825;</div>
     </div>
     <div class="ig-post ig-post-2 fade-in-scroll">
       <div class="ig-post-tape"></div>
-      <div class="ig-post-photo"><video src="ig-post-3.mp4" autoplay muted loop playsinline></video></div>
+      <div class="ig-post-photo"><video data-lazy-src="ig-post-3-sm.mp4" preload="none" muted loop playsinline></video></div>
       <div class="ig-post-caption">Cheers, besties! &#9825;</div>
     </div>
     <div class="ig-post ig-post-3 fade-in-scroll">
       <div class="ig-post-tape"></div>
-      <div class="ig-post-photo"><video src="ig-post-2.mp4" autoplay muted loop playsinline></video></div>
+      <div class="ig-post-photo"><video data-lazy-src="ig-post-2-sm.mp4" preload="none" muted loop playsinline></video></div>
       <div class="ig-post-caption">Fresh boba daily</div>
     </div>
   </div>
+  <script>
+    // These clips autoplayed and downloaded eagerly on page load (11.6MB
+    // originally) — on a phone connection they saturated bandwidth and were
+    // the main driver of a ~16s LCP. Attach the src and start playback only
+    // when the section actually approaches the viewport.
+    (function () {
+      var vids = document.querySelectorAll('video[data-lazy-src]');
+      if (!('IntersectionObserver' in window)) {
+        vids.forEach(function (v) { v.src = v.getAttribute('data-lazy-src'); v.play().catch(function(){}); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          var v = entry.target;
+          v.src = v.getAttribute('data-lazy-src');
+          v.autoplay = true;
+          var p = v.play(); if (p && p.catch) p.catch(function(){});
+          io.unobserve(v);
+        });
+      }, { rootMargin: '400px 0px' });
+      vids.forEach(function (v) { io.observe(v); });
+    })();
+  </script>
 </section>
 
 <footer>

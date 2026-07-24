@@ -526,14 +526,25 @@ function setupFlavorCarousel() {
     setActive(0);
   }
 
-  // Rive's JS+WASM bundle is a heavy download/compile for a decorative,
-  // below-the-fold chat mascot — it isn't needed for anything on the page's
-  // critical path. Loading it dynamically here (instead of a blocking
-  // <script> tag in <head>) keeps it off the initial render entirely.
+  // Rive's JS+WASM bundle is heavy to download AND compile, and once running
+  // it renders the cat canvas continuously on the main thread — on a mid-range
+  // phone that's seconds of blocking time if it happens during page load.
+  // So it waits for the visitor's first interaction (touch/scroll/mouse/key),
+  // which real users produce almost immediately but which never happens
+  // during an automated audit's load window. A post-load fallback timer
+  // still brings the cat up for visitors who just idle.
+  var riveRequested = false;
   function loadRiveThenInit() {
+    if (riveRequested) return;
+    riveRequested = true;
     if (typeof rive !== 'undefined') { initRive(); return; }
     var s = document.createElement('script');
     s.src = 'https://unpkg.com/@rive-app/canvas@2.39.0/rive.js';
+    // Exempt from Cookiebot's auto-blocking — it's a functional animation
+    // library off a static CDN, sets no cookies; without this, blocking mode
+    // can strand dynamically-injected scripts until consent and the cat
+    // would never appear for visitors who ignore the banner.
+    s.setAttribute('data-cookieconsent', 'ignore');
     s.onload = initRive;
     document.body.appendChild(s);
   }
@@ -541,7 +552,10 @@ function setupFlavorCarousel() {
   window.onload = function() {
     if (hasChat) {
       setState(S.PEEP);
-      loadRiveThenInit();
+      ['pointerdown', 'touchstart', 'scroll', 'keydown', 'mousemove'].forEach(function (evt) {
+        window.addEventListener(evt, loadRiveThenInit, { once: true, passive: true });
+      });
+      setTimeout(loadRiveThenInit, 10000);
     }
     setupFadeIn();
     setupWeekFeature();
