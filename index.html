@@ -1,12 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Besties Boba & Bites — Livermore, CA</title>
+<link rel="icon" type="image/png" href="android-chrome-192x192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://consent.cookiebot.com">
+<!-- CSS and fonts are declared before the Cookiebot/GA scripts so the
+     browser's preload scanner starts fetching them immediately, instead of
+     waiting on those render-blocking scripts to finish first. -->
+<link rel="stylesheet" href="styles.css"/>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fredoka:wght@500;600;700&family=Roboto:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="f15ebac7-5ffb-4696-bb5a-a185347f5915" data-blockingmode="auto" type="text/javascript"></script>
 <script type="text/javascript">
   window.addEventListener('CookiebotOnDialogInit', function () { if (window.Cookiebot) Cookiebot.hide(); });
   window.addEventListener('load', function () { if (window.Cookiebot && !Cookiebot.hasResponse) Cookiebot.show(); });
 </script>
-<link rel="preconnect" href="https://consent.cookiebot.com">
 <!-- Google tag (gtag.js) — gated behind Cookiebot consent (Statistics category) -->
 <script type="text/plain" data-cookieconsent="statistics" async src="https://www.googletagmanager.com/gtag/js?id=G-V4S0LWFPND"></script>
 <script type="text/plain" data-cookieconsent="statistics">
@@ -15,13 +26,9 @@
   gtag('js', new Date());
   gtag('config', 'G-V4S0LWFPND');
 </script>
-<link rel="icon" type="image/png" href="android-chrome-192x192.png">
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Besties Boba & Bites — Livermore, CA</title>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fredoka:wght@500;600;700&family=Roboto:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
-<script src="https://unpkg.com/@rive-app/canvas@2.39.0/rive.js"></script>
-<link rel="stylesheet" href="styles.css"/>
+<!-- rive.js is loaded lazily from script.js after window.load — it's a
+     heavy JS+WASM bundle for a decorative below-the-fold chat mascot and
+     doesn't belong on the critical rendering path. -->
 </head>
 <body>
 <!-- ===== MOBILE LOADING SPLASH (skeleton + cats) ===== -->
@@ -123,7 +130,7 @@
   <video class="hero-video hero-photo is-active" id="hero-scrub-video" muted playsinline preload="auto"
          data-src-desktop="hero-4sec.mp4" data-src-mobile="MobileHeroTrue.mp4">
   </video>
-  <video class="hero-video hero-photo" id="hero-scrub-video-2" muted playsinline preload="auto">
+  <video class="hero-video hero-photo" id="hero-scrub-video-2" muted playsinline preload="none">
   </video>
   <div class="hero-dark-scrim"></div>
   <script>
@@ -190,18 +197,29 @@
       var slide2Ready = false;
       var transitioning = false;
 
-      var source2 = document.createElement('source');
-      source2.src = 'newhero.mp4';
-      source2.type = 'video/mp4';
-      v2.appendChild(source2);
-      v2.addEventListener('loadedmetadata', function () {
-        try { v2.currentTime = slides[1].start; } catch (e) {}
-      }, { once: true });
-      v2.addEventListener('seeked', function onSeeked() {
-        v2.removeEventListener('seeked', onSeeked);
-        slide2Ready = true;
-      });
-      v2.load();
+      // newhero.mp4 is a large file (~5.5MB) and isn't needed for several
+      // seconds — loading it immediately competes for bandwidth with the
+      // actual LCP-critical first slide and badly hurts initial load
+      // performance. Defer it until after the page has fully loaded.
+      function loadSlide2() {
+        var source2 = document.createElement('source');
+        source2.src = 'newhero.mp4';
+        source2.type = 'video/mp4';
+        v2.appendChild(source2);
+        v2.addEventListener('loadedmetadata', function () {
+          try { v2.currentTime = slides[1].start; } catch (e) {}
+        }, { once: true });
+        v2.addEventListener('seeked', function onSeeked() {
+          v2.removeEventListener('seeked', onSeeked);
+          slide2Ready = true;
+        });
+        v2.load();
+      }
+      if (document.readyState === 'complete') {
+        setTimeout(loadSlide2, 800);
+      } else {
+        window.addEventListener('load', function () { setTimeout(loadSlide2, 800); });
+      }
 
       function setActiveDot(idx) {
         var dots = document.querySelectorAll('#hero-slide-dots .hero-slide-dot');
@@ -319,7 +337,7 @@
           </div>
         </div>
         <div class="promo-card promo-card-back promo-card-back-2" id="promo-card-2" data-card="2">
-          <div class="promo-card-photo"><img src="bobahero.png" alt="Order Ahead Online"/></div>
+          <div class="promo-card-photo"><img src="bobahero.jpg" alt="Order Ahead Online"/></div>
           <div class="promo-card-body">
             <span class="promo-card-pill">Order Online</span>
             <h3 class="promo-card-title">Order Ahead Online</h3>
@@ -386,7 +404,7 @@
           <button class="week-thumb" data-index="3" data-img="chocolate_sprinkles.png" data-name="Chocolate Sprinkles" data-desc="Rich chocolate glaze loaded with rainbow sprinkles." data-badge=""><img src="chocolate_sprinkles.png" alt="Chocolate Sprinkles"/></button>
           <button class="week-thumb" data-index="4" data-img="fruity_pebbles.png" data-name="Fruity Pebbles" data-desc="Crunchy Fruity Pebbles cereal pressed into a sweet glaze." data-badge=""><img src="fruity_pebbles.png" alt="Fruity Pebbles"/></button>
           <button class="week-thumb" data-index="5" data-img="ube_coconut.png" data-name="Ube Coconut" data-desc="Purple ube glaze with toasted coconut flakes." data-badge=""><img src="ube_coconut.png" alt="Ube Coconut"/></button>
-          <button class="week-thumb" data-index="6" data-img="cookiesandcream.png" data-name="Cookies &amp; Cream" data-desc="Crushed cookies swirled into a creamy vanilla glaze." data-badge=""><img src="cookiesandcream.png" alt="Cookies &amp; Cream"/></button>
+          <button class="week-thumb" data-index="6" data-img="cookiesandcream.jpg" data-name="Cookies &amp; Cream" data-desc="Crushed cookies swirled into a creamy vanilla glaze." data-badge=""><img src="cookiesandcream.jpg" alt="Cookies &amp; Cream"/></button>
           <button class="week-thumb" data-index="7" data-img="original_glazed.png" data-name="OG Glazed" data-desc="Our classic glaze, simple and always a favorite." data-badge=""><img src="original_glazed.png" alt="OG Glazed"/></button>
           <button class="week-thumb" data-index="8" data-img="churro.png" data-name="Churro" data-desc="Cinnamon sugar all over, just like a classic churro." data-badge=""><img src="churro.png" alt="Churro"/></button>
         </div>

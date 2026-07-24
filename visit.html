@@ -1,12 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Visit Us — Besties Boba & Bites</title>
+<link rel="icon" type="image/png" href="android-chrome-192x192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://consent.cookiebot.com">
+<!-- CSS and fonts are declared before the Cookiebot/GA scripts so the
+     browser's preload scanner starts fetching them immediately, instead of
+     waiting on those render-blocking scripts to finish first. -->
+<link rel="stylesheet" href="styles.css"/>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fredoka:wght@500;600;700&family=Roboto:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="f15ebac7-5ffb-4696-bb5a-a185347f5915" data-blockingmode="auto" type="text/javascript"></script>
 <script type="text/javascript">
   window.addEventListener('CookiebotOnDialogInit', function () { if (window.Cookiebot) Cookiebot.hide(); });
   window.addEventListener('load', function () { if (window.Cookiebot && !Cookiebot.hasResponse) Cookiebot.show(); });
 </script>
-<link rel="preconnect" href="https://consent.cookiebot.com">
 <!-- Google tag (gtag.js) — gated behind Cookiebot consent (Statistics category) -->
 <script type="text/plain" data-cookieconsent="statistics" async src="https://www.googletagmanager.com/gtag/js?id=G-V4S0LWFPND"></script>
 <script type="text/plain" data-cookieconsent="statistics">
@@ -15,13 +26,9 @@
   gtag('js', new Date());
   gtag('config', 'G-V4S0LWFPND');
 </script>
-<link rel="icon" type="image/png" href="android-chrome-192x192.png">
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Visit Us — Besties Boba & Bites</title>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fredoka:wght@500;600;700&family=Roboto:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
-<script src="https://unpkg.com/@rive-app/canvas@2.39.0/rive.js"></script>
-<link rel="stylesheet" href="styles.css"/>
+<!-- rive.js is loaded lazily from script.js after window.load — it's a
+     heavy JS+WASM bundle for a decorative below-the-fold chat mascot and
+     doesn't belong on the critical rendering path. -->
 </head>
 <body>
 

@@ -526,10 +526,22 @@ function setupFlavorCarousel() {
     setActive(0);
   }
 
+  // Rive's JS+WASM bundle is a heavy download/compile for a decorative,
+  // below-the-fold chat mascot — it isn't needed for anything on the page's
+  // critical path. Loading it dynamically here (instead of a blocking
+  // <script> tag in <head>) keeps it off the initial render entirely.
+  function loadRiveThenInit() {
+    if (typeof rive !== 'undefined') { initRive(); return; }
+    var s = document.createElement('script');
+    s.src = 'https://unpkg.com/@rive-app/canvas@2.39.0/rive.js';
+    s.onload = initRive;
+    document.body.appendChild(s);
+  }
+
   window.onload = function() {
     if (hasChat) {
       setState(S.PEEP);
-      if (typeof rive !== 'undefined') initRive();
+      loadRiveThenInit();
     }
     setupFadeIn();
     setupWeekFeature();
