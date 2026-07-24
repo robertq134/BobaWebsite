@@ -76,8 +76,13 @@
   document.documentElement.style.overflow = 'hidden';
 
   var shownAt = Date.now();
-  var MIN_SHOW = 3000;
-  var MAX_SHOW = 8000;
+  // MIN_SHOW just avoids an instant flicker if the hero happens to be ready
+  // immediately; MAX_SHOW is a worst-case ceiling for a slow/failed video
+  // load. Primary dismissal is 'bb-hero-ready' (fired once the actual hero
+  // video can play), not window 'load' — waiting on the whole page's load
+  // event here was adding several seconds of pure, unnecessary LCP delay.
+  var MIN_SHOW = 400;
+  var MAX_SHOW = 3000;
   var dismissed = false;
 
   function hideLoader() {
@@ -95,6 +100,7 @@
     }, wait);
   }
 
+  window.addEventListener('bb-hero-ready', hideLoader, { once: true });
   window.addEventListener('load', hideLoader);
   setTimeout(hideLoader, MAX_SHOW);
 })();
@@ -169,8 +175,14 @@
             }).catch(function () { warmed = false; });
           }
         }
-        if (v.readyState >= 3) prewarm();
-        v.addEventListener('canplaythrough', prewarm, { once: true });
+        // Let the loader know as soon as the hero video itself is ready,
+        // instead of it waiting on window 'load' (which waits for every
+        // image/video on the whole page — donut thumbnails, IG posts, menu
+        // photos, all of it — badly delaying LCP for no reason, since none
+        // of that is needed to show the hero).
+        function markHeroReady() { window.dispatchEvent(new Event('bb-hero-ready')); }
+        if (v.readyState >= 3) { prewarm(); markHeroReady(); }
+        else v.addEventListener('canplaythrough', function () { prewarm(); markHeroReady(); }, { once: true });
 
         window.addEventListener('bb-loader-done', startHero, { once: true });
         setTimeout(startHero, 9000);
@@ -319,7 +331,7 @@
 
       <div class="promo-stack" id="promo-stack">
         <div class="promo-card promo-card-active" id="promo-card-0" data-card="0">
-          <div class="promo-card-photo"><img src="mochidonutsV2.jpg" alt="$1 Mochi Donut Tuesdays"/></div>
+          <div class="promo-card-photo"><img src="mochidonutsV2.jpg" alt="$1 Mochi Donut Tuesdays" loading="lazy"/></div>
           <div class="promo-card-body">
             <span class="promo-card-pill">This Week</span>
             <h3 class="promo-card-title">$1 Mochi Donut Tuesdays</h3>
@@ -328,7 +340,7 @@
           </div>
         </div>
         <div class="promo-card promo-card-back promo-card-back-1" id="promo-card-1" data-card="1">
-          <div class="promo-card-photo"><img src="drinks.jpg" alt="Catering &amp; Group Orders"/></div>
+          <div class="promo-card-photo"><img src="drinks.jpg" alt="Catering &amp; Group Orders" loading="lazy"/></div>
           <div class="promo-card-body">
             <span class="promo-card-pill">Group Orders</span>
             <h3 class="promo-card-title">Catering &amp; Group Orders</h3>
@@ -337,7 +349,7 @@
           </div>
         </div>
         <div class="promo-card promo-card-back promo-card-back-2" id="promo-card-2" data-card="2">
-          <div class="promo-card-photo"><img src="bobahero.jpg" alt="Order Ahead Online"/></div>
+          <div class="promo-card-photo"><img src="bobahero.jpg" alt="Order Ahead Online" loading="lazy"/></div>
           <div class="promo-card-body">
             <span class="promo-card-pill">Order Online</span>
             <h3 class="promo-card-title">Order Ahead Online</h3>
@@ -361,7 +373,7 @@
     <div class="week-redesign">
       <div class="week-hero-split">
         <div class="week-hero-photo" id="week-feature-card">
-          <img class="week-hero-img" id="week-feature-img" src="tropical_cutie.png" alt="Tropical Cutie mochi donut"/>
+          <img class="week-hero-img" id="week-feature-img" src="tropical_cutie.png" alt="Tropical Cutie mochi donut" loading="lazy"/>
           <div class="week-hero-scrim"></div>
           <svg class="week-doodle week-doodle-1" viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="20" fill="none" stroke="#fff" stroke-width="2" opacity=".5"/><circle cx="30" cy="30" r="7" fill="none" stroke="#fff" stroke-width="2" opacity=".5"/></svg>
           <svg class="week-doodle week-doodle-2" viewBox="0 0 60 70" aria-hidden="true"><path d="M14 22h32l-4 40a4 4 0 0 1-4 4H22a4 4 0 0 1-4-4z" fill="none" stroke="#fff" stroke-width="2" opacity=".5"/><path d="M20 22a10 10 0 0 1 20 0" fill="none" stroke="#fff" stroke-width="2" opacity=".5"/></svg>
@@ -398,15 +410,15 @@
         <div class="week-thumb-row">
         <button class="week-arrow week-arrow-small" data-dir="prev" aria-label="Previous flavor">&#8249;</button>
         <div class="week-thumbs" id="week-thumbs">
-          <button class="week-thumb is-active" data-index="0" data-img="tropical_cutie.png" data-name="Tropical Cutie" data-desc="Strawberry, pineapple, and guava swirled into one fruity glaze." data-badge="Featured Flavor"><img src="tropical_cutie.png" alt="Tropical Cutie"/></button>
-          <button class="week-thumb" data-index="1" data-img="troll_farts.png" data-name="Troll Farts" data-desc="Cotton candy glaze with a rainbow sprinkle party on top." data-badge=""><img src="troll_farts.png" alt="Troll Farts"/></button>
-          <button class="week-thumb" data-index="2" data-img="toasted_marshmallow.png" data-name="Toasted Marshmallow" data-desc="Torched marshmallow glaze with a golden campfire toast." data-badge=""><img src="toasted_marshmallow.png" alt="Toasted Marshmallow"/></button>
-          <button class="week-thumb" data-index="3" data-img="chocolate_sprinkles.png" data-name="Chocolate Sprinkles" data-desc="Rich chocolate glaze loaded with rainbow sprinkles." data-badge=""><img src="chocolate_sprinkles.png" alt="Chocolate Sprinkles"/></button>
-          <button class="week-thumb" data-index="4" data-img="fruity_pebbles.png" data-name="Fruity Pebbles" data-desc="Crunchy Fruity Pebbles cereal pressed into a sweet glaze." data-badge=""><img src="fruity_pebbles.png" alt="Fruity Pebbles"/></button>
-          <button class="week-thumb" data-index="5" data-img="ube_coconut.png" data-name="Ube Coconut" data-desc="Purple ube glaze with toasted coconut flakes." data-badge=""><img src="ube_coconut.png" alt="Ube Coconut"/></button>
-          <button class="week-thumb" data-index="6" data-img="cookiesandcream.jpg" data-name="Cookies &amp; Cream" data-desc="Crushed cookies swirled into a creamy vanilla glaze." data-badge=""><img src="cookiesandcream.jpg" alt="Cookies &amp; Cream"/></button>
-          <button class="week-thumb" data-index="7" data-img="original_glazed.png" data-name="OG Glazed" data-desc="Our classic glaze, simple and always a favorite." data-badge=""><img src="original_glazed.png" alt="OG Glazed"/></button>
-          <button class="week-thumb" data-index="8" data-img="churro.png" data-name="Churro" data-desc="Cinnamon sugar all over, just like a classic churro." data-badge=""><img src="churro.png" alt="Churro"/></button>
+          <button class="week-thumb is-active" data-index="0" data-img="tropical_cutie.png" data-name="Tropical Cutie" data-desc="Strawberry, pineapple, and guava swirled into one fruity glaze." data-badge="Featured Flavor"><img src="tropical_cutie.png" alt="Tropical Cutie" loading="lazy"/></button>
+          <button class="week-thumb" data-index="1" data-img="troll_farts.png" data-name="Troll Farts" data-desc="Cotton candy glaze with a rainbow sprinkle party on top." data-badge=""><img src="troll_farts.png" alt="Troll Farts" loading="lazy"/></button>
+          <button class="week-thumb" data-index="2" data-img="toasted_marshmallow.png" data-name="Toasted Marshmallow" data-desc="Torched marshmallow glaze with a golden campfire toast." data-badge=""><img src="toasted_marshmallow.png" alt="Toasted Marshmallow" loading="lazy"/></button>
+          <button class="week-thumb" data-index="3" data-img="chocolate_sprinkles.png" data-name="Chocolate Sprinkles" data-desc="Rich chocolate glaze loaded with rainbow sprinkles." data-badge=""><img src="chocolate_sprinkles.png" alt="Chocolate Sprinkles" loading="lazy"/></button>
+          <button class="week-thumb" data-index="4" data-img="fruity_pebbles.png" data-name="Fruity Pebbles" data-desc="Crunchy Fruity Pebbles cereal pressed into a sweet glaze." data-badge=""><img src="fruity_pebbles.png" alt="Fruity Pebbles" loading="lazy"/></button>
+          <button class="week-thumb" data-index="5" data-img="ube_coconut.png" data-name="Ube Coconut" data-desc="Purple ube glaze with toasted coconut flakes." data-badge=""><img src="ube_coconut.png" alt="Ube Coconut" loading="lazy"/></button>
+          <button class="week-thumb" data-index="6" data-img="cookiesandcream.jpg" data-name="Cookies &amp; Cream" data-desc="Crushed cookies swirled into a creamy vanilla glaze." data-badge=""><img src="cookiesandcream.jpg" alt="Cookies &amp; Cream" loading="lazy"/></button>
+          <button class="week-thumb" data-index="7" data-img="original_glazed.png" data-name="OG Glazed" data-desc="Our classic glaze, simple and always a favorite." data-badge=""><img src="original_glazed.png" alt="OG Glazed" loading="lazy"/></button>
+          <button class="week-thumb" data-index="8" data-img="churro.png" data-name="Churro" data-desc="Cinnamon sugar all over, just like a classic churro." data-badge=""><img src="churro.png" alt="Churro" loading="lazy"/></button>
         </div>
         <button class="week-arrow week-arrow-small" data-dir="next" aria-label="Next flavor">&#8250;</button>
         </div>
@@ -427,7 +439,7 @@
 
   <div class="awards-row stagger-group">
     <div class="awards-cat awards-cat-left fade-in-scroll">
-      <img class="awards-cat-ph" src="awards-cat-white.png" alt="Besties cat mascot holding a mochi donut"/>
+      <img class="awards-cat-ph" src="awards-cat-white.png" alt="Besties cat mascot holding a mochi donut" loading="lazy"/>
     </div>
 
     <div class="awards-testimonial fade-in-left">
@@ -441,7 +453,7 @@
 
     <div class="awards-badges fade-in-scroll">
       <div class="award-item">
-        <img class="award-item-img" src="award-badge-restaurantguru.jpg" alt="Restaurant Guru 2025 — Recommended: Besties Boba &amp; Bites"/>
+        <img class="award-item-img" src="award-badge-restaurantguru.jpg" alt="Restaurant Guru 2025 — Recommended: Besties Boba &amp; Bites" loading="lazy"/>
       </div>
     </div>
 
@@ -455,7 +467,7 @@
     </div>
 
     <div class="awards-cat awards-cat-right fade-in-scroll">
-      <img class="awards-cat-ph" src="awards-cat-orange.png" alt="Besties cat mascot holding a boba drink"/>
+      <img class="awards-cat-ph" src="awards-cat-orange.png" alt="Besties cat mascot holding a boba drink" loading="lazy"/>
     </div>
   </div>
 </section>
