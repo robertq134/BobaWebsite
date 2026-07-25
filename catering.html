@@ -12,8 +12,20 @@
      browser's preload scanner starts fetching them immediately, instead of
      waiting on those render-blocking scripts to finish first. -->
 <link rel="stylesheet" href="styles.css"/>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fredoka:wght@500;600;700&family=Roboto:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
-<script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="f15ebac7-5ffb-4696-bb5a-a185347f5915" data-blockingmode="auto" type="text/javascript"></script>
+<!-- Loaded as a non-blocking "print" stylesheet, then swapped to
+     apply on load — an external font CSS file is otherwise render-blocking,
+     and font-display:swap (already in this URL) only prevents invisible
+     text once the CSS itself has loaded, it doesn't stop the CSS fetch
+     from blocking first paint. -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fredoka:wght@500;600;700&family=Roboto:wght@400;500;600;700;800&display=swap"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fredoka:wght@500;600;700&family=Roboto:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'"/>
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fredoka:wght@500;600;700&family=Roboto:wght@400;500;600;700;800&display=swap"/></noscript>
+<!-- async: safe here because our only cookie-setting script (GA below)
+     is already manually pre-gated via type="text/plain" and never
+     auto-executes — it doesn't depend on Cookiebot loading before it in
+     document order. Without async this script blocks HTML parsing (and
+     therefore first paint) until it fully downloads and runs. -->
+<script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="f15ebac7-5ffb-4696-bb5a-a185347f5915" data-blockingmode="auto" type="text/javascript" async></script>
 <script type="text/javascript">
   window.addEventListener('CookiebotOnDialogInit', function () { if (window.Cookiebot) Cookiebot.hide(); });
   window.addEventListener('load', function () { if (window.Cookiebot && !Cookiebot.hasResponse) Cookiebot.show(); });
