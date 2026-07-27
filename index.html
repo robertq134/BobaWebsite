@@ -168,11 +168,26 @@
       v.setAttribute('data-mode', 'autoplay');
 
       var started = false;
+      // If autoplay is denied (iOS Low Power Mode, data-saver browsers), retry
+      // on the first user gesture — gestures grant playback permission on iOS.
+      function armGestureRetry() {
+        ['touchstart', 'pointerdown', 'click', 'scroll', 'keydown'].forEach(function (evt) {
+          window.addEventListener(evt, startHero, { once: true, passive: true });
+        });
+      }
       var startHero = function () {
         if (started) return;
         started = true;
         try { v.currentTime = 0; } catch (e) {}
-        var pr = v.play(); if (pr && pr.catch) pr.catch(function(){});
+        var pr = v.play();
+        if (pr && pr.catch) pr.catch(function () {
+          // Un-latch: `started` used to stay true here, so one rejected
+          // autoplay (guaranteed on iPhones in Low Power Mode, since iOS
+          // also never preloads enough for the other start paths to fire)
+          // left the hero permanently blank with no retry ever happening.
+          started = false;
+          armGestureRetry();
+        });
       };
 
       if (isMobile) {
@@ -548,6 +563,18 @@
         });
       }, { rootMargin: '400px 0px' });
       vids.forEach(function (v) { io.observe(v); });
+
+      // Autoplay can be silently denied (iOS Low Power Mode) — user gestures
+      // grant playback permission, so revive any frozen clips on interaction.
+      ['touchstart', 'pointerdown', 'scroll'].forEach(function (evt) {
+        window.addEventListener(evt, function () {
+          vids.forEach(function (v) {
+            if (v.src && v.paused) {
+              var p = v.play(); if (p && p.catch) p.catch(function(){});
+            }
+          });
+        }, { once: true, passive: true });
+      });
     })();
   </script>
 </section>
