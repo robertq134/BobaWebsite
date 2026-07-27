@@ -392,7 +392,16 @@ nav.nav-on-dark:not(.scrolled) .nav-toggle span { background: white; }
 .week-thumb-strip { background: var(--offwhite-dark); padding: 16px 24px; }
 .week-thumb-row { display: flex; align-items: center; justify-content: center; gap: 12px; }
 .week-arrow-small { width: 28px; height: 28px; font-size: 14px; }
-.week-thumbs { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 4px; flex: 1; min-width: 0; justify-content: center; }
+/* justify-content:center on a scrollable flex row splits the overflow across
+   BOTH sides, pushing the first items to a negative offset. scrollLeft can't go
+   below 0, so those items become permanently unreachable — that hid the first
+   flavors of 9 on mobile. Auto margins on the end items center the row only
+   while there's free space and collapse to 0 once it overflows, so every thumb
+   stays scrollable. (Preferred over `safe center`, which some browsers still
+   drop, and unlike a media query this self-corrects at any width.) */
+.week-thumbs { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 4px; flex: 1; min-width: 0; justify-content: flex-start; }
+.week-thumbs > :first-child { margin-inline-start: auto; }
+.week-thumbs > :last-child  { margin-inline-end: auto; }
 .week-thumb {
   flex: 0 0 auto;
   width: 68px;
@@ -925,7 +934,11 @@ nav.nav-on-dark:not(.scrolled) .nav-logo img { filter: drop-shadow(0 1px 4px rgb
 .vu-markets-sub { font-size: 16px; color: var(--muted); margin-top: 10px; }
 /* minmax(0,1fr) lets each column shrink below the photo stack's natural size
    instead of overflowing on narrower desktop widths. */
-.vu-markets-grid { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 64px; max-width: 1700px; margin: 0 auto; }
+/* Single centered column — was a 2-col grid when we listed two markets; with one
+   it would sit in the left half against an empty right half. 820px keeps the
+   block the same visual width one column used to have, so .vu-photo-stack still
+   renders at its 780px cap and the section looks unchanged apart from centering. */
+.vu-markets-grid { display: grid; grid-template-columns: minmax(0,1fr); gap: 64px; max-width: 820px; margin: 0 auto; }
 .vu-market-block { text-align: center; }
 
 /* Width is a percentage of the market-block's own column (not the viewport),
