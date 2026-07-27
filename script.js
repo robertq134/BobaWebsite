@@ -302,6 +302,22 @@
       }
     }
 
+    // Thumbnails are tiny files; the full-size feature photo for each flavor is
+    // a separate, larger image that would otherwise only start downloading the
+    // moment its thumb is clicked — a visible stall on a phone connection.
+    // Warm them in the browser cache once the page is idle instead.
+    function preloadFeatureImages() {
+      thumbs.forEach(function(t) {
+        var src = t.getAttribute('data-img');
+        if (src) { new Image().src = src; }
+      });
+    }
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(preloadFeatureImages, { timeout: 6000 });
+    } else {
+      setTimeout(preloadFeatureImages, 2500);
+    }
+
     var slideEls = [img, overlay, sideName, sideDesc].filter(Boolean);
 
     function setSlideState(els, x, opacity, withTransition) {
