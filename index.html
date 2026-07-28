@@ -145,7 +145,11 @@
 <!-- HERO -->
 <div class="hero-scroll-track" id="hero-scroll-track">
 <section class="hero hero-dark hero-sticky">
-  <video class="hero-video hero-photo is-active" id="hero-scrub-video" muted playsinline preload="auto"
+  <!-- `autoplay` in the markup matters on iPhone: iOS's native autoplay
+       machinery (attribute + muted + playsinline) is the one start path
+       verified working there — JS-driven play() alone was refused on
+       iPhone Chrome while this exact pattern played fine on the menu page. -->
+  <video class="hero-video hero-photo is-active" id="hero-scrub-video" autoplay muted playsinline preload="auto"
          data-src-desktop="hero-4sec.mp4" data-src-mobile="MobileHeroTrue.mp4">
   </video>
   <video class="hero-video hero-photo" id="hero-scrub-video-2" muted playsinline preload="none">
@@ -160,10 +164,12 @@
       // staying blank until the video file has buffered enough to render
       // its own first frame.
       v.poster = isMobile ? 'hero-poster-mobile.jpg' : 'hero-poster-desktop.jpg';
-      var source = document.createElement('source');
-      source.src = isMobile ? v.getAttribute('data-src-mobile') : v.getAttribute('data-src-desktop');
-      source.type = 'video/mp4';
-      v.appendChild(source);
+      // Direct src assignment, not a dynamically-appended <source> child —
+      // this script runs during parse so it's equivalent to markup, and iOS
+      // has a history of ignoring <source> elements added after the video
+      // element exists. With src + the autoplay attribute set, the browser's
+      // own autoplay engine starts playback with no JS play() required.
+      v.src = isMobile ? v.getAttribute('data-src-mobile') : v.getAttribute('data-src-desktop');
 
       v.setAttribute('data-mode', 'autoplay');
 
@@ -313,7 +319,12 @@
         dot.addEventListener('click', function () { goToSlide(i); });
       });
 
-      v.load();
+      // NOTE: no v.load() here on purpose. It was needed back when the source
+      // was appended as a <source> child, but now that v.src is assigned
+      // directly the load is already underway — and calling load() again
+      // resets the element and aborts the autoplay the attribute just
+      // started. The menu page hero (the one confirmed working on iPhone)
+      // has no load() call either.
     })();
   </script>
 
