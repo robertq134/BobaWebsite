@@ -99,6 +99,17 @@
 html { scroll-behavior: smooth; }
 
 :root {
+  /* Lock the site to light rendering. This site has no dark theme, but the
+     browser can still impose one: UA-styled widgets (the chat input, buttons,
+     scrollbars, form fields) flip to dark palettes when the OS is in dark
+     mode, and Chrome on Android can auto-invert whole pages. Declaring
+     color-scheme opts out of all of that, so what we designed is what ships. */
+  color-scheme: light;      /* fallback: understood everywhere */
+  color-scheme: light only; /* stronger: also blocks Chrome's forced auto-dark.
+                               Kept as a second declaration because browsers
+                               that don't parse `only` discard the whole line —
+                               this way they still get plain `light` above. */
+
   --pink:   #E8527A;
   --pink-d: #C73A61;
   --yellow: #F5C842;
@@ -1432,7 +1443,13 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
     width: 220px !important;
     cursor: pointer;
     overflow: visible;
+    /* The stage box is 220x220 and mostly empty, but a transparent div still
+       catches taps — so it was stealing them from anything beneath it. Let
+       taps fall through the empty area and re-enable them only on the
+       hitzone, which is the part that's actually meant to be tapped. */
+    pointer-events: none;
   }
+  #bb-cat-hitzone { pointer-events: auto; }
 
   #bb-rive {
     width: 220px !important;
@@ -1468,7 +1485,12 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
 
   #bb-chat {
     position: fixed !important;
-    bottom: 180px !important;
+    /* Clear the cat stage entirely. The stage is a 220px-tall fixed box anchored
+       at bottom:0, so at the old 180px the chat's bottom 40px — the input row —
+       sat underneath it and taps were being swallowed by the stage's invisible
+       (but still tap-catching) box. 232px puts the chat above the stage's top
+       edge with a little breathing room. */
+    bottom: 232px !important;
     right: 8px !important;
     left: 8px !important;
     width: auto !important;
