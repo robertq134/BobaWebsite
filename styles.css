@@ -789,7 +789,10 @@ nav.nav-on-dark:not(.scrolled) .nav-logo img { filter: drop-shadow(0 1px 4px rgb
   max-width: 1760px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 0.8fr 1.35fr 2.2fr 1.35fr 0.8fr;
+  /* Centre column widened (was 2.2fr) now that it holds two award badges
+     rather than one — at the old ratio each card fell under the embedded
+     badge's fixed 186px width and cropped it. */
+  grid-template-columns: 0.7fr 1.25fr 3.1fr 1.25fr 0.7fr;
   align-items: center;
   gap: 22px;
   position: relative;
@@ -798,10 +801,22 @@ nav.nav-on-dark:not(.scrolled) .nav-logo img { filter: drop-shadow(0 1px 4px rgb
 .awards-cat { display: flex; justify-content: center; align-items: center; position: relative; }
 .awards-cat-ph { width: 100%; max-width: 230px; aspect-ratio: 1 / 1; object-fit: contain; filter: drop-shadow(0 6px 14px rgba(0,0,0,0.08)); }
 
-.awards-badges { display: flex; justify-content: center; }
-.award-item { width: 100%; max-width: 560px; aspect-ratio: 1 / 1; border-radius: 28px; background: #fff; box-shadow: 0 18px 44px rgba(0,0,0,0.13); display: flex; align-items: center; justify-content: center; padding: 32px; overflow: hidden; box-sizing: border-box; transition: transform .25s ease, box-shadow .25s ease; }
+/* Two award badges share the centre grid column, so they sit side by side and
+   split the space evenly (flex-basis 0 keeps both cards the same width even
+   though their contents differ — an image in one, a fixed-size third-party
+   widget in the other). They stack in the mobile block further down. */
+/* align-items:center (not stretch) so each card's height comes from its own
+   aspect-ratio rather than the tallest sibling — stretching made the two cards
+   resolve to slightly different widths. */
+.awards-badges { display: flex; justify-content: center; align-items: center; gap: 20px; }
+.award-item { flex: 1 1 0; min-width: 0; max-width: 250px; aspect-ratio: 1 / 1; border-radius: 28px; background: #fff; box-shadow: 0 18px 44px rgba(0,0,0,0.13); display: flex; align-items: center; justify-content: center; padding: 24px; overflow: hidden; box-sizing: border-box; transition: transform .25s ease, box-shadow .25s ease; }
 .award-item:hover { transform: translateY(-6px) scale(1.02); box-shadow: 0 24px 52px rgba(0,0,0,0.19); }
 .award-item-img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }
+/* The vendor badge is a fixed 186x200 block. The card is always wider than
+   that (250px desktop, 280px mobile), so it renders at natural size — no
+   scaling rules here, since the vendor's own `background` shorthand loads
+   after ours at equal specificity and would override them anyway. */
+.award-item-embed { padding: 14px; }
 
 .awards-testimonial {
   position: relative;
@@ -1348,7 +1363,10 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
     gap: 24px;
   }
   .awards-cat-ph { width: 90px; max-width: none; height: 90px; }
-  .award-item { width: min(280px, 78vw); max-width: none; }
+  /* Stack the two badges vertically on mobile instead of squeezing them
+     side by side into a phone-width column. */
+  .awards-badges { flex-direction: column; align-items: center; gap: 20px; }
+  .award-item { flex: 0 0 auto; width: min(280px, 78vw); max-width: none; }
   .awards-testimonial { width: 100%; max-width: 320px; }
 
   /* ── Instagram: stack posts, keep them tappable ── */
