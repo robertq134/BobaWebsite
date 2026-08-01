@@ -3,8 +3,11 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="color-scheme" content="light">
 <title>Besties Boba & Bites — Livermore, CA</title>
-<link rel="icon" type="image/png" href="android-chrome-192x192.png">
+<link rel="icon" href="/favicon.ico" sizes="any"/>
+<link rel="icon" type="image/png" href="/android-chrome-192x192.png"/>
+<link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://consent.cookiebot.com">
@@ -20,6 +23,14 @@
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fredoka:wght@500;600;700&family=Roboto:wght@400;500;600;700;800&display=swap"/>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fredoka:wght@500;600;700&family=Roboto:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'"/>
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fredoka:wght@500;600;700&family=Roboto:wght@400;500;600;700;800&display=swap"/></noscript>
+<!-- Restaurant Guru award badge stylesheet (third party). Loaded non-blocking
+     via the same print-media swap as the fonts — the badge sits far below the
+     fold, so letting an external stylesheet block first paint for it would
+     undo the render-blocking work done elsewhere on this page. -->
+<link rel="preconnect" href="https://awards.infcdn.net" crossorigin>
+<link rel="preload" as="style" href="https://awards.infcdn.net/2024/badge-circledLeaves27.css"/>
+<link rel="stylesheet" href="https://awards.infcdn.net/2024/badge-circledLeaves27.css" media="print" onload="this.media='all'"/>
+<noscript><link rel="stylesheet" href="https://awards.infcdn.net/2024/badge-circledLeaves27.css"/></noscript>
 <!-- async: safe here because our only cookie-setting script (GA below)
      is already manually pre-gated via type="text/plain" and never
      auto-executes — it doesn't depend on Cookiebot loading before it in
@@ -497,6 +508,13 @@
     <div class="awards-badges fade-in-scroll">
       <div class="award-item">
         <img class="award-item-img" src="award-badge-restaurantguru.jpg" alt="Restaurant Guru 2025 — Recommended: Besties Boba &amp; Bites" loading="lazy"/>
+      </div>
+      <div class="award-item award-item-embed">
+        <!-- Restaurant Guru badge widget. Markup is theirs and the class names
+             are what their stylesheet targets, so they're left verbatim —
+             rel="noopener noreferrer" is the one addition, since target="_blank"
+             without it lets the opened page reach back via window.opener. -->
+        <a id="b-circledLeaves27" target="_blank" rel="noopener noreferrer" href="https://restaurantguru.com/Besties-Boba-and-Bites-Formerly-Bober-Tea-and-Coffee-Livermore" class="b-circledLeaves27--light b-circledLeaves27--2025"> <span class="b-circledLeaves27__title">Recommended</span> <span class="b-circledLeaves27__separator"></span> <span class="b-circledLeaves27__name">Besties Boba &amp; Bites</span></a>
       </div>
     </div>
 
