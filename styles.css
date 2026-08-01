@@ -789,10 +789,11 @@ nav.nav-on-dark:not(.scrolled) .nav-logo img { filter: drop-shadow(0 1px 4px rgb
   max-width: 1760px;
   margin: 0 auto;
   display: grid;
-  /* Centre column widened (was 2.2fr) now that it holds two award badges
-     rather than one — at the old ratio each card fell under the embedded
-     badge's fixed 186px width and cropped it. */
-  grid-template-columns: 0.7fr 1.25fr 3.1fr 1.25fr 0.7fr;
+  /* Centre column is `auto` so it sizes to the two fixed-width award cards
+     instead of to an fr share — that keeps the badges a predictable size at
+     every viewport (an fr share made them shrink to ~250px on common laptop
+     widths, which read as far too small). */
+  grid-template-columns: 0.7fr 1.15fr auto 1.15fr 0.7fr;
   align-items: center;
   gap: 22px;
   position: relative;
@@ -808,15 +809,30 @@ nav.nav-on-dark:not(.scrolled) .nav-logo img { filter: drop-shadow(0 1px 4px rgb
 /* align-items:center (not stretch) so each card's height comes from its own
    aspect-ratio rather than the tallest sibling — stretching made the two cards
    resolve to slightly different widths. */
-.awards-badges { display: flex; justify-content: center; align-items: center; gap: 20px; }
-.award-item { flex: 1 1 0; min-width: 0; max-width: 250px; aspect-ratio: 1 / 1; border-radius: 28px; background: #fff; box-shadow: 0 18px 44px rgba(0,0,0,0.13); display: flex; align-items: center; justify-content: center; padding: 24px; overflow: hidden; box-sizing: border-box; transition: transform .25s ease, box-shadow .25s ease; }
+.awards-badges { display: flex; justify-content: center; align-items: center; gap: 24px; }
+.award-item { flex: 0 0 340px; width: 340px; max-width: 100%; aspect-ratio: 1 / 1; border-radius: 28px; background: #fff; box-shadow: 0 18px 44px rgba(0,0,0,0.13); display: flex; align-items: center; justify-content: center; padding: 26px; overflow: hidden; box-sizing: border-box; transition: transform .25s ease, box-shadow .25s ease; }
 .award-item:hover { transform: translateY(-6px) scale(1.02); box-shadow: 0 24px 52px rgba(0,0,0,0.19); }
 .award-item-img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }
-/* The vendor badge is a fixed 186x200 block. The card is always wider than
-   that (250px desktop, 280px mobile), so it renders at natural size — no
-   scaling rules here, since the vendor's own `background` shorthand loads
-   after ours at equal specificity and would override them anyway. */
+/* The vendor badge is a hard-coded 186x200 block, so it can't grow with the
+   card and would sit marooned in white space. Scale it up with a transform —
+   that enlarges the background artwork AND its text together, which
+   background-size alone can't do (the text is real DOM sized in px).
+   The extra .awards-badges in the selector outranks the vendor's own
+   `#id.class` rule, which loads after ours and would otherwise win. */
 .award-item-embed { padding: 14px; }
+.awards-badges .award-item-embed #b-circledLeaves27 {
+  transform: scale(1.5);
+  transform-origin: center;
+}
+/* Smaller laptops: the centre column is a fixed width, so at full card size it
+   starves the testimonial columns either side (they collapsed to ~128px at
+   1280px wide). Ease the cards down and give the decorative cat columns less
+   of the remainder so the quotes stay readable. */
+@media (min-width: 769px) and (max-width: 1499px) {
+  .awards-row { grid-template-columns: 0.45fr 1.15fr auto 1.15fr 0.45fr; }
+  .award-item { flex-basis: 258px; width: 258px; }
+  .awards-badges .award-item-embed #b-circledLeaves27 { transform: scale(1.1); }
+}
 
 .awards-testimonial {
   position: relative;
@@ -1367,6 +1383,9 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
      side by side into a phone-width column. */
   .awards-badges { flex-direction: column; align-items: center; gap: 20px; }
   .award-item { flex: 0 0 auto; width: min(280px, 78vw); max-width: none; }
+  /* Smaller card here, so a gentler scale — 200px * 1.2 = 240 still clears
+     the 280px card's inner height. */
+  .awards-badges .award-item-embed #b-circledLeaves27 { transform: scale(1.2); }
   .awards-testimonial { width: 100%; max-width: 320px; }
 
   /* ── Instagram: stack posts, keep them tappable ── */
