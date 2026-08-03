@@ -283,9 +283,18 @@
       img.src = t.getAttribute('data-img');
       img.alt = t.getAttribute('data-name');
       name.textContent = t.getAttribute('data-name');
-      desc.textContent = t.getAttribute('data-desc');
+      // Most flavours now carry no description (only the allergen note does),
+      // so hide the element entirely when it's blank rather than leaving an
+      // empty paragraph holding vertical space, and don't prefix the shop
+      // blurb with a stray leading space.
+      var descText = (t.getAttribute('data-desc') || '').trim();
+      desc.textContent = descText;
+      desc.style.display = descText ? '' : 'none';
       if (sideName) sideName.innerHTML = t.getAttribute('data-name') + ' <span class="week-heart">&#9825;</span>';
-      if (sideDesc) sideDesc.textContent = t.getAttribute('data-desc') + ' Handcrafted fresh every morning in small batches with lots of love.';
+      if (sideDesc) {
+        var blurb = 'Handcrafted fresh every morning in small batches with lots of love.';
+        sideDesc.textContent = descText ? descText + ' ' + blurb : blurb;
+      }
       var badgeText = t.getAttribute('data-badge');
       if (badgeText) {
         badge.textContent = badgeText;
