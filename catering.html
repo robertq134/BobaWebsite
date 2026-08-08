@@ -51,7 +51,7 @@
 <nav class="nav-on-dark">
   <div class="nav-logo">
     <a href="/" aria-label="Besties Boba &amp; Bites home">
-      <img src="mochilogoV2.png" style="height:44px;width:auto;display:block;"/>
+      <img src="mochilogoV2.png" alt="Besties Boba &amp; Bites" style="height:44px;width:auto;display:block;"/>
     </a>
   </div>
   <div class="nav-right">
@@ -399,7 +399,8 @@
       <button class="bb-chip" onclick="bbChip(this)">Tuesday deal?</button>
     </div>
     <div id="bb-input-row">
-      <input id="bb-input" type="text" placeholder="Type a message..."/>
+      <label for="bb-input" class="bb-sr-only">Type your message to Mochi</label>
+      <input id="bb-input" type="text" placeholder="Type a message..." aria-label="Type your message to Mochi"/>
       <button id="bb-send" onclick="bbSend()">Send</button>
     </div>
   </div>

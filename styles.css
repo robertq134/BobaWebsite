@@ -112,10 +112,15 @@ html { scroll-behavior: smooth; }
 
   --pink:   #E8527A;
   --pink-d: #C73A61;
+  /* Small pink TEXT only. --pink-d clears 4.5:1 on white but not on the
+     tinted section backgrounds (#FBD9E3 testimonials, #F3ECE0 promos), so
+     small labels use this darker shade. Buttons keep --pink-d: white-on-pink
+     is 4.99:1 regardless of what is behind the button. */
+  --pink-text: #B82A54;
   --yellow: #F5C842;
   --dark:   #160E12;
   --text:   #2A1E24;
-  --muted:  #8A7278;
+  --muted:  #6F5D66;   /* was #8A7278 (4.41:1 on white, 3.76:1 on beige) — under AA 4.5:1 */
   --border: #EAD8DF;
   --cream:  #FFFFFF;
   --warm:   #F9F0EC;
@@ -127,18 +132,32 @@ html { scroll-behavior: smooth; }
 }
 
 body { font-family: 'Roboto', sans-serif; background: var(--cream); color: var(--text); -webkit-font-smoothing: antialiased; }
+
+/* Visually hidden but still announced by screen readers — used for the chat
+   input's <label>. Deliberately not display:none or visibility:hidden, since
+   both remove the element from the accessibility tree entirely. */
+.bb-sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
 h1, h2, h3 { font-family: 'Fredoka', sans-serif; }
 a { text-decoration: none; color: inherit; }
 button { font-family: 'Roboto', sans-serif; cursor: pointer; }
 
 .ph { background: var(--warm); border: 1.5px dashed var(--border); display: flex; align-items: center; justify-content: center; }
 .ph span { font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); }
-.tag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--pink); margin-bottom: 14px; }
-.btn-fill { display: inline-block; background: var(--pink); color: white; border: 1.5px solid transparent; border-radius: 6px; padding: 13px 28px; font-size: 14px; font-weight: 600; line-height: 1.2; transition: background .15s, transform .15s, box-shadow .15s; cursor: pointer; }
+.tag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--pink-text); margin-bottom: 14px; }
+.btn-fill { display: inline-block; background: var(--pink-d); color: white; border: 1.5px solid transparent; border-radius: 6px; padding: 13px 28px; font-size: 14px; font-weight: 600; line-height: 1.2; transition: background .15s, transform .15s, box-shadow .15s; cursor: pointer; }
 .btn-big { padding: 20px 44px; font-size: 18px; border-radius: 10px; }
 .btn-icon { display: inline-flex; align-items: center; gap: 10px; }
 .btn-icon svg { width: 20px; height: 20px; flex-shrink: 0; }
-.btn-fill:hover { background: var(--pink-d); transform: translateY(-2px) scale(1.03); box-shadow: 0 8px 20px rgba(199,58,97,.35); }
+.btn-fill:hover { background: #A82F51; transform: translateY(-2px) scale(1.03); box-shadow: 0 8px 20px rgba(199,58,97,.35); }
 .btn-outline { display: inline-block; background: transparent; color: var(--dark); border: 1.5px solid var(--border); border-radius: 6px; padding: 13px 28px; font-size: 14px; font-weight: 600; line-height: 1.2; transition: border-color .15s, transform .15s, background .15s; cursor: pointer; }
 .btn-outline:hover { border-color: var(--dark); transform: translateY(-2px) scale(1.03); background: rgba(0,0,0,0.03); }
 
@@ -175,13 +194,13 @@ nav.nav-on-dark:not(.scrolled) .nav-toggle span { background: white; }
   transition: width .25s ease, left .25s ease;
 }
 .nav-links a:hover::after { width: 100%; left: 0; }
-.nav-links a.active { color: var(--pink); text-decoration: underline; text-decoration-color: var(--pink); }
+.nav-links a.active { color: var(--pink-text); text-decoration: underline; text-decoration-color: var(--pink-text); }
 .nav-links a:hover { color: var(--dark); }
-.nav-order { display: flex; align-items: center; gap: 8px; background: var(--pink); color: #fff !important; border: none; border-radius: 999px; padding: 10px 20px; font-size: 14px; font-weight: 700; transition: background .15s, transform .15s, box-shadow .15s; }
-.nav-order:hover { background: var(--pink-d); transform: scale(1.06); box-shadow: 0 6px 16px rgba(199,58,97,.35); }
+.nav-order { display: flex; align-items: center; gap: 8px; background: var(--pink-d); color: #fff !important; border: none; border-radius: 999px; padding: 10px 20px; font-size: 14px; font-weight: 700; transition: background .15s, transform .15s, box-shadow .15s; }
+.nav-order:hover { background: #A82F51; transform: scale(1.06); box-shadow: 0 6px 16px rgba(199,58,97,.35); }
 .nav-order svg { width: 18px; height: 18px; flex-shrink: 0; }
-.nav-cta { background: var(--pink); color: white; border: none; border-radius: 6px; padding: 9px 20px; font-size: 13px; font-weight: 700; transition: background .15s; }
-.nav-cta:hover { background: var(--pink-d); }
+.nav-cta { background: var(--pink-d); color: white; border: none; border-radius: 6px; padding: 9px 20px; font-size: 13px; font-weight: 700; transition: background .15s; }
+.nav-cta:hover { background: #A82F51; }
 
 .hero { position: relative; min-height: 100vh; overflow: hidden; }
 .hero.hero-compact { min-height: 420px; }
@@ -331,7 +350,8 @@ nav.nav-on-dark:not(.scrolled) .nav-toggle span { background: white; }
   width: 33px;
   height: 33px;
   border-radius: 50%;
-  background: var(--pink);
+  /* white arrow glyph on pink was 3.55:1 */
+  background: var(--pink-d);
   color: #fff;
   border: none;
   font-size: 17px;
@@ -361,7 +381,8 @@ nav.nav-on-dark:not(.scrolled) .nav-toggle span { background: white; }
 .week-hero-overlay { position: absolute; left: 27px; right: 27px; bottom: 24px; z-index: 2; color: #fff; transition: opacity .2s ease; }
 .week-feature-badge {
   display: inline-block;
-  background: var(--pink);
+  /* 9px white-on-pink was 3.55:1; --pink-d takes it to 4.99:1 */
+  background: var(--pink-d);
   color: #fff;
   font-size: 9px;
   font-weight: 700;
@@ -583,14 +604,14 @@ nav.nav-on-dark:not(.scrolled) .nav-toggle span { background: white; }
 .menu-inner { max-width: 1120px; margin: 0 auto; }
 .menu-head { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 48px; }
 .menu-h2 { font-size: clamp(32px, 3.2vw, 48px); font-weight: 800; letter-spacing: -0.5px; color: white; }
-.menu-link { font-size: 13px; font-weight: 600; color: var(--pink); border-bottom: 1.5px solid var(--pink); padding-bottom: 2px; transition: opacity .15s; }
+.menu-link { font-size: 13px; font-weight: 600; color: var(--pink-text); border-bottom: 1.5px solid var(--pink-text); padding-bottom: 2px; transition: opacity .15s; }
 .menu-link:hover { opacity: 0.75; }
 .menu-cards { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
 .menu-card { border-radius: 12px; overflow: hidden; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); transition: border-color .2s; }
 .menu-card:hover { border-color: rgba(255,255,255,.18); }
 .menu-card-img { width: 100%; height: 350px; object-fit: cover; display: block; }
 .menu-card-body { padding: 24px 22px; }
-.menu-card-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--pink); margin-bottom: 8px; }
+.menu-card-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--pink-text); margin-bottom: 8px; }
 .menu-card-title { font-size: 20px; font-weight: 800; color: white; letter-spacing: -0.3px; margin-bottom: 10px; }
 .menu-card-desc { font-size: 13px; color: rgba(255,255,255,.4); line-height: 1.65; }
 
@@ -651,7 +672,7 @@ nav.nav-on-dark:not(.scrolled) .nav-toggle span { background: white; }
 .drink-name { font-size: 14px; font-weight: 600; color: var(--text); }
 .drink-price { font-size: 13px; font-weight: 500; color: var(--muted); margin-top: 2px; }
 .drink-card.out-of-stock .drink-img-frame { opacity: 0.5; }
-.drink-oos-tag { font-size: 11px; font-weight: 700; color: var(--pink); text-transform: uppercase; letter-spacing: 0.4px; }
+.drink-oos-tag { font-size: 11px; font-weight: 700; color: var(--pink-text); text-transform: uppercase; letter-spacing: 0.4px; }
 
 nav.nav-on-dark:not(.scrolled) .nav-links a { color: rgba(255,255,255,.85); }
 nav.nav-on-dark:not(.scrolled) .nav-links a:hover { color: white; }
@@ -761,7 +782,7 @@ nav.nav-on-dark:not(.scrolled) .nav-logo img { filter: drop-shadow(0 1px 4px rgb
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: var(--pink);
+  background: var(--pink-d);
   color: #fff;
   font-size: 15px;
   font-weight: 700;
@@ -847,8 +868,8 @@ nav.nav-on-dark:not(.scrolled) .nav-logo img { filter: drop-shadow(0 1px 4px rgb
 .awards-quote-icon { width: 40px; height: 30px; color: var(--pink); opacity: .55; margin-bottom: 12px; }
 .awards-quote { font-size: 17px; line-height: 1.6; color: var(--dark); font-style: italic; }
 .awards-reviewer { display: flex; align-items: center; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
-.awards-reviewer-name { font-weight: 700; color: var(--pink-d); font-size: 15px; }
-.awards-stars { color: var(--pink); letter-spacing: 2px; font-size: 14px; }
+.awards-reviewer-name { font-weight: 700; color: var(--pink-text); font-size: 15px; }
+.awards-stars { color: var(--pink-text); letter-spacing: 2px; font-size: 14px; }
 
 /* ── PROMOS & SPECIALS: "Today's pick" card-stack carousel ──
    Premium/editorial, not bubbly — warm beige bg, white cards, soft depth. ── */
@@ -896,11 +917,11 @@ nav.nav-on-dark:not(.scrolled) .nav-logo img { filter: drop-shadow(0 1px 4px rgb
 .promo-card-photo { height: 52%; }
 .promo-card-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .promo-card-body { padding: 22px 26px 28px; }
-.promo-card-pill { display: inline-block; background: var(--pink); color: #fff; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 6px 16px; border-radius: 999px; }
+.promo-card-pill { display: inline-block; background: var(--pink-d); color: #fff; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 6px 16px; border-radius: 999px; }
 .promo-card-title { font-family: 'Fredoka', sans-serif; font-size: 25px; font-weight: 700; color: var(--dark); margin-top: 14px; line-height: 1.25; }
 .promo-card-desc { font-size: 15px; color: var(--muted); margin-top: 8px; line-height: 1.55; }
 .promo-card-arrow-btn {
-  width: 44px; height: 44px; border-radius: 50%; background: var(--pink); color: #fff;
+  width: 44px; height: 44px; border-radius: 50%; background: var(--pink-d); color: #fff;
   display: flex; align-items: center; justify-content: center; margin-top: 20px;
   font-size: 17px; box-shadow: 0 8px 20px rgba(199,58,97,.3);
   transition: background .15s ease, transform .15s ease;
@@ -943,7 +964,7 @@ nav.nav-on-dark:not(.scrolled) .nav-logo img { filter: drop-shadow(0 1px 4px rgb
 .ig-stat { display: flex; flex-direction: column; align-items: center; }
 .ig-stat-divider { width: 1px; height: 46px; background: var(--border); }
 .ig-followers .ig-follower-num { font-size: clamp(46px, 6vw, 64px); font-weight: 800; color: var(--dark); display: block; line-height: 1; }
-.ig-stat-label { font-size: 16px; font-weight: 700; color: var(--pink); margin-top: 6px; }
+.ig-stat-label { font-size: 16px; font-weight: 700; color: var(--pink-text); margin-top: 6px; }
 .ig-cta { text-align: center; margin-top: 72px; position: relative; z-index: 2; }
 .ig-follow-btn { display: inline-flex; align-items: center; gap: 10px; padding: 16px 32px; font-size: 17px; margin-top: 20px; }
 .ig-follow-btn svg { width: 22px; height: 22px; flex-shrink: 0; }
@@ -965,7 +986,7 @@ nav.nav-on-dark:not(.scrolled) .nav-logo img { filter: drop-shadow(0 1px 4px rgb
 .vu-address { font-size: 16px; line-height: 1.6; color: var(--muted); margin: 14px 0 24px; }
 .vu-directions-btn { display: inline-block; }
 .vu-hours { margin-top: 36px; border-top: 1px solid var(--border); padding-top: 24px; }
-.vu-hours-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--pink); margin-bottom: 14px; }
+.vu-hours-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--pink-text); margin-bottom: 14px; }
 .vu-hours-row { display: flex; justify-content: space-between; font-size: 14px; color: var(--dark); padding: 8px 0; border-bottom: 1px solid var(--border); }
 .vu-hours-row:last-child { border-bottom: none; }
 .vu-shop-map { position: relative; min-height: 420px; }
@@ -996,7 +1017,7 @@ nav.nav-on-dark:not(.scrolled) .nav-logo img { filter: drop-shadow(0 1px 4px rgb
 .vu-market-name { font-family: 'Fredoka', sans-serif; font-size: clamp(32px, 3.6vw, 48px); font-weight: 700; color: var(--dark); }
 .vu-market-addr { font-size: clamp(18px, 1.9vw, 23px); color: var(--muted); line-height: 1.6; margin-top: 14px; }
 .vu-market-divider { width: 84px; height: 4px; background: var(--pink); margin: 34px auto; }
-.vu-market-hours-label { font-size: 17px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--pink); margin-bottom: 12px; }
+.vu-market-hours-label { font-size: 17px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--pink-text); margin-bottom: 12px; }
 .vu-market-hours div { font-size: clamp(18px, 1.9vw, 23px); color: var(--dark); line-height: 1.8; }
 /* Separates the second day/time pair so the two schedules don't read as one
    run-on list of four lines. */
@@ -1013,7 +1034,7 @@ nav.nav-on-dark:not(.scrolled) .nav-logo img { filter: drop-shadow(0 1px 4px rgb
 .about-p { font-size: 16px; line-height: 1.8; color: var(--muted); margin-bottom: 16px; }
 .about-quote { padding: 20px 24px; border-left: 3px solid var(--pink); background: var(--warm); border-radius: 0 8px 8px 0; }
 .about-quote p { font-size: 15px; font-weight: 500; font-style: italic; color: var(--dark); line-height: 1.6; margin-bottom: 10px; }
-.about-quote span { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--pink); }
+.about-quote span { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--pink-text); }
 
 
 .visit { background: var(--warm); border-top: 1px solid var(--border); padding: 88px 48px; }
@@ -1141,14 +1162,17 @@ footer { background: var(--dark); padding: 56px 48px 32px; }
 .bb-dots span:nth-child(3){animation:_dot-pulse 1.2s ease-in-out 0.4s infinite}
 
 #bb-chips { padding:8px 14px 4px; display:flex; gap:6px; flex-wrap:wrap; background:white; flex-shrink:0; }
-.bb-chip { background:#F9EEF1; border:1.5px solid #EAD8DF; border-radius:999px; padding:5px 13px; font-size:11px; font-weight:600; cursor:pointer; color:#E8527A; font-family:inherit; transition:background .15s; }
+.bb-chip { background:#F9EEF1; border:1.5px solid #EAD8DF; border-radius:999px; padding:5px 13px; font-size:11px; font-weight:600; cursor:pointer; color:#B82A54; font-family:inherit; transition:background .15s; }
 .bb-chip:hover { background:#f2d5dc; }
 
 #bb-input-row { padding:10px 14px 14px; display:flex; gap:8px; background:white; flex-shrink:0; }
 #bb-input { flex:1; border:1.5px solid #EAD8DF; border-radius:999px; padding:9px 16px; font-family:inherit; font-size:13px; background:#FEFCF8; color:#1C1412; outline:none; transition:border-color .2s, box-shadow .2s; }
 #bb-input:focus { border-color:#E8527A; box-shadow:0 0 0 3px rgba(232,82,122,.14); }
-#bb-send { background:#E8527A; border:none; border-radius:999px; padding:9px 18px; color:white; font-size:14px; font-weight:600; cursor:pointer; font-family:inherit; transition:background .18s; }
-#bb-send:hover    { background:#C73A61; }
+#bb-send { background:#C73A61; border:none; border-radius:999px; padding:9px 18px; color:white; font-size:14px; font-weight:600; cursor:pointer; font-family:inherit; transition:background .18s; }
+#bb-send:hover    { background:#A82F51; }
+/* Disabled state keeps the lighter pink: WCAG 1.4.3 exempts inactive
+   components from the contrast minimum, and the dimmed look is the signal
+   that the control is unavailable until consent is given. */
 #bb-send:disabled { background:#e8a0ae; cursor:not-allowed; }
 
 @media (max-width: 768px) {
