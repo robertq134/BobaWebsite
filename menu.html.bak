@@ -170,8 +170,8 @@
       <div class="drink-name">Wintermelon Tea</div>
     </div>
     <div class="drink-card">
-      <a href="https://bestiesboba.square.site/product/strawberry-uji-matcha/DCWFLXSWXNLQZOJ24B5NJOLO" target="_blank" rel="noopener noreferrer">
-        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/strawberry-uji-matcha.jpg" alt="Strawberry Matcha" loading="lazy" decoding="async"/></div>
+      <a href="https://bestiesboba.square.site/product/strawberry-uji-matcha-latte/DCWFLXSWXNLQZOJ24B5NJOLO" target="_blank" rel="noopener noreferrer">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/strawberry-uji-matcha-latte.jpg" alt="Strawberry Matcha" loading="lazy" decoding="async"/></div>
       </a>
       <div class="drink-name">Strawberry Matcha</div>
     </div>
@@ -551,81 +551,60 @@
   </div>
   <div class="drink-grid">
     <div class="drink-card">
-      <a href="https://bestiesboba.square.site/product/uji-matcha/72" target="_blank" rel="noopener noreferrer">
-        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/uji-matcha.jpg" alt="Uji Matcha" loading="lazy" decoding="async"/></div>
+      <a href="https://bestiesboba.square.site/product/brown-sugar-uji-matcha-latte/37" target="_blank" rel="noopener noreferrer">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/brown-sugar-uji-matcha-latte.jpg" alt="Brown Sugar Uji Matcha Latte" loading="lazy" decoding="async"/></div>
       </a>
-      <div class="drink-name">Uji Matcha</div>
-      <div class="drink-price">$6.25</div>
-    </div>
-    <div class="drink-card">
-      <a href="https://bestiesboba.square.site/product/brown-sugar-uji-matcha/37" target="_blank" rel="noopener noreferrer">
-        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/brown-sugar-uji-matcha.jpg" alt="Brown Sugar Uji Matcha" loading="lazy" decoding="async"/></div>
-      </a>
-      <div class="drink-name">Brown Sugar Uji Matcha</div>
-      <div class="drink-price">$6.75</div>
-    </div>
-    <div class="drink-card">
-      <a href="https://bestiesboba.square.site/product/chizu-uji-matcha/48" target="_blank" rel="noopener noreferrer">
-        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/chizu-uji-matcha.jpg" alt="Chizu Uji Matcha" loading="lazy" decoding="async"/></div>
-      </a>
-      <div class="drink-name">Chizu Uji Matcha</div>
-      <div class="drink-price">$6.75</div>
-    </div>
-    <div class="drink-card">
-      <a href="https://bestiesboba.square.site/product/double-uji-matcha/UKHHI57T7GEPZQ5TFEM2UK7J" target="_blank" rel="noopener noreferrer">
-        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/double-uji-matcha.jpg" alt="Double Uji Matcha" loading="lazy" decoding="async"/></div>
-      </a>
-      <div class="drink-name">Double Uji Matcha</div>
-      <div class="drink-price">$6.75</div>
-    </div>
-    <div class="drink-card">
-      <a href="https://bestiesboba.square.site/product/strawberry-uji-matcha/DCWFLXSWXNLQZOJ24B5NJOLO" target="_blank" rel="noopener noreferrer">
-        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/strawberry-uji-matcha.jpg" alt="Strawberry Uji Matcha" loading="lazy" decoding="async"/></div>
-      </a>
-      <div class="drink-name">Strawberry Uji Matcha</div>
+      <div class="drink-name">Brown Sugar Uji Matcha Latte</div>
       <div class="drink-price">$7.00</div>
     </div>
     <div class="drink-card">
-      <a href="https://bestiesboba.square.site/product/banana-uji-matcha/3NXUPBYA4LT67R25VHZZG5CS" target="_blank" rel="noopener noreferrer">
-        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/banana-uji-matcha.jpg" alt="Banana Uji Matcha" loading="lazy" decoding="async"/></div>
+      <a href="https://bestiesboba.square.site/product/chizu-uji-matcha-latte/48" target="_blank" rel="noopener noreferrer">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/uji-matcha-latte.jpg" alt="Chizu Uji Matcha Latte" loading="lazy" decoding="async"/></div>
       </a>
-      <div class="drink-name">Banana Uji Matcha</div>
+      <div class="drink-name">Chizu Uji Matcha Latte</div>
       <div class="drink-price">$7.00</div>
     </div>
     <div class="drink-card">
-      <a href="https://bestiesboba.square.site/product/mango-uji-matcha/BG5G2CEPJQKTZ2NFTNUFAN27" target="_blank" rel="noopener noreferrer">
-        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/mango-uji-matcha.jpg" alt="Mango Uji Matcha" loading="lazy" decoding="async"/></div>
+      <a href="https://bestiesboba.square.site/product/uji-matcha-latte/72" target="_blank" rel="noopener noreferrer">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/uji-matcha-latte.jpg" alt="Uji Matcha Latte" loading="lazy" decoding="async"/></div>
       </a>
-      <div class="drink-name">Mango Uji Matcha</div>
-      <div class="drink-price">$7.00</div>
+      <div class="drink-name">Uji Matcha Latte</div>
+      <div class="drink-price">$6.85</div>
     </div>
     <div class="drink-card">
-      <a href="https://bestiesboba.square.site/product/blueberry-uji-matcha/P66PMXPTFWKIF6UOCIOM4QE5" target="_blank" rel="noopener noreferrer">
-        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/blueberry-uji-matcha.jpg" alt="Blueberry Uji Matcha" loading="lazy" decoding="async"/></div>
+      <a href="https://bestiesboba.square.site/product/strawberry-uji-matcha-latte/DCWFLXSWXNLQZOJ24B5NJOLO" target="_blank" rel="noopener noreferrer">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/strawberry-uji-matcha-latte.jpg" alt="Strawberry Uji Matcha Latte" loading="lazy" decoding="async"/></div>
       </a>
-      <div class="drink-name">Blueberry Uji Matcha</div>
-      <div class="drink-price">$7.00</div>
+      <div class="drink-name">Strawberry Uji Matcha Latte</div>
+      <div class="drink-price">$7.20</div>
     </div>
     <div class="drink-card">
-      <a href="https://bestiesboba.square.site/product/ube-coconut-matcha/UPLNWX4I4GQMOPURGGYYFYXT" target="_blank" rel="noopener noreferrer">
-        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/ube-coconut-matcha.jpg" alt="Ube Coconut Matcha" loading="lazy" decoding="async"/></div>
+      <a href="https://bestiesboba.square.site/product/blueberry-uji-matcha-latte/P66PMXPTFWKIF6UOCIOM4QE5" target="_blank" rel="noopener noreferrer">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/blueberry-uji-matcha-latte.jpg" alt="Blueberry Uji Matcha Latte" loading="lazy" decoding="async"/></div>
       </a>
-      <div class="drink-name">Ube Coconut Matcha</div>
-      <div class="drink-price">$7.00</div>
+      <div class="drink-name">Blueberry Uji Matcha Latte</div>
+      <div class="drink-price">$7.20</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/ube-coconut-matcha-latte/UPLNWX4I4GQMOPURGGYYFYXT" target="_blank" rel="noopener noreferrer">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/ube-coconut-matcha-latte.jpg" alt="Ube Coconut Matcha Latte" loading="lazy" decoding="async"/></div>
+      </a>
+      <div class="drink-name">Ube Coconut Matcha Latte</div>
+      <div class="drink-price">$7.20</div>
     </div>
     <div class="drink-card">
       <a href="https://bestiesboba.square.site/product/coconut-uji-matcha-cloud/SNIPXXIOG22BLONK5CDGCOMU" target="_blank" rel="noopener noreferrer">
         <div class="drink-img-frame"><img class="drink-img" src="menu-photos/coconut-uji-matcha-cloud.jpg" alt="Coconut Uji Matcha Cloud" loading="lazy" decoding="async"/></div>
       </a>
       <div class="drink-name">Coconut Uji Matcha Cloud</div>
-      <div class="drink-price">$6.75</div>
+      <div class="drink-price">$7.00</div>
     </div>
     <div class="drink-card">
       <a href="https://bestiesboba.square.site/product/jasmine-uji-matcha-cloud/PQN2CNP552XP27T64KNQCUO4" target="_blank" rel="noopener noreferrer">
         <div class="drink-img-frame"><img class="drink-img" src="menu-photos/jasmine-uji-matcha-cloud.jpg" alt="Jasmine Uji Matcha Cloud" loading="lazy" decoding="async"/></div>
       </a>
       <div class="drink-name">Jasmine Uji Matcha Cloud</div>
-      <div class="drink-price">$6.75</div>
+      <div class="drink-price">$7.00</div>
     </div>
   </div>
 </section>
@@ -793,8 +772,48 @@
   </div>
 </section>
 
-<!-- MOCHI DONUTS -->
+<!-- VIRAL ICE CREAM -->
 <section class="menu-grid-section is-white">
+  <div class="menu-grid-head">
+    <span class="tag">Menu</span>
+    <h2 class="menu-grid-h2">Viral Ice Cream</h2>
+  </div>
+  <div class="drink-grid">
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/crispy-chicken-burger-ice-cream/KFQNFEL26M35P7TG5DGWHZ5Z" target="_blank" rel="noopener noreferrer">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/crispy-chicken-burger-ice-cream.jpg" alt="Crispy Chicken Burger Ice Cream" loading="lazy" decoding="async"/></div>
+      </a>
+      <div class="drink-name">Crispy Chicken Burger Ice Cream</div>
+      <div class="drink-price">$6.99</div>
+    </div>
+    <div class="drink-card out-of-stock">
+      <a href="https://bestiesboba.square.site/product/french-fries-ice-cream/SZIF74PYQTV5GB7KXLRZ75KR" target="_blank" rel="noopener noreferrer">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/french-fries-ice-cream.jpg" alt="French Fries Ice Cream" loading="lazy" decoding="async"/></div>
+      </a>
+      <div class="drink-name">French Fries Ice Cream</div>
+      <div class="drink-price">$5.99</div>
+      <div class="drink-oos-tag">Sold Out</div>
+    </div>
+    <div class="drink-card out-of-stock">
+      <a href="https://bestiesboba.square.site/product/fried-cluckin-ice-cream/XVTRETTD5EW5MUFEBLAMHRIQ" target="_blank" rel="noopener noreferrer">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/fried-cluckin-ice-cream.jpg" alt="Fried Cluckin' Ice Cream" loading="lazy" decoding="async"/></div>
+      </a>
+      <div class="drink-name">Fried Cluckin' Ice Cream</div>
+      <div class="drink-price">$6.99</div>
+      <div class="drink-oos-tag">Sold Out</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/steak-shaped-ice-cream-bar/Y7WQEF4BFME5RAHWUKE3BX2I" target="_blank" rel="noopener noreferrer">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/steak-shaped-ice-cream-bar.jpg" alt="Steak Shaped Ice Cream Bar" loading="lazy" decoding="async"/></div>
+      </a>
+      <div class="drink-name">Steak Shaped Ice Cream Bar</div>
+      <div class="drink-price">$5.99</div>
+    </div>
+  </div>
+</section>
+
+<!-- MOCHI DONUTS -->
+<section class="menu-grid-section is-warm">
   <div class="menu-grid-head">
     <span class="tag">Menu</span>
     <h2 class="menu-grid-h2">Mochi Donuts</h2>
@@ -832,7 +851,7 @@
 </section>
 
 <!-- MERCH -->
-<section class="menu-grid-section is-warm">
+<section class="menu-grid-section is-white">
   <div class="menu-grid-head">
     <span class="tag">Menu</span>
     <h2 class="menu-grid-h2">Merch</h2>
@@ -845,11 +864,19 @@
       <div class="drink-name">Minibubu Keychain</div>
       <div class="drink-price">$4.99</div>
     </div>
-    <div class="drink-card">
-      <a href="https://bestiesboba.square.site/product/blind-box-plushies-series-3/UR7VK3FEPER5I5OEIGR5XMHQ" target="_blank" rel="noopener noreferrer">
-        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/blind-box-plushies-series-3.jpg" alt="Blind Box Plushies Series 3" loading="lazy" decoding="async"/></div>
+    <div class="drink-card out-of-stock">
+      <a href="https://bestiesboba.square.site/product/blind-box-plushies-series-1/IQYIUVNTRTF6YTOR66UKGNBL" target="_blank" rel="noopener noreferrer">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/blind-box-plushies-series-1.jpg" alt="Blind Box Plushies Series 1" loading="lazy" decoding="async"/></div>
       </a>
-      <div class="drink-name">Blind Box Plushies Series 3</div>
+      <div class="drink-name">Blind Box Plushies Series 1</div>
+      <div class="drink-price">$8.99</div>
+      <div class="drink-oos-tag">Sold Out</div>
+    </div>
+    <div class="drink-card">
+      <a href="https://bestiesboba.square.site/product/blind-box-plushies-series-2/UR7VK3FEPER5I5OEIGR5XMHQ" target="_blank" rel="noopener noreferrer">
+        <div class="drink-img-frame"><img class="drink-img" src="menu-photos/blind-box-plushies-series-2.jpg" alt="Blind Box Plushies Series 2" loading="lazy" decoding="async"/></div>
+      </a>
+      <div class="drink-name">Blind Box Plushies Series 2</div>
       <div class="drink-price">$8.99</div>
     </div>
   </div>
