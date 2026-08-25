@@ -1,30 +1,22 @@
-UPLOAD TO GITHUB — Uji Matcha update
-=====================================
+UPLOAD TO GITHUB - new mochi donut flavors
+===========================================
 
-Drag BOTH items below into your repo's ROOT (same place index.html lives),
-using: Add file -> Upload files, then commit to main.
+Everything in this folder goes to the repo ROOT (where index.html lives).
+Select ALL the files here (except this README) and drag them in together.
 
-  menu.html            -> repo root (overwrites the existing one)
-  menu-photos/         -> merges into the existing menu-photos folder
-                          (12 photos: 11 matcha drinks + Blind Box Series 3)
+  index.html                    (overwrites existing)
+  + 18 photos (9 flavors x hero + thumb)
 
-GitHub keeps the folder structure when you drag the whole menu-photos
-folder in, so the photos land in the right place automatically.
-
-Filenames are case-sensitive on GitHub Pages - upload them exactly as-is.
-
-After it deploys (1-2 min), hard-refresh the menu page with Ctrl+Shift+R.
+Add file -> Upload files -> drag -> commit to main.
+Hard-refresh with Ctrl+Shift+R after ~2 min.
 
 
-SAFE TO DELETE FROM THE REPO (no longer used by the site)
----------------------------------------------------------
-  menu-photos/crispy-chicken-burger-ice-cream.*
-  menu-photos/french-fries-ice-cream.*
-  menu-photos/fried-cluckin-ice-cream.*
-  menu-photos/steak-shaped-ice-cream-bar.*
-  menu-photos/blind-box-plushies-series-1.*
-  menu-photos/blind-box-plushies-series-2.*
-  menu-photos/*-uji-matcha-latte.*
-  menu-photos/ube-coconut-matcha-latte.*
+OPTIONAL CLEANUP - delete these old flavor photos from the repo root:
+  Churro-*, UbeMatcha-*, BananaSplit-*, FunnelCake-*, Strawberry-*,
+  MilkCookie-*, BirthdayCake-*, ChocolatePocky-*, FruityPebbles-*
+  CocoPebbles-*, CoconutCaramel-*, Taro-*, BananaMatcha-*, Biscoff-*,
+  CherryLime-*, StrawberryLychee-*, ChocolatePandas-*
 
-Optional, not required - the site works fine either way.
+  CAREFUL: do NOT delete strawberry-uji-matcha.jpg (lowercase) - that is
+  a drink photo still in use. Only the capitalised Strawberry-hero.jpg
+  and Strawberry-thumb.jpg are the old donut.
